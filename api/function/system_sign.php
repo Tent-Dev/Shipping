@@ -1,5 +1,7 @@
 <?php
-include("../main_class/class_db.php");
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+include("../main_class/connect_db.php");
 include("../main_class/auth.php");
 $mysql = new Main_db;
 $auth = new Auth;
@@ -46,13 +48,6 @@ if ($cmd != "") {
 		    $_SESSION['getUsername'] = $result['member_username'];
 			$_SESSION['getId'] = $result['member_id'];
 			$_SESSION['getPassword'] = $result['member_password'];
-
-			// $timestamp = array(
-			// 				'h_user_id' => $result['h_user_id'],
-			// 				'h_user_login' =>  date('Y-m-d H:i:s')
-			// 			);
-			//$key_user = array("h_user_id");
-			//$mysql->Update_db($timestamp,$key_user,"h_user");
 			$check = 1;
 		}
 		else{

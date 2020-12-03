@@ -10,7 +10,7 @@ class Main_db{
 	var $db_name;
 	var $db_connection;
 
-	public function Main_db(){
+	public function __construct(){
 		$this->db_host = DB_HOST;
 		$this->db_user = DB_USERNAME;
 		$this->db_pass = DB_PASSWORD;
