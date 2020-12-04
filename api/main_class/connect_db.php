@@ -17,6 +17,12 @@ class Main_db{
 		$this->db_name = DB_NAME;
 	}
 
+	public function Core_db(){
+		$this->db_connection = mysqli_connect($this->db_host,$this->db_user,$this->db_pass,$this->db_name);
+
+		return $this->db_connection;
+	}
+
 	public function Connect_db(){
 		$this->db_connection = mysqli_connect($this->db_host,$this->db_user,$this->db_pass,$this->db_name);
 		mysqli_set_charset($this->db_connection,"utf8"); //set utf8

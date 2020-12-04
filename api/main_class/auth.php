@@ -1,31 +1,44 @@
 <?php
 ini_set('display_errors',1);
 error_reporting(E_ALL);
-//require "connect_db.php";
+
 $mysql = new Main_db;
 $mysql->Connect_db();
 $mysql->SetCharacter();
 
 class Auth{
-	//login with Prepared statement
-	public function AuthLogin($username){
-		$sql = "SELECT id, member_firstname, member_lastname FROM tbl_member
-			 	WHERE member_firstname = ?";
-		$protect = mysqli_prepare($this->db_connection,$sql);
-		mysqli_stmt_bind_param($protect, "s", $username);
 
-		if(mysqli_stmt_execute($protect)){
-			mysqli_stmt_bind_result($protect,$user_id, $user_username,$user_password);
-			$result = mysqli_stmt_fetch($protect);
+	public function __construct(){
+		$this->db_connect = new Main_db;
+		$this->db_connect = $this->db_connect->Core_db();
+	}
+
+	public function AuthLogin($username){
+
+		$stmt = $this->db_connect->prepare("SELECT id, firstname, lastname, username, password FROM tbl_member WHERE username = ?");
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+		$stmt->bind_result($member_id, $member_firstname, $member_lastname, $member_username,$member_password);
+		$result = $stmt->fetch();
+		if($result){
+			$data = array(
+				'member_id' => $member_id,
+				'member_username' => $member_username,
+				'member_firstname' => $member_firstname,
+				'member_lastname' => $member_lastname,
+				'member_password' =>$member_password
+			);
 			$arr = array(
-					'member_username' => $user_username,
-					'member_id' => $user_id,
-					'member_password' =>$user_password
-			 		);
+				'status' => 200,
+				'data' => $data
+			);
+		}else{
+			$arr = array(
+				'status' => 404,
+				'err_msg' => 'Data not found'
+			 );
 		}
-		else{
-		echo mysqli_stmt_error;
-		}
+		
 		return $arr;
 	}
 }

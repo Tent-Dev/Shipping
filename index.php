@@ -23,11 +23,11 @@
 				method: 'post',
 				data: {
 					command: 'login',
-					user: 'admin',
-					pass: '1234'
+					username: 'admin',
+					password: '1234'
 				},
 				success: function(data) {
-					//var data = JSON.parse(data)
+					var data = JSON.parse(data)
 					console.log("result: ",data);
 				},
 				error: function() {
