@@ -41,8 +41,8 @@ class Main_db{
 		$result = mysqli_query($this->db_connection,$sql);
 		$array = array();
 
-		while ($row = mysqli_fetch_array($result)) { //คืนค่ามา
-			array_push($array, $row); //เพิ่ม value เข้าไปใน array ตำแหน่งท้ายสุด
+		while ($row = mysqli_fetch_array($result)) {
+			array_push($array, $row);
 		}
 		mysqli_free_result($result);
 		return $array;
@@ -61,7 +61,7 @@ class Main_db{
     }
 
 	public function Insert_db($arr,$tableName){
-		$str = "INSERT INTO ".$tableName."(".implode(",", array_keys($arr)).")"; //implode แทรก string
+		$str = "INSERT INTO ".$tableName."(".implode(",", array_keys($arr)).")";
 		$str2 = " VALUES('".implode("','",$arr)."')";
 		$sql = $str.$str2;
 		//var_dump($sql);
