@@ -55,10 +55,10 @@ class Main_db{
 	}
 
 	public function numRows($query) {
-        $result  = mysqli_query($this->db_connection, $query);
-        $rowcount = mysqli_num_rows($result);
-        return $rowcount;
-    }
+		$result  = mysqli_query($this->db_connection, $query);
+		$rowcount = mysqli_num_rows($result);
+		return $rowcount;
+	}
 
 	public function Insert_db($arr,$tableName){
 		$str = "INSERT INTO ".$tableName."(".implode(",", array_keys($arr)).")";
@@ -81,8 +81,8 @@ class Main_db{
 			$sql.= $k." = '".$value."' ";
 
 			if ($k != $last_key){ //เช็คว่า array ยังไม่ใช่ตัวสุดท้าย ให้ใส่เครื่องหมาย , ต่อท้าย เช่น 'field1','field2' จบ
-				$sql.=",";
-			}
+			$sql.=",";
+		}
 			if (in_array($k, $key)){ //in_array ใช้ตรวจสอบว่ามีข้อมูลที่กำหนดใน array หรือไม่ ถ้ามีก็ใช้ AND ต่อ
 				$where.= $k." = '".$value."' ";
 
@@ -101,8 +101,8 @@ class Main_db{
 
 	//ป้องกันตัวอักษร
 	public function quote($str){
-    	return $this->db_connection->real_escape_string($str);
-    }
+		return $this->db_connection->real_escape_string($str);
+	}
 	public function Delete_db($sql){
 		$result = mysqli_query($this->db_connection,$sql);
 		return $result;

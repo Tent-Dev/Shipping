@@ -1,12 +1,12 @@
 <?php
-require "connect_db.php";
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 
 class Validate{
 
 	public function __construct(){
 		$this->db_connect = new Main_db;
-		$this->db_connect = $this->db_connect->Connect_db();
-		$this->db_connect = $this->db_connect->SetCharacter();
+		$this->db_core = $this->db_connect->Core_db();
 	}
 	// Does string contain letters?
 	public function Check_letters($string){
@@ -24,12 +24,17 @@ class Validate{
 	public function Check_same($tablename,$field,$value){
 		$sql = "SELECT * FROM ".$tablename." WHERE ".$field." = '".$value."'";
 		$count = $this->db_connect->numRows($sql);
-		if($count >0){
-			$result = true;
+		if($count == 0){
+			$response = array(
+					'status' => 200
+				);
 		}else{
-			$result = false;
+			$response = array(
+					'status' => 400,
+					'err_msg' => 'Username duplicate'
+				);
 		}
-		return $result;
+		return $response;
 	}
 }
 ?>

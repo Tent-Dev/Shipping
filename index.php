@@ -21,15 +21,15 @@
 					<h1>Shipping System</h1>
 					<div class="form-group">
 						<div class="input-group mt-3">
-					        <div class="input-group-prepend">
-					          <div class="input-group-text"><i class="fas fa-user"></i></div>
-					        </div>
+							<div class="input-group-prepend">
+								<div class="input-group-text"><i class="fas fa-user"></i></div>
+							</div>
 							<input class="form-control" type="text" name="" value="" placeholder="">
 						</div>
 						<div class="input-group mt-3">
-					        <div class="input-group-prepend">
-					          <div class="input-group-text"><i class="fas fa-key"></i></div>
-					        </div>
+							<div class="input-group-prepend">
+								<div class="input-group-text"><i class="fas fa-key"></i></div>
+							</div>
 							<input class="form-control" type="password" name="" value="" placeholder="">
 						</div>
 						<button class="btn btn-primary mt-3" type="" id="test_connect">เข้าสู่ระบบ</button>
