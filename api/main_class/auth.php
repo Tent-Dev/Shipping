@@ -2,6 +2,10 @@
 ini_set('display_errors',1);
 error_reporting(E_ALL);
 
+include("../lib/php-jwt-master/src/JWT.php");
+
+use \Firebase\JWT\JWT;
+
 $mysql = new Main_db;
 $mysql->Connect_db();
 $mysql->SetCharacter();
@@ -14,7 +18,7 @@ class Auth{
 	}
 
 	public function AuthLogin($username, $password){
-
+		$jwt_auth = new JWT_Auth();
 		$stmt = $this->db_core->prepare("SELECT id, firstname, lastname, username, password FROM tbl_member WHERE username = ?");
 		$stmt->bind_param("s", $username);
 		$stmt->execute();
@@ -27,8 +31,9 @@ class Auth{
 					'member_username' => $member_username,
 					'member_firstname' => $member_firstname,
 					'member_lastname' => $member_lastname,
-					'member_password' =>$member_password
+					'signin_time' => date("Y-m-d H:i:s")
 				);
+				$jwt_auth->JWT_Create($data);
 				$response = array(
 					'status' => 200,
 					'data' => $data
@@ -48,6 +53,24 @@ class Auth{
 		}
 		
 		return $response;
+	}
+}
+
+class JWT_Auth{
+
+	public function JWT_Create($data){
+		$key = "example_key";
+
+		$data['exp'] = 1460046010;
+		$payload = $data;
+
+		$jwt = JWT::encode($payload, $key);
+		//$decoded = JWT::decode($jwt, $key, array('HS256'));
+
+		print_r($jwt);
+
+		// JWT::$leeway = 60; // $leeway in seconds
+		// $decoded = JWT::decode($jwt, $key, array('HS256'));
 	}
 }
 ?>

@@ -52,7 +52,6 @@ if ($cmd != "") {
 			session_start();
 			$_SESSION['getUsername'] = $result['data']['member_username'];
 			$_SESSION['getId'] = $result['data']['member_id'];
-			$_SESSION['getPassword'] = $result['data']['member_password'];
 		}
 		else{
 		}
