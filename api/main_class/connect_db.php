@@ -50,7 +50,7 @@ class Main_db{
 
 	public function Select_db_one($sql){
 		$result = mysqli_query($this->db_connection,$sql);
-		$query = mysqli_fetch_array($result);
+		$query = mysqli_fetch_assoc($result);
 		return $query;
 	}
 
@@ -64,26 +64,24 @@ class Main_db{
 		$str = "INSERT INTO ".$tableName."(".implode(",", array_keys($arr)).")";
 		$str2 = " VALUES('".implode("','",$arr)."')";
 		$sql = $str.$str2;
-		//var_dump($sql);
-		//echo $sql;
 		$result = mysqli_query($this->db_connection,$sql);
 		return $result;
 	}
 
 	public function Update_db($arr,$key,$tableName){
 		$sql = "UPDATE ".$tableName." SET ";
-		$last_key = end(array_keys($arr)); //end เลื่อน pointer ไปตำแหน่งท้ายสุดของ array, array_key ใช้คืนค่า key ทั้งหมดแบบ array โดย array ที่ได้จะมี key ตั้งแต่ 0 ขั้นไปตามลำดับ
+		$last_key = end(array_keys($arr));
 		$last_arr = end($key);
 		$where = " WHERE ";
-		foreach ($arr as $k => $value) { //นำข้อมูลออกมาจากตัวแปลที่เป็นประเภท array โดยสามารถเรียกค่าได้ทั้ง $key และ $value ของ array
+		foreach ($arr as $k => $value) {
 			$value = $this->quote($value);
 			
 			$sql.= $k." = '".$value."' ";
 
-			if ($k != $last_key){ //เช็คว่า array ยังไม่ใช่ตัวสุดท้าย ให้ใส่เครื่องหมาย , ต่อท้าย เช่น 'field1','field2' จบ
+			if ($k != $last_key){
 			$sql.=",";
 		}
-			if (in_array($k, $key)){ //in_array ใช้ตรวจสอบว่ามีข้อมูลที่กำหนดใน array หรือไม่ ถ้ามีก็ใช้ AND ต่อ
+			if (in_array($k, $key)){
 				$where.= $k." = '".$value."' ";
 
 				if ($k != $last_arr){
@@ -114,13 +112,6 @@ class Main_db{
 	}
 
 ///////////////////////////////////////////////////////////////////////
-
-	//สุ่มชุดตัวอักษร ทำ Session
-	function ran(){
-		$length = 15;    
-		$ran = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,$length);
-		return $ran;
-	}
 
 }
 ?>

@@ -15,30 +15,32 @@
 
 </head>
 <body>
-	<div class="container">
-		<div align="center">
-			<div class="card shadow p-3 mb-5 h-100 bg-white rounded align-items-center">
-				<div class="card-body">
-					<h1>Shipping System</h1>
-					<div class="form-group">
-						<div class="input-group mt-3">
-							<div class="input-group-prepend">
-								<div class="input-group-text"><i class="fas fa-user"></i></div>
+	<div class="row">
+		<div class="container">
+			<div align="center">
+				<div class="card shadow p-3 mb-5 h-100 bg-white rounded align-items-center">
+					<div class="card-body">
+						<h1>Shipping System</h1>
+						<div class="form-group">
+							<div class="input-group mt-3">
+								<div class="input-group-prepend">
+									<div class="input-group-text"><i class="fas fa-user"></i></div>
+								</div>
+								<input class="form-control" type="text" name="" value="" placeholder="">
 							</div>
-							<input class="form-control" type="text" name="" value="" placeholder="">
-						</div>
-						<div class="input-group mt-3">
-							<div class="input-group-prepend">
-								<div class="input-group-text"><i class="fas fa-key"></i></div>
+							<div class="input-group mt-3">
+								<div class="input-group-prepend">
+									<div class="input-group-text"><i class="fas fa-key"></i></div>
+								</div>
+								<input class="form-control" type="password" name="" value="" placeholder="">
 							</div>
-							<input class="form-control" type="password" name="" value="" placeholder="">
+							<button class="btn btn-primary mt-3" type="" id="test_connect">เข้าสู่ระบบ</button>
 						</div>
-						<button class="btn btn-primary mt-3" type="" id="test_connect">เข้าสู่ระบบ</button>
 					</div>
 				</div>
 			</div>
+			<p align="center">Copyright 2020 Shipping System by <a href="#">Dev-Team</a></p>
 		</div>
-		<p align="center">Copyright 2020 Shipping System by <a href="#">Dev-Team</a></p>
 	</div>
 
 </body>

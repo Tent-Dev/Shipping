@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors',1);
-error_reporting(E_ALL);
+// ini_set('display_errors',1);
+// error_reporting(E_ALL);
 
 include("../main_class/connect_db.php");
 include("../main_class/auth.php");
@@ -38,8 +38,8 @@ if ($cmd != "") {
 			$response = $username_duplicate;
 		}
 		echo json_encode($response);
-		exit();
 		$mysql->Close_db();
+		exit();
 	}
 
 	//login
@@ -48,20 +48,14 @@ if ($cmd != "") {
 		$password = $_POST['password'];
 		$result = $auth->AuthLogin($username, $password);
 
-		if($result['status'] == 200){
-			session_start();
-			$_SESSION['getUsername'] = $result['data']['member_username'];
-			$_SESSION['getId'] = $result['data']['member_id'];
-		}
-		else{
-		}
 		echo json_encode($result);
 		$mysql->Close_db();
+		exit();
 	}
 
 	//logout
 	if ($cmd == "logout") {
-		session_start() ;
+		session_start();
 		session_destroy();
 	}
 
