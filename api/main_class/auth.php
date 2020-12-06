@@ -14,6 +14,58 @@ class Auth{
 		$this->db_connect->Connect_db();
 	}
 
+	public function AuthPermission(){
+		session_start();
+		if(isset($_SESSION['SESSION_ID']) && isset($_SESSION['ID'])){
+			$stmt = $this->db_core->prepare("SELECT session_id FROM tbl_member WHERE id = ?");
+			$stmt->bind_param("s", $_SESSION['ID']);
+			$stmt->execute();
+			$stmt->bind_result($session_id);
+			$result = $stmt->fetch();
+			if($result){
+				if(password_verify($_SESSION['SESSION_ID'], $session_id)){
+					if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > (SESSION_EXPIRE_MINUTE*60))) {
+						session_unset(); 
+						session_destroy();
+						$response = array(
+							'permission' => false,
+							'msg' => 'Session expired',
+						);
+					}else if(isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] <= (SESSION_EXPIRE_MINUTE*60))){
+						$_SESSION['LAST_ACTIVITY'] = time();
+						$response = array(
+							'permission' => true,
+							'msg' => 'Session enable',
+						);
+					}
+					else{
+						$response = array(
+							'permission' => false,
+							'msg' => 'Cannot find your last session activity',
+						);
+					}
+				}else{
+					$response = array(
+						'permission' => false,
+						'msg' => 'Session invalid',
+					);
+				}
+			}else{
+				$response = array(
+					'permission' => false,
+					'msg' => 'Cannot find your account',
+				);
+			}
+		}
+		else{
+			$response = array(
+				'permission' => false,
+				'msg' => 'Cannot find your session',
+			);
+		}
+		return $response;
+	}
+
 	public function AuthLogin($username, $password){
 		$jwt_auth = new JWT_Auth();
 		$stmt = $this->db_core->prepare("SELECT id, firstname, lastname, username, password FROM tbl_member WHERE username = ?");
@@ -39,15 +91,16 @@ class Auth{
 						'member_username' => $member_username,
 						'member_firstname' => $member_firstname,
 						'member_lastname' => $member_lastname,
-						'signin_time' => date("Y-m-d H:i:s"),
+						'signin_time' => time(),
 						'session_id' => $session_id
 					);
 					//$jwt_auth->JWT_Create($data);
 
 					session_start();
-					$_SESSION['getUsername'] = $member_username;
-					$_SESSION['getId'] = $member_id;
-					$_SESSION['session_id'] = $session_id;
+					$_SESSION['USERNAME'] = $member_username;
+					$_SESSION['ID'] = $member_id;
+					$_SESSION['SESSION_ID'] = $session_id;
+					$_SESSION['LAST_ACTIVITY'] = time();
 
 					$response = array(
 						'status' => 200,

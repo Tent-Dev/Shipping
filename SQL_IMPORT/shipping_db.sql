@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2020 at 11:28 AM
+-- Generation Time: Dec 06, 2020 at 07:09 PM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -31,7 +31,14 @@ CREATE TABLE IF NOT EXISTS `btl_transaction` (
   `transaction_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `btl_transaction`
+--
+
+INSERT INTO `btl_transaction` (`id`, `transaction_id`, `customer_id`, `product_id`) VALUES
+(1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -74,10 +81,8 @@ CREATE TABLE IF NOT EXISTS `tbl_member` (
 --
 
 INSERT INTO `tbl_member` (`id`, `firstname`, `lastname`, `member_type`, `username`, `password`, `session_id`) VALUES
-(1, 'Admin', 'Test', 'admin', 'admin', '1234', NULL),
-(2, 'Chutipas', 'Borsub', 'staff', 'itsofun01', 'Yooyen123', NULL),
-(3, 'Test', 'Signup', NULL, 'testsignup', '$2y$12$rUz0H84mEiG0BDYnqHljDuxOafLyiadlzeWTd6TGrxNojvIbFHBEy', NULL),
-(4, 'Admin', 'Test', NULL, 'admin2', '$2y$12$P2AvHFLQDJaq6jZPYvlAu.MVHIrj8ZxGa98OTSwWb.Nh5XkQOLjh.', '$2y$12$TmEAYlJL4eryjK5SccTdM.zE/iBCqUShDkFyCwn9yq4DLnTMfISXK');
+(3, 'Test', 'Signup', NULL, 'testsignup', '$2y$12$rUz0H84mEiG0BDYnqHljDuxOafLyiadlzeWTd6TGrxNojvIbFHBEy', '$2y$12$gf2v223qDnN93i8qjbQc0usD8.3bp.Z1S6XBEWeU2fUl5M7DqHXIO'),
+(4, 'Admin', 'Test', NULL, 'admin', '$2y$12$P2AvHFLQDJaq6jZPYvlAu.MVHIrj8ZxGa98OTSwWb.Nh5XkQOLjh.', '$2y$12$0oqSySz.WYRnfR2qA6TStu9YVecTCcZiwlJU7pexyRwB.TBUHF9aG');
 
 -- --------------------------------------------------------
 
@@ -90,15 +95,16 @@ CREATE TABLE IF NOT EXISTS `tbl_product` (
   `shipping_type` varchar(100) NOT NULL,
   `weight` float NOT NULL,
   `price` float NOT NULL,
-  `tracking_code` varchar(100) NOT NULL
+  `tracking_code` varchar(100) NOT NULL,
+  `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_product`
 --
 
-INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_code`) VALUES
-(1, 'EMS', 1.65, 50, '1102002841486');
+INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_code`, `status`) VALUES
+(1, 'EMS', 1.65, 50, '1102002841486', '');
 
 --
 -- Indexes for dumped tables
@@ -136,7 +142,7 @@ ALTER TABLE `tbl_product`
 -- AUTO_INCREMENT for table `btl_transaction`
 --
 ALTER TABLE `btl_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_customer`
 --
