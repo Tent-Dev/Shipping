@@ -15,9 +15,7 @@ $cmd = isset($_POST["command"]) ? $_POST["command"] : "";
 if ($cmd != "") {
 
 	if ($cmd == "tracking") {
-
 		$result = $tracking->TrackingCode($_POST["tracking_code"]);
-
 		echo json_encode($result);
 		$mysql->Close_db();
 		exit();

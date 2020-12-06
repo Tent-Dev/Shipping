@@ -47,7 +47,6 @@ if ($cmd != "") {
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		$result = $auth->AuthLogin($username, $password);
-
 		echo json_encode($result);
 		$mysql->Close_db();
 		exit();

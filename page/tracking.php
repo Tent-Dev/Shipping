@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Hello Shipping</title>
+	<title>Tracking</title>
 
 	<!-- import Lib -->
 	<link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.min.css">
