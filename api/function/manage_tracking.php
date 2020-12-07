@@ -17,12 +17,7 @@ $cmd = isset($_POST["command"]) ? $_POST["command"] : "";
 if ($cmd != "") {
 
 	if ($cmd == "tracking") {
-		$permission = $auth->AuthPermission();
-		if($permission['permission']){
-			$result = $tracking->TrackingCode($_POST["tracking_code"]);
-		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
-		}
+		$result = $tracking->TrackingCode($_POST["tracking_code"]);
 		echo json_encode($result);
 		$mysql->Close_db();
 		exit();

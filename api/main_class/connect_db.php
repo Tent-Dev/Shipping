@@ -41,7 +41,7 @@ class Main_db{
 		$result = mysqli_query($this->db_connection,$sql);
 		$array = array();
 
-		while ($row = mysqli_fetch_array($result)) {
+		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($array, $row);
 		}
 		mysqli_free_result($result);

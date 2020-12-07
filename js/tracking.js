@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$('#test_connect').click(function(event) {
 		$.ajax({
-			url: '../api/function/query_description.php',
+			url: '../api/function/manage_tracking.php',
 			method: 'post',
 			data: {
 				command: 'tracking',

@@ -24,7 +24,7 @@ class Tracking{
 			);
 		}else{
 			$response = array(
-				'status' => 400,
+				'status' => 404,
 				'err_msg' => 'Tracking code not found'
 			);
 		}
