@@ -58,6 +58,8 @@ class MNG_Product{
 	}
 
 	public function CreateProduct($param = null){
+		$get_last_customer_id = "";
+		$get_last_product_id = "";
 		$arr_customer = array( 
 			"firstname" => $param['firstname'],
 			"lastname" => $param['lastname'],
@@ -66,7 +68,8 @@ class MNG_Product{
 
 		$result_customer = $this->db_connect->Insert_db($arr_customer,"tbl_customer");
 
-		if($result_customer){
+		if($result_customer['status']){
+			$get_last_customer_id = $result_customer['last_id'];
 			$tracking_code = $this->GenerateTrackingCode();
 			$arr_customer = array( 
 				"shipping_type" => $param['shipping_type'],
@@ -78,20 +81,20 @@ class MNG_Product{
 
 			$result_product = $this->db_connect->Insert_db($arr_customer,"tbl_product");
 
-			if($result_product){
-
+			if($result_product['status']){
+				$get_last_product_id = $result_product['last_id'];
 				$trans_id = $this->GenerateTransactionId();
 
 				$arr_customer = array( 
 					"transaction_id" => $trans_id,
-					"customer_id" => $param['weight'],
-					"product_id" => $param['price'],
+					"customer_id" => $get_last_customer_id,
+					"product_id" => $get_last_product_id,
 					"receiver_desc" => $param['receiver_desc'],
 				);
 
 				$result_transaction = $this->db_connect->Insert_db($arr_customer,"tbl_transaction");
 				
-				if($result_transaction){
+				if($result_transaction['status']){
 					$response = array(
 						'status' => 200,
 						'data' => $data
@@ -119,14 +122,19 @@ class MNG_Product{
 	}
 
 	public function GenerateTransactionId(){
-		$trans_id = getdate();
-		$trans_id = $trans_id[0];
+		$trans_id = time();
 		return $trans_id;
 	}
 
 	public function GenerateTrackingCode(){
-		$tracking_code = getdate();
-		$tracking_code = "SH".$tracking_code[0];
+
+		$ran1 = substr(str_shuffle('0123456789'),1,3);
+		$ran2 = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,1);
+		$ran3 = substr(str_shuffle('0123456789'),1,4);
+		$ran4 = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,2);
+		$ran5 = substr(str_shuffle('0123456789'),1,1);
+		$tracking_code = "SH".$ran1.$ran2.$ran3.$ran4.$ran5;
+
 		return $tracking_code;
 	}
 }

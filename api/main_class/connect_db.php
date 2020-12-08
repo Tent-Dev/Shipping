@@ -65,7 +65,18 @@ class Main_db{
 		$str2 = " VALUES('".implode("','",$arr)."')";
 		$sql = $str.$str2;
 		$result = mysqli_query($this->db_connection,$sql);
-		return $result;
+		if($result){
+			$response = array(
+				'status' => true, 
+				'last_id' => mysqli_insert_id($this->db_connection)
+			);
+		}else{
+			$response = array(
+				'status' => false, 
+				'err_msg' => 'Cannot insert data'
+			);
+		}
+		return $response;
 	}
 
 	public function Update_db($arr,$key,$tableName){
@@ -79,8 +90,8 @@ class Main_db{
 			$sql.= $k." = '".$value."' ";
 
 			if ($k != $last_key){
-			$sql.=",";
-		}
+				$sql.=",";
+			}
 			if (in_array($k, $key)){
 				$where.= $k." = '".$value."' ";
 
