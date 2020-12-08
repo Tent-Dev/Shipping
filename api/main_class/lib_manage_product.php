@@ -28,16 +28,17 @@ class MNG_Product{
 		$sql_where = "";
 
 		if(isset($param['status'])){
-			$sql_where = ($sql_where != "") ? " AND " : " WHERE ";
-			$sql_where .= " tbl_product.status = ".$param['status']." ";
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.status = '".$param['status']."' ";
 		}
 
 		if(isset($param['tracking_code'])){
-			$sql_where = ($sql_where != "") ? " AND " : " WHERE ";
-			$sql_where .= " tbl_product.tracking_code = ".$param['tracking_code']." ";
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.tracking_code = '".$param['tracking_code']."' ";
 		}
 
-		$sql = $sql + $sql_where;
+		$sql = $sql . $sql_where;
+
 
 		$data = $this->db_connect->Select_db($sql);
 
