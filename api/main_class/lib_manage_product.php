@@ -9,7 +9,7 @@ class MNG_Product{
 		$this->db_connect->Connect_db();
 	}
 
-	public function GetProduct($status = null){
+	public function GetProduct($param = null){
 
 		$sql =
 		"
@@ -25,9 +25,19 @@ class MNG_Product{
 		ON tbl_customer.id = tbl_transaction.customer_id
 		";
 
-		if(isset($status)){
-			$sql .= " WHERE tbl_product.status = ".$status." ";
+		$sql_where = "";
+
+		if(isset($param['status'])){
+			$sql_where = ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.status = ".$param['status']." ";
 		}
+
+		if(isset($param['tracking_code'])){
+			$sql_where = ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.tracking_code = ".$param['tracking_code']." ";
+		}
+
+		$sql = $sql + $sql_where;
 
 		$data = $this->db_connect->Select_db($sql);
 

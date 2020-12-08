@@ -19,7 +19,7 @@ if ($cmd != "") {
 	if ($cmd == "get_product") {
 		$permission = $auth->AuthPermission();
 		if($permission['permission']){
-			$result = $mng_product->GetProduct($_POST["status"]);
+			$result = $mng_product->GetProduct($_POST);
 		}else{
 			$result = array('status' => 500, 'err_msg' => $permission['msg']);
 		}
