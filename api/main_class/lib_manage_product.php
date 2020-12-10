@@ -118,8 +118,7 @@ class MNG_Product{
 
 					if($result_transaction['status']){
 						$response = array(
-							'status' => 200,
-							'data' => $data
+							'status' => 200
 						);
 					}else{
 						$response = array(
@@ -144,12 +143,43 @@ class MNG_Product{
 		return $response;
 	}
 
-	public function GenerateTransactionId(){
-		$ran1 = substr(str_shuffle('0123456789'),1,2);
-		$ran2 = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,2);
-		$trans_id = strtotime("now").$ran1.$ran2;
-		var_dump($trans_id);
-		return $trans_id;
+	public function UpdateProduct($param = null){
+		$arr = array();
+
+		if(isset($param['product_id'])){
+			$arr['id'] = $param['product_id'];
+		}
+
+		if(isset($param['shipper_id'])){
+			$arr['shipper_id'] = $param['shipper_id'];
+		}
+
+		if(isset($param['temp_shipping'])){
+			$arr['temp_shipping'] = $param['temp_shipping'];
+		}
+
+		if(isset($param['price'])){
+			$arr['price'] = $param['price'];
+		}
+
+		if(isset($param['weight'])){
+			$arr['weight'] = $param['weight'];
+		}
+
+		$key = array("id");
+		$result = $this->db_connect->Update_db($arr, $key, "tbl_product");
+
+		if($result){
+			$response = array(
+				'status' => 200
+			);
+		}else{
+			$response = array(
+				'status' => 500,
+				'err_msg' => 'Can not update product'
+			);
+		}
+		return $response;
 	}
 
 	public function GenerateTrackingCode(){
