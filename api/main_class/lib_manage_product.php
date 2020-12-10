@@ -15,14 +15,16 @@ class MNG_Product{
 		"
 		SELECT tbl_product.tracking_code,
 		tbl_product.status,
-		CONCAT(tbl_customer.firstname ,' ', tbl_customer.lastname) as sender_name,
 		tbl_product.create_date,
-		tbl_transaction.receiver_desc 
+		tbl_transaction.receiver_desc ,
+		tbl_transaction.sender_desc,
+		CONCAT(tbl_member.firstname,' ', tbl_member.lastname) as shipper_name
 		FROM tbl_product
 		JOIN tbl_transaction
 		ON tbl_product.id = tbl_transaction.product_id
-		JOIN tbl_customer
-		ON tbl_customer.id = tbl_transaction.customer_id
+		LEFT JOIN tbl_member
+		ON tbl_product.shipper_id = tbl_member.id
+		ORDER BY tbl_product.id
 		";
 
 		$sql_where = "";
@@ -59,7 +61,7 @@ class MNG_Product{
 
 	public function CreateProduct($param = null){
 
-		$dumpmy_data = '{"firstname":"มานี่","lastname":"อร่อยนะ","id_card":"1102002841487","item":[{"weight":1.5,"price":30,"shipping_type":"normal","address":{"address":"12/0000 ถนนมาเจริญ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830888888"},"receiver_desc":{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}},{"firstname":"พรนภัส","lastname":"หิวมาก","id_card":"1102002841486","weight":1.5,"price":30,"shipping_type":"normal","address":{"address":"12/0000 ถนนมาเจริญ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830888888"},"receiver_desc":{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}}]}';
+		$dumpmy_data = '{"firstname":"ชื่อคนทำรายการ","lastname":"นามสกุลคนทำรายการ","id_card":"1102002841486","item":[{"weight":1.5,"price":30,"shipping_type":"normal","receiver_desc":{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}},{"weight":1.5,"price":30,"shipping_type":"normal","receiver_desc":{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}}]}';
 
 		$json_en = json_decode($dumpmy_data, true);
 
