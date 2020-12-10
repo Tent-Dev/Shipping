@@ -58,58 +58,79 @@ class MNG_Product{
 	}
 
 	public function CreateProduct($param = null){
-		$get_last_customer_id = "";
-		$get_last_product_id = "";
-		$arr_customer = array( 
-			"firstname" => $param['firstname'],
-			"lastname" => $param['lastname'],
-			"address" => $param['address'],
-		);
 
-		$result_customer = $this->db_connect->Insert_db($arr_customer,"tbl_customer");
+		$dumpmy_data = '{"firstname":"มานี่","lastname":"อร่อยนะ","id_card":"1102002841487","item":[{"weight":1.5,"price":30,"shipping_type":"normal","address":{"address":"12/0000 ถนนมาเจริญ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830888888"},"receiver_desc":{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}},{"firstname":"พรนภัส","lastname":"หิวมาก","id_card":"1102002841486","weight":1.5,"price":30,"shipping_type":"normal","address":{"address":"12/0000 ถนนมาเจริญ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830888888"},"receiver_desc":{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}}]}';
+
+		$json_en = json_decode($dumpmy_data, true);
+
+		$ran_transac1 = substr(str_shuffle('0123456789'),1,2);
+		$ran_transac2 = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,2);
+
+		$arr_customer = array( 
+			"firstname" => $json_en['firstname'],
+			"lastname" => $json_en['lastname'],
+			"id_card" => $json_en['id_card']
+		);
+		$sql = 
+		"SELECT * FROM tbl_customer WHERE id_card = '".$json_en['id_card']."'";
+
+		$check_idcard = $this->db_connect->Select_db_one($sql);
+
+		if($check_idcard){
+			$result_customer = array('status' => true, 'last_id' => $check_idcard['id'] );
+		}else{
+			$result_customer = $this->db_connect->Insert_db($arr_customer,"tbl_customer");
+		}
 
 		if($result_customer['status']){
-			$get_last_customer_id = $result_customer['last_id'];
-			$tracking_code = $this->GenerateTrackingCode();
-			$arr_customer = array( 
-				"shipping_type" => $param['shipping_type'],
-				"weight" => $param['weight'],
-				"price" => $param['price'],
-				"tracking_code" => $tracking_code,
-				"status" => 'waiting'
-			);
+			foreach ($json_en['item'] as $value) {
 
-			$result_product = $this->db_connect->Insert_db($arr_customer,"tbl_product");
+				$get_last_customer_id = "";
+				$get_last_product_id = "";
 
-			if($result_product['status']){
-				$get_last_product_id = $result_product['last_id'];
-				$trans_id = $this->GenerateTransactionId();
-
+				$get_last_customer_id = $result_customer['last_id'];
+				$tracking_code = $this->GenerateTrackingCode();
 				$arr_customer = array( 
-					"transaction_id" => $trans_id,
-					"customer_id" => $get_last_customer_id,
-					"product_id" => $get_last_product_id,
-					"receiver_desc" => $param['receiver_desc'],
+					"shipping_type" => $value['shipping_type'],
+					"weight" => $value['weight'],
+					"price" => $value['price'],
+					"tracking_code" => $tracking_code,
+					"status" => 'waiting'
 				);
 
-				$result_transaction = $this->db_connect->Insert_db($arr_customer,"tbl_transaction");
-				
-				if($result_transaction['status']){
-					$response = array(
-						'status' => 200,
-						'data' => $data
+				$result_product = $this->db_connect->Insert_db($arr_customer,"tbl_product");
+
+				if($result_product['status']){
+					$get_last_product_id = $result_product['last_id'];
+					$trans_id = strtotime("now").$ran_transac1.$ran_transac2;
+
+					$arr_customer = array( 
+						"transaction_id" => $trans_id,
+						"customer_id" => $get_last_customer_id,
+						"product_id" => $get_last_product_id,
+						"sender_desc" =>  json_encode($value['sender_desc'], JSON_UNESCAPED_UNICODE),
+						"receiver_desc" => json_encode($value['receiver_desc'], JSON_UNESCAPED_UNICODE)
 					);
+
+					$result_transaction = $this->db_connect->Insert_db($arr_customer,"tbl_transaction");
+
+					if($result_transaction['status']){
+						$response = array(
+							'status' => 200,
+							'data' => $data
+						);
+					}else{
+						$response = array(
+							'status' => 500,
+							'err_msg' => 'Cannot create transaction'
+						);
+					}
 				}else{
 					$response = array(
 						'status' => 500,
-						'err_msg' => 'Cannot create transaction'
+						'err_msg' => 'Cannot create product'
 					);
 				}
-			}else{
-				$response = array(
-					'status' => 500,
-					'err_msg' => 'Cannot create product'
-				);
 			}
 		}else{
 			$response = array(
@@ -122,7 +143,10 @@ class MNG_Product{
 	}
 
 	public function GenerateTransactionId(){
-		$trans_id = time();
+		$ran1 = substr(str_shuffle('0123456789'),1,2);
+		$ran2 = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),1,2);
+		$trans_id = strtotime("now").$ran1.$ran2;
+		var_dump($trans_id);
 		return $trans_id;
 	}
 
