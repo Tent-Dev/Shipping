@@ -92,6 +92,12 @@
                                     <input type="text" name="s_lname" id="s_lname" class="form-control form-control-sm" value="">
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="s_idcard" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ส่ง</label>
+                                    <input type="text" name="s_idcard" id="s_idcard" class="form-control form-control-sm">
+                                </div>
+                            </div>
                             <p class="form-title">ข้อมูลผู้รับ</p>
                             <div class="row">
                                 <div class="col">
