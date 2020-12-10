@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 10, 2020 at 03:08 PM
+-- Generation Time: Dec 10, 2020 at 06:13 PM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `tbl_member` (
 --
 
 INSERT INTO `tbl_member` (`id`, `firstname`, `lastname`, `member_type`, `username`, `password`, `session_id`) VALUES
-(3, 'Test', 'Signup', NULL, 'testsignup', '$2y$12$rUz0H84mEiG0BDYnqHljDuxOafLyiadlzeWTd6TGrxNojvIbFHBEy', '$2y$12$ukkUev9ydhFisMARe/Tc9eVC8AqVSrwbn/YVt0.gpZRhppX8oXVBe'),
+(3, 'Test', 'Signup', NULL, 'testsignup', '$2y$12$rUz0H84mEiG0BDYnqHljDuxOafLyiadlzeWTd6TGrxNojvIbFHBEy', '$2y$12$zNmYv3ycY5b0tRGUpgJ7yOTnBbkpz259q8JoC3t89hhuukZv9jPQe'),
 (4, 'Admin', 'Test', NULL, 'admin', '$2y$12$P2AvHFLQDJaq6jZPYvlAu.MVHIrj8ZxGa98OTSwWb.Nh5XkQOLjh.', '$2y$12$0oqSySz.WYRnfR2qA6TStu9YVecTCcZiwlJU7pexyRwB.TBUHF9aG'),
 (5, 'Admin', 'Test', NULL, 'admin2', '$2y$12$eK974nZoXdYRNe6nrJm1S.2drx/0o/Roen/DssBHj/0po1B.AGavG', NULL),
 (6, 'Admin', 'Test', NULL, 'admin3', '$2y$12$2m3D1N8Wa7ijQMtu1j6RPe9NVEDk0wZhOvldHn5R7/FkHi3W6IuAe', NULL);
@@ -94,34 +94,35 @@ CREATE TABLE IF NOT EXISTS `tbl_product` (
   `tracking_code` varchar(100) NOT NULL,
   `status` varchar(50) NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `shipper_id` int(11) NOT NULL
+  `shipper_id` int(11) NOT NULL,
+  `temp_shipping` text NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_product`
 --
 
-INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_code`, `status`, `create_date`, `shipper_id`) VALUES
-(1, 'EMS', 1.65, 50, '1102002841486', '', '2020-12-07 15:38:17', 0),
-(2, 'normal', 1.5, 30, 'SH1607448733', 'waiting', '2020-12-08 17:32:13', 0),
-(3, 'normal', 1.5, 30, 'SH1607449216', 'waiting', '2020-12-08 17:40:16', 0),
-(4, 'normal', 1.5, 30, 'SHT7KFYV0J4N', 'waiting', '2020-12-08 18:00:05', 0),
-(5, 'normal', 1.5, 30, 'SHSN9OTC4AE5', 'waiting', '2020-12-08 18:02:52', 0),
-(6, 'normal', 1.5, 30, 'SHHZIABOMTGK', 'waiting', '2020-12-08 18:05:58', 0),
-(7, 'normal', 1.5, 30, 'SH1NTBK28PLC', 'waiting', '2020-12-08 18:11:44', 0),
-(8, 'normal', 1.5, 30, 'SHKR5EPQHSDX', 'waiting', '2020-12-08 18:15:39', 0),
-(9, 'normal', 1.5, 30, 'SHLE4V09G28P', 'waiting', '2020-12-08 18:16:42', 0),
-(10, 'normal', 1.5, 30, 'SH5fcfc3d9ddbe14.14639092', 'waiting', '2020-12-08 18:20:09', 0),
-(11, 'normal', 1.5, 30, 'SH724N2980RL1', 'waiting', '2020-12-08 18:29:22', 0),
-(12, 'normal', 1.5, 30, 'SH301U6781TY6', 'waiting', '2020-12-09 16:30:45', 0),
-(13, 'normal', 1.5, 30, 'SH243J3810DU8', 'waiting', '2020-12-10 14:30:29', 0),
-(14, 'normal', 1.5, 30, 'SH158B7905LA6', 'waiting', '2020-12-10 14:30:29', 0),
-(15, 'normal', 1.5, 30, 'SH106U4312SE8', 'waiting', '2020-12-10 14:33:06', 0),
-(16, 'normal', 1.5, 30, 'SH748Y7183UJ9', 'waiting', '2020-12-10 14:33:06', 0),
-(17, 'normal', 1.5, 30, 'SH405D6741UX8', 'waiting', '2020-12-10 14:34:00', 0),
-(18, 'normal', 1.5, 30, 'SH749T0763TS8', 'waiting', '2020-12-10 14:34:01', 0),
-(19, 'normal', 1.5, 30, 'SH069W2916LE6', 'waiting', '2020-12-10 14:35:48', 0),
-(20, 'normal', 1.5, 30, 'SH694B2708JR9', 'waiting', '2020-12-10 14:35:48', 0);
+INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_code`, `status`, `create_date`, `shipper_id`, `temp_shipping`) VALUES
+(1, 'EMS', 1.65, 50, '1102002841486', '', '2020-12-07 15:38:17', 0, ''),
+(2, 'normal', 1.5, 30, 'SH1607448733', 'waiting', '2020-12-08 17:32:13', 0, ''),
+(3, 'normal', 1.5, 30, 'SH1607449216', 'waiting', '2020-12-08 17:40:16', 0, ''),
+(4, 'normal', 1.5, 30, 'SHT7KFYV0J4N', 'waiting', '2020-12-08 18:00:05', 0, ''),
+(5, 'normal', 1.5, 30, 'SHSN9OTC4AE5', 'waiting', '2020-12-08 18:02:52', 0, ''),
+(6, 'normal', 1.5, 30, 'SHHZIABOMTGK', 'waiting', '2020-12-08 18:05:58', 0, ''),
+(7, 'normal', 1.5, 30, 'SH1NTBK28PLC', 'waiting', '2020-12-08 18:11:44', 0, ''),
+(8, 'normal', 1.5, 30, 'SHKR5EPQHSDX', 'waiting', '2020-12-08 18:15:39', 0, ''),
+(9, 'normal', 1.5, 30, 'SHLE4V09G28P', 'waiting', '2020-12-08 18:16:42', 0, ''),
+(10, 'normal', 1.5, 30, 'SH5fcfc3d9ddbe14.14639092', 'waiting', '2020-12-08 18:20:09', 0, ''),
+(11, 'normal', 1.5, 30, 'SH724N2980RL1', 'waiting', '2020-12-08 18:29:22', 0, ''),
+(12, 'normal', 1.5, 30, 'SH301U6781TY6', 'waiting', '2020-12-09 16:30:45', 0, ''),
+(13, 'normal', 1.5, 30, 'SH243J3810DU8', 'waiting', '2020-12-10 14:30:29', 0, ''),
+(14, 'normal', 1.5, 30, 'SH158B7905LA6', 'waiting', '2020-12-10 14:30:29', 0, ''),
+(15, 'normal', 1.5, 30, 'SH106U4312SE8', 'waiting', '2020-12-10 14:33:06', 0, ''),
+(16, 'normal', 1.5, 30, 'SH748Y7183UJ9', 'waiting', '2020-12-10 14:33:06', 0, ''),
+(17, 'normal', 1.5, 30, 'SH405D6741UX8', 'waiting', '2020-12-10 14:34:00', 0, ''),
+(18, 'normal', 1.5, 30, 'SH749T0763TS8', 'waiting', '2020-12-10 14:34:01', 0, ''),
+(19, 'normal', 1.5, 30, 'SH069W2916LE6', 'waiting', '2020-12-10 14:35:48', 0, ''),
+(20, 'normal', 2, 40, 'SH694B2708JR9', 'waiting', '2020-12-10 14:35:48', 5, '');
 
 -- --------------------------------------------------------
 
