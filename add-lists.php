@@ -31,25 +31,23 @@
     <section>
     <div class="container">
         <div class="row">
-            <div class="col-12 mt-3">
+            <div class="col-12 mt-3 mb-5">
                 <h2>เพิ่มพัสดุ</h2>
                 <form action="" method="post">
                     <div id="form-section">
-                        <p class="form-title">ข้อมูลผู้ส่ง</p>
+                        <p class="form-title">ข้อมูลผู้ทำรายการ</p>
                         <div class="row">
                             <div class="col">
-                                <label for="s_fname" class="col-form-label col-form-label-sm">ชื่อผู้ส่ง</label>
-                                <input type="text" name="s_fname" id="s_fname" class="form-control form-control-sm">
+                                <label for="firstname" class="col-form-label col-form-label-sm">ชื่อผู้ทำรายการ</label>
+                                <input type="text" name="firstname" id="firstname" class="form-control form-control-sm">
                             </div>
                             <div class="col">
-                                <label for="s_lname" class="col-form-label col-form-label-sm">นามสกุลผู้ส่ง</label>
-                                <input type="text" name="s_lname" id="s_lname" class="form-control form-control-sm">
+                                <label for="lastname" class="col-form-label col-form-label-sm">นามสกุลผู้ทำรายการ</label>
+                                <input type="text" name="lastname" id="lastname" class="form-control form-control-sm">
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col">
-                                <label for="s_idcard" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ส่ง</label>
-                                <input type="text" name="s_idcard" id="s_idcard" class="form-control form-control-sm">
+                                <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
+                                <input type="text" name="id_card" id="id_card" class="form-control form-control-sm">
                             </div>
                         </div>
                         
@@ -64,18 +62,42 @@
                                     <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุลผู้รับ</label>
                                     <input type="text" name="r_lname[]" id="r_lname" class="form-control form-control-sm">
                                 </div>
+                                <div class="col">
+                                    <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>
+                                    <input type="text" name="phone_number[]" id="phone_number" class="form-control form-control-sm">
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="address" class="col-form-label col-form-label-sm">ที่อยู่</label>
-                                    <textarea type="text" name="address" id="address" class="form-control form-control-sm" rows="3"></textarea>
+                                    <input type="text" name="address" id="address" class="form-control form-control-sm">
                                 </div>
                                 <div class="col">
-                                    <label for="tel" class="col-form-label col-form-label-sm">เบอร์โทร</label>
-                                    <input type="text" name="tel" id="tel" class="form-control form-control-sm" value="">
+                                    <label for="district" class="col-form-label col-form-label-sm">เขต</label>
+                                    <input type="text" name="district" id="district" class="form-control form-control-sm">
+                                </div>
+                                <div class="col">
+                                    <label for="area" class="col-form-label col-form-label-sm">แขวง</label>
+                                    <input type="text" name="area" id="area" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col">
+                                    <label for="province" class="col-form-label col-form-label-sm">จังหวัด</label>
+                                    <input type="text" name="province" id="province" class="form-control form-control-sm">
+                                </div>
+                                <div class="col">
+                                    <label for="province" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
+                                    <input type="text" name="province" id="province" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="shipping_type" class="col-form-label col-form-label-sm">ประเภทการส่ง</label>
+                                    <select name="shipping_type[]" id="shipping_type" class="form-control form-control-sm">
+                                        <option value="normal" selected>ส่งแบบธรรมดา</option>
+                                    </select>
+                                </div>
                                 <div class="col">
                                     <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก</label>
                                     <input type="text" name="weight" id="weight" class="form-control form-control-sm" value="">
