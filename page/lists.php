@@ -46,11 +46,11 @@
                         <thead>
                             <tr>
                                 <th width="50px">No.</th>
-                                <th>Date</th>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th width="120px">Edit / Delete</th>
+                                <th>วันที่นำเข้าพัสดุ</th>
+                                <th>เลขพัสดุ</th>
+                                <th>ชื่อผู้รับ</th>
+                                <th>สถานะ</th>
+                                <th width="120px">แก้ไข / ลบ</th>
                             </tr>
                         </thead>
                         <tbody id="query_product">

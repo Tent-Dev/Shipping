@@ -25,7 +25,7 @@ class MNG_Product{
 		ON tbl_product.id = tbl_transaction.product_id
 		LEFT JOIN tbl_member
 		ON tbl_product.shipper_id = tbl_member.id
-		ORDER BY tbl_product.id
+		ORDER BY tbl_product.id DESC
 		";
 
 		$sql_where = "";

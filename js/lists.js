@@ -24,7 +24,7 @@ function get_productlist(){
 	                            '<td>name</td>'+
 	                            '<td>'+val.status+'</td>'+
 	                            '<td>'+
-	                                '<button class="btn btn-sm btn-warning" data-toggle="modal" data-id="'+val.id+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
+	                                '<button class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
 	                                '<button class="btn btn-sm btn-danger" data-id="'+val.id+'"><i class="fas fa-trash"></i></button>'+
 	                            '</td>'+
 	                        '</tr>';
