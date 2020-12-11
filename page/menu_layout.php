@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="../css/layout.css">
 
 <!-- Header Bar -->
 <div class="bar">
