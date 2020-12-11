@@ -15,8 +15,39 @@
 
 </head>
 <body>
-	<div class="row">
-		<div class="container">
+	<style>
+		body {
+			
+		}
+		.box {
+			width: 50%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	</style>
+
+	<div class="box">
+		<div class="card shadow p-3 mb-5 bg-white rounded">
+			<div class="card-body">
+				<h1>เช็คสถานะพัสดุ</h1>
+				<div class="form-group">
+					<div class="input-group mt-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text"><i class="fas fa-barcode"></i></div>
+						</div>
+						<input class="form-control" type="text" name="" value="" placeholder="">
+					</div>
+				</div>
+				<div class="text-right">
+					<button class="btn btn-primary mt-3" type="" id="test_connect">ตรวจสอบสถานะ</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="container">
+		<div class="row">
 			<div align="center" class="row">
 				<div class="col-12" align="left">
 					<h1>เช็คสถานะพัสดุ</h1>
@@ -38,7 +69,7 @@
 			</div>
 			<p align="center">Copyright 2020 Shipping System by <a href="#">Dev-Team</a></p>
 		</div>
-	</div>
+	</div> -->
 
 </body>
 </html>
