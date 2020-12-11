@@ -14,6 +14,7 @@ class MNG_Product{
 		$sql =
 		"
 		SELECT tbl_product.tracking_code,
+		tbl_product.id,
 		tbl_product.status,
 		tbl_product.create_date,
 		tbl_transaction.receiver_desc ,

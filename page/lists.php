@@ -13,6 +13,7 @@
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/lists.js" type="text/javascript" charset="utf-8"></script>
 
     <style>
         .form-title {
@@ -52,8 +53,8 @@
                                 <th width="120px">Edit / Delete</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody id="query_product">
+                            <!-- <tr>
                                 <td>1</td>
                                 <td>date</td>
                                 <td>code</td>
@@ -63,7 +64,7 @@
                                     <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editData"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
