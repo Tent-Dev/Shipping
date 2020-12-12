@@ -1,3 +1,10 @@
+<?php
+session_start();
+if($_SESSION['SESSION_ID'] == ""){
+    header("Location:../index.php");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
