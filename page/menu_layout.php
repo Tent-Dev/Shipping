@@ -10,10 +10,10 @@
     <!-- <button class="btn btn-sm btn-danger btn-logout">Sign out</button> -->
     <div class="dropdown profile d-none d-md-block">
         <button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Name
+           <?php echo $_SESSION['USERNAME'] ?>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="">Sign out</a>
+            <a id="logout" class="dropdown-item" href="">Sign out</a>
         </div>
     </div>
 </div>

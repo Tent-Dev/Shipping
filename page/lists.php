@@ -1,3 +1,10 @@
+<?php
+session_start();
+if($_SESSION['SESSION_ID'] == ""){
+    header("Location:../index.php");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +21,7 @@
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/lists.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/logout.js" type="text/javascript" charset="utf-8"></script>
 
     <style>
         .form-title {

@@ -55,7 +55,9 @@ if ($cmd != "") {
 	//logout
 	if ($cmd == "logout") {
 		session_start();
+		session_unset(); 
 		session_destroy();
+		exit();
 	}
 
 }
