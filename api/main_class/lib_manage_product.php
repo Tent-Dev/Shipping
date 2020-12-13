@@ -17,6 +17,8 @@ class MNG_Product{
 		tbl_product.id,
 		tbl_product.status,
 		tbl_product.create_date,
+		tbl_product.weight,
+		tbl_product.price,
 		tbl_transaction.receiver_desc ,
 		tbl_transaction.sender_desc,
 		CONCAT(tbl_member.firstname,' ', tbl_member.lastname) as shipper_name
@@ -46,9 +48,23 @@ class MNG_Product{
 		$data = $this->db_connect->Select_db($sql);
 
 		if($data){
+			$items = array();
+			foreach ($data as $value) {
+				$get_item = array(
+					'id' =>  $value['id'],
+					'tracking_code' => $value['tracking_code'],
+					'status' => $value['status'],
+					'create_date' => $value['create_date'],
+					'receiver_desc' => json_decode($value['receiver_desc']),
+					'sender_desc' => json_decode($value['sender_desc']),
+					'weight' => round($value['weight'], 2),
+					'price' => round($value['price'], 2),
+				);
+				$items[] = $get_item;
+			}
 			$response = array(
 				'status' => 200,
-				'data' => $data
+				'data' => $items
 			);
 		}else{
 			$response = array(
