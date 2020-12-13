@@ -26,6 +26,7 @@
     <div class="menu-content">
         <a href="lists.php" class="menu active">รายการพัสดุ</a>
         <a href="" class="menu">Dashboard 2</a>
+        <a href="" class="menu">เพิ่มบัญชีผู้ใช้</a>
     </div>
     <div class="dropup m-profile d-none d-md-none">
         <button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

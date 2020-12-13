@@ -147,23 +147,23 @@ class MNG_Product{
 	public function UpdateProduct($param = null){
 		$arr = array();
 
-		if(isset($param['product_id'])){
+		if(isset($param['product_id']) && $param['product_id'] !== ''){
 			$arr['id'] = $param['product_id'];
 		}
 
-		if(isset($param['shipper_id'])){
+		if(isset($param['shipper_id']) && $param['shipper_id'] !== ''){
 			$arr['shipper_id'] = $param['shipper_id'];
 		}
 
-		if(isset($param['temp_shipping'])){
+		if(isset($param['temp_shipping']) && $param['temp_shipping'] !== ''){
 			$arr['temp_shipping'] = $param['temp_shipping'];
 		}
 
-		if(isset($param['price'])){
+		if(isset($param['price']) && $param['price'] !== ''){
 			$arr['price'] = $param['price'];
 		}
 
-		if(isset($param['weight'])){
+		if(isset($param['weight']) && $param['weight'] !== ''){
 			$arr['weight'] = $param['weight'];
 		}
 

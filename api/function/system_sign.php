@@ -16,37 +16,9 @@ $cmd = isset($_POST["command"]) ? $_POST["command"] : "";
 
 if ($cmd != "") {
 
-	//Signup
-	if ($cmd == "signup") {
-		$firstName = $_POST['firstname'];
-		$lastName = $_POST['lastname'];
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$confirm_password = $_POST['confirm_password'];
-		$username_duplicate = $validate->Check_same('tbl_member','username',$username);
-		if($username_duplicate['status'] == 200){
-			$arr = array( 
-				"username"=> $username,
-				"password"=> password_hash($password, PASSWORD_BCRYPT, array('cost'=>12)),
-				"firstname"=> $firstName,
-				"lastname"=> $lastName
-			);
-			$mysql->Insert_db($arr,"tbl_member");
-			$response = $username_duplicate;
-			
-		}else{
-			$response = $username_duplicate;
-		}
-		echo json_encode($response);
-		$mysql->Close_db();
-		exit();
-	}
-
 	//login
 	if ($cmd == "login") {
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$result = $auth->AuthLogin($username, $password);
+		$result = $auth->AuthLogin($_POST);
 		echo json_encode($result);
 		$mysql->Close_db();
 		exit();
@@ -57,6 +29,7 @@ if ($cmd != "") {
 		session_start();
 		session_unset(); 
 		session_destroy();
+		echo json_encode($response = array('status' => 200 ));
 		exit();
 	}
 

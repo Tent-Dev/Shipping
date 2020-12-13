@@ -66,15 +66,15 @@ class Auth{
 		return $response;
 	}
 
-	public function AuthLogin($username, $password){
+	public function AuthLogin($param = null){
 		$jwt_auth = new JWT_Auth();
 		$stmt = $this->db_core->prepare("SELECT id, firstname, lastname, username, password FROM tbl_member WHERE username = ?");
-		$stmt->bind_param("s", $username);
+		$stmt->bind_param("s", $param['username']);
 		$stmt->execute();
 		$stmt->bind_result($member_id, $member_firstname, $member_lastname, $member_username,$member_password);
 		$result = $stmt->fetch();
 		if($result){
-			if(password_verify($password, $member_password)){
+			if(password_verify($param['password'], $member_password)){
 				$session_id = $this->GenerateSession();
 				$encypt_session = password_hash($session_id, PASSWORD_BCRYPT, array('cost'=>12));
 
