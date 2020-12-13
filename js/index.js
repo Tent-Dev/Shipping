@@ -22,13 +22,13 @@ $(document).ready(function() {
 					}else{
 						console.log("result: ",data);
 						$('#login').html('เข้าสู่ระบบ');
-					console.log("error");
-					Swal.fire({
-						title: 'พบข้อผิดพลาด',
-						text: 'ชื่อบัญชีผู้ใช้ หรือรหัสผ่านไม่ถูกต้อง',
-						icon: 'error',
-						confirmButtonText: 'ตกลง'
-					});
+						console.log("error");
+						Swal.fire({
+							title: 'พบข้อผิดพลาด',
+							text: 'ชื่อบัญชีผู้ใช้ หรือรหัสผ่านไม่ถูกต้อง',
+							icon: 'error',
+							confirmButtonText: 'ตกลง'
+						});
 					}
 				},
 				error: function() {
@@ -46,6 +46,26 @@ function validate(){
 
 	if(username == '' || password == ''){
 		result = false;
+
+		if(username == ''){
+			$('#username').addClass('custom_has_err');
+			$("#username").attr("placeholder", "โปรดกรอกบัญชีผู้ใช้");
+		}else{
+			$('#username').removeClass('custom_has_err');
+			$("#username").attr("placeholder", "");
+		}
+
+		if(password == ''){
+			$('#password').addClass('custom_has_err');
+			$("#password").attr("placeholder", "โปรดกรอกรหัสผ่าน");
+		}else{
+			$('#password').removeClass('custom_has_err');
+			$("#password").attr("placeholder", "");
+		}
+	}else{
+		$('#username, #password').removeClass('custom_has_err');
+		$("#username").attr("placeholder", "โปรดกรอกบัญชีผู้ใช้");
+		$("#password").attr("placeholder", "โปรดกรอกรหัสผ่าน");
 	}
 
 	return result;

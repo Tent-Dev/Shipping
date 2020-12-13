@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="lib/bootstrap-4.5.3-dist/css/bootstrap.min.css">
 	<link href="lib/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
 	<link href="lib/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+	<link href="css/main_custom.css" rel="stylesheet">
 	
 	<!-- <link rel="preconnect" href="https://fonts.gstatic.com"> 
     <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> -->
@@ -46,7 +47,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text"><i class="fas fa-key"></i></div>
 						</div>
-						<input id="password" class="form-control" type="password" name="" value="" placeholder="">
+						<input id="password" class="form-control" type="password" name="" value="" placeholder="" required>
 					</div>
 					<button class="btn btn-primary mt-3" type="button" id="login">เข้าสู่ระบบ</button>
 				</div>
