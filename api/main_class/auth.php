@@ -68,10 +68,10 @@ class Auth{
 
 	public function AuthLogin($param = null){
 		$jwt_auth = new JWT_Auth();
-		$stmt = $this->db_core->prepare("SELECT id, firstname, lastname, username, password FROM tbl_member WHERE username = ?");
+		$stmt = $this->db_core->prepare("SELECT id, firstname, lastname, username, password, member_type FROM tbl_member WHERE username = ?");
 		$stmt->bind_param("s", $param['username']);
 		$stmt->execute();
-		$stmt->bind_result($member_id, $member_firstname, $member_lastname, $member_username,$member_password);
+		$stmt->bind_result($member_id, $member_firstname, $member_lastname, $member_username,$member_password, $member_type);
 		$result = $stmt->fetch();
 		if($result){
 			if(password_verify($param['password'], $member_password)){
@@ -91,6 +91,7 @@ class Auth{
 						'member_username' => $member_username,
 						'member_firstname' => $member_firstname,
 						'member_lastname' => $member_lastname,
+						'member_type' => $member_type,
 						'signin_time' => time(),
 						'session_id' => $session_id
 					);
@@ -99,6 +100,7 @@ class Auth{
 					session_start();
 					$_SESSION['USERNAME'] = $member_username;
 					$_SESSION['ID'] = $member_id;
+					$_SESSION['TYPE'] = $member_type;
 					$_SESSION['SESSION_ID'] = $session_id;
 					$_SESSION['LAST_ACTIVITY'] = time();
 
