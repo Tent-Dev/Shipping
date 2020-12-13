@@ -59,6 +59,25 @@ class MNG_Account{
 		return $response;
 	}
 
+	public function GetAccount($param = null){
+		$sql = "SELECT id, firstname, lastname, member_type, username FROM tbl_member WHERE id = '".$_SESSION['ID']."'";
+
+		$data = $this->db_connect->Select_db($sql);
+
+		if($data){
+			$response = array(
+				'status' => 200,
+				'data' => $data
+			);
+		}else{
+			$response = array(
+				'status' => 404,
+				'err_msg' => 'Account not found'
+			);
+		}
+		return $response;
+	}
+
 	public function UpdateAccount($param = null){
 
 		$arr = array();
