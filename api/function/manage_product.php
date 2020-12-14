@@ -5,9 +5,11 @@
 include("../main_class/connect_db.php");
 include("../main_class/auth.php");
 include("../main_class/lib_manage_product.php");
+include("../main_class/tools.php");
 
 $mysql = new Main_db;
 $auth = new Auth;
+$tools = new Tools;
 $mng_product = new MNG_Product;
 
 $mysql->Connect_db();

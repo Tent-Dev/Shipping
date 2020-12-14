@@ -6,11 +6,18 @@ class MNG_Product{
 
 	public function __construct(){
 		$this->db_connect = new Main_db;
+		$this->tools = new Tools;
 		$this->db_connect->Connect_db();
 	}
 
 	public function GetProduct($param = null){
-
+		$per_page = 10;
+		$page = 1;
+		if(isset($param['page']) && $param['page'] != ''){
+			$page = $param['page'];
+		}
+		$start_page = $this->tools->PaginationSetpage($per_page,$page);
+		
 		$sql =
 		"
 		SELECT tbl_product.tracking_code,
@@ -27,8 +34,9 @@ class MNG_Product{
 		ON tbl_product.id = tbl_transaction.product_id
 		LEFT JOIN tbl_member
 		ON tbl_product.shipper_id = tbl_member.id
-		ORDER BY tbl_product.id DESC
 		";
+
+		$sql_limit = " ORDER BY tbl_product.id DESC LIMIT ".$start_page." , ".$per_page."";
 
 		$sql_where = "";
 
@@ -42,10 +50,13 @@ class MNG_Product{
 			$sql_where .= " tbl_product.tracking_code = '".$param['tracking_code']."' ";
 		}
 
-		$sql = $sql . $sql_where;
+		$sql_query = $sql . $sql_where. $sql_limit;
+		$sql_count = $sql . $sql_where;
 
+		$data = $this->db_connect->Select_db($sql_query);
 
-		$data = $this->db_connect->Select_db($sql);
+        $rowcount = $this->db_connect->numRows($sql_count);
+        $total_pages = ceil($rowcount / $per_page);
 
 		if($data){
 			$items = array();
@@ -62,6 +73,7 @@ class MNG_Product{
 				);
 				$items[] = $get_item;
 			}
+			$items['total_pages'] = $total_pages;
 			$response = array(
 				'status' => 200,
 				'data' => $items
@@ -169,6 +181,10 @@ class MNG_Product{
 
 		if(isset($param['shipper_id']) && $param['shipper_id'] !== ''){
 			$arr['shipper_id'] = $param['shipper_id'];
+		}
+
+		if(isset($param['status']) && $param['status'] !== ''){
+			$arr['status'] = $param['status'];
 		}
 
 		if(isset($param['temp_shipping']) && $param['temp_shipping'] !== ''){
