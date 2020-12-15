@@ -1,3 +1,6 @@
+<?php
+include("../client_config/config.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +15,7 @@
 	<script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- import My Script -->
-	<script src="../js/tracking.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/tracking.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 
 </head>
 <body>

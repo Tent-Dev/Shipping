@@ -59,6 +59,7 @@ class MNG_Product{
         $total_pages = ceil($rowcount / $per_page);
 
 		if($data){
+			$data_final = array();
 			$items = array();
 			foreach ($data as $value) {
 				$get_item = array(
@@ -73,10 +74,11 @@ class MNG_Product{
 				);
 				$items[] = $get_item;
 			}
-			$items['total_pages'] = $total_pages;
+			$data_final['total_pages'] = $total_pages;
+			$data_final['data'] = $items;
 			$response = array(
 				'status' => 200,
-				'data' => $items
+				'data' => $data_final
 			);
 		}else{
 			$response = array(
