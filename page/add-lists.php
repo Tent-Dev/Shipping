@@ -46,6 +46,10 @@ if($_SESSION['SESSION_ID'] == ""){
                         <p class="form-title">ข้อมูลผู้ทำรายการ</p>
                         <div class="row">
                             <div class="col-md-4">
+                                <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
+                                <input type="text" name="id_card" id="id_card" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-4">
                                 <label for="firstname" class="col-form-label col-form-label-sm">ชื่อผู้ทำรายการ</label>
                                 <input type="text" name="firstname" id="firstname" class="form-control form-control-sm">
                             </div>
@@ -53,15 +57,54 @@ if($_SESSION['SESSION_ID'] == ""){
                                 <label for="lastname" class="col-form-label col-form-label-sm">นามสกุลผู้ทำรายการ</label>
                                 <input type="text" name="lastname" id="lastname" class="form-control form-control-sm">
                             </div>
-                            <div class="col-md-4">
-                                <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
-                                <input type="text" name="id_card" id="id_card" class="form-control form-control-sm">
-                            </div>
                         </div>
                         
                         <div class="section">
+                            <p class="form-title" style="background-color: #9ec6ff;">ข้อมูลผู้ส่ง</p>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้ส่ง</label>
+                                    <input type="text" name="phone_number[]" id="phone_number" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อผู้ส่ง</label>
+                                    <input type="text" name="r_fname[]" id="r_fname" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุลผู้ส่ง</label>
+                                    <input type="text" name="r_lname[]" id="r_lname" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="address" class="col-form-label col-form-label-sm">ที่อยู่</label>
+                                    <input type="text" name="address" id="address" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="district" class="col-form-label col-form-label-sm">เขต</label>
+                                    <input type="text" name="district" id="district" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="area" class="col-form-label col-form-label-sm">แขวง</label>
+                                    <input type="text" name="area" id="area" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="province" class="col-form-label col-form-label-sm">จังหวัด</label>
+                                    <input type="text" name="province" id="province" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="province" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
+                                    <input type="text" name="province" id="province" class="form-control form-control-sm">
+                                </div>
+                            </div>
                             <p class="form-title">ข้อมูลผู้รับ</p>
                             <div class="row">
+                                <div class="col-md-4">
+                                    <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>
+                                    <input type="text" name="phone_number[]" id="phone_number" class="form-control form-control-sm">
+                                </div>
                                 <div class="col-md-4">
                                     <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อผู้รับ</label>
                                     <input type="text" name="r_fname[]" id="r_fname" class="form-control form-control-sm">
@@ -69,10 +112,6 @@ if($_SESSION['SESSION_ID'] == ""){
                                 <div class="col-md-4">
                                     <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุลผู้รับ</label>
                                     <input type="text" name="r_lname[]" id="r_lname" class="form-control form-control-sm">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>
-                                    <input type="text" name="phone_number[]" id="phone_number" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="row">
@@ -104,10 +143,11 @@ if($_SESSION['SESSION_ID'] == ""){
                                     <label for="shipping_type" class="col-form-label col-form-label-sm">ประเภทการส่ง</label>
                                     <select name="shipping_type[]" id="shipping_type" class="form-control form-control-sm">
                                         <option value="normal" selected>ส่งแบบธรรมดา</option>
+                                        <option value="cod">ส่งแบบธรรมดา แบบเก็บเงินปลาย</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก</label>
+                                    <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กิโลกรัม)</label>
                                     <input type="text" name="weight" id="weight" class="form-control form-control-sm" value="">
                                 </div>
                                 <div class="col-md-4">
