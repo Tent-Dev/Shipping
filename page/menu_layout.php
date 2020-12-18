@@ -10,10 +10,11 @@
     <!-- <button class="btn btn-sm btn-danger btn-logout">Sign out</button> -->
     <div class="dropdown profile d-none d-md-block">
         <button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Name
+           <?php echo $_SESSION['USERNAME'] ?>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="">Sign out</a>
+            <a id="" class="dropdown-item" href=""><i class="fas fa-user-cog mr-2"></i>แก้ไขข้อมูล</a>
+            <a id="logout" class="dropdown-item" href=""><i class="fas fa-power-off mr-2"></i>ออกจากระบบ</a>
         </div>
     </div>
 </div>
@@ -26,13 +27,17 @@
     <div class="menu-content">
         <a href="lists.php" class="menu active">รายการพัสดุ</a>
         <a href="" class="menu">Dashboard 2</a>
+        <?php if(isset($_SESSION['TYPE']) && $_SESSION['TYPE'] == 'admin'){?>
+        <a href="" class="menu">เพิ่มบัญชีผู้ใช้</a>
+        <?php } ?>
     </div>
     <div class="dropup m-profile d-none d-md-none">
         <button class="btn dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Name
+            <?php echo $_SESSION['USERNAME'] ?>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="">Sign out</a>
+            <a id="" class="dropdown-item" href=""><i class="fas fa-user-cog mr-2"></i>แก้ไขข้อมูล</a>
+            <a id="logout" class="dropdown-item" href=""><i class="fas fa-power-off mr-2"></i>ออกจากระบบ</a>
         </div>
     </div>
 </div>

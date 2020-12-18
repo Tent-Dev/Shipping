@@ -4,11 +4,11 @@
 
 include("../main_class/connect_db.php");
 include("../main_class/auth.php");
-include("../main_class/validate.php");
+include("../main_class/lib_manage_transaction.php");
 
 $mysql = new Main_db;
 $auth = new Auth;
-$validate = new Validate;
+$mng_transaction = new MNG_Transaction;
 
 $mysql->Connect_db();
 $mysql->SetCharacter();
@@ -16,20 +16,15 @@ $cmd = isset($_POST["command"]) ? $_POST["command"] : "";
 
 if ($cmd != "") {
 
-	//login
-	if ($cmd == "login") {
-		$result = $auth->AuthLogin($_POST);
+	if ($cmd == "get_transaction") {
+		$permission = $auth->AuthPermission();
+		if($permission['permission']){
+			$result = $mng_transaction->GetTransaction($_POST);
+		}else{
+			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+		}
 		echo json_encode($result);
 		$mysql->Close_db();
-		exit();
-	}
-
-	//logout
-	if ($cmd == "logout") {
-		session_start();
-		session_unset(); 
-		session_destroy();
-		echo json_encode($response = array('status' => 200 ));
 		exit();
 	}
 

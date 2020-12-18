@@ -1,7 +1,11 @@
+<?php
+include("../client_config/config.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tracking</title>
 
 	<!-- import Lib -->
@@ -11,7 +15,7 @@
 	<script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
 
 	<!-- import My Script -->
-	<script src="../js/tracking.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/tracking.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 
 </head>
 <body>
@@ -37,11 +41,11 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text"><i class="fas fa-barcode"></i></div>
 						</div>
-						<input class="form-control" type="text" name="" value="" placeholder="">
+						<input id="tracking_code" class="form-control" type="text" name="" value="" placeholder="">
 					</div>
 				</div>
 				<div class="text-right">
-					<button class="btn btn-primary mt-3" type="" id="test_connect">ตรวจสอบสถานะ</button>
+					<button class="btn btn-primary mt-3" type="" id="check_tracking">ตรวจสอบสถานะ</button>
 				</div>
 			</div>
 		</div>

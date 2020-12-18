@@ -1,3 +1,11 @@
+<?php
+session_start();
+include("../client_config/config.php");
+if($_SESSION['SESSION_ID'] == ""){
+    header("Location:../index.php");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

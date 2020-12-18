@@ -4,13 +4,11 @@
 
 include("../main_class/connect_db.php");
 include("../main_class/auth.php");
-include("../main_class/lib_manage_product.php");
-include("../main_class/tools.php");
+include("../main_class/lib_manage_account.php");
 
 $mysql = new Main_db;
 $auth = new Auth;
-$tools = new Tools;
-$mng_product = new MNG_Product;
+$mng_account = new MNG_Account;
 
 $mysql->Connect_db();
 $mysql->SetCharacter();
@@ -18,10 +16,10 @@ $cmd = isset($_POST["command"]) ? $_POST["command"] : "";
 
 if ($cmd != "") {
 
-	if ($cmd == "get_product") {
+	if ($cmd == "update_account") {
 		$permission = $auth->AuthPermission();
 		if($permission['permission']){
-			$result = $mng_product->GetProduct($_POST);
+			$result = $mng_account->UpdateAccount($_POST);
 		}else{
 			$result = array('status' => 500, 'err_msg' => $permission['msg']);
 		}
@@ -30,10 +28,10 @@ if ($cmd != "") {
 		exit();
 	}
 
-	if ($cmd == "create_product") {
+	if ($cmd == "create_account") {
 		$permission = $auth->AuthPermission();
 		if($permission['permission']){
-			$result = $mng_product->CreateProduct($_POST);
+			$result = $mng_account->CreateAccount($_POST);
 		}else{
 			$result = array('status' => 500, 'err_msg' => $permission['msg']);
 		}
@@ -42,10 +40,10 @@ if ($cmd != "") {
 		exit();
 	}
 
-	if ($cmd == "update_product") {
+	if ($cmd == "get_account") {
 		$permission = $auth->AuthPermission();
 		if($permission['permission']){
-			$result = $mng_product->UpdateProduct($_POST);
+			$result = $mng_account->GetAccount($_POST);
 		}else{
 			$result = array('status' => 500, 'err_msg' => $permission['msg']);
 		}

@@ -1,0 +1,776 @@
+{
+	"info": {
+		"_postman_id": "774c38a6-1929-4bcf-8f2a-76665b3c96cc",
+		"name": "Shipping_API-DEV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "auth_login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "login",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/system_sign.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"system_sign.php"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "auth_login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "command",
+											"value": "login",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "testsignup",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "1234",
+											"type": "text"
+										}
+									],
+									"options": {
+										"formdata": {}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1/Shipping/api/function/system_sign.php",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"path": [
+										"Shipping",
+										"api",
+										"function",
+										"system_sign.php"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 05 Dec 2020 17:11:45 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.27 (Win32) OpenSSL/1.1.0f PHP/7.1.8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.8"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "PHPSESSID=c3f73f0105d5b1cbd3f20df96bb74329; path=/"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Length",
+									"value": "202"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=99"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"member_id\": 3,\n        \"member_username\": \"testsignup\",\n        \"member_firstname\": \"Test\",\n        \"member_lastname\": \"Signup\",\n        \"member_password\": \"$2y$12$rUz0H84mEiG0BDYnqHljDuxOafLyiadlzeWTd6TGrxNojvIbFHBEy\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "auth_logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "logout",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/system_sign.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"system_sign.php"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tracking",
+			"item": [
+				{
+					"name": "tracking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "tracking",
+									"type": "text"
+								},
+								{
+									"key": "tracking_code",
+									"value": "SH1607449216",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_tracking.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_tracking.php"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "tracking",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "command",
+											"value": "tracking",
+											"type": "text"
+										},
+										{
+											"key": "tracking_code",
+											"value": "1102002841486",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1/Shipping/api/function/manage_tracking.php",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"path": [
+										"Shipping",
+										"api",
+										"function",
+										"manage_tracking.php"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 06 Dec 2020 10:32:22 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.27 (Win32) OpenSSL/1.1.0f PHP/7.1.8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "115"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":200,\"data\":{\"id\":\"1\",\"shipping_type\":\"EMS\",\"weight\":\"1.65\",\"price\":\"50\",\"tracking_code\":\"1102002841486\"}}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "get_product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "get_product",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "tracking_code",
+									"value": "1102002841486",
+									"type": "text",
+									"disabled": true
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_product.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_product.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "create_product",
+									"type": "text"
+								},
+								{
+									"key": "create_data",
+									"value": "{\"firstname\":\"ชื่อคนทำรายการ\",\"lastname\":\"นามสกุลคนทำรายการ\",\"id_card\":\"1102002841486\",\"item\":[{\"weight\":1.5,\"price\":30,\"shipping_type\":\"normal\",\"receiver_desc\":{\"firstname\":\"ชื่อคนส่ง\",\"lastname\":\"นามสกุลคนส่ง\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"ชื่อคนรับ\",\"lastname\":\"นามสกุลคนรับ\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"}},{\"weight\":1.5,\"price\":30,\"shipping_type\":\"normal\",\"receiver_desc\":{\"firstname\":\"ชื่อคนส่ง\",\"lastname\":\"นามสกุลคนส่ง\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"ชื่อคนรับ\",\"lastname\":\"นามสกุลคนรับ\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"}}]}",
+									"type": "text"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_product.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_product.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "update_product",
+									"type": "text"
+								},
+								{
+									"key": "product_id",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "shipper_id",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "temp_shipping",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "40",
+									"description": "not null",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "weight",
+									"value": "2",
+									"description": "not null",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "waiting",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_product.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_product.php"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "create_account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "create_account",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "firstname",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "Create",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_account.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_account.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "update_account",
+									"type": "text"
+								},
+								{
+									"key": "firstname",
+									"value": "มาลี",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "อร่อยนะ",
+									"type": "text"
+								},
+								{
+									"key": "member_type",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "member_id",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_account.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_account.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "get_account",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_account.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_account.php"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "get_transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "get_transaction",
+									"type": "text"
+								},
+								{
+									"key": "transaction_id",
+									"value": "160785539365NY",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_transaction.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_transaction.php"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get_transaction",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "command",
+											"value": "get_transaction",
+											"type": "text"
+										},
+										{
+											"key": "transaction_id",
+											"value": "160785539365NY",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1/Shipping/api/function/manage_transaction.php",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"path": [
+										"Shipping",
+										"api",
+										"function",
+										"manage_transaction.php"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 13 Dec 2020 16:25:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.27 (Win32) OpenSSL/1.1.0f PHP/7.1.8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.8"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2480"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":200,\"data\":{\"items\":[{\"receiver_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"shipping_type\":\"normal\",\"tracking_code\":\"SH290Z7518VG6\",\"weight\":1.5,\"price\":30},{\"receiver_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"shipping_type\":\"normal\",\"tracking_code\":\"SH175W2831XA1\",\"weight\":1.5,\"price\":30}],\"transaction_id\":\"160785539365NY\",\"create_date\":\"2020-12-13 17:29:53\",\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e33\\u0e23\\u0e32\\u0e22\\u0e01\\u0e32\\u0e23\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e17\\u0e33\\u0e23\\u0e32\\u0e22\\u0e01\\u0e32\\u0e23\"}}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

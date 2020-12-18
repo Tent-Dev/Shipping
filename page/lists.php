@@ -1,3 +1,11 @@
+<?php
+session_start();
+include("../client_config/config.php");
+if($_SESSION['SESSION_ID'] == ""){
+    header("Location:../index.php");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +21,10 @@
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/lists.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/logout.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 
     <style>
         .form-title {
@@ -44,26 +56,14 @@
                     <table class="table table-sm table-striped">
                         <thead>
                             <tr>
-                                <th width="50px">No.</th>
-                                <th>Date</th>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th width="120px">Edit / Delete</th>
+                                <th>วันที่นำเข้าพัสดุ</th>
+                                <th>เลขพัสดุ</th>
+                                <th>ชื่อผู้รับ</th>
+                                <th>สถานะ</th>
+                                <th width="120px">แก้ไข / ลบ</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>date</td>
-                                <td>code</td>
-                                <td>name</td>
-                                <td>status</td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editData"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
+                        <tbody id="show_data_from_db">
                         </tbody>
                     </table>
                 </div>
@@ -73,7 +73,7 @@
                 <div class="col-12 my-3">
                     <nav aria-label="Page navigation">
                         <ul class="pagination pagination-sm justify-content-center">
-                            <li class="page-item">
+                            <!-- <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
@@ -85,7 +85,8 @@
                                 <a class="page-link" href="#" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
-                            </li>
+                            </li> -->
+                            <div class="main_pagination"></div>
                         </ul>
                     </nav>
                 </div>
