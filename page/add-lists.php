@@ -22,6 +22,9 @@ if($_SESSION['SESSION_ID'] == ""){
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
 
+    <!-- import My Script -->
+    <script src="../js/create_order.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+
     <style>
         .form-title {
             margin-top: 20px;
