@@ -23,13 +23,26 @@ if($_SESSION['SESSION_ID'] == ""){
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
 
     <style>
-        .form-title {
-            margin-top: 20px;
-            margin-bottom: 5px;
+        .btn-back {
+            color: #464646;
+        }
+        .btn-back:hover {
+            color: #464646;
+            text-decoration: none;
+        }
+        [class*='form-title-'] {
+            margin: 20px -5px 5px;
             padding: 3px;
             text-align: center;
-            border-radius: 10px;
             background-color: #d2e5ff;
+        }
+        .form-title-1 { border-radius: 10px; }
+        .form-title-2 { border-radius: 10px 10px 0 0; }
+        .form-title-3 { border-radius: 0; }
+        .section {
+            padding: 0 5px 15px;
+            box-shadow: 0 0 10px -3px #adadad;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -40,10 +53,10 @@ if($_SESSION['SESSION_ID'] == ""){
     <div class="container">
         <div class="row">
             <div class="col-12 mt-3 mb-5">
-                <h2>เพิ่มพัสดุ</h2>
+                <a href="lists.php" class="btn-back">รายการพัสดุ</a> / <h2 class="d-inline">เพิ่มพัสดุ</h2>
                 <form action="" method="post">
                     <div id="form-section">
-                        <p class="form-title">ข้อมูลผู้ทำรายการ</p>
+                        <p class="form-title-1">ข้อมูลผู้ทำรายการ</p>
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
@@ -60,7 +73,7 @@ if($_SESSION['SESSION_ID'] == ""){
                         </div>
                         
                         <div class="section">
-                            <p class="form-title" style="background-color: #9ec6ff;">ข้อมูลผู้ส่ง</p>
+                            <p class="form-title-2" style="background-color: #9ec6ff;">ข้อมูลผู้ส่ง</p>
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้ส่ง</label>
@@ -99,7 +112,7 @@ if($_SESSION['SESSION_ID'] == ""){
                                     <input type="text" name="province" id="province" class="form-control form-control-sm">
                                 </div>
                             </div>
-                            <p class="form-title">ข้อมูลผู้รับ</p>
+                            <p class="form-title-3">ข้อมูลผู้รับ</p>
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>
@@ -143,7 +156,7 @@ if($_SESSION['SESSION_ID'] == ""){
                                     <label for="shipping_type" class="col-form-label col-form-label-sm">ประเภทการส่ง</label>
                                     <select name="shipping_type[]" id="shipping_type" class="form-control form-control-sm">
                                         <option value="normal" selected>ส่งแบบธรรมดา</option>
-                                        <option value="cod">ส่งแบบธรรมดา แบบเก็บเงินปลาย</option>
+                                        <option value="cod">ส่งแบบธรรมดา แบบเก็บเงินปลายทาง</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
@@ -155,17 +168,22 @@ if($_SESSION['SESSION_ID'] == ""){
                                     <input type="text" name="price" id="price" class="form-control form-control-sm" value="">
                                 </div>
                             </div>
+                            <div class="text-right">
+                                <button type="button" class="btn btn-sm btn-danger remove mt-3"><i class="fas fa-trash"></i></button>
+                            </div>
                         </div>
                     </div>
                     
                     <hr>
                     <div class="row">
                         <div class="col-6">
-                            <a href="#" class="addsection btn btn-sm btn-info">เพิ่มผู้รับ</a>
+                            <a href="#" class="addsection btn btn-sm btn-info"><i class="fas fa-plus"></i> เพิ่มผู้รับ</a>
                         </div>
-                        <div class="col-6 text-right">
-                            <a href="" class="btn btn-sm btn-success">บันทึก</a>
-                            <a href="" class="btn btn-sm btn-danger">ยกเลิก</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <a href="" class="btn btn-sm btn-success">บันทึก <i class="far fa-save"></i></a>
+                            <a href="" class="btn btn-sm btn-danger">ยกเลิก <i class="fas fa-times"></i></a>
                         </div>
                     </div>
                 </form>
@@ -187,6 +205,14 @@ if($_SESSION['SESSION_ID'] == ""){
             this.id = newId;
         }).end().appendTo('#form-section');
 
+        return false;
+    });
+
+    $('#form-section').on('click', '.remove', function() {
+        $(this).parent().fadeOut(300, function(){
+            $(this).parent().remove();
+            return false;
+        });
         return false;
     });
 </script>

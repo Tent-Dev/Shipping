@@ -46,10 +46,8 @@ if($_SESSION['SESSION_ID'] == ""){
                             <h1>รายการพัสดุ</h1>
                         </div>
                         <div class="col-3 d-flex align-items-center justify-content-end">
-                            <a href="">
-                                <a href="add-lists.php">
-                                    <button type="button" class="btn btn-sm btn-success">Add <i class="fas fa-plus"></i></button>
-                                </a>
+                            <a href="add_lists.php">
+                                <button type="button" class="btn btn-sm btn-success">Add <i class="fas fa-plus"></i></button>
                             </a>
                         </div>
                     </div>
