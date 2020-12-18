@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 10, 2020 at 06:13 PM
+-- Generation Time: Dec 18, 2020 at 07:18 PM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -68,17 +68,19 @@ CREATE TABLE IF NOT EXISTS `tbl_member` (
   `username` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
   `session_id` text
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_member`
 --
 
 INSERT INTO `tbl_member` (`id`, `firstname`, `lastname`, `member_type`, `username`, `password`, `session_id`) VALUES
-(3, 'Test', 'Signup', NULL, 'testsignup', '$2y$12$rUz0H84mEiG0BDYnqHljDuxOafLyiadlzeWTd6TGrxNojvIbFHBEy', '$2y$12$zNmYv3ycY5b0tRGUpgJ7yOTnBbkpz259q8JoC3t89hhuukZv9jPQe'),
-(4, 'Admin', 'Test', NULL, 'admin', '$2y$12$P2AvHFLQDJaq6jZPYvlAu.MVHIrj8ZxGa98OTSwWb.Nh5XkQOLjh.', '$2y$12$0oqSySz.WYRnfR2qA6TStu9YVecTCcZiwlJU7pexyRwB.TBUHF9aG'),
-(5, 'Admin', 'Test', NULL, 'admin2', '$2y$12$eK974nZoXdYRNe6nrJm1S.2drx/0o/Roen/DssBHj/0po1B.AGavG', NULL),
-(6, 'Admin', 'Test', NULL, 'admin3', '$2y$12$2m3D1N8Wa7ijQMtu1j6RPe9NVEDk0wZhOvldHn5R7/FkHi3W6IuAe', NULL);
+(3, 'Test', 'Signup', NULL, 'testsignup', '$2y$12$rUz0H84mEiG0BDYnqHljDuxOafLyiadlzeWTd6TGrxNojvIbFHBEy', '$2y$12$AOz8QUplw934HauQG0KB9eSlsSDTAPflu4hsDl92Pvh2TxWfWxRDG'),
+(4, 'มาลี', 'อร่อยนะ', 'admin', 'admin', '$2y$12$cseLkNbuvrIOD506dAPtze7PGfyDwclbHjTKXVpKV/PP9/wpwfx22', '$2y$12$JRc5sD7cgQauFR11BFIATOB8LiunlvHGghEVndfJ7r0OJfm1NXB12'),
+(5, 'Admin', 'Test', NULL, 'admin2', '$2y$12$eK974nZoXdYRNe6nrJm1S.2drx/0o/Roen/DssBHj/0po1B.AGavG', '$2y$12$UCjJNDw3AHmDDpxJOLxCLeeOz5Ps9qfOGlWRCg0hfKaOe/8L9vqEi'),
+(6, 'Admin', 'Test', NULL, 'admin3', '$2y$12$2m3D1N8Wa7ijQMtu1j6RPe9NVEDk0wZhOvldHn5R7/FkHi3W6IuAe', NULL),
+(7, 'Admin', 'Test', NULL, 'admin22', '$2y$12$BDIL.R7eVoSUlaNiEC5F.OCzcZ5Kqdhv7vGvkAceC3s8vvrVJlgLa', NULL),
+(8, 'Test', 'Create', NULL, 'testCreate1', '$2y$12$3Fk5Crpk5JuF4S1jqVz7ke5FbR6AGUW/hpfoB6xJytZ3aOEVrcbu.', NULL);
 
 -- --------------------------------------------------------
 
@@ -96,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `tbl_product` (
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `shipper_id` int(11) NOT NULL,
   `temp_shipping` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_product`
@@ -122,7 +124,13 @@ INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_c
 (17, 'normal', 1.5, 30, 'SH405D6741UX8', 'waiting', '2020-12-10 14:34:00', 0, ''),
 (18, 'normal', 1.5, 30, 'SH749T0763TS8', 'waiting', '2020-12-10 14:34:01', 0, ''),
 (19, 'normal', 1.5, 30, 'SH069W2916LE6', 'waiting', '2020-12-10 14:35:48', 0, ''),
-(20, 'normal', 2, 40, 'SH694B2708JR9', 'waiting', '2020-12-10 14:35:48', 5, '');
+(20, 'normal', 2, 40, 'SH694B2708JR9', 'waiting', '2020-12-10 14:35:48', 5, ''),
+(21, 'normal', 1.5, 30, 'SH290Z7518VG6', 'waiting', '2020-12-13 10:29:53', 0, ''),
+(22, 'normal', 1.5, 30, 'SH175W2831XA1', 'waiting', '2020-12-13 10:29:53', 0, ''),
+(23, 'normal', 1.5, 30, 'SH263Z8693UX9', 'waiting', '2020-12-18 17:45:33', 0, ''),
+(24, 'normal', 1.5, 30, 'SH135U7035BS0', 'waiting', '2020-12-18 17:45:33', 0, ''),
+(25, 'normal', 1.5, 30, 'SH954Z0376WD7', 'waiting', '2020-12-18 17:51:54', 0, ''),
+(26, 'normal', 1.5, 30, 'SH892Y3290XL3', 'waiting', '2020-12-18 17:51:54', 0, '');
 
 -- --------------------------------------------------------
 
@@ -137,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `tbl_transaction` (
   `product_id` int(11) NOT NULL,
   `receiver_desc` text NOT NULL,
   `sender_desc` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_transaction`
@@ -163,7 +171,37 @@ INSERT INTO `tbl_transaction` (`id`, `transaction_id`, `customer_id`, `product_i
 (17, '2147483647', 15, 17, '{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
 (18, '2147483647', 15, 18, '{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
 (19, '160761094880XO', 15, 19, '{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
-(20, '160761094880XO', 15, 20, '{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}');
+(20, '160761094880XO', 15, 20, '{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
+(21, '160785539365NY', 14, 21, '{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
+(22, '160785539365NY', 14, 22, '{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
+(23, '160831353371EO', 14, 23, '{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
+(24, '160831353371EO', 14, 24, '{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
+(25, '160831391420DF', 14, 25, '{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
+(26, '160831391420DF', 14, 26, '{"firstname":"ชื่อคนส่ง","lastname":"นามสกุลคนส่ง","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนรับ","lastname":"นามสกุลคนรับ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_transport`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_transport` (
+  `id` int(11) NOT NULL,
+  `trans_id` varchar(50) NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'waiting',
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_transport`
+--
+
+INSERT INTO `tbl_transport` (`id`, `trans_id`, `status`, `timestamp`) VALUES
+(1, '160831353371EO', 'waiting', '2020-12-18 17:45:33'),
+(2, '160831353371EO', 'waiting', '2020-12-18 17:45:33'),
+(3, '25', 'waiting', '2020-12-18 17:51:54'),
+(4, '26', 'waiting', '2020-12-18 17:51:54'),
+(6, '25', 'sending', '2020-12-18 19:16:01');
 
 --
 -- Indexes for dumped tables
@@ -194,6 +232,12 @@ ALTER TABLE `tbl_transaction`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_transport`
+--
+ALTER TABLE `tbl_transport`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -206,17 +250,22 @@ ALTER TABLE `tbl_customer`
 -- AUTO_INCREMENT for table `tbl_member`
 --
 ALTER TABLE `tbl_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `tbl_transaction`
 --
 ALTER TABLE `tbl_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT for table `tbl_transport`
+--
+ALTER TABLE `tbl_transport`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

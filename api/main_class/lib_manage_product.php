@@ -120,6 +120,7 @@ class MNG_Product{
 
 				$get_last_customer_id = "";
 				$get_last_product_id = "";
+				$get_last_trans_id = "";
 
 				$get_last_customer_id = $result_customer['last_id'];
 				$tracking_code = $this->GenerateTrackingCode();
@@ -148,9 +149,25 @@ class MNG_Product{
 					$result_transaction = $this->db_connect->Insert_db($arr_customer,"tbl_transaction");
 
 					if($result_transaction['status']){
-						$response = array(
-							'status' => 200
+						$get_last_trans_id = $result_transaction['last_id'];
+
+						$arr_customer = array( 
+							"trans_id" => $get_last_trans_id,
+							"status" => 'waiting',
 						);
+
+						$result_transport = $this->db_connect->Insert_db($arr_customer,"tbl_transport");
+
+						if($result_transport['status']){
+							$response = array(
+								'status' => 200
+							);
+						}else{
+							$response = array(
+								'status' => 500,
+								'err_msg' => 'Cannot create transport'
+							);
+						}
 					}else{
 						$response = array(
 							'status' => 500,
