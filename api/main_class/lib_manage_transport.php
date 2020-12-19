@@ -23,11 +23,11 @@ class MNG_Transport{
 		tbl_product.weight,
 		tbl_product.price 
 		FROM tbl_transport
-		JOIN tbl_transaction
+		LEFT JOIN tbl_transaction
 		ON tbl_transport.id = tbl_transaction.id
-		JOIN tbl_product
+		LEFT JOIN tbl_product
 		ON tbl_product.id = tbl_transaction.product_id
-		WHERE tbl_transport.trans_id = '".$param['transport_id']."'";
+		WHERE tbl_transport.product_id = '".$param['product_id']."'";
 
 		$data = $this->db_connect->Select_db($sql);
 
@@ -36,8 +36,6 @@ class MNG_Transport{
 			foreach ($data as $value ) {
 				$get_item = array(
 					'status' =>  $value['status'],
-					'tracking_code' => $value['tracking_code'],
-					'shipping_type' => $value['shipping_type'],
 					'timestamp' => $value['timestamp']
 				);
 				$items['items'][] = $get_item;
@@ -58,10 +56,11 @@ class MNG_Transport{
 	}
 
 	public function CreateTransport($param = null){
+
 		$arr_transport = array();
 
-		if(isset($param['trans_id']) && $param['trans_id'] !== ''){
-			$arr_transport['trans_id'] = $param['trans_id'];
+		if(isset($param['product_id']) && $param['product_id'] !== ''){
+			$arr_transport['product_id'] = $param['product_id'];
 		}
 		if(isset($param['status']) && $param['status'] !== ''){
 			$arr_transport['status'] = $param['status'];
@@ -70,9 +69,21 @@ class MNG_Transport{
 		$result_transport = $this->db_connect->Insert_db($arr_transport,"tbl_transport");
 
 		if($result_transport['status']){
-			$response = array(
-				'status' => 200
-			);
+			$arr_update_product_status = array();
+			$arr_update_product_status['id'] = $param['product_id'];
+			$arr_update_product_status['status'] = $param['status'];
+			$key = array("id");
+			$result_update_product = $this->db_connect->Update_db($arr_update_product_status, $key, "tbl_product");
+			if($result_update_product){
+				$response = array(
+					'status' => 200
+				);
+			}else{
+				$response = array(
+					'status' => 500,
+					'err_msg' => 'Cannot update product status'
+				);
+			}
 		}else{
 			$response = array(
 				'status' => 500,
