@@ -19,14 +19,18 @@
     </div>
 </div>
 
+<?php
+    $path = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+?>
+
 <!-- Side Menu -->
 <div class="side-menu">
     <div class="logo">
         <img src="https://fph.tu.ac.th/uploads/fph/DownloadLogo/2018_FPHHorz%20Logo%20%28EN%29.png" alt="">
     </div>
     <div class="menu-content">
-        <a href="lists.php" class="menu active">รายการพัสดุ</a>
-        <a href="" class="menu">Dashboard 2</a>
+        <a href="lists.php" class="menu <?php if($path == 'lists.php' || $path == 'add_lists.php') echo "active"; ?>">รายการพัสดุ</a>
+        <a href="sort_mail.php" class="menu <?php if($path == 'sort_mail.php') echo "active"; ?>">คัดแยกพัสดุ</a>
         <?php if(isset($_SESSION['TYPE']) && $_SESSION['TYPE'] == 'admin'){?>
         <a href="" class="menu">เพิ่มบัญชีผู้ใช้</a>
         <?php } ?>

@@ -1,17 +1,17 @@
 <?php
-session_start();
-include("../client_config/config.php");
-if($_SESSION['SESSION_ID'] == ""){
-    header("Location:../index.php");
-    die();
-}
+    session_start();
+    include("../client_config/config.php");
+    if($_SESSION['SESSION_ID'] == ""){
+        header("Location:../index.php");
+        die();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lists</title>
+    <title>คัดแยกพัสดุ</title>
 
     <link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.min.css">
     <link href="../lib/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
@@ -21,10 +21,6 @@ if($_SESSION['SESSION_ID'] == ""){
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
-
-    <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/lists.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/logout.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 
     <style>
         .form-title {
@@ -40,130 +36,100 @@ if($_SESSION['SESSION_ID'] == ""){
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-9">
-                            <h1>รายการพัสดุ</h1>
-                        </div>
-                        <div class="col-3 d-flex align-items-center justify-content-end">
-                            <a href="add_lists.php">
-                                <button type="button" class="btn btn-sm btn-success">Add <i class="fas fa-plus"></i></button>
-                            </a>
-                        </div>
-                    </div>
-                    <table class="table table-sm table-hover">
-                        <thead>
-                            <tr>
-                                <th>วันที่นำเข้าพัสดุ</th>
-                                <th>เลขพัสดุ</th>
-                                <th>ชื่อผู้รับ</th>
-                                <th>สถานะ</th>
-                                <th width="120px">แก้ไข / ลบ</th>
-                            </tr>
-                        </thead>
-                        <tbody id="show_data_from_db">
-                        </tbody>
-                    </table>
+                <div class="col-9">
+                    <h1>คัดแยกพัสดุ</h1>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-12 my-3">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination pagination-sm justify-content-center">
-                            <!-- <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li> -->
-                            <div class="main_pagination"></div>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th>วันที่นำเข้าพัสดุ</th>
+                        <th>เลขพัสดุ</th>
+                        <th>ชื่อผู้รับ</th>
+                        <th>เขตจัดส่ง</th>
+                        <th>สถานะ</th>
+                        <th>คนนำจ่าย</th>
+                        <th width="60px">แก้ไข</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>date</td>
+                        <td>no.</td>
+                        <td>name</td>
+                        <td>เขต</td>
+                        <td>waiting</td>
+                        <td>person</td>
+                        <td><button class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="" data-target="#editData"><i class="fas fa-edit"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="editDataLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editDataLabel">แก้ไขข้อมูลพัสดุ No.xxxxx</h5>
+                        <h5 class="modal-title" id="editDataLabel">คนนำจ่ายพัสดุ No.xxxxx</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="fas fa-times"></i></span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <form action="" method="post">
-                            <p class="form-title">ข้อมูลผู้ทำรายการ</p>
                             <div class="row">
                                 <div class="col">
-                                    <label for="firstname" class="col-form-label col-form-label-sm">ชื่อ</label>
-                                    <input type="text" name="firstname" id="firstname" class="form-control form-control-sm" value="">
-                                </div>
-                                <div class="col">
-                                    <label for="lastname" class="col-form-label col-form-label-sm">นามสกุล</label>
-                                    <input type="text" name="lastname" id="lastname" class="form-control form-control-sm" value="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชน</label>
-                                    <input type="text" name="id_card" id="id_card" class="form-control form-control-sm">
+                                    <label for="sender" class="col-form-label col-form-label-sm">คนนำจ่าย</label>
+                                    <select name="sender" id="sender" class="form-control form-control-sm">
+                                        <option value="" selected>กรุณาเลือกคนนำจ่ายพัสดุ</option>
+                                    </select>
                                 </div>
                             </div>
                             <p class="form-title">ข้อมูลผู้รับ</p>
                             <div class="row">
                                 <div class="col">
                                     <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อ</label>
-                                    <input type="text" name="r_fname" id="r_fname" class="form-control form-control-sm" value="">
+                                    <input type="text" name="r_fname" id="r_fname" class="form-control form-control-sm" value="" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุล</label>
-                                    <input type="text" name="r_lname" id="r_lname" class="form-control form-control-sm" value="">
+                                    <input type="text" name="r_lname" id="r_lname" class="form-control form-control-sm" value="" readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทร</label>
-                                    <input type="text" name="phone_number" id="phone_number" class="form-control form-control-sm" value="">
+                                    <input type="text" name="phone_number" id="phone_number" class="form-control form-control-sm" value="" readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="address" class="col-form-label col-form-label-sm">ที่อยู่</label>
-                                    <input type="text" name="address" id="address" class="form-control form-control-sm">
+                                    <input type="text" name="address" id="address" class="form-control form-control-sm" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="district" class="col-form-label col-form-label-sm">เขต</label>
-                                    <input type="text" name="district" id="district" class="form-control form-control-sm">
+                                    <input type="text" name="district" id="district" class="form-control form-control-sm" readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="area" class="col-form-label col-form-label-sm">แขวง</label>
-                                    <input type="text" name="area" id="area" class="form-control form-control-sm">
+                                    <input type="text" name="area" id="area" class="form-control form-control-sm" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="province" class="col-form-label col-form-label-sm">จังหวัด</label>
-                                    <input type="text" name="province" id="province" class="form-control form-control-sm">
+                                    <input type="text" name="province" id="province" class="form-control form-control-sm" readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="province" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
-                                    <input type="text" name="province" id="province" class="form-control form-control-sm">
+                                    <input type="text" name="province" id="province" class="form-control form-control-sm" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="shipping_type" class="col-form-label col-form-label-sm">ประเภทการส่ง</label>
-                                    <select name="shipping_type[]" id="shipping_type" class="form-control form-control-sm">
+                                    <select name="shipping_type" id="shipping_type" class="form-control form-control-sm" disabled>
                                         <option value="normal" selected>ส่งแบบธรรมดา</option>
                                         <option value="cod">ส่งแบบธรรมดา แบบเก็บเงินปลายทาง</option>
                                     </select>
@@ -172,11 +138,11 @@ if($_SESSION['SESSION_ID'] == ""){
                             <div class="row">
                                 <div class="col">
                                     <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กรัม)</label>
-                                    <input type="text" name="weight" id="weight" class="form-control form-control-sm" value="">
+                                    <input type="text" name="weight" id="weight" class="form-control form-control-sm" value="" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="price" class="col-form-label col-form-label-sm">ราคา</label>
-                                    <input type="text" name="price" id="price" class="form-control form-control-sm" value="">
+                                    <input type="text" name="price" id="price" class="form-control form-control-sm" value="" readonly>
                                 </div>
                             </div>
                         </form>

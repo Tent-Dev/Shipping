@@ -163,7 +163,7 @@ if($_SESSION['SESSION_ID'] == ""){
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กิโลกรัม)</label>
+                                    <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กรัม)</label>
                                     <input type="text" name="weight" id="weight" class="form-control form-control-sm" value="">
                                 </div>
                                 <div class="col-md-4">
