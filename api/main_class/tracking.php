@@ -26,7 +26,7 @@ class Tracking{
 		JOIN tbl_transaction
 		ON tbl_transaction.product_id = tbl_product.id
 		JOIN tbl_transport
-		ON tbl_transport.trans_id = tbl_transaction.id
+		ON tbl_transport.product_id = tbl_transaction.id
 		WHERE tbl_product.tracking_code = '".$tracking_code."'";
 
 		$data = $this->db_connect->Select_db_one($sql);
@@ -47,11 +47,11 @@ class Tracking{
 				tbl_product.weight,
 				tbl_product.price 
 				FROM tbl_transport
-				JOIN tbl_transaction
+				LEFT JOIN tbl_transaction
 				ON tbl_transport.id = tbl_transaction.id
-				JOIN tbl_product
+				LEFT JOIN tbl_product
 				ON tbl_product.id = tbl_transaction.product_id
-				WHERE tbl_transport.trans_id = '".$data['trans_id']."'";
+				WHERE tbl_transport.product_id = '".$data['trans_id']."'";
 				
 				$data_transport = $this->db_connect->Select_db($sql_transport);
 
@@ -59,8 +59,6 @@ class Tracking{
 					foreach ($data_transport as $value ) {
 						$get_item = array(
 							'status' =>  $value['status'],
-							'tracking_code' => $value['tracking_code'],
-							'shipping_type' => $value['shipping_type'],
 							'timestamp' => $value['timestamp']
 						);
 						$data['transport_history'][] = $get_item;
