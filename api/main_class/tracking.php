@@ -20,7 +20,7 @@ class Tracking{
 		tbl_product.shipper_id,
 		tbl_transaction.transaction_id,
 		tbl_transaction.id as 'trans_id',
-		tbl_transport.status,
+		tbl_product.status,
 		tbl_transport.timestamp 
 		FROM tbl_product
 		JOIN tbl_transaction

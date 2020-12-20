@@ -8,6 +8,8 @@ include("../client_config/config.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tracking</title>
 
+	<link rel="stylesheet" href="../css/tracking.css">
+
 	<!-- import Lib -->
 	<link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.min.css">
 	<link href="../lib/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
@@ -16,7 +18,6 @@ include("../client_config/config.php");
 
 	<!-- import My Script -->
 	<script src="../js/tracking.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
-
 </head>
 <body>
 	<style>
@@ -49,7 +50,19 @@ include("../client_config/config.php");
 				</div>
 			</div>
 		</div>
+		<div class="wrapper">
+			<ul class="StepProgress" id="transport_history">
+				<!-- <li class="StepProgress-item is-done"><strong>Post a contest</strong></li>
+				<li class="StepProgress-item is-done"><strong>Award an entry</strong>
+					Got more entries that you love? Buy more entries anytime! Just hover on your favorite entry and click the Buy button
+				</li>
+				<li class="StepProgress-item current"><strong>Post a contest</strong></li>
+				<li class="StepProgress-item"><strong>Handover</strong></li>
+				<li class="StepProgress-item"><strong>Provide feedback</strong></li> -->
+			</ul>
+		</div>
 	</div>
+
 	<!-- <div class="container">
 		<div class="row">
 			<div align="center" class="row">
