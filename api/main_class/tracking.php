@@ -39,6 +39,7 @@ class Tracking{
 				tbl_transport.id,
 				tbl_transport.status,
 				tbl_transport.timestamp,
+				tbl_transport.note,
 				tbl_transaction.receiver_desc,
 				tbl_transaction.sender_desc ,
 				tbl_product.shipping_type,
@@ -59,7 +60,8 @@ class Tracking{
 					foreach ($data_transport as $value ) {
 						$get_item = array(
 							'status' =>  $value['status'],
-							'timestamp' => $value['timestamp']
+							'timestamp' => $value['timestamp'],
+							'note' => $value['note']
 						);
 						$data['transport_history'][] = $get_item;
 					}

@@ -14,6 +14,7 @@ class MNG_Transport{
 		SELECT tbl_transaction.transaction_id,
 		tbl_transport.id,
 		tbl_transport.status,
+		tbl_transport.note,
 		tbl_transport.timestamp,
 		tbl_transaction.receiver_desc,
 		tbl_transaction.sender_desc ,
@@ -36,7 +37,8 @@ class MNG_Transport{
 			foreach ($data as $value ) {
 				$get_item = array(
 					'status' =>  $value['status'],
-					'timestamp' => $value['timestamp']
+					'timestamp' => $value['timestamp'],
+					'note' => $value['note']
 				);
 				$items['items'][] = $get_item;
 			}
@@ -64,6 +66,9 @@ class MNG_Transport{
 		}
 		if(isset($param['status']) && $param['status'] !== ''){
 			$arr_transport['status'] = $param['status'];
+		}
+		if(isset($param['note']) && $param['note'] !== ''){
+			$arr_transport['note'] = $param['note'];
 		}
 
 		$result_transport = $this->db_connect->Insert_db($arr_transport,"tbl_transport");

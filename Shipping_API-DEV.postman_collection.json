@@ -204,7 +204,7 @@
 								},
 								{
 									"key": "tracking_code",
-									"value": "SH097P1847IN5",
+									"value": "SH316N7810AM4",
 									"type": "text"
 								}
 							]
@@ -889,12 +889,17 @@
 								},
 								{
 									"key": "product_id",
-									"value": "1",
+									"value": "10",
 									"type": "text"
 								},
 								{
 									"key": "status",
 									"value": "sending",
+									"type": "text"
+								},
+								{
+									"key": "note",
+									"value": "เหตุผล",
 									"type": "text"
 								}
 							]

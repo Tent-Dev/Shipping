@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 19, 2020 at 05:28 PM
+-- Generation Time: Dec 20, 2020 at 03:34 PM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `tbl_member` (
 
 INSERT INTO `tbl_member` (`id`, `firstname`, `lastname`, `member_type`, `username`, `password`, `session_id`) VALUES
 (3, 'Test', 'Signup', NULL, 'testsignup', '$2y$12$rUz0H84mEiG0BDYnqHljDuxOafLyiadlzeWTd6TGrxNojvIbFHBEy', '$2y$12$AOz8QUplw934HauQG0KB9eSlsSDTAPflu4hsDl92Pvh2TxWfWxRDG'),
-(4, 'มาลี', 'อร่อยนะ', 'admin', 'admin', '$2y$12$cseLkNbuvrIOD506dAPtze7PGfyDwclbHjTKXVpKV/PP9/wpwfx22', '$2y$12$zDXsswfNiaYqkJ6Wg5/dAOEolLgD0Ch/EDxcg.koLF0exm1KwNM0e'),
+(4, 'มาลี', 'อร่อยนะ', 'admin', 'admin', '$2y$12$cseLkNbuvrIOD506dAPtze7PGfyDwclbHjTKXVpKV/PP9/wpwfx22', '$2y$12$Z5IiBMH.gKnYK4EbV2O.tOZtYsQx6zdl.0CGXpalHhv5a9eDuU8zi'),
 (5, 'Admin', 'Test', NULL, 'admin2', '$2y$12$eK974nZoXdYRNe6nrJm1S.2drx/0o/Roen/DssBHj/0po1B.AGavG', '$2y$12$UCjJNDw3AHmDDpxJOLxCLeeOz5Ps9qfOGlWRCg0hfKaOe/8L9vqEi'),
 (6, 'Admin', 'Test', NULL, 'admin3', '$2y$12$2m3D1N8Wa7ijQMtu1j6RPe9NVEDk0wZhOvldHn5R7/FkHi3W6IuAe', NULL),
 (7, 'Admin', 'Test', NULL, 'admin22', '$2y$12$BDIL.R7eVoSUlaNiEC5F.OCzcZ5Kqdhv7vGvkAceC3s8vvrVJlgLa', NULL),
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_code`, `status`, `create_date`, `shipper_id`, `temp_shipping`) VALUES
-(1, 'normal', 1.5, 30, 'SH316N7810AM4', 'sending', '2020-12-19 17:14:58', 0, ''),
+(1, 'normal', 1.5, 30, 'SH316N7810AM4', 'success', '2020-12-19 17:14:58', 0, ''),
 (2, 'normal', 1.5, 30, 'SH780H5261ZO2', 'waiting', '2020-12-19 17:14:58', 0, ''),
 (3, 'normal', 1.5, 30, 'SH857Y2649MK5', 'waiting', '2020-12-19 17:15:04', 0, ''),
 (4, 'normal', 1.5, 30, 'SH362L1947SE4', 'waiting', '2020-12-19 17:15:04', 0, ''),
@@ -114,7 +114,7 @@ INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_c
 (7, 'normal', 1.5, 30, 'SH189T8241ID3', 'waiting', '2020-12-19 17:15:06', 0, ''),
 (8, 'normal', 1.5, 30, 'SH384W0541PK8', 'waiting', '2020-12-19 17:15:07', 0, ''),
 (9, 'normal', 1.5, 30, 'SH872S5204PM5', 'waiting', '2020-12-19 17:15:08', 0, ''),
-(10, 'normal', 1.5, 30, 'SH680Z0367OF3', 'waiting', '2020-12-19 17:15:08', 0, '');
+(10, 'normal', 1.5, 30, 'SH680Z0367OF3', 'sending', '2020-12-19 17:15:08', 0, '');
 
 -- --------------------------------------------------------
 
@@ -156,26 +156,31 @@ INSERT INTO `tbl_transaction` (`id`, `transaction_id`, `customer_id`, `product_i
 CREATE TABLE IF NOT EXISTS `tbl_transport` (
   `id` int(11) NOT NULL,
   `product_id` varchar(50) NOT NULL,
-  `status` varchar(20) NOT NULL DEFAULT 'waiting',
+  `status` varchar(100) NOT NULL DEFAULT 'waiting',
+  `note` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_transport`
 --
 
-INSERT INTO `tbl_transport` (`id`, `product_id`, `status`, `timestamp`) VALUES
-(1, '1', 'waiting', '2020-12-19 17:14:58'),
-(2, '2', 'waiting', '2020-12-19 17:14:59'),
-(3, '3', 'waiting', '2020-12-19 17:15:04'),
-(4, '4', 'waiting', '2020-12-19 17:15:04'),
-(5, '5', 'waiting', '2020-12-19 17:15:05'),
-(6, '6', 'waiting', '2020-12-19 17:15:05'),
-(7, '7', 'waiting', '2020-12-19 17:15:06'),
-(8, '8', 'waiting', '2020-12-19 17:15:07'),
-(9, '9', 'waiting', '2020-12-19 17:15:08'),
-(10, '10', 'waiting', '2020-12-19 17:15:08'),
-(11, '1', 'sending', '2020-12-19 17:16:05');
+INSERT INTO `tbl_transport` (`id`, `product_id`, `status`, `note`, `timestamp`) VALUES
+(1, '1', 'waiting', '', '2020-12-19 17:14:58'),
+(2, '2', 'waiting', '', '2020-12-19 17:14:59'),
+(3, '3', 'waiting', '', '2020-12-19 17:15:04'),
+(4, '4', 'waiting', '', '2020-12-19 17:15:04'),
+(5, '5', 'waiting', '', '2020-12-19 17:15:05'),
+(6, '6', 'waiting', '', '2020-12-19 17:15:05'),
+(7, '7', 'waiting', '', '2020-12-19 17:15:06'),
+(8, '8', 'waiting', '', '2020-12-19 17:15:07'),
+(9, '9', 'waiting', '', '2020-12-19 17:15:08'),
+(10, '10', 'waiting', '', '2020-12-19 17:15:08'),
+(11, '1', 'sending', '', '2020-12-19 17:16:05'),
+(13, '1', 'return_distribution_center', 'ผู้รับไม่อยู่บ้าน', '2020-12-20 10:28:03'),
+(14, '1', 'sending', '', '2020-12-20 10:28:49'),
+(15, '1', 'success', '', '2020-12-20 10:29:03'),
+(16, '10', 'sending', '', '2020-12-20 10:34:37');
 
 --
 -- Indexes for dumped tables
@@ -239,7 +244,7 @@ ALTER TABLE `tbl_transaction`
 -- AUTO_INCREMENT for table `tbl_transport`
 --
 ALTER TABLE `tbl_transport`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
