@@ -104,28 +104,28 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <label for="address" class="col-form-label col-form-label-sm">ที่อยู่</label>
-                                    <input type="text" name="address" id="address" class="form-control form-control-sm" readonly>
+                                    <label for="r_address" class="col-form-label col-form-label-sm">ที่อยู่</label>
+                                    <input type="text" name="r_address" id="r_address" class="form-control form-control-sm" readonly>
                                 </div>
                                 <div class="col">
-                                    <label for="district" class="col-form-label col-form-label-sm">เขต</label>
-                                    <input type="text" name="district" id="district" class="form-control form-control-sm" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="area" class="col-form-label col-form-label-sm">แขวง</label>
-                                    <input type="text" name="area" id="area" class="form-control form-control-sm" readonly>
-                                </div>
-                                <div class="col">
-                                    <label for="province" class="col-form-label col-form-label-sm">จังหวัด</label>
-                                    <input type="text" name="province" id="province" class="form-control form-control-sm" readonly>
+                                    <label for="r_district" class="col-form-label col-form-label-sm">เขต</label>
+                                    <input type="text" name="r_district" id="r_district" class="form-control form-control-sm" readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <label for="province" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
-                                    <input type="text" name="province" id="province" class="form-control form-control-sm" readonly>
+                                    <label for="r_area" class="col-form-label col-form-label-sm">แขวง</label>
+                                    <input type="text" name="r_area" id="r_area" class="form-control form-control-sm" readonly>
+                                </div>
+                                <div class="col">
+                                    <label for="r_province" class="col-form-label col-form-label-sm">จังหวัด</label>
+                                    <input type="text" name="r_province" id="r_province" class="form-control form-control-sm" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="r_postcode" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
+                                    <input type="text" name="r_postcode" id="r_postcode" class="form-control form-control-sm" readonly>
                                 </div>
                                 <div class="col">
                                     <label for="shipping_type" class="col-form-label col-form-label-sm">ประเภทการส่ง</label>

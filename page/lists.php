@@ -47,7 +47,7 @@ if($_SESSION['SESSION_ID'] == ""){
                         </div>
                         <div class="col-3 d-flex align-items-center justify-content-end">
                             <a href="add_lists.php">
-                                <button type="button" class="btn btn-sm btn-success">Add <i class="fas fa-plus"></i></button>
+                                <button type="button" class="btn btn-sm btn-success">เพิ่มรายการพัสดุ <i class="fas fa-plus"></i></button>
                             </a>
                         </div>
                     </div>
