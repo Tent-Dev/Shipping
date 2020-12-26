@@ -446,7 +446,7 @@
 								},
 								{
 									"key": "create_data",
-									"value": "{\"firstname\":\"ชื่อคนทำรายการ\",\"lastname\":\"นามสกุลคนทำรายการ\",\"id_card\":\"1102002841486\",\"item\":[{\"weight\":1.5,\"price\":30,\"shipping_type\":\"normal\",\"receiver_desc\":{\"firstname\":\"ชื่อคนส่ง\",\"lastname\":\"นามสกุลคนส่ง\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"ชื่อคนรับ\",\"lastname\":\"นามสกุลคนรับ\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"}},{\"weight\":1.5,\"price\":30,\"shipping_type\":\"normal\",\"receiver_desc\":{\"firstname\":\"ชื่อคนส่ง\",\"lastname\":\"นามสกุลคนส่ง\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"ชื่อคนรับ\",\"lastname\":\"นามสกุลคนรับ\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"}}]}",
+									"value": "{\"firstname\":\"ชื่อคนทำรายการ\",\"lastname\":\"นามสกุลคนทำรายการ\",\"id_card\":\"1102002841486\",\"item\":[{\"weight\":1.5,\"price\":30,\"shipping_type\":\"normal\",\"receiver_desc\":{\"firstname\":\"FReceiver1\",\"lastname\":\"LReceiver1\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"ชื่อคนส่ง1\",\"lastname\":\"นามสกุลคนส่ง1\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0911111111\"}},{\"weight\":1.5,\"price\":30,\"shipping_type\":\"normal\",\"receiver_desc\":{\"firstname\":\"FReceiver2\",\"lastname\":\"LReceiver2\",\"address\":\"919 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0922222222\"},\"sender_desc\":{\"firstname\":\"ชื่อคนส่ง22\",\"lastname\":\"นามสกุลคนส่ง2\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786662\"}}]}",
 									"type": "text"
 								}
 							]
@@ -918,6 +918,50 @@
 								"api",
 								"function",
 								"manage_transport.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Receiver",
+			"item": [
+				{
+					"name": "get_receiver",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "get_receiver",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "0987786666",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_receiver.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_receiver.php"
 							]
 						}
 					},
