@@ -26,7 +26,8 @@ class MNG_Product{
 		tbl_product.create_date,
 		tbl_product.weight,
 		tbl_product.price,
-		tbl_transaction.receiver_desc ,
+		tbl_transaction.transaction_id,
+		tbl_transaction.receiver_desc,
 		tbl_transaction.sender_desc,
 		CONCAT(tbl_member.firstname,' ', tbl_member.lastname) as shipper_name
 		FROM tbl_product
@@ -64,6 +65,7 @@ class MNG_Product{
 			foreach ($data as $value) {
 				$get_item = array(
 					'id' =>  $value['id'],
+					'transaction_id' =>$value['transaction_id'],
 					'tracking_code' => $value['tracking_code'],
 					'status' => $value['status'],
 					'create_date' => $value['create_date'],
@@ -206,6 +208,8 @@ class MNG_Product{
 
 	public function UpdateProduct($param = null){
 		$arr = array();
+		$update_trans_arr = array();
+		$receiver_arr = array();
 
 		if(isset($param['product_id']) && $param['product_id'] !== ''){
 			$arr['id'] = $param['product_id'];
@@ -231,17 +235,41 @@ class MNG_Product{
 			$arr['weight'] = $param['weight'];
 		}
 
-		$key = array("id");
-		$result = $this->db_connect->Update_db($arr, $key, "tbl_product");
+		if(!empty($param['receiver_firstname']) && !empty($param['receiver_lastname']) && !empty($param['receiver_address']) && !empty($param['receiver_district']) && !empty($param['phone_number']) && !empty($param['receiver_area']) && !empty($param['receiver_province']) && !empty($param['receiver_postal'])){
+			
+			$receiver_arr['firstname'] = $param['receiver_firstname'];
+			$receiver_arr['lastname'] = $param['receiver_lastname'];
+			$receiver_arr['address'] = $param['receiver_address'];
+			$receiver_arr['district'] = $param['receiver_district'];
+			$receiver_arr['area'] = $param['receiver_area'];
+			$receiver_arr['province'] = $param['receiver_province'];
+			$receiver_arr['postal'] = $param['receiver_postal'];
+			$receiver_arr['phone_number'] = $param['phone_number'];
 
-		if($result){
-			$response = array(
-				'status' => 200
-			);
+			$update_trans_arr['product_id'] = $param['product_id'];
+			$update_trans_arr['receiver_desc'] = $receiver_arr;
+
+			$update_receiver_result = $this->UpdateReceiverDesc($update_trans_arr);
+		}
+		
+		if($update_receiver_result['status'] == 200){
+			$key = array("id");
+			$result = $this->db_connect->Update_db($arr, $key, "tbl_product");
+
+			if($result){
+				$response = array(
+					'status' => 200
+				);
+			}else{
+				$response = array(
+					'status' => 500,
+					'err_msg' => 'Can not update product'
+				);
+			}
 		}else{
 			$response = array(
 				'status' => 500,
-				'err_msg' => 'Can not update product'
+				'err_msg' => 'Can not update receiver desc'
 			);
 		}
 		return $response;
@@ -283,6 +311,13 @@ class MNG_Product{
 			$result_check_receiver_same = true;
 		}
 		return $result_check_receiver_same;
+	}
+
+	private function UpdateReceiverDesc($params = null){
+		require_once('lib_manage_transaction.php');
+		$mng_transaction = new MNG_Transaction();
+		$result = $mng_transaction->UpdateTransaction($params);
+		return $result;
 	}
 }
 

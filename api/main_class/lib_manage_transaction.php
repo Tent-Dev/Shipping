@@ -61,6 +61,38 @@ class MNG_Transaction{
 		return $response;
 	}
 
+	public function UpdateTransaction($param = null){
+		$arr = array();
+		$receiver_arr = array();
+
+		$arr['product_id'] = $param['product_id'];
+
+		$receiver_arr['firstname'] = $param['receiver_desc']['firstname'];
+		$receiver_arr['lastname'] = $param['receiver_desc']['lastname'];
+		$receiver_arr['address'] = $param['receiver_desc']['address'];
+		$receiver_arr['district'] = $param['receiver_desc']['district'];
+		$receiver_arr['area'] = $param['receiver_desc']['area'];
+		$receiver_arr['province'] = $param['receiver_desc']['province'];
+		$receiver_arr['postal'] = $param['receiver_desc']['postal'];
+		$receiver_arr['phone_number'] = $param['receiver_desc']['phone_number'];
+
+		$arr['receiver_desc'] = json_encode($receiver_arr, JSON_UNESCAPED_UNICODE);
+
+		$key = array("product_id");
+		$result = $this->db_connect->Update_db($arr, $key, "tbl_transaction");
+		if($result){
+			$response = array(
+				'status' => 200
+			);
+		}else{
+			$response = array(
+				'status' => 500,
+				'err_msg' => 'Can not update transaction'
+			);
+		}
+		return $response;
+	}
+
 }
 
 ?>
