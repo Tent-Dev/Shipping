@@ -147,6 +147,7 @@ if($_SESSION['SESSION_ID'] == ""){
                                 <div class="col-6">
                                     <label for="member_type" class="col-form-label col-form-label-sm">ตำแหน่ง</label>
                                     <select name="member_type" id="member_type" class="form-control form-control-sm">
+                                        <option value="" selected>กรุณาเลือกตำแหน่ง</option>
                                         <option value="admin">Admin</option>
                                     </select>
                                 </div>
