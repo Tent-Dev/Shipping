@@ -485,7 +485,7 @@
 								},
 								{
 									"key": "product_id",
-									"value": "20",
+									"value": "3",
 									"type": "text"
 								},
 								{
@@ -496,7 +496,8 @@
 								{
 									"key": "temp_shipping",
 									"value": "",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "price",
@@ -515,7 +516,54 @@
 								{
 									"key": "status",
 									"value": "waiting",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "receiver_firstname",
+									"value": "ทดสอบ",
 									"type": "text"
+								},
+								{
+									"key": "receiver_lastname",
+									"value": "อัพเดท",
+									"type": "text"
+								},
+								{
+									"key": "receiver_address",
+									"value": "12/100",
+									"type": "text"
+								},
+								{
+									"key": "receiver_district",
+									"value": "หนองแขม",
+									"type": "text"
+								},
+								{
+									"key": "receiver_area",
+									"value": "หนองแขม",
+									"type": "text"
+								},
+								{
+									"key": "receiver_province",
+									"value": "กรุงเทพ",
+									"type": "text"
+								},
+								{
+									"key": "receiver_postal",
+									"value": "10160",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "0897505566",
+									"type": "text"
+								},
+								{
+									"key": "transaction_id",
+									"value": "160900731274ZM",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
