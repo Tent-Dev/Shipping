@@ -13,7 +13,7 @@
            <?php echo $_SESSION['USERNAME'] ?>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a id="" class="dropdown-item" href=""><i class="fas fa-user-cog mr-2"></i>แก้ไขข้อมูล</a>
+            <a id="" class="dropdown-item" href="account.php"><i class="fas fa-user-cog mr-2"></i>แก้ไขข้อมูล</a>
             <a id="logout" class="dropdown-item" href=""><i class="fas fa-power-off mr-2"></i>ออกจากระบบ</a>
         </div>
     </div>
@@ -40,7 +40,7 @@
             <?php echo $_SESSION['USERNAME'] ?>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a id="" class="dropdown-item" href=""><i class="fas fa-user-cog mr-2"></i>แก้ไขข้อมูล</a>
+            <a id="" class="dropdown-item" href="account.php"><i class="fas fa-user-cog mr-2"></i>แก้ไขข้อมูล</a>
             <a id="logout" class="dropdown-item" href=""><i class="fas fa-power-off mr-2"></i>ออกจากระบบ</a>
         </div>
     </div>

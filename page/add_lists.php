@@ -34,18 +34,53 @@ if($_SESSION['SESSION_ID'] == ""){
             text-decoration: none;
         }
         [class*='form-title-'] {
-            margin: 20px -5px 5px;
+            margin: 20px -15px 5px;
             padding: 3px;
             text-align: center;
             background-color: #d2e5ff;
         }
-        .form-title-1 { border-radius: 10px; }
+        .form-title-1 {
+            margin-left: 0px;
+            margin-right: 0px;
+            border-radius: 10px;
+        }
         .form-title-2 { border-radius: 10px 10px 0 0; }
         .form-title-3 { border-radius: 0; }
         .section {
-            padding: 0 5px 15px;
+            padding: 0 15px 15px;
             box-shadow: 0 0 10px -3px #adadad;
             border-radius: 10px;
+        }
+        .form-suggest {
+            position: relative;
+        }
+        .box-suggest {
+            position: absolute;
+            z-index: 9;
+            top: 100%;
+            width: 90%;
+            height: 250px;
+            overflow-y: auto;
+            background-color: #ffffff;
+            box-shadow: 0 3px 8px rgba(94, 94, 94, 0.5);
+            font-size: 14px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s linear;
+        }
+        .box-suggest.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .suggest-detail {
+            padding: 8px 16px;
+            border-bottom: 1px solid #000000;
+        }
+        .suggest-detail p {
+            margin-bottom: 0;
+        }
+        .suggest-detail p:first-child {
+            color: #1560bd;
         }
     </style>
 </head>
@@ -80,7 +115,15 @@ if($_SESSION['SESSION_ID'] == ""){
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="sender_phone" class="col-form-label col-form-label-sm">เบอร์โทรผู้ส่ง</label>
-                                    <input type="text" name="sender_phone[]" id="sender_phone" class="form-control form-control-sm">
+                                    <input type="text" name="sender_phone[]" id="sender_phone" class="form-control form-control-sm form-suggest">
+                                    <div class="box-suggest">
+                                        <div class="suggest-detail">
+                                            <p>เบอร์โทรผู้ส่ง</p>
+                                            <p>ชื่อ</p>
+                                            <p>ที่อยู่</p>
+                                            <p>เขต แขวง จังหวัด รหัสไปรษณีย์</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="s_fname" class="col-form-label col-form-label-sm">ชื่อผู้ส่ง</label>
@@ -120,7 +163,15 @@ if($_SESSION['SESSION_ID'] == ""){
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>
-                                    <input type="text" name="phone_number[]" id="phone_number" class="form-control form-control-sm">
+                                    <input type="text" name="phone_number[]" id="phone_number" class="form-control form-control-sm form-suggest">
+                                    <div class="box-suggest">
+                                        <div class="suggest-detail">
+                                            <p>เบอร์โทรผู้ส่ง</p>
+                                            <p>ชื่อ</p>
+                                            <p>ที่อยู่</p>
+                                            <p>เขต แขวง จังหวัด รหัสไปรษณีย์</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อผู้รับ</label>
@@ -195,5 +246,14 @@ if($_SESSION['SESSION_ID'] == ""){
         </div>
     </div>
 </section>
+
+<script>
+    $('.form-suggest').on('focus', function() {
+        $(this).parent().find('.box-suggest').addClass('active');
+    });
+    $('.form-suggest').on('focusout', function() {
+        $(this).parent().find('.box-suggest.active').removeClass('active');
+    });
+</script>
 </body>
 </html>
