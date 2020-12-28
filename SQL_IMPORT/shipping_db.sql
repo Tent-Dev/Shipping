@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 26, 2020 at 06:29 PM
+-- Generation Time: Dec 28, 2020 at 04:42 PM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -54,14 +54,14 @@ CREATE TABLE IF NOT EXISTS `tbl_member` (
   `username` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
   `session_id` text
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_member`
 --
 
 INSERT INTO `tbl_member` (`id`, `firstname`, `lastname`, `member_type`, `username`, `password`, `session_id`) VALUES
-(4, 'มาลี', 'อร่อยนะ', 'admin', 'admin', '$2y$12$cseLkNbuvrIOD506dAPtze7PGfyDwclbHjTKXVpKV/PP9/wpwfx22', '$2y$12$0MH3PrUfTrPXYmchuBvgKuOf3Z88BeBFktLbjPKS4FQovWlLmRcUe');
+(4, 'มาลี', 'อร่อยนะ', 'admin', 'admin', '$2y$12$cseLkNbuvrIOD506dAPtze7PGfyDwclbHjTKXVpKV/PP9/wpwfx22', '$2y$12$sb6EqWdLR6HnnGgRKrXoYe4DWtVbrf80IZUtyB3s6FRNG4TIWokSa');
 
 -- --------------------------------------------------------
 
@@ -78,18 +78,18 @@ CREATE TABLE IF NOT EXISTS `tbl_product` (
   `status` varchar(50) NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `shipper_id` int(11) NOT NULL,
-  `temp_shipping` text NOT NULL
+  `payment_type` text NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_product`
 --
 
-INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_code`, `status`, `create_date`, `shipper_id`, `temp_shipping`) VALUES
-(1, 'normal', 1.5, 30, 'SH540H2684NJ9', 'waiting', '2020-12-26 18:27:57', 0, ''),
-(2, 'normal', 1.5, 30, 'SH023V5641RS5', 'waiting', '2020-12-26 18:27:57', 0, ''),
-(3, 'normal', 1.5, 30, 'SH431C2604NW3', 'waiting', '2020-12-26 18:28:32', 0, ''),
-(4, 'normal', 1.5, 30, 'SH286X5783XI2', 'waiting', '2020-12-26 18:28:32', 0, '');
+INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_code`, `status`, `create_date`, `shipper_id`, `payment_type`) VALUES
+(1, 'normal', 1.5, 30, 'SH540H2684NJ9', 'waiting', '2020-12-26 18:27:57', 0, 'cod'),
+(2, 'normal', 1.5, 30, 'SH023V5641RS5', 'waiting', '2020-12-26 18:27:57', 0, 'cod'),
+(3, 'normal', 1.5, 30, 'SH431C2604NW3', 'waiting', '2020-12-26 18:28:32', 5, 'cod'),
+(4, 'normal', 1.5, 30, 'SH286X5783XI2', 'waiting', '2020-12-26 18:28:32', 0, 'normal');
 
 -- --------------------------------------------------------
 
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `tbl_transaction` (
 INSERT INTO `tbl_transaction` (`id`, `transaction_id`, `customer_id`, `product_id`, `receiver_desc`, `sender_desc`) VALUES
 (1, '160900727713YO', 1, 1, '{"firstname":"FReceiver1","lastname":"LReceiver1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0911111111"}'),
 (2, '160900727713YO', 1, 2, '{"firstname":"FReceiver2","lastname":"LReceiver2","address":"919 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0922222222"}', '{"firstname":"ชื่อคนส่ง22","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786662"}'),
-(3, '160900731274ZM', 1, 3, '{"firstname":"FReceiver1","lastname":"LReceiver1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0911111111"}'),
+(3, '160900731274ZM', 1, 3, '{"firstname":"ทดสอบ","lastname":"อัพเดท","address":"12\\/100","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพ","postal":"10160","phone_number":"0897505566"}', '{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0911111111"}'),
 (4, '160900731274ZM', 1, 4, '{"firstname":"FReceiver2","lastname":"LReceiver2","address":"919 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0922222222"}', '{"firstname":"ชื่อคนส่ง22","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786662"}');
 
 -- --------------------------------------------------------
@@ -215,7 +215,7 @@ ALTER TABLE `tbl_customer`
 -- AUTO_INCREMENT for table `tbl_member`
 --
 ALTER TABLE `tbl_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_product`
 --

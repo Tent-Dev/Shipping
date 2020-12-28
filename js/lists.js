@@ -79,6 +79,8 @@ function getDescription(product_id, tracking_code){
 			if(data.status == 200){
 				var get_body_html = generateHtml(data);
 				$('.modal-body').html(get_body_html);
+
+				$("#shipping_type").val(data.data.data[0].payment_type).change();
 			}
 
 		},
