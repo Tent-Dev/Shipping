@@ -1,10 +1,5 @@
 <?php
-session_start();
-include("../client_config/config.php");
-if($_SESSION['SESSION_ID'] == ""){
-    header("Location:../index.php");
-    die();
-}
+include("auth_onpage.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +10,7 @@ if($_SESSION['SESSION_ID'] == ""){
 
     <link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.min.css">
     <link href="../lib/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
+    <link href="../css/list.css" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
     <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -93,7 +89,7 @@ if($_SESSION['SESSION_ID'] == ""){
 
         <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="editDataLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
+                <!-- <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editDataLabel">แก้ไขข้อมูลพัสดุ No.xxxxx</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -185,7 +181,7 @@ if($_SESSION['SESSION_ID'] == ""){
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
                         <button type="button" class="btn btn-success">บันทึก</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

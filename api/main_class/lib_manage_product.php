@@ -26,6 +26,7 @@ class MNG_Product{
 		tbl_product.create_date,
 		tbl_product.weight,
 		tbl_product.price,
+		tbl_product.payment_type,
 		tbl_transaction.transaction_id,
 		tbl_transaction.receiver_desc,
 		tbl_transaction.sender_desc,
@@ -51,6 +52,11 @@ class MNG_Product{
 			$sql_where .= " tbl_product.tracking_code = '".$param['tracking_code']."' ";
 		}
 
+		if(isset($param['product_id'])){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.id = '".$param['product_id']."' ";
+		}
+
 		$sql_query = $sql . $sql_where. $sql_limit;
 		$sql_count = $sql . $sql_where;
 
@@ -73,6 +79,7 @@ class MNG_Product{
 					'sender_desc' => json_decode($value['sender_desc']),
 					'weight' => round($value['weight'], 2),
 					'price' => round($value['price'], 2),
+					'payment_type' => $value['payment_type'],
 				);
 				$items[] = $get_item;
 			}
