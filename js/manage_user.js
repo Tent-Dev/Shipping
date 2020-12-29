@@ -202,6 +202,10 @@ function insertAccount(){
     }
 }
 
+function updateAccount(){
+    
+}
+
 function validate(){
     var result = true;
     var firstname = $('#firstname').val();

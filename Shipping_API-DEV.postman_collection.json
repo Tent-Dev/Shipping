@@ -669,7 +669,7 @@
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "testaccount",
 									"type": "text"
 								},
 								{
@@ -690,6 +690,12 @@
 								{
 									"key": "lastname",
 									"value": "Create",
+									"type": "text"
+								},
+								{
+									"key": "member_type",
+									"value": "staff",
+									"description": "staff, admin",
 									"type": "text"
 								}
 							]
