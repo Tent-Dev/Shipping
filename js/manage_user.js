@@ -6,10 +6,21 @@ $(document).ready(function() {
         $('#member_type').append(html);
     });
 
-	$(document).on('click', '.btn_edit', function(event) {
-		var account_id = $(this).data('id');
-		getDescription(account_id);
-	});
+    $(document).on('click', '.btn_edit', function(event) {
+      var account_id = $(this).data('id');
+      getDescription(account_id);
+  });
+
+    $(document).on('click', '.btn_add', function(event) {
+        insertAccount();
+    });
+
+    $('#addData').on('hidden.bs.modal', function (e) {
+      $(this).find("input,select").val('').end();
+      $(this).find(':input').removeAttr('placeholder');
+      $(this).find(':input').removeClass('custom_has_err');
+  });
+
 });
 
 function getDataFromDB(page = 1){
@@ -29,19 +40,19 @@ function getDataFromDB(page = 1){
 				$.each(data.data.data, function(index, val) {
 					html +=
 					'<tr>'+
-						'<td>'+val.username+'</td>'+
-						'<td>'+val.firstname+' '+val.lastname+'</td>'+
-						'<td>'+val.member_type+'</td>'+
-						'<td>'+
-						'<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
-						'<button class="btn btn-sm btn-danger" data-id="'+val.id+'"><i class="fas fa-trash"></i></button>'+
-						'</td>'+
-					'</tr>';
-				});
+                  '<td>'+val.username+'</td>'+
+                  '<td>'+val.firstname+' '+val.lastname+'</td>'+
+                  '<td>'+val.member_type+'</td>'+
+                  '<td>'+
+                  '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
+                  '<button class="btn btn-sm btn-danger" data-id="'+val.id+'"><i class="fas fa-trash"></i></button>'+
+                  '</td>'+
+                  '</tr>';
+              });
 				pagination(page,data.data.total_pages);
 			}
 
-			$('#show_data_from_db').append(html);
+			$('#show_data_from_db').html(html);
 		},
 		error: function() {
 			console.log("error");
@@ -70,29 +81,29 @@ function getDescription(account_id){
     $('.modal-edit').html(html_mock);
     $('.modal-edit-body').html('<div align="center" class="wrap_loading_box"><div><i class="fas fa-spinner fa-spin loading_box_icon"></i></div></div>');
 
-	$.ajax({
-		url: '../api/function/manage_account.php',
-		method: 'post',
-		data: {
-			command: 'get_account_desc',
-			account_id: account_id
-		},
-		success: function(data) {
-			var data = JSON.parse(data);
-			console.log("result: ",data);
+    $.ajax({
+      url: '../api/function/manage_account.php',
+      method: 'post',
+      data: {
+       command: 'get_account_desc',
+       account_id: account_id
+   },
+   success: function(data) {
+       var data = JSON.parse(data);
+       console.log("result: ",data);
 
-			if(data.status == 200){
-				var get_body_html = generateHtml(data.data);
-				$('.modal-edit-body').html(get_body_html);
-                $("#member_type_edit").val(data.data.member_type).change();
-			}
+       if(data.status == 200){
+        var get_body_html = generateHtml(data.data);
+        $('.modal-edit-body').html(get_body_html);
+        $("#member_type_edit").val(data.data.member_type).change();
+    }
 
-		},
-		error: function() {
-			console.log("error");
-		}
-	});
-	
+},
+error: function() {
+   console.log("error");
+}
+});
+
 }
 
 function generateHtml(data){
@@ -114,15 +125,8 @@ function generateHtml(data){
     html +='            <input type="text" name="username" id="username" class="form-control form-control-sm" value="'+data.username+'" readonly>';
     html +='        </div>';
     html +='        <div class="col-6">';
-    html +='            <label for="password" class="col-form-label col-form-label-sm">Password</label>';
-    html +='            <input type="password" name="password" id="password" class="form-control form-control-sm" value="">';
-    html +='        </div>';
-    html +='    </div>';
-    html +='    <div class="row">';
-    html +='        <div class="col-6">';
     html +='            <label for="member_type" class="col-form-label col-form-label-sm">ตำแหน่ง</label>';
     html +='            <select name="member_type" id="member_type_edit" class="form-control form-control-sm">';
-    //html +='                <option value="" selected>กรุณาเลือกตำแหน่ง</option>';
     $.each(MEMBER_TYPE, function(index, val) {
         var selected = '';
         if(data.member_type == val){
@@ -137,9 +141,115 @@ function generateHtml(data){
     return html;
 }
 
+function insertAccount(){
+    var firstname = $('#firstname').val();
+    var lastname = $('#lastname').val();
+    var username = $('#username').val();
+    var password = $('#password').val();
+    var member_type = $('#member_type').val();
+    var confirm_password = $('#confirm_password').val();
+
+    if(validate()){
+        $('.btn_add').html('<i class="fas fa-spinner fa-spin"></i></span>');
+        $.ajax({
+            url: '../api/function/manage_account.php',
+            method: 'post',
+            data: {
+                command: 'create_account',
+                firstname: firstname,
+                lastname: lastname,
+                username: username,
+                password: password,
+                member_type: member_type,
+                confirm_password: confirm_password
+            },
+            success: function(data) {
+                $('.btn_add').html('เพิ่ม');
+                var data = JSON.parse(data);
+                console.log("result: ",data);
+
+                if(data.status == 200){
+                    getDataFromDB();
+                    $("#addData").modal('hide');
+                }
+
+            },
+            error: function() {
+                console.log("error");
+            }
+        });
+    }
+}
+
+function validate(){
+    var result = true;
+    var firstname = $('#firstname').val();
+    var lastname = $('#lastname').val();
+    var username = $('#username').val();
+    var password = $('#password').val();
+    var member_type = $('#member_type').val();
+    var confirm_password = $('#confirm_password').val();
+
+    if(username == '' || password == '' || confirm_password == '' || firstname == '' || lastname == '' || member_type == '' ){
+        result = false;
+
+        if(username == ''){
+            $('#username').addClass('custom_has_err');
+            $("#username").attr("placeholder", "โปรดกรอกบัญชีผู้ใช้");
+        }else{
+            $('#username').removeClass('custom_has_err');
+            $("#username").attr("placeholder", "");
+        }
+
+        if(password == ''){
+            $('#password').addClass('custom_has_err');
+            $("#password").attr("placeholder", "โปรดกรอกรหัสผ่าน");
+        }else{
+            $('#password').removeClass('custom_has_err');
+            $("#password").attr("placeholder", "");
+        }
+
+        if(confirm_password == ''){
+            $('#confirm_password').addClass('custom_has_err');
+            $("#confirm_password").attr("placeholder", "โปรดกรอกรหัสผ่านยืนยัน");
+        }else{
+            $('#confirm_password').removeClass('custom_has_err');
+            $("#confirm_password").attr("placeholder", "");
+        }
+
+        if(firstname == ''){
+            $('#firstname').addClass('custom_has_err');
+            $("#firstname").attr("placeholder", "โปรดกรอกชื่อ");
+        }else{
+            $('#firstname').removeClass('custom_has_err');
+            $("#firstname").attr("placeholder", "");
+        }
+
+        if(lastname == ''){
+            $('#lastname').addClass('custom_has_err');
+            $("#lastname").attr("placeholder", "โปรดกรอกนามสกุล");
+        }else{
+            $('#lastname').removeClass('custom_has_err');
+            $("#lastname").attr("placeholder", "");
+        }
+
+        if(member_type == ''){
+            $('#member_type').addClass('custom_has_err');
+            //$("#member_type").attr("placeholder", "โปรดกรอกรหัสผ่าน");
+        }else{
+            $('#member_type').removeClass('custom_has_err');
+            //$("#member_type").attr("placeholder", "");
+        }
+    }else{
+        $('#username, #password, #confirm_password, #firstname, #lastname, #member_type').removeClass('custom_has_err');
+    }
+
+    return result;
+}
+
 // function generateModal(){
 // 	html = '';
-	
+
 // 	html += '<div class="modal-content">';
 //     html += '	<div class="modal-header">';
 //     html += '		<h5 class="modal-title" id="editDataLabel">แก้ไขข้อมูลพัสดุ No.xxxxx</h5>';

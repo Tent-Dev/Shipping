@@ -21,7 +21,7 @@ class MNG_Account{
 		$member_type = $param['member_type'];
 		$confirm_password = $param['confirm_password'];
 		$username_duplicate = $validate->Check_same('tbl_member','username',$username);
-		if(empty($firstName) || empty($lastName) || empty($username) || empty($password) || empty($confirm_password)){
+		if(empty($firstName) || empty($lastName) || empty($username) || empty($password) || empty($confirm_password) || empty($member_type)){
 			$response = array(
 				'status' => 999,
 				'err_msg' => 'Cannot create account. Plase fill all data.'

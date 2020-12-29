@@ -92,23 +92,27 @@ include("auth_onpage.php");
                                     <input type="text" name="username" id="username" class="form-control form-control-sm" value="">
                                 </div>
                                 <div class="col-6">
-                                    <label for="password" class="col-form-label col-form-label-sm">Password</label>
-                                    <input type="password" name="password" id="password" class="form-control form-control-sm" value="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
                                     <label for="member_type" class="col-form-label col-form-label-sm">ตำแหน่ง</label>
                                     <select name="member_type" id="member_type" class="form-control form-control-sm">
                                         <option value="" selected>กรุณาเลือกตำแหน่ง</option>
                                     </select>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="password" class="col-form-label col-form-label-sm">Password</label>
+                                    <input type="password" name="password" id="password" class="form-control form-control-sm" value="">
+                                </div>
+                                <div class="col-6">
+                                    <label for="confirm_password" class="col-form-label col-form-label-sm">Confirm Password</label>
+                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control form-control-sm" value="">
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                        <button type="button" class="btn btn-success">เพิ่ม</button>
+                        <button type="button" class="btn btn-success btn_add">เพิ่ม</button>
                     </div>
                 </div>
             </div>
