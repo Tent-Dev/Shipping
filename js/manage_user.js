@@ -85,23 +85,23 @@ function getDescription(account_id){
       url: '../api/function/manage_account.php',
       method: 'post',
       data: {
-       command: 'get_account_desc',
-       account_id: account_id
-   },
-   success: function(data) {
-       var data = JSON.parse(data);
-       console.log("result: ",data);
+         command: 'get_account_desc',
+         account_id: account_id
+     },
+     success: function(data) {
+         var data = JSON.parse(data);
+         console.log("result: ",data);
 
-       if(data.status == 200){
-        var get_body_html = generateHtml(data.data);
-        $('.modal-edit-body').html(get_body_html);
-        $("#member_type_edit").val(data.data.member_type).change();
-    }
+         if(data.status == 200){
+            var get_body_html = generateHtml(data.data);
+            $('.modal-edit-body').html(get_body_html);
+            $("#member_type_edit").val(data.data.member_type).change();
+        }
 
-},
-error: function() {
-   console.log("error");
-}
+    },
+    error: function() {
+     console.log("error");
+ }
 });
 
 }
@@ -151,6 +151,8 @@ function insertAccount(){
 
     if(validate()){
         $('.btn_add').html('<i class="fas fa-spinner fa-spin"></i></span>');
+        $('.btn_add, .btn_cancel').attr('disabled', true);
+
         $.ajax({
             url: '../api/function/manage_account.php',
             method: 'post',
@@ -165,6 +167,7 @@ function insertAccount(){
             },
             success: function(data) {
                 $('.btn_add').html('เพิ่ม');
+                $('.btn_add, .btn_cancel').attr('disabled', false);
                 var data = JSON.parse(data);
                 console.log("result: ",data);
 
@@ -172,9 +175,27 @@ function insertAccount(){
                     getDataFromDB();
                     $("#addData").modal('hide');
                 }
+                else if(data.status == 400){
+                    Swal.fire({
+                        title: 'พบข้อผิดพลาด',
+                        text: 'ชื่อบัญชีนี้มีอยู่ในระบบแล้ว',
+                        icon: 'error',
+                        confirmButtonText: 'ตกลง'
+                    });
+                }
+                else if(data.status == 999){
+                    Swal.fire({
+                        title: 'พบข้อผิดพลาด',
+                        text: 'ยืนยันรหัสผ่านไม่ตรงกัน',
+                        icon: 'error',
+                        confirmButtonText: 'ตกลง'
+                    });
+                }
 
             },
             error: function() {
+                $('.btn_add').html('เพิ่ม');
+                $('.btn_add, .btn_cancel').attr('disabled', false);
                 console.log("error");
             }
         });
@@ -241,6 +262,14 @@ function validate(){
             //$("#member_type").attr("placeholder", "");
         }
     }else{
+        if(password !== confirm_password){
+            Swal.fire({
+                title: 'พบข้อผิดพลาด',
+                text: 'ยืนยันรหัสผ่านไม่ตรงกัน',
+                icon: 'error',
+                confirmButtonText: 'ตกลง'
+            });
+        }
         $('#username, #password, #confirm_password, #firstname, #lastname, #member_type').removeClass('custom_has_err');
     }
 

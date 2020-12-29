@@ -17,6 +17,7 @@ include("auth_onpage.php");
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         var MEMBER_TYPE = <?php echo MEMBER_TYPE; ?>;
     </script>
@@ -111,7 +112,7 @@ include("auth_onpage.php");
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                        <button type="button" class="btn btn-secondary btn_cancel" data-dismiss="modal">ยกเลิก</button>
                         <button type="button" class="btn btn-success btn_add">เพิ่ม</button>
                     </div>
                 </div>
