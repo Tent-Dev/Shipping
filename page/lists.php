@@ -10,6 +10,7 @@ include("auth_onpage.php");
 
     <link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.min.css">
     <link href="../lib/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
+    <link href="../css/main_custom.css" rel="stylesheet">
     <link href="../css/list.css" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
@@ -67,19 +68,6 @@ include("auth_onpage.php");
                 <div class="col-12 my-3">
                     <nav aria-label="Page navigation">
                         <ul class="pagination pagination-sm justify-content-center">
-                            <!-- <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li> -->
                             <div class="main_pagination"></div>
                         </ul>
                     </nav>

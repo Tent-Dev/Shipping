@@ -30,6 +30,18 @@ if ($cmd != "") {
 		exit();
 	}
 
+	if ($cmd == "get_product_desc") {
+		$permission = $auth->AuthPermission();
+		if($permission['permission']){
+			$result = $mng_product->GetProductDescription($_POST);
+		}else{
+			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+		}
+		echo json_encode($result);
+		$mysql->Close_db();
+		exit();
+	}
+
 	if ($cmd == "create_product") {
 		$permission = $auth->AuthPermission();
 		if($permission['permission']){

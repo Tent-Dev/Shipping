@@ -4,6 +4,7 @@
 
 include("../main_class/connect_db.php");
 include("../main_class/auth.php");
+include("../main_class/tools.php");
 include("../main_class/lib_manage_account.php");
 
 $mysql = new Main_db;
@@ -44,6 +45,18 @@ if ($cmd != "") {
 		$permission = $auth->AuthPermission();
 		if($permission['permission']){
 			$result = $mng_account->GetAccount($_POST);
+		}else{
+			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+		}
+		echo json_encode($result);
+		$mysql->Close_db();
+		exit();
+	}
+
+	if ($cmd == "get_account_desc") {
+		$permission = $auth->AuthPermission();
+		if($permission['permission']){
+			$result = $mng_account->GetAccountDescription($_POST);
 		}else{
 			$result = array('status' => 500, 'err_msg' => $permission['msg']);
 		}

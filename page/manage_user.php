@@ -13,9 +13,17 @@ include("auth_onpage.php");
 
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
     <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="../css/main_custom.css" rel="stylesheet">
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var MEMBER_TYPE = <?php echo MEMBER_TYPE; ?>;
+    </script>
+    <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/manage_user.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/logout.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+
 </head>
 <body>
     <?php include('menu_layout.php'); ?>
@@ -35,24 +43,24 @@ include("auth_onpage.php");
                     <table class="table table-sm table-hover">
                         <thead>
                             <tr>
-                                <th>ลำดับ</th>
+                                <th>ชื่อบัญชีผู้ใช้</th>
                                 <th>ชื่อ - นามสกุล</th>
                                 <th>ตำแหน่ง</th>
                                 <th width="120px">แก้ไข / ลบ</th>
                             </tr>
                         </thead>
                         <tbody id="show_data_from_db">
-                            <tr>
-                                <td>1</td>
-                                <td>ชื่อ</td>
-                                <td>admin</td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-target="#editData"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-danger" data-id="'+val.id+'"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 my-3">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination pagination-sm justify-content-center">
+                            <div class="main_pagination"></div>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -93,7 +101,6 @@ include("auth_onpage.php");
                                     <label for="member_type" class="col-form-label col-form-label-sm">ตำแหน่ง</label>
                                     <select name="member_type" id="member_type" class="form-control form-control-sm">
                                         <option value="" selected>กรุณาเลือกตำแหน่ง</option>
-                                        <option value="admin">Admin</option>
                                     </select>
                                 </div>
                             </div>
@@ -108,53 +115,7 @@ include("auth_onpage.php");
         </div>
 
         <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="editDataLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editDataLabel">แก้ไขข้อมูลพนักงาน</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" method="post">
-                            <div class="row">
-                                <div class="col">
-                                    <label for="firstname" class="col-form-label col-form-label-sm">ชื่อ</label>
-                                    <input type="text" name="firstname" id="firstname" class="form-control form-control-sm" value="">
-                                </div>
-                                <div class="col">
-                                    <label for="lastname" class="col-form-label col-form-label-sm">นามสกุล</label>
-                                    <input type="text" name="lastname" id="lastname" class="form-control form-control-sm" value="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="username" class="col-form-label col-form-label-sm">Username</label>
-                                    <input type="text" name="username" id="username" class="form-control form-control-sm" value="">
-                                </div>
-                                <div class="col-6">
-                                    <label for="password" class="col-form-label col-form-label-sm">Password</label>
-                                    <input type="password" name="password" id="password" class="form-control form-control-sm" value="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="member_type" class="col-form-label col-form-label-sm">ตำแหน่ง</label>
-                                    <select name="member_type" id="member_type" class="form-control form-control-sm">
-                                        <option value="" selected>กรุณาเลือกตำแหน่ง</option>
-                                        <option value="admin">Admin</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                        <button type="button" class="btn btn-warning">แก้ไข</button>
-                    </div>
-                </div>
-            </div>
+            <div class="modal-dialog modal-edit modal-dialog-centered modal-dialog-scrollable"></div>
         </div>
     </section>
 </body>

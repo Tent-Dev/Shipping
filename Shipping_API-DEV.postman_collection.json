@@ -438,6 +438,63 @@
 					"response": []
 				},
 				{
+					"name": "get_product_desc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "get_product_desc",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "tracking_code",
+									"value": "SH431C2604NW3",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "product_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_product.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_product.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "create_product",
 					"request": {
 						"method": "POST",
@@ -731,6 +788,45 @@
 								{
 									"key": "command",
 									"value": "get_account",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_account.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_account.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_account_desc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "get_account_desc",
+									"type": "text"
+								},
+								{
+									"key": "account_id",
+									"value": "5",
 									"type": "text"
 								}
 							]

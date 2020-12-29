@@ -18,3 +18,14 @@
 ::-ms-input-placeholder { /* Microsoft Edge */
   color: #ed5565 !important;
 }
+
+.wrap_loading_box {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading_box_icon {
+  font-size: 37px;
+}

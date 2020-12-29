@@ -99,6 +99,87 @@ class MNG_Product{
 		return $response;
 	}
 
+	public function GetProductDescription($param = null){
+		$sql =
+		"
+		SELECT tbl_product.tracking_code,
+		tbl_product.id,
+		tbl_product.status,
+		tbl_product.create_date,
+		tbl_product.weight,
+		tbl_product.price,
+		tbl_product.payment_type,
+		tbl_transaction.transaction_id,
+		tbl_transaction.receiver_desc,
+		tbl_transaction.sender_desc,
+		tbl_customer.firstname,
+		tbl_customer.lastname,
+		tbl_customer.id_card,
+		CONCAT(tbl_member.firstname,' ', tbl_member.lastname) as shipper_name
+		FROM tbl_product
+		JOIN tbl_transaction
+		ON tbl_product.id = tbl_transaction.product_id 
+		JOIN tbl_customer
+		ON tbl_transaction.customer_id = tbl_customer.id
+		LEFT JOIN tbl_member
+		ON tbl_product.shipper_id = tbl_member.id
+		";
+
+		$sql_where = "";
+
+		if(isset($param['status'])){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.status = '".$param['status']."' ";
+		}
+
+		if(isset($param['tracking_code'])){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.tracking_code = '".$param['tracking_code']."' ";
+		}
+
+		if(isset($param['product_id'])){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.id = '".$param['product_id']."' ";
+		}
+
+		$sql_query = $sql . $sql_where;
+
+		$data = $this->db_connect->Select_db_one($sql_query);
+
+		if($data){
+			$customer_desc = array(
+				'firstname' => $data['firstname'],
+				'lastname' => $data['lastname'],
+				'id_card' => $data['id_card'],
+			);
+
+			$get_item = array(
+				'id' =>  $data['id'],
+				'transaction_id' =>$data['transaction_id'],
+				'tracking_code' => $data['tracking_code'],
+				'status' => $data['status'],
+				'create_date' => $data['create_date'],
+				'customer_desc' => $customer_desc,
+				'receiver_desc' => json_decode($data['receiver_desc']),
+				'sender_desc' => json_decode($data['sender_desc']),
+				'weight' => round($data['weight'], 2),
+				'price' => round($data['price'], 2),
+				'payment_type' => $data['payment_type'],
+			);
+			$response = array(
+				'status' => 200,
+				'data' => $get_item
+			);
+		}else{
+			$response = array(
+				'status' => 404,
+				'err_msg' => 'Product not found'
+			);
+		}
+
+		return $response;
+	}
+
 	public function CreateProduct($param = null){
 		$receiver_save_phone = '';
 		$dumpmy_data = '{"firstname":"ชื่อคนทำรายการ","lastname":"นามสกุลคนทำรายการ","id_card":"1102002841486","item":[{"weight":1.5,"price":30,"shipping_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ1","lastname":"นามสกุลคนรับ1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}},{"weight":1.5,"price":30,"shipping_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ2","lastname":"นามสกุลคนรับ2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง2","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}}]}';

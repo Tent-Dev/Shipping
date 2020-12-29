@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 28, 2020 at 04:42 PM
+-- Generation Time: Dec 29, 2020 at 12:54 PM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -54,14 +54,15 @@ CREATE TABLE IF NOT EXISTS `tbl_member` (
   `username` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
   `session_id` text
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_member`
 --
 
 INSERT INTO `tbl_member` (`id`, `firstname`, `lastname`, `member_type`, `username`, `password`, `session_id`) VALUES
-(4, 'มาลี', 'อร่อยนะ', 'admin', 'admin', '$2y$12$cseLkNbuvrIOD506dAPtze7PGfyDwclbHjTKXVpKV/PP9/wpwfx22', '$2y$12$sb6EqWdLR6HnnGgRKrXoYe4DWtVbrf80IZUtyB3s6FRNG4TIWokSa');
+(4, 'มาลี', 'อร่อยนะ', 'admin', 'admin', '$2y$12$cseLkNbuvrIOD506dAPtze7PGfyDwclbHjTKXVpKV/PP9/wpwfx22', '$2y$12$3EGCq591p8sR57wq9o779OluIRLJeMu391UTwFK/o6jdOtF2XphZq'),
+(5, 'Test', 'Create', 'staff', 'testaccount', '$2y$12$i0G.Xb3tKE50HPqzsWkhQ.U00Nz1uR8xSUOpj4b9JVMYxuO/xuFmy', NULL);
 
 -- --------------------------------------------------------
 
@@ -215,7 +216,7 @@ ALTER TABLE `tbl_customer`
 -- AUTO_INCREMENT for table `tbl_member`
 --
 ALTER TABLE `tbl_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_product`
 --

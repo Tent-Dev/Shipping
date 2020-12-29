@@ -6,6 +6,7 @@ class MNG_Account{
 
 	public function __construct(){
 		$this->db_connect = new Main_db;
+		$this->tools = new Tools;
 		$this->db_connect->Connect_db();
 	}
 
@@ -17,6 +18,7 @@ class MNG_Account{
 		$lastName = $param['lastname'];
 		$username = $param['username'];
 		$password = $param['password'];
+		$member_type = $param['member_type'];
 		$confirm_password = $param['confirm_password'];
 		$username_duplicate = $validate->Check_same('tbl_member','username',$username);
 		if(empty($firstName) || empty($lastName) || empty($username) || empty($password) || empty($confirm_password)){
@@ -33,7 +35,8 @@ class MNG_Account{
 					"username"=> $username,
 					"password"=> password_hash($password, PASSWORD_BCRYPT, array('cost'=>12)),
 					"firstname"=> $firstName,
-					"lastname"=> $lastName
+					"lastname"=> $lastName,
+					"member_type" => $member_type
 				);
 				$result = $this->db_connect->Insert_db($arr,"tbl_member");
 				if($result){
@@ -60,9 +63,73 @@ class MNG_Account{
 	}
 
 	public function GetAccount($param = null){
-		$sql = "SELECT id, firstname, lastname, member_type, username FROM tbl_member WHERE id = '".$_SESSION['ID']."'";
+		$per_page = 10;
+		$page = 1;
+		if(isset($param['page']) && $param['page'] != ''){
+			$page = $param['page'];
+		}
+		$start_page = $this->tools->PaginationSetpage($per_page,$page);
 
-		$data = $this->db_connect->Select_db($sql);
+		$sql = "SELECT id, firstname, lastname, member_type, username FROM tbl_member";
+		$sql_limit = " ORDER BY id DESC LIMIT ".$start_page." , ".$per_page."";
+
+		$sql_where = "";
+
+		if(isset($param['member_type'])){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.status = '".$param['member_type']."' ";
+		}
+
+		if(isset($param['firstname'])){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " firstname = '".$param['firstname']."' ";
+		}
+
+		if(isset($param['username'])){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " username = '".$param['username']."' ";
+		}
+
+		$sql_query = $sql . $sql_where. $sql_limit;
+		$sql_count = $sql . $sql_where;
+
+		$data = $this->db_connect->Select_db($sql_query);
+
+		$rowcount = $this->db_connect->numRows($sql_count);
+		$total_pages = ceil($rowcount / $per_page);
+
+		if($data){
+
+			$data_final['total_pages'] = $total_pages;
+			$data_final['data'] = $data;
+
+			$response = array(
+				'status' => 200,
+				'data' => $data_final
+			);
+		}else{
+			$response = array(
+				'status' => 404,
+				'err_msg' => 'Account not found'
+			);
+		}
+		return $response;
+	}
+
+	public function GetAccountDescription($param = null){
+
+		$sql = "SELECT id, firstname, lastname, member_type, username FROM tbl_member";
+
+		$sql_where = "";
+
+		if(isset($param['account_id'])){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " id = '".$param['account_id']."' ";
+		}
+
+		$sql_query = $sql . $sql_where;
+
+		$data = $this->db_connect->Select_db_one($sql_query);
 
 		if($data){
 			$response = array(
