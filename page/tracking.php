@@ -8,33 +8,31 @@ include("../client_config/config.php");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tracking</title>
 
-	<link rel="stylesheet" href="../css/tracking.css">
-
 	<!-- import Lib -->
 	<link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.min.css">
 	<link href="../lib/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
 	<script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
 
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/tracking.css">
+
 	<!-- import My Script -->
 	<script src="../js/tracking.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-	<style>
-		body {
-			
-		}
-		.box {
-			width: 50%;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-		}
-	</style>
+	<nav>
+		<div class="nav-logo">
+			<img src="https://fph.tu.ac.th/uploads/fph/DownloadLogo/2018_FPHHorz%20Logo%20%28EN%29.png" alt="">
+		</div>
+		<div class="nav-right">
+			ติดต่อ <a href="tel:099-999999" class="tel">099-999999</a>
+		</div>
+	</nav>
 
 	<div class="box">
-		<div class="card shadow p-3 mb-5 bg-white rounded">
+		<div class="card">
 			<div class="card-body">
 				<h1>เช็คสถานะพัสดุ</h1>
 				<div class="form-group">
@@ -46,7 +44,7 @@ include("../client_config/config.php");
 					</div>
 				</div>
 				<div class="text-right">
-					<button class="btn btn-primary mt-3" type="" id="check_tracking">ตรวจสอบสถานะ</button>
+					<button class="btn btn-primary mt-3 check_tracking" type="" id="check_tracking">ตรวจสอบสถานะ</button>
 				</div>
 			</div>
 		</div>
@@ -62,6 +60,7 @@ include("../client_config/config.php");
 			</ul>
 		</div>
 	</div>
+	<div class="overlay"></div>
 
 	<!-- <div class="container">
 		<div class="row">

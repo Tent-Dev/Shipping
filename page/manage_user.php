@@ -41,18 +41,20 @@ include("auth_onpage.php");
                             <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#addData">เพิ่มบัญชีผู้ใช้ <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
-                    <table class="table table-sm table-hover">
-                        <thead>
-                            <tr>
-                                <th>ชื่อบัญชีผู้ใช้</th>
-                                <th>ชื่อ - นามสกุล</th>
-                                <th>ตำแหน่ง</th>
-                                <th width="120px">แก้ไข / ลบ</th>
-                            </tr>
-                        </thead>
-                        <tbody id="show_data_from_db">
-                        </tbody>
-                    </table>
+                    <div class="overflow-auto">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ชื่อบัญชีผู้ใช้</th>
+                                    <th>ชื่อ - นามสกุล</th>
+                                    <th>ตำแหน่ง</th>
+                                    <th width="120px">แก้ไข / ลบ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="show_data_from_db">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="row">

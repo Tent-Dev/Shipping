@@ -48,19 +48,21 @@ include("auth_onpage.php");
                             </a>
                         </div>
                     </div>
-                    <table class="table table-sm table-hover">
-                        <thead>
-                            <tr>
-                                <th>วันที่นำเข้าพัสดุ</th>
-                                <th>เลขพัสดุ</th>
-                                <th>ชื่อผู้รับ</th>
-                                <th>สถานะ</th>
-                                <th width="120px">แก้ไข / ลบ</th>
-                            </tr>
-                        </thead>
-                        <tbody id="show_data_from_db">
-                        </tbody>
-                    </table>
+                    <div class="overflow-auto">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>วันที่นำเข้าพัสดุ</th>
+                                    <th>เลขพัสดุ</th>
+                                    <th>ชื่อผู้รับ</th>
+                                    <th>สถานะ</th>
+                                    <th width="120px">แก้ไข / ลบ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="show_data_from_db">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 

@@ -35,30 +35,32 @@ include("auth_onpage.php");
                     <h1>คัดแยกพัสดุ</h1>
                 </div>
             </div>
-            <table class="table table-sm table-hover">
-                <thead>
-                    <tr>
-                        <th>วันที่นำเข้าพัสดุ</th>
-                        <th>เลขพัสดุ</th>
-                        <th>ชื่อผู้รับ</th>
-                        <th>เขตจัดส่ง</th>
-                        <th>สถานะ</th>
-                        <th>คนนำจ่าย</th>
-                        <th width="60px">แก้ไข</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>date</td>
-                        <td>no.</td>
-                        <td>name</td>
-                        <td>เขต</td>
-                        <td>waiting</td>
-                        <td>person</td>
-                        <td><button class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="" data-target="#editData"><i class="fas fa-edit"></i></button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="overflow-auto">
+                <table class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th>วันที่นำเข้าพัสดุ</th>
+                            <th>เลขพัสดุ</th>
+                            <th>ชื่อผู้รับ</th>
+                            <th>เขตจัดส่ง</th>
+                            <th>สถานะ</th>
+                            <th>คนนำจ่าย</th>
+                            <th width="60px">แก้ไข</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>date</td>
+                            <td>no.</td>
+                            <td>name</td>
+                            <td>เขต</td>
+                            <td>waiting</td>
+                            <td>person</td>
+                            <td><button class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="" data-target="#editData"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="editDataLabel" aria-hidden="true">
