@@ -113,21 +113,21 @@ include("auth_onpage.php");
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>
-                                    <input type="text" name="phone_number" id="phone_number" class="form-control-plaintext" value="099-9999999" readonly>
+                                    <div>099-9999999</div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="shipper" class="col-form-label col-form-label-sm">คนนำจ่าย</label>
-                                    <input type="text" name="shipper" id="shipper" class="form-control-plaintext" value="ใครนำจ่าย" readonly>
+                                    <div>ใครนำจ่าย</div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อผู้รับ</label>
-                                    <input type="text" name="r_fname" id="r_fname" class="form-control-plaintext" value="ชื่อผู้รับ" readonly>
+                                    <div>ชื่อผู้รับ</div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุลผู้รับ</label>
-                                    <input type="text" name="r_lname" id="r_lname" class="form-control-plaintext" value="นามสกุลผู้รับ" readonly>
+                                    <div>นามสกุลผู้รับ</div>
                                 </div>
                             </div>
                             <div class="row">
