@@ -15,6 +15,10 @@ $(document).ready(function() {
         insertAccount();
     });
 
+    $(document).on('click', '.btn_save', function(event) {
+        updateAccount();
+    });
+
     $('#addData').on('hidden.bs.modal', function (e) {
       $(this).find("input,select").val('').end();
       $(this).find(':input').removeAttr('placeholder');
@@ -39,10 +43,10 @@ function getDataFromDB(page = 1){
 				var html = "";
 				$.each(data.data.data, function(index, val) {
 					html +=
-					'<tr>'+
-                  '<td>'+val.username+'</td>'+
-                  '<td>'+val.firstname+' '+val.lastname+'</td>'+
-                  '<td>'+val.member_type+'</td>'+
+					'<tr class="_rowid-'+val.id+'">'+
+                  '<td class="_td-username">'+val.username+'</td>'+
+                  '<td class="_td-name">'+val.firstname+' '+val.lastname+'</td>'+
+                  '<td class="_td-type">'+val.member_type+'</td>'+
                   '<td>'+
                   '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
                   '<button class="btn btn-sm btn-danger" data-id="'+val.id+'"><i class="fas fa-trash"></i></button>'+
@@ -74,7 +78,7 @@ function getDescription(account_id){
     html_mock += '	</div>';
     html_mock += '   <div class="modal-footer">';
     html_mock += '		<button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>';
-    html_mock += '		<button type="button" class="btn btn-success">บันทึก</button>';
+    html_mock += '		<button type="button" class="btn btn-success btn_save">บันทึก</button>';
     html_mock += '	</div>';
     html_mock += '</div">';
 
@@ -112,17 +116,17 @@ function generateHtml(data){
     html +='    <div class="row">';
     html +='        <div class="col">';
     html +='            <label for="firstname" class="col-form-label col-form-label-sm">ชื่อ</label>';
-    html +='            <input type="text" name="firstname" id="firstname" class="form-control form-control-sm" value="'+data.firstname+'">';
+    html +='            <input type="text" name="firstname" id="firstname_edit" class="form-control form-control-sm" value="'+data.firstname+'">';
     html +='        </div>';
     html +='        <div class="col">';
     html +='            <label for="lastname" class="col-form-label col-form-label-sm">นามสกุล</label>';
-    html +='            <input type="text" name="lastname" id="lastname" class="form-control form-control-sm" value="'+data.lastname+'">';
+    html +='            <input type="text" name="lastname" id="lastname_edit" class="form-control form-control-sm" value="'+data.lastname+'">';
     html +='        </div>';
     html +='    </div>';
     html +='    <div class="row">';
     html +='        <div class="col-6">';
     html +='            <label for="username" class="col-form-label col-form-label-sm">Username</label>';
-    html +='            <input type="text" name="username" id="username" class="form-control form-control-sm" value="'+data.username+'" readonly>';
+    html +='            <input type="text" name="username" id="username_edit" class="form-control form-control-sm" value="'+data.username+'" data-id="'+data.id+'" readonly>';
     html +='        </div>';
     html +='        <div class="col-6">';
     html +='            <label for="member_type" class="col-form-label col-form-label-sm">ตำแหน่ง</label>';
@@ -203,7 +207,55 @@ function insertAccount(){
 }
 
 function updateAccount(){
-    
+    var firstname = $('#firstname_edit').val();
+    var lastname = $('#lastname_edit').val();
+    var member_id = $('#username_edit').data('id');
+    var username = $('#username_edit').val();
+    var member_type = $('#member_type_edit').val();
+
+    if(validateEdit()){
+        $('.btn_save').html('<i class="fas fa-spinner fa-spin"></i></span>');
+        $('.btn_save, .btn_cancel').attr('disabled', true);
+
+        $.ajax({
+            url: '../api/function/manage_account.php',
+            method: 'post',
+            data: {
+                command: 'update_account',
+                member_id: member_id,
+                firstname: firstname,
+                lastname: lastname,
+                username: username,
+                member_type: member_type
+            },
+            success: function(data) {
+                $('.btn_save').html('บันทึก');
+                $('.btn_save, .btn_cancel').attr('disabled', false);
+                var data = JSON.parse(data);
+                console.log("result: ",data);
+
+                if(data.status == 200){
+                //getDataFromDB();
+                $('._rowid-'+member_id+'').find('._td-name').html(firstname+' '+lastname);
+                $('._rowid-'+member_id+'').find('._td-type').html(member_type);
+                $("#editData").modal('hide');
+            }
+            else if(data.status == 500){
+                Swal.fire({
+                    title: 'พบข้อผิดพลาด',
+                    text: 'ไม่สามารถอัพเดทข้อมูลได้',
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง'
+                });
+            }
+        },
+        error: function() {
+            $('.btn_save').html('บันทึก');
+            $('.btn_save, .btn_cancel').attr('disabled', false);
+            console.log("error");
+        }
+    });
+    } 
 }
 
 function validate(){
@@ -280,6 +332,53 @@ function validate(){
     return result;
 }
 
+function validateEdit(){
+    var result = true;
+    var firstname = $('#firstname_edit').val();
+    var lastname = $('#lastname_edit').val();
+    var username = $('#username_edit').val();
+    var member_type = $('#member_type_edit').val();
+
+    if(username == '' ||  firstname == '' || lastname == '' || member_type == '' ){
+        result = false;
+
+        if(username == ''){
+            $('#username_edit').addClass('custom_has_err');
+            $("#username_edit").attr("placeholder", "โปรดกรอกบัญชีผู้ใช้");
+        }else{
+            $('#username_edit').removeClass('custom_has_err');
+            $("#username_edit").attr("placeholder", "");
+        }
+
+        if(firstname == ''){
+            $('#firstname_edit').addClass('custom_has_err');
+            $("#firstname_edit").attr("placeholder", "โปรดกรอกชื่อ");
+        }else{
+            $('#firstname_edit').removeClass('custom_has_err');
+            $("#firstname_edit").attr("placeholder", "");
+        }
+
+        if(lastname == ''){
+            $('#lastname_edit').addClass('custom_has_err');
+            $("#lastname_edit").attr("placeholder", "โปรดกรอกนามสกุล");
+        }else{
+            $('#lastname_edit').removeClass('custom_has_err');
+            $("#lastname_edit").attr("placeholder", "");
+        }
+
+        if(member_type == ''){
+            $('#member_type_edit').addClass('custom_has_err');
+            //$("#member_type").attr("placeholder", "โปรดกรอกรหัสผ่าน");
+        }else{
+            $('#member_type_edit').removeClass('custom_has_err');
+            //$("#member_type").attr("placeholder", "");
+        }
+    }else{
+        $('#username_edit, #firstname_edit, #lastname_edit, #member_type_edit').removeClass('custom_has_err');
+    }
+
+    return result;
+}
 // function generateModal(){
 // 	html = '';
 
