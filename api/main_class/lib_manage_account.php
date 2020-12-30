@@ -7,6 +7,7 @@ class MNG_Account{
 	public function __construct(){
 		$this->db_connect = new Main_db;
 		$this->tools = new Tools;
+		$this->db_core = $this->db_connect->Core_db();
 		$this->db_connect->Connect_db();
 	}
 
@@ -165,19 +166,41 @@ class MNG_Account{
 			$arr['member_type'] = $param['member_type'];
 		}
 
-		if(isset($param['password']) && $param['password'] !== ''){
-			if(isset($param['confirm_password']) && $param['confirm_password'] !== '' && (($param['password'] == $param['confirm_password']))){
-				$arr['password'] = password_hash($param['password'], PASSWORD_BCRYPT, array('cost'=>12));
+		if((isset($param['old_password']) && $param['old_password'] !== '') && (isset($param['new_password']) && $param['new_password'] !== '')){
+			$stmt = $this->db_core->prepare("SELECT id, password FROM tbl_member WHERE id = ?");
+			$stmt->bind_param("s", $_SESSION['ID']);
+			$stmt->execute();
+			$stmt->bind_result($member_id, $current_password);
+			$result = $stmt->fetch();
+			if($result){
+				if(password_verify($param['old_password'], $current_password)){
+					if(isset($param['confirm_password']) && $param['confirm_password'] !== '' && (($param['new_password'] == $param['confirm_password']))){
+						$arr['password'] = password_hash($param['new_password'], PASSWORD_BCRYPT, array('cost'=>12));
+					}else{
+						$response = array(
+							'status' => 999,
+							'err_msg' => 'Can not update account. Password and Confirm password not match.'
+						);
+						return $response;
+						exit();
+					}
+				}else{
+					$response = array(
+						'status' => 1000,
+						'err_msg' => 'Can not update account. Old password incorrect.'
+					);
+					return $response;
+					exit();
+				}
 			}else{
 				$response = array(
-					'status' => 999,
-					'err_msg' => 'Can not update account. Password and Confirm password not match.'
+					'status' => 998,
+					'err_msg' => 'Can not update account. Can not check current password.'
 				);
 				return $response;
 				exit();
 			}
 		}
-
 		$key = array("id");
 		$result = $this->db_connect->Update_db($arr, $key, "tbl_member");
 

@@ -1,7 +1,0 @@
-.test_scss{
-	color: #000;
-	font-size: 16;
-	&.test_with_this{
-		background-color: #fff;
-	}
-}

@@ -235,26 +235,25 @@ function updateAccount(){
                 console.log("result: ",data);
 
                 if(data.status == 200){
-                //getDataFromDB();
-                $('._rowid-'+member_id+'').find('._td-name').html(firstname+' '+lastname);
-                $('._rowid-'+member_id+'').find('._td-type').html(member_type);
-                $("#editData").modal('hide');
+                    //getDataFromDB();
+                    $('._rowid-'+member_id+'').find('._td-name').html(firstname+' '+lastname);
+                    $('._rowid-'+member_id+'').find('._td-type').html(member_type);
+                    $("#editData").modal('hide');
+                }
+                else if(data.status == 500){
+                    Swal.fire({
+                        title: 'พบข้อผิดพลาด',
+                        text: 'ไม่สามารถอัพเดทข้อมูลได้',
+                        icon: 'error',
+                        confirmButtonText: 'ตกลง'
+                    });
+                }
+            },error: function() {
+                $('.btn_save').html('บันทึก');
+                $('.btn_save, .btn_cancel').attr('disabled', false);
+                console.log("error");
             }
-            else if(data.status == 500){
-                Swal.fire({
-                    title: 'พบข้อผิดพลาด',
-                    text: 'ไม่สามารถอัพเดทข้อมูลได้',
-                    icon: 'error',
-                    confirmButtonText: 'ตกลง'
-                });
-            }
-        },
-        error: function() {
-            $('.btn_save').html('บันทึก');
-            $('.btn_save, .btn_cancel').attr('disabled', false);
-            console.log("error");
-        }
-    });
+        });
     } 
 }
 

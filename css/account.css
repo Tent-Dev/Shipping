@@ -1,0 +1,17 @@
+.wrap_field {
+  border: 1px #1111 solid;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 25px;
+  position: relative;
+}
+
+.header_field {
+  position: absolute;
+  top: -14px;
+  left: 13px;
+  background-color: #fff;
+  padding: 0px 10px;
+}
+
+/*# sourceMappingURL=account.css.map */
