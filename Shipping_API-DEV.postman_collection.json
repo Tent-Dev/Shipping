@@ -748,14 +748,22 @@
 									"type": "text"
 								},
 								{
-									"key": "password",
-									"value": "1234",
-									"type": "text"
+									"key": "old_password",
+									"value": "12345",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "new_password",
+									"value": "",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "confirm_password",
-									"value": "1234",
-									"type": "text"
+									"value": "",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "member_id",
