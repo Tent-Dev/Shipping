@@ -16,6 +16,9 @@ include("auth_onpage.php");
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/Signature/jq-signature.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/update_status.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 
     <style>
         .signature {
@@ -33,6 +36,11 @@ include("auth_onpage.php");
             height: 120px;
             border-radius: 10px;
             border: 1px solid #a6a6a6;
+            text-align: center;
+        }
+
+        canvas{
+            width: calc(100% - 0vw) !important
         }
     </style>
 </head>
@@ -61,16 +69,6 @@ include("auth_onpage.php");
                                 </tr>
                             </thead>
                             <tbody id="show_data_from_db">
-                                <tr>
-                                    <td>+val.create_date+</td>
-                                    <td>+val.tracking_code+</td>
-                                    <td>name</td>
-                                    <td>+val.status+</td>
-                                    <td>+val.person+</td>
-                                    <td align="center">
-                                        <button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -98,7 +96,7 @@ include("auth_onpage.php");
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="" method="post">
+                        <!-- <form action="" method="post">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="status" class="col-form-label col-form-label-sm">สถานะพัสดุ</label>
@@ -136,7 +134,7 @@ include("auth_onpage.php");
                                     <div class="signature-box"></div>
                                 </div>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
@@ -146,16 +144,5 @@ include("auth_onpage.php");
             </div>
         </div>
     </section>
-
-    <script>
-        $('select#status').on('change', function() {
-            var value = $(this).children('option:selected').val();
-            if(value == "success") {
-                $('.signature').addClass('success');
-            } else {
-                $('.signature.success').removeClass('success');
-            }
-        });
-    </script>
 </body>
 </html>
