@@ -146,6 +146,45 @@ class MNG_Account{
 		return $response;
 	}
 
+	public function GetAccountForShipperList($param = null){
+
+		$sql = "SELECT id, firstname, lastname, member_type, username FROM tbl_member";
+
+		$sql_where = "";
+
+		// if(isset($param['member_type'])){
+		// 	$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+		// 	$sql_where .= " tbl_product.status = '".$param['member_type']."' ";
+		// }
+
+		// if(isset($param['firstname'])){
+		// 	$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+		// 	$sql_where .= " firstname = '".$param['firstname']."' ";
+		// }
+
+		// if(isset($param['username'])){
+		// 	$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+		// 	$sql_where .= " username = '".$param['username']."' ";
+		// }
+
+		$sql_query = $sql . $sql_where;
+
+		$data = $this->db_connect->Select_db($sql_query);
+
+		if($data){
+			$response = array(
+				'status' => 200,
+				'data' => $data
+			);
+		}else{
+			$response = array(
+				'status' => 404,
+				'err_msg' => 'Shipper not found'
+			);
+		}
+		return $response;
+	}
+
 	public function UpdateAccount($param = null){
 
 		$arr = array();

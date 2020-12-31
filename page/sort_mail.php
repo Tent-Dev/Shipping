@@ -13,9 +13,15 @@ include("auth_onpage.php");
 
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
     <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="../css/main_custom.css" rel="stylesheet">
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/sort_mail.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/logout.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 
     <style>
         .form-title {
@@ -48,107 +54,24 @@ include("auth_onpage.php");
                             <th width="60px">แก้ไข</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>date</td>
-                            <td>no.</td>
-                            <td>name</td>
-                            <td>เขต</td>
-                            <td>waiting</td>
-                            <td>person</td>
-                            <td><button class="btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="" data-target="#editData"><i class="fas fa-edit"></i></button></td>
-                        </tr>
+                    <tbody id="show_data_from_db">
                     </tbody>
                 </table>
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-12 my-3">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-sm justify-content-center">
+                        <div class="main_pagination"></div>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
         <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="editDataLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editDataLabel">คนนำจ่ายพัสดุ No.xxxxx</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" method="post">
-                            <div class="row">
-                                <div class="col">
-                                    <label for="sender" class="col-form-label col-form-label-sm">คนนำจ่าย</label>
-                                    <select name="sender" id="sender" class="form-control form-control-sm">
-                                        <option value="" selected>กรุณาเลือกคนนำจ่ายพัสดุ</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <p class="form-title">ข้อมูลผู้รับ</p>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อ</label>
-                                    <input type="text" name="r_fname" id="r_fname" class="form-control form-control-sm" value="" readonly>
-                                </div>
-                                <div class="col">
-                                    <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุล</label>
-                                    <input type="text" name="r_lname" id="r_lname" class="form-control form-control-sm" value="" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทร</label>
-                                    <input type="text" name="phone_number" id="phone_number" class="form-control form-control-sm" value="" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="r_address" class="col-form-label col-form-label-sm">ที่อยู่</label>
-                                    <input type="text" name="r_address" id="r_address" class="form-control form-control-sm" readonly>
-                                </div>
-                                <div class="col">
-                                    <label for="r_district" class="col-form-label col-form-label-sm">เขต</label>
-                                    <input type="text" name="r_district" id="r_district" class="form-control form-control-sm" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="r_area" class="col-form-label col-form-label-sm">แขวง</label>
-                                    <input type="text" name="r_area" id="r_area" class="form-control form-control-sm" readonly>
-                                </div>
-                                <div class="col">
-                                    <label for="r_province" class="col-form-label col-form-label-sm">จังหวัด</label>
-                                    <input type="text" name="r_province" id="r_province" class="form-control form-control-sm" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="r_postcode" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
-                                    <input type="text" name="r_postcode" id="r_postcode" class="form-control form-control-sm" readonly>
-                                </div>
-                                <div class="col">
-                                    <label for="shipping_type" class="col-form-label col-form-label-sm">ประเภทการส่ง</label>
-                                    <select name="shipping_type" id="shipping_type" class="form-control form-control-sm" disabled>
-                                        <option value="normal" selected>ส่งแบบธรรมดา</option>
-                                        <option value="cod">ส่งแบบธรรมดา แบบเก็บเงินปลายทาง</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กรัม)</label>
-                                    <input type="text" name="weight" id="weight" class="form-control form-control-sm" value="" readonly>
-                                </div>
-                                <div class="col">
-                                    <label for="price" class="col-form-label col-form-label-sm">ราคา</label>
-                                    <input type="text" name="price" id="price" class="form-control form-control-sm" value="" readonly>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                        <button type="button" class="btn btn-success">บันทึก</button>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

@@ -80,6 +80,7 @@ class MNG_Product{
 					'weight' => round($value['weight'], 2),
 					'price' => round($value['price'], 2),
 					'payment_type' => $value['payment_type'],
+					'shipper_name' => $value['shipper_name']
 				);
 				$items[] = $get_item;
 			}
@@ -108,6 +109,7 @@ class MNG_Product{
 		tbl_product.create_date,
 		tbl_product.weight,
 		tbl_product.price,
+		tbl_product.shipper_id,
 		tbl_product.payment_type,
 		tbl_transaction.transaction_id,
 		tbl_transaction.receiver_desc,
@@ -165,6 +167,8 @@ class MNG_Product{
 				'weight' => round($data['weight'], 2),
 				'price' => round($data['price'], 2),
 				'payment_type' => $data['payment_type'],
+				'shipper_name' => $data['shipper_name'],
+				'shipper_id' => $data['shipper_id']
 			);
 			$response = array(
 				'status' => 200,
@@ -298,7 +302,6 @@ class MNG_Product{
 		$arr = array();
 		$update_trans_arr = array();
 		$receiver_arr = array();
-
 		if(isset($param['product_id']) && $param['product_id'] !== ''){
 			$arr['id'] = $param['product_id'];
 		}
@@ -338,9 +341,11 @@ class MNG_Product{
 			$update_trans_arr['receiver_desc'] = $receiver_arr;
 
 			$update_receiver_result = $this->UpdateReceiverDesc($update_trans_arr);
+		}else{
+			$update_receiver_result['status'] = 'not_update';
 		}
 		
-		if($update_receiver_result['status'] == 200){
+		if($update_receiver_result['status'] == 200 || $update_receiver_result['status'] == 'not_update'){
 			$key = array("id");
 			$result = $this->db_connect->Update_db($arr, $key, "tbl_product");
 
@@ -357,7 +362,7 @@ class MNG_Product{
 		}else{
 			$response = array(
 				'status' => 500,
-				'err_msg' => 'Can not update receiver desc'
+				'err_msg' => 'receiver desc not update'
 			);
 		}
 		return $response;
