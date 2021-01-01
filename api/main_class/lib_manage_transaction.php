@@ -64,19 +64,35 @@ class MNG_Transaction{
 	public function UpdateTransaction($param = null){
 		$arr = array();
 		$receiver_arr = array();
+		$sender_arr = array();
 
 		$arr['product_id'] = $param['product_id'];
 
-		$receiver_arr['firstname'] = $param['receiver_desc']['firstname'];
-		$receiver_arr['lastname'] = $param['receiver_desc']['lastname'];
-		$receiver_arr['address'] = $param['receiver_desc']['address'];
-		$receiver_arr['district'] = $param['receiver_desc']['district'];
-		$receiver_arr['area'] = $param['receiver_desc']['area'];
-		$receiver_arr['province'] = $param['receiver_desc']['province'];
-		$receiver_arr['postal'] = $param['receiver_desc']['postal'];
-		$receiver_arr['phone_number'] = $param['receiver_desc']['phone_number'];
+		if(!empty($param['receiver_desc'])){
+			$receiver_arr['firstname'] = $param['receiver_desc']['firstname'];
+			$receiver_arr['lastname'] = $param['receiver_desc']['lastname'];
+			$receiver_arr['address'] = $param['receiver_desc']['address'];
+			$receiver_arr['district'] = $param['receiver_desc']['district'];
+			$receiver_arr['area'] = $param['receiver_desc']['area'];
+			$receiver_arr['province'] = $param['receiver_desc']['province'];
+			$receiver_arr['postal'] = $param['receiver_desc']['postal'];
+			$receiver_arr['phone_number'] = $param['receiver_desc']['phone_number'];
+			
+			$arr['receiver_desc'] = json_encode($receiver_arr, JSON_UNESCAPED_UNICODE);
+		}
 
-		$arr['receiver_desc'] = json_encode($receiver_arr, JSON_UNESCAPED_UNICODE);
+		if(!empty($param['sender_desc'])){
+			$sender_arr['firstname'] = $param['sender_desc']['firstname'];
+			$sender_arr['lastname'] = $param['sender_desc']['lastname'];
+			$sender_arr['address'] = $param['sender_desc']['address'];
+			$sender_arr['district'] = $param['sender_desc']['district'];
+			$sender_arr['area'] = $param['sender_desc']['area'];
+			$sender_arr['province'] = $param['sender_desc']['province'];
+			$sender_arr['postal'] = $param['sender_desc']['postal'];
+			$sender_arr['phone_number'] = $param['sender_desc']['phone_number'];
+
+			$arr['sender_desc'] = json_encode($sender_arr, JSON_UNESCAPED_UNICODE);
+		}
 
 		$key = array("product_id");
 		$result = $this->db_connect->Update_db($arr, $key, "tbl_transaction");

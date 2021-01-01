@@ -302,8 +302,13 @@ class MNG_Product{
 		$arr = array();
 		$update_trans_arr = array();
 		$receiver_arr = array();
+		$sender_arr = array();
+		$update_receiver = false;
+		$update_sender = false;
+		$warn_msg = '';
 		if(isset($param['product_id']) && $param['product_id'] !== ''){
 			$arr['id'] = $param['product_id'];
+			$update_trans_arr['product_id'] = $param['product_id'];
 		}
 
 		if(isset($param['shipper_id']) && $param['shipper_id'] !== ''){
@@ -314,10 +319,6 @@ class MNG_Product{
 			$arr['status'] = $param['status'];
 		}
 
-		if(isset($param['temp_shipping']) && $param['temp_shipping'] !== ''){
-			$arr['temp_shipping'] = $param['temp_shipping'];
-		}
-
 		if(isset($param['price']) && $param['price'] !== ''){
 			$arr['price'] = $param['price'];
 		}
@@ -326,7 +327,7 @@ class MNG_Product{
 			$arr['weight'] = $param['weight'];
 		}
 
-		if(!empty($param['receiver_firstname']) && !empty($param['receiver_lastname']) && !empty($param['receiver_address']) && !empty($param['receiver_district']) && !empty($param['phone_number']) && !empty($param['receiver_area']) && !empty($param['receiver_province']) && !empty($param['receiver_postal'])){
+		if(!empty($param['receiver_firstname']) && !empty($param['receiver_lastname']) && !empty($param['receiver_address']) && !empty($param['receiver_district']) && !empty($param['receiver_phone_number']) && !empty($param['receiver_area']) && !empty($param['receiver_province']) && !empty($param['receiver_postal'])){
 			
 			$receiver_arr['firstname'] = $param['receiver_firstname'];
 			$receiver_arr['lastname'] = $param['receiver_lastname'];
@@ -335,23 +336,45 @@ class MNG_Product{
 			$receiver_arr['area'] = $param['receiver_area'];
 			$receiver_arr['province'] = $param['receiver_province'];
 			$receiver_arr['postal'] = $param['receiver_postal'];
-			$receiver_arr['phone_number'] = $param['phone_number'];
+			$receiver_arr['phone_number'] = $param['receiver_phone_number'];
 
-			$update_trans_arr['product_id'] = $param['product_id'];
 			$update_trans_arr['receiver_desc'] = $receiver_arr;
-
-			$update_receiver_result = $this->UpdateReceiverDesc($update_trans_arr);
+			$update_receiver = true;
 		}else{
-			$update_receiver_result['status'] = 'not_update';
+			$update_trans_result['status'] = 'not_update';
+		}
+
+		if(!empty($param['sender_firstname']) && !empty($param['sender_lastname']) && !empty($param['sender_address']) && !empty($param['sender_district']) && !empty($param['sender_phone_number']) && !empty($param['sender_area']) && !empty($param['sender_province']) && !empty($param['sender_postal'])){
+			
+			$sender_arr['firstname'] = $param['sender_firstname'];
+			$sender_arr['lastname'] = $param['sender_lastname'];
+			$sender_arr['address'] = $param['sender_address'];
+			$sender_arr['district'] = $param['sender_district'];
+			$sender_arr['area'] = $param['sender_area'];
+			$sender_arr['province'] = $param['sender_province'];
+			$sender_arr['postal'] = $param['sender_postal'];
+			$sender_arr['phone_number'] = $param['sender_phone_number'];
+
+			$update_trans_arr['sender_desc'] = $sender_arr;
+			$update_sender = true;
+		}else{
+			$update_trans_result['status'] = 'not_update';
+		}
+
+		if($update_receiver || $update_sender){
+			$update_trans_result = $this->UpdateTransDesc($update_trans_arr);
+		}else{
+			$warn_msg = 'receiver and sender not update. If you want to update, plase fill all receiver or sender data.';
 		}
 		
-		if($update_receiver_result['status'] == 200 || $update_receiver_result['status'] == 'not_update'){
+		if($update_trans_result['status'] == 200 || $update_trans_result['status'] == 'not_update'){
 			$key = array("id");
 			$result = $this->db_connect->Update_db($arr, $key, "tbl_product");
 
 			if($result){
 				$response = array(
-					'status' => 200
+					'status' => 200,
+					'warn_msg' => $warn_msg
 				);
 			}else{
 				$response = array(
@@ -362,7 +385,7 @@ class MNG_Product{
 		}else{
 			$response = array(
 				'status' => 500,
-				'err_msg' => 'receiver desc not update'
+				'err_msg' => 'receiver and sender not update'
 			);
 		}
 		return $response;
@@ -406,7 +429,7 @@ class MNG_Product{
 		return $result_check_receiver_same;
 	}
 
-	private function UpdateReceiverDesc($params = null){
+	private function UpdateTransDesc($params = null){
 		require_once('lib_manage_transaction.php');
 		$mng_transaction = new MNG_Transaction();
 		$result = $mng_transaction->UpdateTransaction($params);
