@@ -135,7 +135,7 @@ function generateHtml(data){
 	
 	html += '<form action="" method="post">';
 	html += '                            <div class="row">';
-	html += '                                <div class="col-sm-6">';
+	html += '                                <div class="col">';
 	html += '                                    <label for="status" class="col-form-label col-form-label-sm">สถานะพัสดุ</label>';
 	html += '                                    <select name="status" id="status" class="form-control form-control-sm">';
 	html += '                                        <option value="waiting">พัสดุถูกนำเข้าสู่ระบบ</option>';
@@ -168,6 +168,7 @@ function generateHtml(data){
 	html += '                            <div class="row">';
 	html += '                                <div class="col signature">';
 	html += '                                    <label for="signature" class="col-form-label col-form-label-sm">ลายเซ็น</label>';
+	html += '                                    <button type="button" class="clear-sign" onclick="clearCanvas()">(ล้าง)</button>';
 	html += '                                    <div class="signature-box js-signature"></div>';
 	html += '                                </div>';
 	html += '                            </div>';
@@ -261,4 +262,9 @@ function validate(){
 	// }
 
 	return result;
+}
+
+function clearCanvas() {
+	$('.js-signature').jqSignature('clearCanvas');
+	$('.btn_save').attr('disabled', true);
 }

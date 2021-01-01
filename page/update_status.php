@@ -39,7 +39,15 @@ include("auth_onpage.php");
             border: 1px solid #a6a6a6;
             text-align: center;
         }
-
+        .clear-sign {
+            font-size: 12px;
+            color: #ed5f5f;
+            border: none;
+            background: none;
+        }
+        .clear-sign:hover {
+            color: #ff0000;
+        }
         canvas{
             width: calc(100% - 0vw) !important
         }

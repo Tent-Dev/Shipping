@@ -5,7 +5,7 @@ body {
 nav {
   display: flex;
   justify-content: space-between;
-  position: sticky;
+  position: fixed;
   z-index: 9;
   top: 0;
   width: 100%;
@@ -37,9 +37,9 @@ a.tel {
   width: 50%;
   position: absolute;
   z-index: 2;
-  top: 50%;
+  top: 25%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
 }
 .box .card {
   padding: 24px;
@@ -93,7 +93,7 @@ a.tel {
   top: 0;
   left: 16px;
   width: 10px;
-  height: 100%;
+  /* height: 100%; */
   border-left: 2px solid #CCC;
 }
 .StepProgress-item {
@@ -126,6 +126,9 @@ a.tel {
 .StepProgress-item.is-done::before {
   border-left: 2px solid #1560bd;
 }
+.StepProgress-item.is-done:last-child:before {
+  border: none;
+}
 .StepProgress-item.is-done::after {
   content: "✓";
   font-size: 10px;
@@ -135,7 +138,7 @@ a.tel {
   background-color: #1560bd;
 }
 .StepProgress-item.current::before {
-  border-left: 2px solid #1560bd;
+  border-left: 2px dashed #1560bd;
 }
 .StepProgress-item.current::after {
   padding-top: 1px;

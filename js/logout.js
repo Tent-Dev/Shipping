@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	$('#logout').click(function(event) {
+	$('.logout').click(function(event) {
 		event.preventDefault();
 		console.log('logout');
 		$.ajax({
