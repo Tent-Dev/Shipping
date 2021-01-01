@@ -39,7 +39,7 @@ $(document).ready(function() {
 						html +='	<strong>'+val.status+'</strong>';
 						html +='	<div>'+status_convert+'</div>';
 						if(val.note !== '' && val.note !== null){
-							html +='	<div>เนื่องจาก: '+val.note+'</div>';
+							html +='	<div>หมายเหตุ: '+val.note+'</div>';
 						}
 						html +='	<div class="time_stamp">เมื่อ: '+val.timestamp+'</div>';
 						html +='</li>';

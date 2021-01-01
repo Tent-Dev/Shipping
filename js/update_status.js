@@ -171,6 +171,14 @@ function generateHtml(data){
 	html += '                                    <div class="signature-box js-signature"></div>';
 	html += '                                </div>';
 	html += '                            </div>';
+	html += '                            <div class="row">';
+	html += '                                <div class="col note">';
+	html += '                                    <label for="note" class="col-form-label col-form-label-sm">หมายเหตุ</label>';
+	html += '                                    <div class="note_wrap">';
+	html += '								 	 	<textarea class="form-control form-control-sm" id="note"></textarea>';
+	html += '                                    </div>';
+	html += '                                </div>';
+	html += '                            </div>';
 	html += '                        </form>';
 	
 	return html;
@@ -179,12 +187,14 @@ function generateHtml(data){
 
 async function saveData(product_id){
 	var status = $('#status').val();
+	var note = $('#note').val();
 	var image_signature = '';
 	var data_ajax = new FormData();
 
 	data_ajax.append('command', 'create_transport');
 	data_ajax.append('product_id', product_id);
 	data_ajax.append('status', status);
+	data_ajax.append('note', note);
 
 	if(status == 'success'){
 		image_signature = $('.js-signature').jqSignature('getDataURL');
