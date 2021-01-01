@@ -557,12 +557,6 @@
 									"type": "text"
 								},
 								{
-									"key": "temp_shipping",
-									"value": "",
-									"type": "text",
-									"disabled": true
-								},
-								{
 									"key": "price",
 									"value": "40",
 									"description": "not null",
@@ -577,54 +571,98 @@
 									"disabled": true
 								},
 								{
-									"key": "status",
-									"value": "waiting",
+									"key": "receiver_firstname",
+									"value": "ชื่อคนรับ001",
 									"type": "text",
 									"disabled": true
 								},
 								{
-									"key": "receiver_firstname",
-									"value": "ทดสอบ",
-									"type": "text"
-								},
-								{
 									"key": "receiver_lastname",
-									"value": "อัพเดท",
-									"type": "text"
+									"value": "นามสกุลคนรับ001",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "receiver_address",
 									"value": "12/100",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "receiver_district",
 									"value": "หนองแขม",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "receiver_area",
 									"value": "หนองแขม",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "receiver_province",
 									"value": "กรุงเทพ",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "receiver_postal",
 									"value": "10160",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
-									"key": "phone_number",
-									"value": "0897505566",
-									"type": "text"
+									"key": "receiver_phone_number",
+									"value": "0891111111",
+									"type": "text",
+									"disabled": true
 								},
 								{
-									"key": "transaction_id",
-									"value": "160900731274ZM",
+									"key": "sender_firstname",
+									"value": "ชื่อคนส่ง001",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "sender_lastname",
+									"value": "นามสกุลคนส่ง001",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "sender_address",
+									"value": "999/1999 หมู่3",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "sender_district",
+									"value": "บางเขน",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "sender_area",
+									"value": "บางเขน",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "sender_province",
+									"value": "กรุงเทพมหนาคร",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "sender_postal",
+									"value": "10555",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "sender_phone_number",
+									"value": "0859484747",
 									"type": "text",
 									"disabled": true
 								}
