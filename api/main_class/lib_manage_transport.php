@@ -60,6 +60,7 @@ class MNG_Transport{
 	public function CreateTransport($param = null){
 
 		$arr_transport = array();
+		$file_name='';
 
 		if(isset($param['product_id']) && $param['product_id'] !== ''){
 			$arr_transport['product_id'] = $param['product_id'];
@@ -93,6 +94,9 @@ class MNG_Transport{
 			$arr_update_product_status = array();
 			$arr_update_product_status['id'] = $param['product_id'];
 			$arr_update_product_status['status'] = $param['status'];
+			if($file_name !== '' && $success){
+				$arr_update_product_status['image_signature'] = $file_name;
+			}
 			$key = array("id");
 			$result_update_product = $this->db_connect->Update_db($arr_update_product_status, $key, "tbl_product");
 			if($result_update_product){
