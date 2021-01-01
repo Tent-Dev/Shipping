@@ -32,7 +32,7 @@ function getDataFromDB(page = 1){
 						'<td>'+val.status+'</td>'+
 						'<td>'+
 						// '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
-						'<a href="edit_lists.php"><button class="btn_edit btn btn-sm btn-warning mr-2" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'"><i class="fas fa-edit"></i></button></a>'+
+						'<a href="edit_lists.php?product_id='+val.id+'"><button class="btn_edit btn btn-sm btn-warning mr-2" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'"><i class="fas fa-edit"></i></button></a>'+
 						'<button class="btn btn-sm btn-danger" data-id="'+val.id+'"><i class="fas fa-trash"></i></button>'+
 						'</td>'+
 					'</tr>';
