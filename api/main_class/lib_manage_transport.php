@@ -70,6 +70,22 @@ class MNG_Transport{
 		if(isset($param['note']) && $param['note'] !== ''){
 			$arr_transport['note'] = $param['note'];
 		}
+		if(isset($param['image_signature']) && $param['image_signature'] !== ''){
+			$img = str_replace('data:image/png;base64,', '', $param['image_signature']);
+			$img = str_replace(' ', '+', $img);
+			$data = base64_decode($img);
+			$file_name = uniqid().'_product'.$param['product_id'].'.png';
+			$file = '../../assets/signature/'.$file_name;
+			$success = file_put_contents($file, $data);
+
+			if(!$success){
+				$response = array(
+					'status' => 999,
+					'err_msg' => 'Cannot save signature'
+				);
+				exit();
+			}
+		}
 
 		$result_transport = $this->db_connect->Insert_db($arr_transport,"tbl_transport");
 
