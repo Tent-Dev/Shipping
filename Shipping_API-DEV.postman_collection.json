@@ -1170,6 +1170,50 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Sender",
+			"item": [
+				{
+					"name": "get_sender",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "get_sender",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "0911111111",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_sender.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_sender.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
