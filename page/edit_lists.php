@@ -99,15 +99,19 @@ include("auth_onpage.php");
                     <div id="form-section">
                         <p class="form-title-1">ข้อมูลผู้ทำรายการ</p>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <label for="tel" class="col-form-label col-form-label-sm">เบอร์โทรผู้ทำรายการ</label>
+                                <input type="text" name="tel" id="tel" class="form-control form-control-sm" value="">
+                            </div>
+                            <div class="col-md-3">
                                 <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
                                 <input type="text" name="id_card" id="id_card" class="form-control form-control-sm" value="">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="firstname" class="col-form-label col-form-label-sm">ชื่อผู้ทำรายการ</label>
                                 <input type="text" name="firstname" id="firstname" class="form-control form-control-sm" value="">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="lastname" class="col-form-label col-form-label-sm">นามสกุลผู้ทำรายการ</label>
                                 <input type="text" name="lastname" id="lastname" class="form-control form-control-sm" value="">
                             </div>

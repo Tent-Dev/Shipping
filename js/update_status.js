@@ -1,6 +1,8 @@
+var startdate = "", enddate = "", status = "", keyword = "", shipper = "";
+
 $(document).ready(function() {
 	getDataFromDB();
-	//getShipperList();
+	getShipperList();
 
 	$(document).on('click', '.btn_edit', function(event) {
 		var product_id = $(this).data('id');
@@ -32,15 +34,78 @@ $(document).ready(function() {
 		}
 	});
 
+	$('input#filter_date').daterangepicker({
+		autoUpdateInput: false,
+		locale: {
+			format: "YYYY-MM-DD",
+			cancelLabel: 'Clear'
+		}
+	});
+
+	$('input#filter_date').on('apply.daterangepicker', function(ev, picker) {
+		startdate = picker.startDate.format('YYYY-MM-DD');
+		enddate = picker.endDate.format('YYYY-MM-DD');
+		$(this).val(startdate + ' - ' + enddate);
+		status = $('#filter_status option:selected').val();
+		shipper = $('#filter_shipper option:selected').val();
+		filterAll(startdate, enddate, status, keyword, shipper);
+	});
+
+	$('#filter_date').on('cancel.daterangepicker', function(ev, picker) {
+		$('#filter_date').val('');
+		startdate = "";
+		enddate = "";
+		filterAll(startdate, enddate, status, keyword, shipper);
+	});
+
+	$('#search').keyup(delay(function(e){
+		status = $('#filter_status option:selected').val();
+		shipper = $('#filter_shipper option:selected').val();
+		keyword = $(this).val();
+		filterAll(startdate, enddate, status, keyword, shipper);
+	}, 300));
 });
 
-function getDataFromDB(page = 1){
+function filterStatus(value) {
+	$('#show_data_from_db').empty();
+	status = value;
+	getDataFromDB(1, startdate, enddate, status, keyword, shipper);
+}
+
+function filterShipper(value) {
+	$('#show_data_from_db').empty();
+	shipper = value;
+	getDataFromDB(1, startdate, enddate, status, keyword, shipper);
+}
+
+function filterAll(startdate, enddate, status, keyword, shipper) {
+	$('#show_data_from_db').empty();
+	getDataFromDB(1, startdate, enddate, status, keyword, shipper);
+}
+
+function delay(callback, ms) {
+	var timer = 0;
+	return function() {
+		var context = this, args = arguments;
+		clearTimeout(timer);
+		timer = setTimeout(function () {
+		callback.apply(context, args);
+		}, ms || 0);
+	};
+}
+
+function getDataFromDB(page = 1, startdate, enddate, status, keyword, shipper){
 	$.ajax({
 		url: '../api/function/manage_product.php',
 		method: 'post',
 		data: {
 			command: 'get_product',
-			page: page
+			page: page,
+            startdate: startdate,
+            enddate: enddate,
+            status: status,
+			keyword: keyword,
+			shipper: shipper
 		},
 		success: function(data) {
 			var data = JSON.parse(data)
@@ -185,6 +250,28 @@ function generateHtml(data){
 	return html;
 }
 
+function getShipperList(){
+	$.ajax({
+		url: '../api/function/manage_account.php',
+		method: 'post',
+		data: {
+			command: 'get_shipper'
+		},
+		success: function(data) {
+			var data = JSON.parse(data)
+			console.log("result: ",data);
+			if(data.status == 200){
+				SHIPPER_LIST = data.data;
+				SHIPPER_LIST.forEach(element => {
+					$('#filter_shipper').append('<option value="'+element.id+'">'+element.firstname+' '+element.lastname+'</option>');
+				});
+			}
+		},
+		error: function() {
+			console.log("error");
+		}
+	});
+}
 
 async function saveData(product_id){
 	var status = $('#status').val();

@@ -30,19 +30,22 @@ class MNG_Product{
 		tbl_transaction.transaction_id,
 		tbl_transaction.receiver_desc,
 		tbl_transaction.sender_desc,
-		CONCAT(tbl_member.firstname,' ', tbl_member.lastname) as shipper_name
+		CONCAT(tbl_member.firstname,' ', tbl_member.lastname) as shipper_name,
+		CONCAT(tbl_receiver.firstname,' ', tbl_receiver.lastname) as receiver_name
 		FROM tbl_product
 		JOIN tbl_transaction
 		ON tbl_product.id = tbl_transaction.product_id
 		LEFT JOIN tbl_member
 		ON tbl_product.shipper_id = tbl_member.id
+		LEFT JOIN tbl_receiver
+		ON tbl_transaction.customer_id = tbl_receiver.id
 		";
 
 		$sql_limit = " ORDER BY tbl_product.id DESC LIMIT ".$start_page." , ".$per_page."";
 
 		$sql_where = "";
 
-		if(isset($param['status'])){
+		if(isset($param['status']) && $param['status'] != ""){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
 			$sql_where .= " tbl_product.status = '".$param['status']."' ";
 		}
@@ -55,6 +58,26 @@ class MNG_Product{
 		if(isset($param['product_id'])){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
 			$sql_where .= " tbl_product.id = '".$param['product_id']."' ";
+		}
+
+		if(isset($param['startdate']) && $param['startdate'] != "" && isset($param['enddate']) && $param['enddate'] != ""){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			if($param['startdate'] === $param['enddate']) {
+				$sql_where .= " tbl_product.create_date LIKE '".$param['startdate']."%' ";
+			}
+			else {
+				$sql_where .= " tbl_product.create_date BETWEEN '".$param['startdate']."' AND '".$param['enddate']."' ";
+			}
+		}
+
+		if(isset($param['keyword']) && $param['keyword'] != ""){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " CONCAT(tbl_product.tracking_code, tbl_receiver.firstname, tbl_receiver.lastname) LIKE '%".$param['keyword']."%' ";
+		}
+
+		if(isset($param['shipper']) && $param['shipper'] != ""){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.shipper_id = '".$param['shipper']."' ";
 		}
 
 		$sql_query = $sql . $sql_where. $sql_limit;
@@ -80,7 +103,8 @@ class MNG_Product{
 					'weight' => round($value['weight'], 2),
 					'price' => round($value['price'], 2),
 					'payment_type' => $value['payment_type'],
-					'shipper_name' => $value['shipper_name']
+					'shipper_name' => $value['shipper_name'],
+					'receiver_name' => $value['receiver_name']
 				);
 				$items[] = $get_item;
 			}

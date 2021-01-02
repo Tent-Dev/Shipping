@@ -43,3 +43,25 @@
   justify-content: center;
   align-items: center;
 }
+
+.filter-title {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.filter {
+  padding: 1.5px 10px;
+  font-size: 14px;
+  color: #4e4e4e;
+  border-radius: 6px;
+  border: 1px solid #a8a8a8;
+  background-color: #ffffff;
+}
+
+input.filter::placeholder {
+  color: #9c9c9c !important;
+}
+
+.datepicker {
+  width: 200px;
+}

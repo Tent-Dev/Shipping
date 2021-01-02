@@ -1,3 +1,5 @@
+var startdate = "", enddate = "", keyword = "";
+
 $(document).ready(function() {
 	getDataFromDB();
 
@@ -5,16 +7,70 @@ $(document).ready(function() {
 		var product_id = $(this).data('id');
 		var tracking_code = $(this).data('trackingcode');
 		getDescription(product_id, tracking_code);
-	});
+    });
+    
+    $('input#filter_date').daterangepicker({
+        autoUpdateInput: false,
+        locale: {
+            format: "YYYY-MM-DD",
+            cancelLabel: 'Clear'
+        }
+    });
+
+    $('input#filter_date').on('apply.daterangepicker', function(ev, picker) {
+        startdate = picker.startDate.format('YYYY-MM-DD');
+        enddate = picker.endDate.format('YYYY-MM-DD');
+        $(this).val(startdate + ' - ' + enddate);
+        var status = $('#filter_status option:selected').val();
+        filterAll(startdate, enddate, status, keyword);
+    });
+
+    $('#filter_date').on('cancel.daterangepicker', function(ev, picker) {
+        $('#filter_date').val('');
+        startdate = "";
+        enddate = "";
+        filterAll(startdate, enddate, status, keyword);
+    });
+
+    $('#search').keyup(delay(function(e){
+        var status = $('#filter_status option:selected').val();
+        keyword = $(this).val();
+        filterAll(startdate, enddate, status, keyword);
+    }, 300));
 });
 
-function getDataFromDB(page = 1){
+function filterStatus(status) {
+    $('#show_data_from_db').empty();
+    getDataFromDB(1, startdate, enddate, status, keyword);
+}
+
+function filterAll(startdate, enddate, status, keyword) {
+    $('#show_data_from_db').empty();
+    getDataFromDB(1, startdate, enddate, status, keyword);
+}
+
+function delay(callback, ms) {
+    var timer = 0;
+    return function() {
+        var context = this, args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+        callback.apply(context, args);
+        }, ms || 0);
+    };
+}
+
+function getDataFromDB(page = 1, startdate, enddate, status, keyword){
 	$.ajax({
 		url: '../api/function/manage_product.php',
 		method: 'post',
 		data: {
 			command: 'get_product',
-			page: page
+            page: page,
+            startdate: startdate,
+            enddate: enddate,
+            status: status,
+            keyword: keyword
 		},
 		success: function(data) {
 			var data = JSON.parse(data)
@@ -28,7 +84,7 @@ function getDataFromDB(page = 1){
 					'<tr>'+
 						'<td>'+val.create_date+'</td>'+
 						'<td>'+val.tracking_code+'</td>'+
-						'<td>name</td>'+
+						'<td>'+val.receiver_name+'</td>'+
 						'<td>'+val.status+'</td>'+
 						'<td>'+
 						// '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
