@@ -210,6 +210,7 @@ class MNG_Product{
 
 	public function CreateProduct($param = null){
 		$receiver_save_phone = '';
+		$sender_save_phone = '';
 		$dumpmy_data = '{"firstname":"ชื่อคนทำรายการ","lastname":"นามสกุลคนทำรายการ","id_card":"1102002841486","item":[{"weight":1.5,"price":30,"shipping_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ1","lastname":"นามสกุลคนรับ1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}},{"weight":1.5,"price":30,"shipping_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ2","lastname":"นามสกุลคนรับ2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง2","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}}]}';
 
 		$json_en = json_decode($param['create_data'], true);
@@ -280,6 +281,21 @@ class MNG_Product{
 								$result_receiver = $this->db_connect->Insert_db($arr_receiver,"tbl_receiver");
 							}
 							$receiver_save_phone = $value['receiver_desc']['phone_number'];
+						}
+
+						if($sender_save_phone !== $value['sender_desc']['phone_number']){
+							$check_sender_same = $this->CheckSenderSame($value['sender_desc']['phone_number'], $value['sender_desc']);
+							if(!$check_sender_same){
+								$arr_sender = array( 
+									"phone_number" => $value['sender_desc']['phone_number'],
+									"firstname" => $value['sender_desc']['firstname'],
+									"lastname" => $value['sender_desc']['lastname'],
+									"address" =>  json_encode($value['sender_desc'], JSON_UNESCAPED_UNICODE),
+								);
+
+								$result_sender = $this->db_connect->Insert_db($arr_sender,"tbl_sender");
+							}
+							$sender_save_phone = $value['sender_desc']['phone_number'];
 						}
 						
 						$arr_customer = array( 
@@ -451,6 +467,32 @@ class MNG_Product{
 			$result_check_receiver_same = true;
 		}
 		return $result_check_receiver_same;
+	}
+
+	private function CheckSenderSame($phone_number = null, $address = null){
+		require_once("lib_manage_sender.php");
+		$mng_sender = new MNG_Sender();
+		$result_check_sender_same = false;
+
+		if($phone_number !== null && $phone_number !== ''){
+			$arr_send = array('phone_number' => $phone_number);
+			$get_sender = $mng_sender->GetSender($arr_send);
+
+			if($get_sender['status'] == 200){
+				foreach ($get_sender['data']['items'] as $value) {
+					$address_database = json_encode((array)$value['address']);
+					$address_input = json_encode($address);
+
+					if($address_database == $address_input){
+						$result_check_sender_same = true;
+						break;
+					}
+				}
+			}
+		}else{
+			$result_check_sender_same = true;
+		}
+		return $result_check_sender_same;
 	}
 
 	private function UpdateTransDesc($params = null){
