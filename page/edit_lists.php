@@ -143,12 +143,12 @@ include("auth_onpage.php");
                                     <input type="text" name="s_address[]" id="s_address" class="form-control form-control-sm" value="">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="s_district" class="col-form-label col-form-label-sm">เขต</label>
-                                    <input type="text" name="s_district[]" id="s_district" class="form-control form-control-sm" value="">
+                                    <label for="s_area" class="col-form-label col-form-label-sm">เขต</label>
+                                    <input type="text" name="s_area[]" id="s_area" class="form-control form-control-sm" value="">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="s_area" class="col-form-label col-form-label-sm">แขวง</label>
-                                    <input type="text" name="s_area[]" id="s_area" class="form-control form-control-sm" value="">
+                                    <label for="s_district" class="col-form-label col-form-label-sm">แขวง</label>
+                                    <input type="text" name="s_district[]" id="s_district" class="form-control form-control-sm" value="">
                                 </div>
                             </div>
                             <div class="row">
@@ -191,12 +191,12 @@ include("auth_onpage.php");
                                     <input type="text" name="r_address[]" id="r_address" class="form-control form-control-sm" value="">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="r_district" class="col-form-label col-form-label-sm">เขต</label>
-                                    <input type="text" name="r_district[]" id="r_district" class="form-control form-control-sm" value="">
+                                    <label for="r_area" class="col-form-label col-form-label-sm">เขต</label>
+                                    <input type="text" name="r_area[]" id="r_area" class="form-control form-control-sm" value="">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="r_area" class="col-form-label col-form-label-sm">แขวง</label>
-                                    <input type="text" name="r_area[]" id="r_area" class="form-control form-control-sm" value="">
+                                    <label for="r_district" class="col-form-label col-form-label-sm">แขวง</label>
+                                    <input type="text" name="r_district[]" id="r_district" class="form-control form-control-sm" value="">
                                 </div>
                             </div>
                             <div class="row">
@@ -231,8 +231,10 @@ include("auth_onpage.php");
                     
                     <div class="row mt-5">
                         <div class="col-12 text-center">
-                            <a href="" class="btn btn-sm btn-success">บันทึก <i class="far fa-save"></i></a>
-                            <a href="" class="btn btn-sm btn-danger">ยกเลิก <i class="fas fa-times"></i></a>
+                            <button type="button" class="btn btn-sm btn-success btn_save">บันทึก <i class="far fa-save"></i></button>
+                            <button type="button" class="btn btn-sm btn-danger btn_cancel">ยกเลิก <i class="fas fa-times"></i></button>
+                            <!-- <a href="" class="btn btn-sm btn-success">บันทึก <i class="far fa-save"></i></a> -->
+                            <!-- <a href="" class="btn btn-sm btn-danger">ยกเลิก <i class="fas fa-times"></i></a> -->
                         </div>
                     </div>
                 </form>
