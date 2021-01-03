@@ -78,8 +78,9 @@ function getDescription(){
 
 function updateAccount(){
 	var id_card = $("#id_card").val();
-	// var id_card = $("#firstname").val();
-	// var id_card = $("#lastname").val();
+	// var c_fname = $("#firstname").val();
+	// var c_lname = $("#lastname").val();
+	// var c_phone_number = $("#customer_phone_number").val();
 
 	var sender_phone = $("#sender_phone").val();
 	var s_fname = $("#s_fname").val();
@@ -131,6 +132,7 @@ function updateAccount(){
 				sender_province: s_province,
 				sender_postal: s_postcode,
 				sender_phone_number: sender_phone,
+				payment_type: shipping_type
 
 			},
 			success: function(data) {
@@ -164,6 +166,7 @@ function validateEdit(){
     var id_card = $("#id_card").val();
 	var firstname = $("#firstname").val();
 	var lastname = $("#lastname").val();
+	var c_phone_number = $("#customer_phone_number").val();
 
 	var sender_phone = $("#sender_phone").val();
 	var s_fname = $("#s_fname").val();
@@ -189,7 +192,7 @@ function validateEdit(){
 
     if(id_card == '' ||  firstname == '' || lastname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
     s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
-    r_postcode == '' || weight == '' || price == '' || shipping_type == '' ){
+    r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' ){
         result = false;
 
         if(id_card == ''){
@@ -214,6 +217,14 @@ function validateEdit(){
         }else{
             $('#lastname').removeClass('custom_has_err');
             $("#lastname").attr("placeholder", "");
+        }
+
+        if(c_phone_number == ''){
+            $('#customer_phone_number').addClass('custom_has_err');
+            $("#customer_phone_number").attr("placeholder", "โปรดกรอกเบอร์โทรผู้ทำรายการ");
+        }else{
+            $('#customer_phone_number').removeClass('custom_has_err');
+            $("#customer_phone_number").attr("placeholder", "");
         }
 
         if(sender_phone == ''){

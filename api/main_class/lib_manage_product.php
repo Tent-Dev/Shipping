@@ -371,6 +371,10 @@ class MNG_Product{
 			$arr['weight'] = $param['weight'];
 		}
 
+		if(isset($param['payment_type']) && $param['payment_type'] !== ''){
+			$arr['payment_type'] = $param['payment_type'];
+		}
+
 		if(!empty($param['receiver_firstname']) && !empty($param['receiver_lastname']) && !empty($param['receiver_address']) && !empty($param['receiver_district']) && !empty($param['receiver_phone_number']) && !empty($param['receiver_area']) && !empty($param['receiver_province']) && !empty($param['receiver_postal'])){
 			
 			$receiver_arr['firstname'] = $param['receiver_firstname'];
