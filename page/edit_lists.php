@@ -73,6 +73,7 @@ include("auth_onpage.php");
         .suggest-detail {
             padding: 8px 16px;
             border-bottom: 1px solid #000000;
+            cursor: pointer;
         }
         .suggest-detail p {
             margin-bottom: 0;
@@ -101,7 +102,7 @@ include("auth_onpage.php");
                         <div class="row">
                             <div class="col-md-3">
                                 <label for="customer_phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้ทำรายการ</label>
-                                <input type="text" name="customer_phone_number" id="customer_phone_number" class="form-control form-control-sm" value="">
+                                <input type="text" name="customer_phone_number" id="customer_phone_number" class="form-control form-control-sm" value="" autocomplete="off">
                             </div>
                             <div class="col-md-3">
                                 <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
@@ -122,13 +123,13 @@ include("auth_onpage.php");
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="sender_phone" class="col-form-label col-form-label-sm">เบอร์โทรผู้ส่ง</label>
-                                    <input type="text" name="sender_phone[]" id="sender_phone" class="form-control form-control-sm form-suggest" value="">
-                                    <div class="box-suggest">
+                                    <input type="text" name="sender_phone[]" id="sender_phone" class="form-control form-control-sm form-suggest" value="" autocomplete="off">
+                                    <div class="box-suggest sender-suggest">
                                         <div class="suggest-detail">
-                                            <p>เบอร์โทรผู้ส่ง</p>
+                                            <!-- <p>เบอร์โทรผู้ส่ง</p>
                                             <p>ชื่อ</p>
                                             <p>ที่อยู่</p>
-                                            <p>เขต แขวง จังหวัด รหัสไปรษณีย์</p>
+                                            <p>เขต แขวง จังหวัด รหัสไปรษณีย์</p> -->
                                         </div>
                                     </div>
                                 </div>
@@ -170,13 +171,13 @@ include("auth_onpage.php");
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>
-                                    <input type="text" name="phone_number[]" id="phone_number" class="form-control form-control-sm form-suggest" value="">
-                                    <div class="box-suggest">
+                                    <input type="text" name="phone_number[]" id="phone_number" class="form-control form-control-sm form-suggest" value="" autocomplete="off">
+                                    <div class="box-suggest receiver-suggest">
                                         <div class="suggest-detail">
-                                            <p>เบอร์โทรผู้ส่ง</p>
+                                            <!-- <p>เบอร์โทรผู้ส่ง</p>
                                             <p>ชื่อ</p>
                                             <p>ที่อยู่</p>
-                                            <p>เขต แขวง จังหวัด รหัสไปรษณีย์</p>
+                                            <p>เขต แขวง จังหวัด รหัสไปรษณีย์</p> -->
                                         </div>
                                     </div>
                                 </div>

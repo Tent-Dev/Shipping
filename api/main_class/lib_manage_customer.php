@@ -2,17 +2,17 @@
 // ini_set('display_errors',1);
 // error_reporting(E_ALL);
 
-class MNG_Sender{
+class MNG_Customer{
 
 	public function __construct(){
 		$this->db_connect = new Main_db;
 		$this->db_connect->Connect_db();
 	}
 
-	public function GetSender($param = null){
+	public function GetCustomer($param = null){
 		$sql = "
-		SELECT phone_number, firstname, lastname, address , id
-		FROM tbl_sender
+		SELECT phone_number, firstname, lastname, id_card, id
+		FROM tbl_customer
 		WHERE phone_number = '".$param['phone_number']."'";
 
 		$data = $this->db_connect->Select_db($sql);
@@ -25,7 +25,7 @@ class MNG_Sender{
 					'firstname' =>  $value['firstname'],
 					'lastname' => $value['lastname'],
 					'phone_number' => $value['phone_number'],
-					'address' => json_decode($value['address'])
+					'id_card' => $value['id_card']
 				);
 				$items['items'][] = $get_item;
 			}
@@ -38,7 +38,7 @@ class MNG_Sender{
 		else{
 			$response = array(
 				'status' => 404,
-				'err_msg' => 'Sender not found'
+				'err_msg' => 'Customer not found'
 			);
 		}
 		return $response;

@@ -11,7 +11,7 @@ class MNG_Receiver{
 
 	public function GetReceiver($param = null){
 		$sql = "
-		SELECT phone_number, firstname, lastname, address 
+		SELECT phone_number, firstname, lastname, address, id
 		FROM tbl_receiver
 		WHERE phone_number = '".$param['phone_number']."'";
 

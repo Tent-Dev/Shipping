@@ -665,6 +665,12 @@
 									"value": "0859484747",
 									"type": "text",
 									"disabled": true
+								},
+								{
+									"key": "payment_type",
+									"value": "normal",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
@@ -1208,6 +1214,50 @@
 								"api",
 								"function",
 								"manage_sender.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "get_customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "get_customer",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "0819584848",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_customer.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_customer.php"
 							]
 						}
 					},
