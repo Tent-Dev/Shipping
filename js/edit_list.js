@@ -510,7 +510,7 @@ function getHistory(type = null){
 						html += '<div class="suggest-detail '+sub_class_name+'" data-index='+index+'>';
 						html +=    '<p>'+val.phone_number+'</p>';
 						html +=    '<p>'+val.firstname+' '+val.lastname+'</p>';
-						html +=    '<p>เลขบัตรประขาขน '+val.id_card+'</p>';
+						html +=    '<p>เลขบัตรประชาขน '+val.id_card+'</p>';
 						html += '</div>';
 					});
 				}else{

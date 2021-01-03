@@ -19,6 +19,7 @@ include("auth_onpage.php");
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/edit_list.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/logout.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 
     <!-- import My Script -->
 
