@@ -30,6 +30,7 @@ function getDescription(){
 				$("#id_card").val(data.data.customer_desc.id_card);
 				$("#firstname").val(data.data.customer_desc.firstname);
 				$("#lastname").val(data.data.customer_desc.lastname);
+				$("#customer_phone_number").val(data.data.customer_desc.customer_phone_number);
 
 				$("#sender_phone").val(data.data.sender_desc.phone_number);
 				$("#s_fname").val(data.data.sender_desc.firstname);

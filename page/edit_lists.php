@@ -100,8 +100,8 @@ include("auth_onpage.php");
                         <p class="form-title-1">ข้อมูลผู้ทำรายการ</p>
                         <div class="row">
                             <div class="col-md-3">
-                                <label for="tel" class="col-form-label col-form-label-sm">เบอร์โทรผู้ทำรายการ</label>
-                                <input type="text" name="tel" id="tel" class="form-control form-control-sm" value="">
+                                <label for="customer_phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้ทำรายการ</label>
+                                <input type="text" name="customer_phone_number" id="customer_phone_number" class="form-control form-control-sm" value="">
                             </div>
                             <div class="col-md-3">
                                 <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>

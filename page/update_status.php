@@ -90,18 +90,11 @@ include("auth_onpage.php");
                     </div>
                     <div class="overflow-auto">
                         <table class="table table-sm table-hover">
-                            <thead>
-                                <tr>
-                                    <th>วันที่นำเข้าพัสดุ</th>
-                                    <th>เลขพัสดุ</th>
-                                    <th>ชื่อผู้รับ</th>
-                                    <th>สถานะ</th>
-                                    <th>คนนำจ่าย</th>
-                                    <th width="100px">แก้ไขสถานะ</th>
-                                </tr>
-                            </thead>
-                            <tbody id="show_data_from_db">
-                            </tbody>
+                            <div class="table_wrap_loading_box">
+                                <div>
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </div>
                         </table>
                     </div>
                 </div>

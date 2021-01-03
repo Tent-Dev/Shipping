@@ -55,7 +55,7 @@ function delay(callback, ms) {
         var context = this, args = arguments;
         clearTimeout(timer);
         timer = setTimeout(function () {
-        callback.apply(context, args);
+            callback.apply(context, args);
         }, ms || 0);
     };
 }
@@ -63,23 +63,23 @@ function delay(callback, ms) {
 function getDataFromDB(page = 1, startdate, enddate, status, keyword){
     $('.table_wrap_loading_box').show();
     $('.table').html('');
-	$.ajax({
-		url: '../api/function/manage_product.php',
-		method: 'post',
-		data: {
-			command: 'get_product',
-            page: page,
-            startdate: startdate,
-            enddate: enddate,
-            status: status,
-            keyword: keyword
-		},
-		success: function(data) {
-			var data = JSON.parse(data)
-			console.log("result: ",data);
+    $.ajax({
+      url: '../api/function/manage_product.php',
+      method: 'post',
+      data: {
+         command: 'get_product',
+         page: page,
+         startdate: startdate,
+         enddate: enddate,
+         status: status,
+         keyword: keyword
+     },
+     success: function(data) {
+         var data = JSON.parse(data)
+         console.log("result: ",data);
 
-			if(data.status == 200){
-				var header = '';
+         if(data.status == 200){
+            var header = '';
             var html = "";
             if(data.data.data.length > 0){
                 header +='<thead>';
@@ -108,8 +108,8 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword){
                         '</td>'+
                         '</tr>';
                     });
-				pagination(page,data.data.total_pages);
-			}else{
+                pagination(page,data.data.total_pages);
+            }else{
                 header +='<div class="table_wrap_empty">';
                 header +='  <div class="text-center">';
                 header +='      <div>ไม่พบข้อมูล</div>';
@@ -125,18 +125,18 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword){
         $('#show_data_from_db').append(html);
     },
     error: function() {
-     console.log("error");
-     var header = '';
-     header +='<div class="table_wrap_empty">';
-     header +='  <div class="text-center">';
-     header +='      <div>ไม่สามารถเชื่อมต่อฐานข้อมูลได้</div>';
-     header +='      <div><i class="fas fa-times"></i></div>';
-     header +='  </div>';
-     header +='</div>';
-     $('.table').html(header);
-     $('.table_wrap_loading_box').hide();
-     $('.table').show();
- }
+       console.log("error");
+       var header = '';
+       header +='<div class="table_wrap_empty">';
+       header +='  <div class="text-center">';
+       header +='      <div>ไม่สามารถเชื่อมต่อฐานข้อมูลได้</div>';
+       header +='      <div><i class="fas fa-times"></i></div>';
+       header +='  </div>';
+       header +='</div>';
+       $('.table').html(header);
+       $('.table_wrap_loading_box').hide();
+       $('.table').show();
+   }
 });
 };
 
@@ -165,24 +165,24 @@ function getDescription(product_id, tracking_code){
       url: '../api/function/manage_product.php',
       method: 'post',
       data: {
-         command: 'get_product_desc',
-         product_id: product_id
-     },
-     success: function(data) {
-         var data = JSON.parse(data)
-         console.log("result: ",data);
+       command: 'get_product_desc',
+       product_id: product_id
+   },
+   success: function(data) {
+       var data = JSON.parse(data)
+       console.log("result: ",data);
 
-         if(data.status == 200){
-            var get_body_html = generateHtml(data);
-            $('.modal-body').html(get_body_html);
+       if(data.status == 200){
+        var get_body_html = generateHtml(data);
+        $('.modal-body').html(get_body_html);
 
-            $("#shipping_type").val(data.data.payment_type).change();
-        }
+        $("#shipping_type").val(data.data.payment_type).change();
+    }
 
-    },
-    error: function() {
-     console.log("error");
- }
+},
+error: function() {
+   console.log("error");
+}
 });
 }
 

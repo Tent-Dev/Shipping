@@ -89,21 +89,23 @@ function delay(callback, ms) {
 		var context = this, args = arguments;
 		clearTimeout(timer);
 		timer = setTimeout(function () {
-		callback.apply(context, args);
+			callback.apply(context, args);
 		}, ms || 0);
 	};
 }
 
 function getDataFromDB(page = 1, startdate, enddate, status, keyword, shipper){
+	$('.table_wrap_loading_box').show();
+	$('.table').html('');
 	$.ajax({
 		url: '../api/function/manage_product.php',
 		method: 'post',
 		data: {
 			command: 'get_product',
 			page: page,
-            startdate: startdate,
-            enddate: enddate,
-            status: status,
+			startdate: startdate,
+			enddate: enddate,
+			status: status,
 			keyword: keyword,
 			shipper: shipper
 		},
@@ -112,23 +114,48 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword, shipper){
 			console.log("result: ",data);
 
 			if(data.status == 200){
+				var header = '';
 				var html = "";
-				$.each(data.data.data, function(index, val) {
-					html +=
-					'<tr class="_rowid-'+val.id+'">'+
-					'<td>'+val.create_date+'</td>'+
-					'<td>'+val.tracking_code+'</td>'+
-					'<td>'+val.receiver_desc.firstname+'</td>'+
-					'<td class="_td-status">'+val.status+'</td>'+
-					'<td>'+val.shipper_name+'</td>'+
-					'<td align="center">'+
-					'<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
-					'</td>'+
-					'</tr>';
-				});
-				pagination(page,data.data.total_pages);
+				if(data.data.data.length > 0){
+					header +='<thead>';
+					header +=    '<tr>';
+					header +=        '<th>วันที่นำเข้าพัสดุ</th>';
+					header +=        '<th>เลขพัสดุ</th>';
+					header +=        '<th>ชื่อผู้รับ</th>';
+					header +=        '<th>สถานะ</th>';
+					header +=        '<th>คนนำจ่าย</th>';
+					header +=        '<th width="100px">แก้ไขสถานะ</th>';
+					header +=    '</tr>';
+					header +='</thead>';
+					header +='<tbody id="show_data_from_db">';
+					header +='</tbody>';
+					$('.table').html(header);
+					$.each(data.data.data, function(index, val) {
+						html +=
+						'<tr class="_rowid-'+val.id+'">'+
+						'<td>'+val.create_date+'</td>'+
+						'<td>'+val.tracking_code+'</td>'+
+						'<td>'+val.receiver_desc.firstname+'</td>'+
+						'<td class="_td-status">'+val.status+'</td>'+
+						'<td>'+val.shipper_name+'</td>'+
+						'<td align="center">'+
+						'<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
+						'</td>'+
+						'</tr>';
+					});
+					pagination(page,data.data.total_pages);
+				}else{
+					header +='<div class="table_wrap_empty">';
+					header +='  <div class="text-center">';
+					header +='      <div>ไม่พบข้อมูล</div>';
+					header +='      <div><i class="far fa-clipboard"></i></div>';
+					header +='  </div>';
+					header +='</div>';
+					$('.table').html(header);
+				}
 			}
-
+			$('.table_wrap_loading_box').hide();
+			$('.table').show();
 			$('#show_data_from_db').append(html);
 		},
 		error: function() {
@@ -296,8 +323,8 @@ async function saveData(product_id){
 			url: '../api/function/manage_transport.php',
 			method: 'post',
 			contentType:false,
-		    processData:false,
-		    cache:false,
+			processData:false,
+			cache:false,
 			data: data_ajax,
 			success: function(data) {
 				var data = JSON.parse(data)

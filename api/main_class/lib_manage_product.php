@@ -141,6 +141,7 @@ class MNG_Product{
 		tbl_customer.firstname,
 		tbl_customer.lastname,
 		tbl_customer.id_card,
+		tbl_customer.phone_number as customer_phone_number,
 		CONCAT(tbl_member.firstname,' ', tbl_member.lastname) as shipper_name
 		FROM tbl_product
 		JOIN tbl_transaction
@@ -177,6 +178,7 @@ class MNG_Product{
 				'firstname' => $data['firstname'],
 				'lastname' => $data['lastname'],
 				'id_card' => $data['id_card'],
+				'customer_phone_number' => $data['customer_phone_number']
 			);
 
 			$get_item = array(
@@ -211,7 +213,7 @@ class MNG_Product{
 	public function CreateProduct($param = null){
 		$receiver_save_phone = '';
 		$sender_save_phone = '';
-		$dumpmy_data = '{"firstname":"ชื่อคนทำรายการ","lastname":"นามสกุลคนทำรายการ","id_card":"1102002841486","item":[{"weight":1.5,"price":30,"shipping_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ1","lastname":"นามสกุลคนรับ1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}},{"weight":1.5,"price":30,"shipping_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ2","lastname":"นามสกุลคนรับ2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง2","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}}]}';
+		$dumpmy_data = '{"firstname":"ชื่อคนทำรายการ","lastname":"นามสกุลคนทำรายการ","id_card":"1102002841486","customer_phone_number":"0819584848","item":[{"weight":1.5,"price":30,"shipping_type":"normal","payment_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ1","lastname":"นามสกุลคนรับ1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}},{"weight":1.5,"price":30,"shipping_type":"normal","payment_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ2","lastname":"นามสกุลคนรับ2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง2","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}}]}';
 
 		$json_en = json_decode($param['create_data'], true);
 
@@ -221,15 +223,16 @@ class MNG_Product{
 		$arr_customer = array( 
 			"firstname" => $json_en['firstname'],
 			"lastname" => $json_en['lastname'],
-			"id_card" => $json_en['id_card']
+			"id_card" => $json_en['id_card'],
+			"phone_number" => $json_en['customer_phone_number']
 		);
 		$sql = 
-		"SELECT * FROM tbl_customer WHERE id_card = '".$json_en['id_card']."'";
+		"SELECT * FROM tbl_customer WHERE phone_number = '".$json_en['customer_phone_number']."'";
 
-		$check_idcard = $this->db_connect->Select_db_one($sql);
+		$check_phone = $this->db_connect->Select_db_one($sql);
 
-		if($check_idcard){
-			$result_customer = array('status' => true, 'last_id' => $check_idcard['id'] );
+		if($check_phone){
+			$result_customer = array('status' => true, 'last_id' => $check_phone['id'] );
 		}else{
 			$result_customer = $this->db_connect->Insert_db($arr_customer,"tbl_customer");
 		}
@@ -244,6 +247,7 @@ class MNG_Product{
 				$tracking_code = $this->GenerateTrackingCode();
 				$arr_customer = array( 
 					"shipping_type" => $value['shipping_type'],
+					"payment_type" => $value['payment_type'],
 					"weight" => $value['weight'],
 					"price" => $value['price'],
 					"tracking_code" => $tracking_code,

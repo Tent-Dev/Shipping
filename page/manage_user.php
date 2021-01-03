@@ -42,17 +42,12 @@ include("auth_onpage.php");
                         </div>
                     </div>
                     <div class="overflow-auto">
+                        <div class="table_wrap_loading_box">
+                            <div>
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
                         <table class="table table-sm table-hover">
-                            <thead>
-                                <tr>
-                                    <th>ชื่อบัญชีผู้ใช้</th>
-                                    <th>ชื่อ - นามสกุล</th>
-                                    <th>ตำแหน่ง</th>
-                                    <th width="120px">แก้ไข / ลบ</th>
-                                </tr>
-                            </thead>
-                            <tbody id="show_data_from_db">
-                            </tbody>
                         </table>
                     </div>
                 </div>
