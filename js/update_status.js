@@ -153,6 +153,8 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword, shipper){
 					header +='</div>';
 					$('.table').html(header);
 				}
+			}else{
+				showErrorAjax();
 			}
 			$('.table_wrap_loading_box').hide();
 			$('.table').show();
@@ -160,6 +162,7 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword, shipper){
 		},
 		error: function() {
 			console.log("error");
+			showErrorAjax();
 		}
 	});
 };

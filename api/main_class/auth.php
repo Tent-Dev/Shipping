@@ -1,7 +1,7 @@
 <?php
 // ini_set('display_errors',1);
 // error_reporting(E_ALL);
-
+ob_start();
 include("../lib/php-jwt-master/src/JWT.php");
 
 use \Firebase\JWT\JWT;

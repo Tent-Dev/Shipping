@@ -138,6 +138,8 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword, shipper){
 					header +='</div>';
 					$('.table').html(header);
 				}
+			}else{
+				showErrorAjax();
 			}
 			$('.table_wrap_loading_box').hide();
 			$('.table').show();
@@ -145,16 +147,7 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword, shipper){
 		},
 		error: function() {
 			console.log("error");
-			var header = '';
-			header +='<div class="table_wrap_empty">';
-			header +='  <div class="text-center">';
-			header +='      <div>ไม่สามารถเชื่อมต่อฐานข้อมูลได้</div>';
-			header +='      <div><i class="fas fa-times"></i></div>';
-			header +='  </div>';
-			header +='</div>';
-			$('.table').html(header);
-			$('.table_wrap_loading_box').hide();
-			$('.table').show();
+			showErrorAjax();
 		}
 	});
 };

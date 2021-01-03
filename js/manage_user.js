@@ -78,6 +78,8 @@ function getDataFromDB(page = 1){
             header +='</div>';
             $('.table').html(header);
         }
+    }else{
+        showErrorAjax();
     }
     $('.table_wrap_loading_box').hide();
     $('.table').show();
@@ -85,6 +87,7 @@ function getDataFromDB(page = 1){
 },
 error: function() {
    console.log("error");
+   showErrorAjax();
 }
 });
 };

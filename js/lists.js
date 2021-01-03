@@ -8,7 +8,7 @@ $(document).ready(function() {
 		var tracking_code = $(this).data('trackingcode');
 		getDescription(product_id, tracking_code);
     });
-    
+
     $('input#filter_date').daterangepicker({
         autoUpdateInput: false,
         locale: {
@@ -73,12 +73,12 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword){
          enddate: enddate,
          status: status,
          keyword: keyword
-     },
-     success: function(data) {
-         var data = JSON.parse(data)
-         console.log("result: ",data);
+    },
+    success: function(data) {
+        var data = JSON.parse(data)
+        console.log("result: ",data);
 
-         if(data.status == 200){
+        if(data.status == 200){
             var header = '';
             var html = "";
             if(data.data.data.length > 0){
@@ -118,7 +118,8 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword){
                 header +='</div>';
                 $('.table').html(header);
             }
-
+        }else{
+            showErrorAjax();
         }
         $('.table_wrap_loading_box').hide();
         $('.table').show();
@@ -126,18 +127,9 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword){
     },
     error: function() {
        console.log("error");
-       var header = '';
-       header +='<div class="table_wrap_empty">';
-       header +='  <div class="text-center">';
-       header +='      <div>ไม่สามารถเชื่อมต่อฐานข้อมูลได้</div>';
-       header +='      <div><i class="fas fa-times"></i></div>';
-       header +='  </div>';
-       header +='</div>';
-       $('.table').html(header);
-       $('.table_wrap_loading_box').hide();
-       $('.table').show();
-   }
-});
+       showErrorAjax();
+    }
+    });
 };
 
 function getDescription(product_id, tracking_code){
