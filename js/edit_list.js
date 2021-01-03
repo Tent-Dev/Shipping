@@ -5,6 +5,9 @@ var sender_history_set = [];
 var check_receiver_history_timeout = 0;
 var receiver_history_set = [];
 
+var check_customer_history_timeout = 0;
+var customer_history_set = [];
+
 $(document).ready(function() {
 	PRODUCT_ID = window.location.search.slice(1).split('=')[1];
 	getDescription();
@@ -30,28 +33,43 @@ $(document).ready(function() {
 		}, 1000);
 	});
 
+	$("#customer_phone_number").keyup(function(event) {
+		clearTimeout(check_customer_history_timeout);
+		check_customer_history_timeout = setTimeout(function() {
+			getHistory('customer');
+		}, 1000);
+	});
+
 	$(document).on('click', '.sender_history', function(event) {
 		var sender_history = $(this).data('index');
-		var sender_phone = $("#sender_phone").val(sender_history_set[sender_history].phone_number);
-		var s_fname = $("#s_fname").val(sender_history_set[sender_history].firstname);
-		var s_lname = $("#s_lname").val(sender_history_set[sender_history].lastname);
-		var s_address = $("#s_address").val(sender_history_set[sender_history].address.address);
-		var s_district = $("#s_district").val(sender_history_set[sender_history].address.district);
-		var s_area = $("#s_area").val(sender_history_set[sender_history].address.area);
-		var s_province = $("#s_province").val(sender_history_set[sender_history].address.province);
-		var s_postcode = $("#s_postcode").val(sender_history_set[sender_history].address.postal);
+		$("#sender_phone").val(sender_history_set[sender_history].phone_number);
+		$("#s_fname").val(sender_history_set[sender_history].firstname);
+		$("#s_lname").val(sender_history_set[sender_history].lastname);
+		$("#s_address").val(sender_history_set[sender_history].address.address);
+		$("#s_district").val(sender_history_set[sender_history].address.district);
+		$("#s_area").val(sender_history_set[sender_history].address.area);
+		$("#s_province").val(sender_history_set[sender_history].address.province);
+		$("#s_postcode").val(sender_history_set[sender_history].address.postal);
 	});
 
 	$(document).on('click', '.receiver_history', function(event) {
 		var receiver_history = $(this).data('index');
-		var phone_number = $("#phone_number").val(receiver_history_set[receiver_history].phone_number);
-		var r_fname = $("#r_fname").val(receiver_history_set[receiver_history].firstname);
-		var r_lname = $("#r_lname").val(receiver_history_set[receiver_history].lastname);
-		var r_address = $("#r_address").val(receiver_history_set[receiver_history].address.address);
-		var r_district = $("#r_district").val(receiver_history_set[receiver_history].address.district);
-		var r_area = $("#r_area").val(receiver_history_set[receiver_history].address.area);
-		var r_province = $("#r_province").val(receiver_history_set[receiver_history].address.province);
-		var r_postcode = $("#r_postcode").val(receiver_history_set[receiver_history].address.postal);
+		$("#phone_number").val(receiver_history_set[receiver_history].phone_number);
+		$("#r_fname").val(receiver_history_set[receiver_history].firstname);
+		$("#r_lname").val(receiver_history_set[receiver_history].lastname);
+		$("#r_address").val(receiver_history_set[receiver_history].address.address);
+		$("#r_district").val(receiver_history_set[receiver_history].address.district);
+		$("#r_area").val(receiver_history_set[receiver_history].address.area);
+		$("#r_province").val(receiver_history_set[receiver_history].address.province);
+		$("#r_postcode").val(receiver_history_set[receiver_history].address.postal);
+	});
+
+	$(document).on('click', '.customer_history', function(event) {
+		var customer_history = $(this).data('index');
+		$("#customer_phone_number").val(customer_history_set[customer_history].phone_number);
+		$("#firstname").val(customer_history_set[customer_history].firstname);
+		$("#lastname").val(customer_history_set[customer_history].lastname);
+		$("#id_card").val(customer_history_set[customer_history].id_card);
 	});
 
 });
@@ -97,6 +115,7 @@ function getDescription(){
 				$("#price").val(data.data.price);
 				$("#shipping_type").val(data.data.payment_type).change();
 
+				getHistory('customer');
 				getHistory('sender');
 				getHistory('receiver');
 			}else if(data.status == 404){
@@ -454,6 +473,14 @@ function getHistory(type = null){
 		sub_class_name = 'receiver_history';
 		url = 'manage_receiver.php';
 	}
+	else if(type == 'customer'){
+		$('.customer-suggest').html('');
+		phone_number = $("#customer_phone_number").val();
+		command = 'get_customer';
+		class_name = '.customer-suggest';
+		sub_class_name = 'customer_history';
+		url = 'manage_customer.php';
+	}
 	
 	$.ajax({
 		url: '../api/function/'+url,
@@ -474,15 +501,29 @@ function getHistory(type = null){
 				else if(type == 'receiver'){
 					receiver_history_set = data.data.items;
 				}
+				else if(type == 'customer'){
+					customer_history_set = data.data.items;
+				}
+
+				if(type == 'customer'){
+					$.each(data.data.items, function(index, val) {
+						html += '<div class="suggest-detail '+sub_class_name+'" data-index='+index+'>';
+						html +=    '<p>'+val.phone_number+'</p>';
+						html +=    '<p>'+val.firstname+' '+val.lastname+'</p>';
+						html +=    '<p>เลขบัตรประขาขน '+val.id_card+'</p>';
+						html += '</div>';
+					});
+				}else{
+					$.each(data.data.items, function(index, val) {
+						html += '<div class="suggest-detail '+sub_class_name+'" data-index='+index+'>';
+						html +=    '<p>'+val.phone_number+'</p>';
+						html +=    '<p>'+val.firstname+' '+val.lastname+'</p>';
+						html +=    '<p>'+val.address.address+'</p>';
+						html +=    '<p>เขต '+val.address.area+' แขวง '+val.address.district+' '+val.address.province+' '+val.address.postal+'</p>';
+						html += '</div>';
+					});
+				}
 				
-				$.each(data.data.items, function(index, val) {
-					html += '<div class="suggest-detail '+sub_class_name+'" data-index='+index+'>';
-					html +=    '<p>'+val.phone_number+'</p>';
-					html +=    '<p>'+val.firstname+' '+val.lastname+'</p>';
-					html +=    '<p>'+val.address.address+'</p>';
-					html +=    '<p>เขต '+val.address.area+' แขวง '+val.address.district+' '+val.address.province+' '+val.address.postal+'</p>';
-					html += '</div>';
-				});
 
 				$(class_name).html(html);
 			}

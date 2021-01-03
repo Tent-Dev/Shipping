@@ -87,45 +87,53 @@ include("auth_onpage.php");
     <?php include('menu_layout.php'); ?>
     
     <section>
-    <div class="container">
-        <div class="full_wrap_loading_box">
-            <div>
-                <i class="fas fa-spinner fa-spin loading_box_icon" style=""></i>
+        <div class="container">
+            <div class="full_wrap_loading_box">
+                <div>
+                    <i class="fas fa-spinner fa-spin loading_box_icon" style=""></i>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12 mt-3 mb-5">
-                <a href="lists.php" class="btn-back">รายการพัสดุ</a> / <h2 class="d-inline">แก้ไขพัสดุ</h2>
-                <form action="" method="post">
-                    <div id="form-section">
-                        <p class="form-title-1">ข้อมูลผู้ทำรายการ</p>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label for="customer_phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้ทำรายการ</label>
-                                <input type="text" name="customer_phone_number" id="customer_phone_number" class="form-control form-control-sm" value="" autocomplete="off">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
-                                <input type="text" name="id_card" id="id_card" class="form-control form-control-sm" value="">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="firstname" class="col-form-label col-form-label-sm">ชื่อผู้ทำรายการ</label>
-                                <input type="text" name="firstname" id="firstname" class="form-control form-control-sm" value="">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="lastname" class="col-form-label col-form-label-sm">นามสกุลผู้ทำรายการ</label>
-                                <input type="text" name="lastname" id="lastname" class="form-control form-control-sm" value="">
-                            </div>
-                        </div>
-                        
-                        <div class="section">
-                            <p class="form-title-2" style="background-color: #9ec6ff;">ข้อมูลผู้ส่ง</p>
+            <div class="row">
+                <div class="col-12 mt-3 mb-5">
+                    <a href="lists.php" class="btn-back">รายการพัสดุ</a> / <h2 class="d-inline">แก้ไขพัสดุ</h2>
+                    <form action="" method="post">
+                        <div id="form-section">
+                            <p class="form-title-1">ข้อมูลผู้ทำรายการ</p>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <label for="sender_phone" class="col-form-label col-form-label-sm">เบอร์โทรผู้ส่ง</label>
-                                    <input type="text" name="sender_phone[]" id="sender_phone" class="form-control form-control-sm form-suggest" value="" autocomplete="off">
-                                    <div class="box-suggest sender-suggest">
+                                <div class="col-md-3">
+                                    <label for="customer_phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้ทำรายการ</label>
+                                    <input type="text" name="customer_phone_number" id="customer_phone_number" class="form-control form-control-sm form-suggest" value="" autocomplete="off">
+                                    <div class="box-suggest customer-suggest">
                                         <div class="suggest-detail">
+                                            <!-- <p>เบอร์โทรผู้ส่ง</p>
+                                            <p>ชื่อ</p>
+                                            <p>ที่อยู่</p>
+                                            <p>เขต แขวง จังหวัด รหัสไปรษณีย์</p> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
+                                    <input type="text" name="id_card" id="id_card" class="form-control form-control-sm" value="">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="firstname" class="col-form-label col-form-label-sm">ชื่อผู้ทำรายการ</label>
+                                    <input type="text" name="firstname" id="firstname" class="form-control form-control-sm" value="">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="lastname" class="col-form-label col-form-label-sm">นามสกุลผู้ทำรายการ</label>
+                                    <input type="text" name="lastname" id="lastname" class="form-control form-control-sm" value="">
+                                </div>
+                            </div>
+
+                            <div class="section">
+                                <p class="form-title-2" style="background-color: #9ec6ff;">ข้อมูลผู้ส่ง</p>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="sender_phone" class="col-form-label col-form-label-sm">เบอร์โทรผู้ส่ง</label>
+                                        <input type="text" name="sender_phone[]" id="sender_phone" class="form-control form-control-sm form-suggest" value="" autocomplete="off">
+                                        <div class="box-suggest sender-suggest">
+                                            <div class="suggest-detail">
                                             <!-- <p>เบอร์โทรผู้ส่ง</p>
                                             <p>ชื่อ</p>
                                             <p>ที่อยู่</p>
