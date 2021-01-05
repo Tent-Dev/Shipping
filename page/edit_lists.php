@@ -58,7 +58,8 @@ include("auth_onpage.php");
             z-index: 9;
             top: 100%;
             width: 90%;
-            height: 250px;
+            height: auto;
+            max-height: 200px;
             overflow-y: auto;
             background-color: #ffffff;
             box-shadow: 0 3px 8px rgba(94, 94, 94, 0.5);
@@ -75,6 +76,12 @@ include("auth_onpage.php");
             padding: 8px 16px;
             border-bottom: 1px solid #000000;
             cursor: pointer;
+        }
+        .suggest-detail:hover {
+            background-color: #f7f7f7;
+        }
+        .suggest-detail:last-child {
+            border: none;
         }
         .suggest-detail p {
             margin-bottom: 0;

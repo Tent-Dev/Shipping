@@ -66,6 +66,7 @@ include("auth_onpage.php");
                     <span class="filter-title">คนนำจ่าย</span>
                     <select class="filter" name="filter_shipper" id="filter_shipper" onchange="filterShipper(this.value)">
                         <option value="" selected>ทั้งหมด</option>
+                        <option value="0">ยังไม่ระบุคนนำจ่าย</option>
                     </select>
                 </div>
             </div>
