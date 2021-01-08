@@ -70,20 +70,22 @@ include("auth_onpage.php");
                         </div>
                     </div>
                     <div class="row mt-2 mb-4">
-                        <div class="col-12 text-right">
+                        <div class="col-12">
                             <span class="mr-2">Filter</span>
                             <input class="filter" type="text" name="search" id="search" placeholder="ค้นหา">
-                            <input class="filter datepicker" type="text" name="filter_date" id="filter_date" placeholder="เลือกช่วงวัน" readonly>
+                            <input class="filter datepicker mt-2 mt-lg-0" type="text" name="filter_date" id="filter_date" placeholder="เลือกช่วงวัน" readonly>
+                            <br class="d-block d-lg-none">
                             <span class="filter-title">สถานะ</span>
-                            <select class="filter" name="filter_status" id="filter_status" onchange="filterStatus(this.value)">
+                            <select class="filter mt-2 mt-lg-0" name="filter_status" id="filter_status" onchange="filterStatus(this.value)">
                                 <option value="" selected>ทั้งหมด</option>
                                 <option value="waiting">พัสดุถูกนำเข้าสู่ระบบ</option>
                                 <option value="sending">พัสดุกำลังถูกนำส่งไปยังผู้รับ</option>
                                 <option value="success">พัสดุถูกนำส่งถึงมือผู้รับเรียบร้อยแล้ว</option>
                                 <option value="return_distribution_center">พัสดุถูกตีกลับสู่ศูนย์กระจายสินค้า</option>
                             </select>
+                            <br class="d-block d-lg-none">
                             <span class="filter-title">คนนำจ่าย</span>
-                            <select class="filter" name="filter_shipper" id="filter_shipper" onchange="filterShipper(this.value)">
+                            <select class="filter mt-2 mt-lg-0" name="filter_shipper" id="filter_shipper" onchange="filterShipper(this.value)">
                                 <option value="" selected>ทั้งหมด</option>
                             </select>
                         </div>
