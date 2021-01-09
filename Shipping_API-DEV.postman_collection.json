@@ -26,7 +26,7 @@
 								},
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "admin_postman",
 									"type": "text"
 								},
 								{
@@ -671,6 +671,30 @@
 									"value": "normal",
 									"type": "text",
 									"disabled": true
+								},
+								{
+									"key": "customer_idcard",
+									"value": "1102002814444",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "customer_firstname",
+									"value": "Test",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "customer_lastname",
+									"value": "Postman",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "customer_phone_number",
+									"value": "0819584848",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
@@ -1240,6 +1264,60 @@
 								{
 									"key": "phone_number",
 									"value": "0819584848",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_customer.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_customer.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "update_customer",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "0897505566",
+									"type": "text"
+								},
+								{
+									"key": "id_card",
+									"value": "1102002844777",
+									"type": "text"
+								},
+								{
+									"key": "firstname",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "Createposman",
 									"type": "text"
 								}
 							]
