@@ -107,7 +107,7 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword, shipper){
 					header +=        '<th>เขตจัดส่ง</th>';
 					header +=        '<th>สถานะ</th>';
 					header +=        '<th>คนนำจ่าย</th>';
-					header +=        '<th width="120px">แก้ไข / ลบ</th>';
+					header +=        '<th width="120px">แก้ไข</th>';
 					header +=    '</tr>';
 					header +='</thead>';
 					header +='<tbody id="show_data_from_db">';

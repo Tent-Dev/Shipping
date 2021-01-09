@@ -347,9 +347,12 @@ class MNG_Product{
 		$update_trans_arr = array();
 		$receiver_arr = array();
 		$sender_arr = array();
+		$customer_arr = array();
 		$update_receiver = false;
 		$update_sender = false;
+		$update_customer = false;
 		$warn_msg = '';
+		$warn_cus_msg = '';
 		if(isset($param['product_id']) && $param['product_id'] !== ''){
 			$arr['id'] = $param['product_id'];
 			$update_trans_arr['product_id'] = $param['product_id'];
@@ -373,6 +376,19 @@ class MNG_Product{
 
 		if(isset($param['payment_type']) && $param['payment_type'] !== ''){
 			$arr['payment_type'] = $param['payment_type'];
+		}
+
+		if(!empty($param['customer_idcard']) && !empty($param['customer_firstname']) && !empty($param['customer_lastname']) && !empty($param['customer_phone_number'])){
+			$customer_arr['firstname'] = $param['customer_firstname'];
+			$customer_arr['lastname'] = $param['customer_firstname'];
+			$customer_arr['id_card'] = $param['customer_idcard'];
+			$customer_arr['phone_number'] = $param['customer_phone_number'];
+			$update_customer = true;
+			$update_customer_result = $this->UpdateCustomer($customer_arr);
+
+			if($update_customer_result['status'] !== 200){
+				$warn_cus_msg = ' And customer not update ('.$update_customer_result['err_msg'].')';
+			}
 		}
 
 		if(!empty($param['receiver_firstname']) && !empty($param['receiver_lastname']) && !empty($param['receiver_address']) && !empty($param['receiver_district']) && !empty($param['receiver_phone_number']) && !empty($param['receiver_area']) && !empty($param['receiver_province']) && !empty($param['receiver_postal'])){
@@ -422,7 +438,7 @@ class MNG_Product{
 			if($result){
 				$response = array(
 					'status' => 200,
-					'warn_msg' => $warn_msg
+					'warn_msg' => $warn_msg.$warn_cus_msg
 				);
 			}else{
 				$response = array(
@@ -507,6 +523,13 @@ class MNG_Product{
 		require_once('lib_manage_transaction.php');
 		$mng_transaction = new MNG_Transaction();
 		$result = $mng_transaction->UpdateTransaction($params);
+		return $result;
+	}
+
+	private function UpdateCustomer($params = null){
+		require_once('lib_manage_customer.php');
+		$mng_customer = new MNG_Customer();
+		$result = $mng_customer->UpdateCustomer($params);
 		return $result;
 	}
 }

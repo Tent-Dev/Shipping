@@ -143,9 +143,9 @@ function getDescription(){
 
 function updateAccount(){
 	var id_card = $("#id_card").val();
-	// var c_fname = $("#firstname").val();
-	// var c_lname = $("#lastname").val();
-	// var c_phone_number = $("#customer_phone_number").val();
+	var c_fname = $("#firstname").val();
+	var c_lname = $("#lastname").val();
+	var c_phone_number = $("#customer_phone_number").val();
 
 	var sender_phone = $("#sender_phone").val();
 	var s_fname = $("#s_fname").val();
@@ -181,6 +181,10 @@ function updateAccount(){
 				product_id: PRODUCT_ID,
 				price: price,
 				weight: weight,
+				customer_idcard : id_card,
+				customer_firstname: c_fname,
+				customer_lastname: c_lastname,
+				customer_phone_number: c_phone_number,
 				receiver_firstname: r_fname,
 				receiver_lastname: r_lname,
 				receiver_address: r_address,

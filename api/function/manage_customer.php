@@ -27,5 +27,17 @@ if ($cmd != "") {
 		$mysql->Close_db();
 		exit();
 	}
+
+	if ($cmd == "update_customer") {
+		$permission = $auth->AuthPermission();
+		if($permission['permission']){
+			$result = $mng_customer->UpdateCustomer($_POST);
+		}else{
+			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+		}
+		echo json_encode($result);
+		$mysql->Close_db();
+		exit();
+	}
 }
 ?>
