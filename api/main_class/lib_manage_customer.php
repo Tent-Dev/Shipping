@@ -54,6 +54,7 @@ class MNG_Customer{
 
 		if(!empty($param['firstname']) && !empty($param['lastname']) && !empty($param['id_card']) && !empty($param['phone_number'])){
 			$create_new_customer = true;
+			$get_customer_id = '';
 			$arr = array();
 			$arr['firstname'] = $param['firstname'];
 			$arr['lastname'] = $param['lastname'];
@@ -66,6 +67,7 @@ class MNG_Customer{
 				foreach ($check_cus_data['data']['items'] as $value) {
 					if($value['firstname'] == $arr['firstname'] && $value['lastname'] == $arr['lastname'] && $value['id_card'] == $arr['id_card']){
 						$create_new_customer = false;
+						$get_customer_id = $value['id'];
 						break;
 					}
 				}
@@ -75,7 +77,8 @@ class MNG_Customer{
 
 					if($result_create_customer){
 						$response = array(
-							'status' => 200
+							'status' => 200,
+							'last_id' => $result_create_customer['last_id']
 						);
 					}else{
 						$response = array(
@@ -85,7 +88,8 @@ class MNG_Customer{
 					}
 				}else{
 					$response = array(
-						'status' => 500,
+						'status' => 200,
+						'last_id' => $get_customer_id,
 						'err_msg' => 'Customer information had dupicated'
 					);
 				}
@@ -96,7 +100,8 @@ class MNG_Customer{
 
 				if($result_create_customer){
 					$response = array(
-						'status' => 200
+						'status' => 200,
+						'last_id' => $result_create_customer['last_id']
 					);
 				}else{
 					$response = array(

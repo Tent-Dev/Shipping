@@ -183,7 +183,7 @@ function updateAccount(){
 				weight: weight,
 				customer_idcard : id_card,
 				customer_firstname: c_fname,
-				customer_lastname: c_lastname,
+				customer_lastname: c_lname,
 				customer_phone_number: c_phone_number,
 				receiver_firstname: r_fname,
 				receiver_lastname: r_lname,

@@ -380,14 +380,16 @@ class MNG_Product{
 
 		if(!empty($param['customer_idcard']) && !empty($param['customer_firstname']) && !empty($param['customer_lastname']) && !empty($param['customer_phone_number'])){
 			$customer_arr['firstname'] = $param['customer_firstname'];
-			$customer_arr['lastname'] = $param['customer_firstname'];
+			$customer_arr['lastname'] = $param['customer_lastname'];
 			$customer_arr['id_card'] = $param['customer_idcard'];
 			$customer_arr['phone_number'] = $param['customer_phone_number'];
 			$update_customer = true;
 			$update_customer_result = $this->UpdateCustomer($customer_arr);
 
 			if($update_customer_result['status'] !== 200){
-				$warn_cus_msg = ' And customer not update ('.$update_customer_result['err_msg'].')';
+				$warn_cus_msg = ' Customer not update ('.$update_customer_result['err_msg'].')';
+			}else{
+				$update_trans_arr['customer_id'] = $update_customer_result['last_id'];
 			}
 		}
 
@@ -425,7 +427,7 @@ class MNG_Product{
 			$update_trans_result['status'] = 'not_update';
 		}
 
-		if($update_receiver || $update_sender){
+		if($update_receiver || $update_sender || $update_customer){
 			$update_trans_result = $this->UpdateTransDesc($update_trans_arr);
 		}else{
 			$warn_msg = 'receiver and sender not update. If you want to update, plase fill all receiver or sender data.';

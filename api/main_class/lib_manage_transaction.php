@@ -68,6 +68,10 @@ class MNG_Transaction{
 
 		$arr['product_id'] = $param['product_id'];
 
+		if(!empty($param['customer_id'])){
+			$arr['customer_id'] = $param['customer_id'];
+		}
+
 		if(!empty($param['receiver_desc'])){
 			$receiver_arr['firstname'] = $param['receiver_desc']['firstname'];
 			$receiver_arr['lastname'] = $param['receiver_desc']['lastname'];
