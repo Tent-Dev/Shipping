@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 03, 2021 at 04:04 PM
+-- Generation Time: Jan 10, 2021 at 02:45 PM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `tbl_customer` (
   `lastname` varchar(255) NOT NULL,
   `id_card` varchar(13) NOT NULL,
   `phone_number` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_customer`
@@ -40,7 +40,19 @@ CREATE TABLE IF NOT EXISTS `tbl_customer` (
 
 INSERT INTO `tbl_customer` (`id`, `firstname`, `lastname`, `id_card`, `phone_number`) VALUES
 (1, 'ชื่อคนทำรายการ', 'นามสกุลคนทำรายการ', '1102002841486', ''),
-(2, 'ชื่อคนทำรายการ', 'นามสกุลคนทำรายการ', '1102002841486', '0819584848');
+(2, 'ชื่อคนทำรายการ', 'นามสกุลคนทำรายการ', '1102002841486', '0819584848'),
+(3, 'ชื่อคนทำรายการ2', 'นามสกุลคนทำรายการ2', '1102002841486', '0819584848'),
+(4, 'ชื่อคนทำรายการ3', 'นามสกุลคนทำรายการ3', '1102002841486', '0819584848'),
+(5, 'Postman', 'Test', '1102002844444', '0819584848'),
+(8, 'Postman2', 'Test', '1102002844444', '0819584848'),
+(9, 'Postman2', 'Test2', '1102002844444', '0819584848'),
+(10, 'Test', 'Test', '1102002814444', '0819584848'),
+(11, 'Test', 'Createposman', '1102002844777', '0897505566'),
+(12, 'ชื่อคนทำรายการ', 'ชื่อคนทำรายการ', '1102002841486', '0899999999'),
+(13, 'ชื่อคนทำรายการ', 'ชื่อคนทำรายการ', '1102002841486', '0899999998'),
+(14, 'Test', 'Test', '1194887555652', '028445555'),
+(15, 'Test', 'Testupdate', '1194887555652', '028445555'),
+(16, 'นงนภัส', 'ง่วงนอน', '1102002888598', '0859484646');
 
 -- --------------------------------------------------------
 
@@ -56,20 +68,21 @@ CREATE TABLE IF NOT EXISTS `tbl_member` (
   `username` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
   `session_id` text
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_member`
 --
 
 INSERT INTO `tbl_member` (`id`, `firstname`, `lastname`, `member_type`, `username`, `password`, `session_id`) VALUES
-(4, 'มาลี2', 'ไม่อร่อยนะ', 'admin', 'admin', '$2y$12$BP0jqnze1LL/VfJe3DcT.eB/ODAhkxDZtO9oTaKmvXi.2tVGNtFKu', '$2y$12$Cr7g/a3DhvdSsEmwLKfk0.Qb/f4iahhw/Jlz5e6O8Em.xDFp3dHGC'),
+(4, 'มาลี2', 'ไม่อร่อยนะ', 'admin', 'admin', '$2y$12$BP0jqnze1LL/VfJe3DcT.eB/ODAhkxDZtO9oTaKmvXi.2tVGNtFKu', '$2y$12$zxH5aPrGbLwpwsBhPCg25.aQfg6VAXejWgQ.eZcy8KjuHBJG0u7C6'),
 (5, 'Test', 'Create2', 'staff', 'testaccount', '$2y$12$i0G.Xb3tKE50HPqzsWkhQ.U00Nz1uR8xSUOpj4b9JVMYxuO/xuFmy', NULL),
 (6, 'Testadd', 'Onpage', 'admin', 'admin2', '$2y$12$xQfZzkrtApWh/D280A0BseVN/d2rh8KcylzpTQAvMCsciEVBcVPIW', NULL),
-(7, 'Chutipas2', 'Borsub', 'staff', 'itsofun01', '$2y$12$H.ISNtFqC.jCeGTsJmOiW.WepH7w0hGbsw9VKbFLXHwZxhy9eH0e.', '$2y$12$nJXkckMVDQEwM1dYw8c91u2fo393Mio8A73RhdYXQEzbQztJWp0EG'),
+(7, 'Chutipas2', 'Borsub', 'staff', 'itsofun01', '$2y$12$H.ISNtFqC.jCeGTsJmOiW.WepH7w0hGbsw9VKbFLXHwZxhy9eH0e.', '$2y$12$5VBl0Inj..C/ld5GSad0ae0LL52OL1clFtcXTIEHFxEgKEt5ZH5gC'),
 (8, 'Manee', 'Aroina', 'admin', 'Manee01', '$2y$12$SLL7v8bGgA7VMLs.kyUwIuroR9qGUsLiLTl0EEqssuZN7lPb942oy', NULL),
 (9, 'Bot', 'test', 'staff', 'Bot01', '$2y$12$DoRHcqnFtQ.56dLRkKK9feQvFrR/rIWn6lBs9F.N5EnaAtfd4lH/q', NULL),
-(10, 'Bot2', 'Test', 'staff', 'Bot02', '$2y$12$TDPRxMF3RBFwu.AwQ0zz3e/fVJBBM93ssU4OWla7/ih2u5l.VEAq2', NULL);
+(10, 'Bot2', 'Test', 'staff', 'Bot02', '$2y$12$TDPRxMF3RBFwu.AwQ0zz3e/fVJBBM93ssU4OWla7/ih2u5l.VEAq2', NULL),
+(11, 'Test', 'Postman', 'admin', 'admin_postman', '$2y$12$g.CiobjIU9wgVm6b526Z9.mLh40omKe7IFomwyfw/pxF2sXyaTNqO', '$2y$12$LOP/mPuvDDnuif0GHJnebORY04rmY0z1K1diYCXJtrcTc/8WtE1Cu');
 
 -- --------------------------------------------------------
 
@@ -119,7 +132,7 @@ INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_c
 (24, 'normal', 1.5, 30, 'SH159L8206KA7', 'waiting', '2021-01-03 13:35:41', 0, 'normal', ''),
 (25, 'normal', 1.5, 30, 'SH469P4352ZX5', 'waiting', '2021-01-03 13:35:41', 0, 'normal', ''),
 (26, 'normal', 1.5, 30, 'SH147F8724CJ1', 'waiting', '2021-01-03 13:37:27', 0, 'normal', ''),
-(27, 'normal', 1.5, 30, 'SH854T3981PK6', 'waiting', '2021-01-03 13:37:27', 4, 'normal', '');
+(27, 'normal', 1.5, 30, 'SH854T3981PK6', 'waiting', '2021-01-03 13:37:27', 11, 'normal', '');
 
 -- --------------------------------------------------------
 
@@ -133,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `tbl_receiver` (
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `address` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_receiver`
@@ -142,7 +155,11 @@ CREATE TABLE IF NOT EXISTS `tbl_receiver` (
 INSERT INTO `tbl_receiver` (`id`, `phone_number`, `firstname`, `lastname`, `address`) VALUES
 (1, '0987786666', 'FReceiver1', 'LReceiver1', '{"firstname":"FReceiver1","lastname":"LReceiver1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
 (2, '0922222222', 'FReceiver2', 'LReceiver2', '{"firstname":"FReceiver2","lastname":"LReceiver2","address":"919 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0922222222"}'),
-(3, '0987786666', 'ชื่อคนรับ1', 'นามสกุลคนรับ1', '{"firstname":"ชื่อคนรับ1","lastname":"นามสกุลคนรับ1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}');
+(3, '0987786666', 'ชื่อคนรับ1', 'นามสกุลคนรับ1', '{"firstname":"ชื่อคนรับ1","lastname":"นามสกุลคนรับ1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
+(4, '0845586666', 'Postman', 'Updatereceiver', '{"address":"1050","district":"บางกะปิ","area":"ลาดพร้าว","province":"กรุงเทพมหานคร","postal":"10355","phone_number":"0845586666"}'),
+(5, '0845586667', 'Postman', 'Updatereceiver', '{"address":"1050","district":"บางกะปิ","area":"ลาดพร้าว","province":"กรุงเทพมหานคร","postal":"10355","phone_number":"0845586667"}'),
+(6, '0987786666', 'ชื่อคนรับ10', 'นามสกุลคนรับ2', '{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
+(7, '0987786666', 'ชื่อคนรับ10', 'นามสกุลคนรับ10', '{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}');
 
 -- --------------------------------------------------------
 
@@ -156,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `tbl_sender` (
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `address` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_sender`
@@ -166,7 +183,11 @@ INSERT INTO `tbl_sender` (`id`, `phone_number`, `firstname`, `lastname`, `addres
 (1, '0911111111', 'ชื่อคนส่ง1', 'นามสกุลคนส่ง1', '{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0911111111"}'),
 (2, '0987786662', 'ชื่อคนส่ง22', 'นามสกุลคนส่ง2', '{"firstname":"ชื่อคนส่ง22","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786662"}'),
 (5, '0987786666', 'ชื่อคนส่ง13', 'นามสกุลคนส่ง1', '{"firstname":"ชื่อคนส่ง13","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0911111111"}'),
-(6, '0987786666', 'ชื่อคนส่ง1', 'นามสกุลคนส่ง1', '{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}');
+(6, '0987786666', 'ชื่อคนส่ง1', 'นามสกุลคนส่ง1', '{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
+(7, '0964458989', 'Postman', 'Updatesender', '{"address":"12/100","district":"หนองจอก","area":"ลาดกระบัง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0964458989"}'),
+(8, '0964458987', 'Postman', 'Updatesender', '{"address":"12/100","district":"หนองจอก","area":"ลาดกระบัง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0964458987"}'),
+(9, '0987786666', 'ชื่อคนรับ10', 'นามสกุลคนรับ10', '{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
+(10, '0987786666', 'ชื่อคนส่งUpdate', 'นามสกุลคนส่งUpdate', '{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}');
 
 -- --------------------------------------------------------
 
@@ -210,7 +231,7 @@ INSERT INTO `tbl_transaction` (`id`, `transaction_id`, `customer_id`, `product_i
 (20, '160968043852HQ', 2, 20, '{"firstname":"ชื่อคนรับ1","lastname":"นามสกุลคนรับ1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
 (21, '160968043852HQ', 2, 21, '{"firstname":"ชื่อคนรับ2","lastname":"นามสกุลคนรับ2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนส่ง2","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
 (26, '160968104743KQ', 2, 26, '{"firstname":"ชื่อคนรับ1","lastname":"นามสกุลคนรับ1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}'),
-(27, '160968104743KQ', 2, 27, '{"firstname":"ชื่อคนรับ2","lastname":"นามสกุลคนรับ2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนส่ง2","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}');
+(27, '160968104743KQ', 10, 27, '{"firstname":"ชื่อคนรับ10","lastname":"นามสกุลคนรับ10","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนส่งUpdate","lastname":"นามสกุลคนส่งUpdate","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}');
 
 -- --------------------------------------------------------
 
@@ -328,12 +349,12 @@ ALTER TABLE `tbl_transport`
 -- AUTO_INCREMENT for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `tbl_member`
 --
 ALTER TABLE `tbl_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tbl_product`
 --
@@ -343,12 +364,12 @@ ALTER TABLE `tbl_product`
 -- AUTO_INCREMENT for table `tbl_receiver`
 --
 ALTER TABLE `tbl_receiver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tbl_sender`
 --
 ALTER TABLE `tbl_sender`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tbl_transaction`
 --

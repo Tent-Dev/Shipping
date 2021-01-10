@@ -1316,6 +1316,80 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update_sender",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "update_sender",
+									"type": "text"
+								},
+								{
+									"key": "firstname",
+									"value": "Postman",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "Updatesender",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "12/100",
+									"type": "text"
+								},
+								{
+									"key": "district",
+									"value": "หนองจอก",
+									"type": "text"
+								},
+								{
+									"key": "area",
+									"value": "ลาดกระบัง",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "0964458987",
+									"type": "text"
+								},
+								{
+									"key": "province",
+									"value": "กรุงเทพมหานคร",
+									"type": "text"
+								},
+								{
+									"key": "postal",
+									"value": "10250",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_sender.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_sender.php"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
