@@ -82,7 +82,7 @@ class MNG_Receiver{
 				}
 
 				if($create_new_receiver){
-					$result_create_receiver = $this->db_connect->Insert_db($arr,"tbl_recevier");
+					$result_create_receiver = $this->db_connect->Insert_db($arr,"tbl_receiver");
 
 					if($result_create_receiver){
 						$response = array(
@@ -92,14 +92,14 @@ class MNG_Receiver{
 					}else{
 						$response = array(
 							'status' => 500,
-							'err_msg' => 'Cannot create customer'
+							'err_msg' => 'Cannot create receiver'
 						);
 					}
 				}else{
 					$response = array(
 						'status' => 200,
 						//'last_id' => $get_customer_id,
-						'err_msg' => 'Customer information had dupicated'
+						'err_msg' => 'Receiver information had dupicated'
 					);
 				}
 
