@@ -543,7 +543,7 @@ class MNG_Product{
 		return $result;
 	}
 
-	private function UpdateCustomer($params = null){
+	private function UpdateReceiver($params = null){
 		require_once('lib_manage_receiver.php');
 		$mng_receiver = new MNG_Receiver();
 		$result = $mng_receiver->UpdateReceiver($params);
