@@ -43,6 +43,97 @@ class MNG_Receiver{
 		}
 		return $response;
 	}
+
+	public function UpdateReceiver($param = null){
+
+		if(!empty($param['firstname']) && !empty($param['lastname']) && !empty($param['address']) && !empty($param['district']) && !empty($param['phone_number']) && !empty($param['area']) && !empty($param['province']) && !empty($param['postal'])){
+			$create_new_receiver = true;
+			//$get_customer_id = '';
+
+			$arr = array();
+			$receiver_arr = array();
+
+			$receiver_arr['address'] = $param['address'];
+			$receiver_arr['district'] = $param['district'];
+			$receiver_arr['area'] = $param['area'];
+			$receiver_arr['province'] = $param['province'];
+			$receiver_arr['postal'] = $param['postal'];
+			$receiver_arr['phone_number'] = $param['phone_number'];
+
+			$arr['firstname'] = $param['firstname'];
+			$arr['lastname'] = $param['lastname'];
+			$arr['phone_number'] = $param['phone_number'];
+			$arr['address'] = json_encode($receiver_arr, JSON_UNESCAPED_UNICODE);
+
+			$check_receiver_data = $this->GetReceiver($arr);
+
+			if($check_receiver_data['status'] == 200){
+				foreach ($check_receiver_data['data']['items'] as $value) {
+					if($value['firstname'] == $arr['firstname'] && $value['lastname'] == $arr['lastname'] && $value['phone_number'] == $arr['phone_number']){
+						
+						$receiver_address = json_decode(json_encode($value['address']), true);;
+						
+						if($receiver_address['address'] == $param['address'] && $receiver_address['district'] == $param['district'] && $receiver_address['area'] == $param['area'] && $receiver_address['province'] == $param['province'] && $receiver_address['postal'] == $param['postal'] && $receiver_address['phone_number'] == $param['phone_number']){
+							$create_new_receiver = false;
+							//$get_customer_id = $value['id'];
+							break;
+						}
+					}
+				}
+
+				if($create_new_receiver){
+					$result_create_receiver = $this->db_connect->Insert_db($arr,"tbl_recevier");
+
+					if($result_create_receiver){
+						$response = array(
+							'status' => 200,
+							//'last_id' => $result_create_receiver['last_id']
+						);
+					}else{
+						$response = array(
+							'status' => 500,
+							'err_msg' => 'Cannot create customer'
+						);
+					}
+				}else{
+					$response = array(
+						'status' => 200,
+						//'last_id' => $get_customer_id,
+						'err_msg' => 'Customer information had dupicated'
+					);
+				}
+
+			}
+			else if($check_receiver_data['status'] == 404){
+				$result_create_receiver = $this->db_connect->Insert_db($arr,"tbl_receiver");
+
+				if($result_create_receiver){
+					$response = array(
+						'status' => 200,
+						//'last_id' => $result_create_customer['last_id']
+					);
+				}else{
+					$response = array(
+						'status' => 500,
+						'err_msg' => 'Cannot create receiver'
+					);
+				}
+			}
+			else{
+
+				$response = array(
+					'status' => 500,
+					'err_msg' => 'Cannot get receiver'
+				);
+			}
+		}else{
+			$response = array(
+				'status' => 500,
+				'err_msg' => 'Please fill all receiver information'
+			);
+		}
+		return $response;
+	}
 }
 
 ?>

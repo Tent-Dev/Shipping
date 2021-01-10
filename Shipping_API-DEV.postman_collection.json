@@ -1198,6 +1198,80 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update_receiver",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "update_receiver",
+									"type": "text"
+								},
+								{
+									"key": "firstname",
+									"value": "Postman",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "Updatereceiver",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "1050",
+									"type": "text"
+								},
+								{
+									"key": "district",
+									"value": "บางกะปิ",
+									"type": "text"
+								},
+								{
+									"key": "area",
+									"value": "ลาดพร้าว",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "0845586667",
+									"type": "text"
+								},
+								{
+									"key": "province",
+									"value": "กรุงเทพมหานคร",
+									"type": "text"
+								},
+								{
+									"key": "postal",
+									"value": "10355",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_receiver.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_receiver.php"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

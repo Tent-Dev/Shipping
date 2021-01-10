@@ -406,6 +406,14 @@ class MNG_Product{
 
 			$update_trans_arr['receiver_desc'] = $receiver_arr;
 			$update_receiver = true;
+
+			$update_receiver_result = $this->UpdateReceiver($receiver_arr);
+			if($update_receiver_result['status'] !== 200){
+				$warn_cus_msg .= ' Receiver not update ('.$update_receiver_result['err_msg'].')';
+			}
+			// else{
+			// 	$update_trans_arr['customer_id'] = $update_customer_result['last_id'];
+			// }
 		}else{
 			$update_trans_result['status'] = 'not_update';
 		}
@@ -532,6 +540,13 @@ class MNG_Product{
 		require_once('lib_manage_customer.php');
 		$mng_customer = new MNG_Customer();
 		$result = $mng_customer->UpdateCustomer($params);
+		return $result;
+	}
+
+	private function UpdateCustomer($params = null){
+		require_once('lib_manage_receiver.php');
+		$mng_receiver = new MNG_Receiver();
+		$result = $mng_receiver->UpdateReceiver($params);
 		return $result;
 	}
 }
