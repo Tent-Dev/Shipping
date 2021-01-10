@@ -153,7 +153,11 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword, shipper){
 					header +='</div>';
 					$('.table').html(header);
 				}
-			}else{
+			}
+			else if(data.status == 404){
+				showErrorAjax('ไม่พบข้อมูล');
+			}
+			else{
 				showErrorAjax();
 			}
 			$('.table_wrap_loading_box').hide();

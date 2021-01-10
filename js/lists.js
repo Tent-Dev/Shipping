@@ -67,69 +67,73 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword){
       url: '../api/function/manage_product.php',
       method: 'post',
       data: {
-         command: 'get_product',
-         page: page,
-         startdate: startdate,
-         enddate: enddate,
-         status: status,
-         keyword: keyword
-    },
-    success: function(data) {
-        var data = JSON.parse(data)
-        console.log("result: ",data);
+       command: 'get_product',
+       page: page,
+       startdate: startdate,
+       enddate: enddate,
+       status: status,
+       keyword: keyword
+   },
+   success: function(data) {
+    var data = JSON.parse(data)
+    console.log("result: ",data);
 
-        if(data.status == 200){
-            var header = '';
-            var html = "";
-            if(data.data.data.length > 0){
-                header +='<thead>';
-                header +=    '<tr>';
-                header +=        '<th>วันที่นำเข้าพัสดุ</th>';
-                header +=        '<th>เลขพัสดุ</th>';
-                header +=        '<th>ชื่อผู้รับ</th>';
-                header +=        '<th>สถานะ</th>';
-                header +=        '<th width="120px">แก้ไข / ลบ</th>';
-                header +=    '</tr>';
-                header +='</thead>';
-                header +='<tbody id="show_data_from_db">';
-                header +='</tbody>';
-                $('.table').html(header);
-                $.each(data.data.data, function(index, val) {
-                    html +=
-                    '<tr>'+
-                    '<td>'+val.create_date+'</td>'+
-                    '<td>'+val.tracking_code+'</td>'+
-                    '<td>name</td>'+
-                    '<td>'+val.status+'</td>'+
-                    '<td>'+
+    if(data.status == 200){
+        var header = '';
+        var html = "";
+        if(data.data.data.length > 0){
+            header +='<thead>';
+            header +=    '<tr>';
+            header +=        '<th>วันที่นำเข้าพัสดุ</th>';
+            header +=        '<th>เลขพัสดุ</th>';
+            header +=        '<th>ชื่อผู้รับ</th>';
+            header +=        '<th>สถานะ</th>';
+            header +=        '<th width="120px">แก้ไข / ลบ</th>';
+            header +=    '</tr>';
+            header +='</thead>';
+            header +='<tbody id="show_data_from_db">';
+            header +='</tbody>';
+            $('.table').html(header);
+            $.each(data.data.data, function(index, val) {
+                html +=
+                '<tr>'+
+                '<td>'+val.create_date+'</td>'+
+                '<td>'+val.tracking_code+'</td>'+
+                '<td>name</td>'+
+                '<td>'+val.status+'</td>'+
+                '<td>'+
                         // '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
                         '<a href="edit_lists.php?product_id='+val.id+'"><button class="btn_edit btn btn-sm btn-warning mr-2" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'"><i class="fas fa-edit"></i></button></a>'+
                         '<button class="btn btn-sm btn-danger" data-id="'+val.id+'"><i class="fas fa-trash"></i></button>'+
                         '</td>'+
                         '</tr>';
                     });
-                pagination(page,data.data.total_pages);
-            }else{
-                header +='<div class="table_wrap_empty">';
-                header +='  <div class="text-center">';
-                header +='      <div>ไม่พบข้อมูล</div>';
-                header +='      <div><i class="far fa-clipboard"></i></div>';
-                header +='  </div>';
-                header +='</div>';
-                $('.table').html(header);
-            }
+            pagination(page,data.data.total_pages);
         }else{
-            showErrorAjax();
+            header +='<div class="table_wrap_empty">';
+            header +='  <div class="text-center">';
+            header +='      <div>ไม่พบข้อมูล</div>';
+            header +='      <div><i class="far fa-clipboard"></i></div>';
+            header +='  </div>';
+            header +='</div>';
+            $('.table').html(header);
         }
-        $('.table_wrap_loading_box').hide();
-        $('.table').show();
-        $('#show_data_from_db').append(html);
-    },
-    error: function() {
-       console.log("error");
-       showErrorAjax();
     }
-    });
+    else if(data.status == 404){
+        showErrorAjax('ไม่พบข้อมูล');
+    }
+    else{
+        showErrorAjax();
+    }
+    $('.table_wrap_loading_box').hide();
+    $('.table').show();
+    $('#show_data_from_db').append(html);
+},
+error: function() {
+ console.log("error");
+ showErrorAjax();
+}
+});
 };
 
 function getDescription(product_id, tracking_code){
@@ -154,28 +158,27 @@ function getDescription(product_id, tracking_code){
     $('.modal-body').html('<div align="center" class="wrap_loading_box"><div><i class="fas fa-spinner fa-spin loading_box_icon"></i></span></div></div>');
 
     $.ajax({
-      url: '../api/function/manage_product.php',
-      method: 'post',
-      data: {
-       command: 'get_product_desc',
-       product_id: product_id
-   },
-   success: function(data) {
-       var data = JSON.parse(data)
-       console.log("result: ",data);
+        url: '../api/function/manage_product.php',
+        method: 'post',
+        data: {
+            command: 'get_product_desc',
+            product_id: product_id
+        },
+        success: function(data) {
+            var data = JSON.parse(data)
+            console.log("result: ",data);
 
-       if(data.status == 200){
-        var get_body_html = generateHtml(data);
-        $('.modal-body').html(get_body_html);
+            if(data.status == 200){
+                var get_body_html = generateHtml(data);
+                $('.modal-body').html(get_body_html);
 
-        $("#shipping_type").val(data.data.payment_type).change();
-    }
-
-},
-error: function() {
-   console.log("error");
-}
-});
+                $("#shipping_type").val(data.data.payment_type).change();
+            }
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
 }
 
 function generateHtml(data){

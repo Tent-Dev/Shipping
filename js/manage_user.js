@@ -31,65 +31,69 @@ function getDataFromDB(page = 1){
     $('.table_wrap_loading_box').show();
     $('.table').html('');
     $.ajax({
-      url: '../api/function/manage_account.php',
-      method: 'post',
-      data: {
-         command: 'get_account',
-         page: page
-     },
-     success: function(data) {
-         var data = JSON.parse(data)
-         console.log("result: ",data);
+        url: '../api/function/manage_account.php',
+        method: 'post',
+        data: {
+            command: 'get_account',
+            page: page
+        },
+        success: function(data) {
+            var data = JSON.parse(data)
+            console.log("result: ",data);
 
-         if(data.status == 200){
-            var header = '';
-            var html = "";
-            if(data.data.data.length > 0){
-               header +='<thead>';
-               header +=    '<tr>';
-               header +=        '<th>ชื่อบัญชีผู้ใช้</th>';
-               header +=        '<th>ชื่อ - นามสกุล</th>';
-               header +=        '<th>ตำแหน่ง</th>';
-               header +=        '<th width="120px">แก้ไข / ลบ</th>';
-               header +=    '</tr>';
-               header +='</thead>';
-               header +='<tbody id="show_data_from_db">';
-               header +='</tbody>';
-               $('.table').html(header);
-               $.each(data.data.data, function(index, val) {
-                 html +=
-                 '<tr class="_rowid-'+val.id+'">'+
-                 '<td class="_td-username">'+val.username+'</td>'+
-                 '<td class="_td-name">'+val.firstname+' '+val.lastname+'</td>'+
-                 '<td class="_td-type">'+val.member_type+'</td>'+
-                 '<td>'+
-                 '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
-                 '<button class="btn btn-sm btn-danger" data-id="'+val.id+'"><i class="fas fa-trash"></i></button>'+
-                 '</td>'+
-                 '</tr>';
-             });
-               pagination(page,data.data.total_pages);
-           }else{
-            header +='<div class="table_wrap_empty">';
-            header +='  <div class="text-center">';
-            header +='      <div>ไม่พบข้อมูล</div>';
-            header +='      <div><i class="far fa-clipboard"></i></div>';
-            header +='  </div>';
-            header +='</div>';
-            $('.table').html(header);
+            if(data.status == 200){
+                var header = '';
+                var html = "";
+                if(data.data.data.length > 0){
+                    header +='<thead>';
+                    header +=    '<tr>';
+                    header +=        '<th>ชื่อบัญชีผู้ใช้</th>';
+                    header +=        '<th>ชื่อ - นามสกุล</th>';
+                    header +=        '<th>ตำแหน่ง</th>';
+                    header +=        '<th width="120px">แก้ไข / ลบ</th>';
+                    header +=    '</tr>';
+                    header +='</thead>';
+                    header +='<tbody id="show_data_from_db">';
+                    header +='</tbody>';
+                    $('.table').html(header);
+                    $.each(data.data.data, function(index, val) {
+                        html +=
+                        '<tr class="_rowid-'+val.id+'">'+
+                        '<td class="_td-username">'+val.username+'</td>'+
+                        '<td class="_td-name">'+val.firstname+' '+val.lastname+'</td>'+
+                        '<td class="_td-type">'+val.member_type+'</td>'+
+                        '<td>'+
+                        '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
+                        '<button class="btn btn-sm btn-danger" data-id="'+val.id+'"><i class="fas fa-trash"></i></button>'+
+                        '</td>'+
+                        '</tr>';
+                    });
+                    pagination(page,data.data.total_pages);
+                }else{
+                    header +='<div class="table_wrap_empty">';
+                    header +='  <div class="text-center">';
+                    header +='      <div>ไม่พบข้อมูล</div>';
+                    header +='      <div><i class="far fa-clipboard"></i></div>';
+                    header +='  </div>';
+                    header +='</div>';
+                    $('.table').html(header);
+                }
+            }
+            else if(data.status == 404){
+                showErrorAjax('ไม่พบข้อมูล');
+            }
+            else{
+                showErrorAjax();
+            }
+            $('.table_wrap_loading_box').hide();
+            $('.table').show();
+            $('#show_data_from_db').html(html);
+        },
+        error: function() {
+            console.log("error");
+            showErrorAjax();
         }
-    }else{
-        showErrorAjax();
-    }
-    $('.table_wrap_loading_box').hide();
-    $('.table').show();
-    $('#show_data_from_db').html(html);
-},
-error: function() {
-   console.log("error");
-   showErrorAjax();
-}
-});
+    });
 };
 
 function getDescription(account_id){
