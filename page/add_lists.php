@@ -10,6 +10,7 @@ include("auth_onpage.php");
 
     <link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.min.css">
     <link href="../lib/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
+    <link href="../css/main_custom.css" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
     <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -95,13 +96,13 @@ include("auth_onpage.php");
         <div class="row">
             <div class="col-12 mt-3 mb-5">
                 <a href="lists.php" class="btn-back">รายการพัสดุ</a> / <h2 class="d-inline">เพิ่มพัสดุ</h2>
-                <form action="" method="post">
+                <!-- <form action="" method="post"> -->
                     <div id="form-section">
                         <p class="form-title-1">ข้อมูลผู้ทำรายการ</p>
                         <div class="row">
                             <div class="col-md-3">
-                                <label for="tel" class="col-form-label col-form-label-sm">เบอร์โทรผู้ทำรายการ</label>
-                                <input type="text" name="tel" id="tel" class="form-control form-control-sm">
+                                <label for="customer_phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้ทำรายการ</label>
+                                <input type="text" name="customer_phone_number" id="customer_phone_number" class="form-control form-control-sm">
                             </div>
                             <div class="col-md-3">
                                 <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
@@ -117,7 +118,7 @@ include("auth_onpage.php");
                             </div>
                         </div>
                         
-                        <div class="section">
+                        <div class="section" data-index="1">
                             <p class="form-title-2" style="background-color: #9ec6ff;">ข้อมูลผู้ส่ง</p>
                             <div class="row">
                                 <div class="col-md-4">
@@ -244,11 +245,11 @@ include("auth_onpage.php");
                     </div>
                     <div class="row">
                         <div class="col-12 text-center">
-                            <a href="" class="btn btn-sm btn-success">บันทึก <i class="far fa-save"></i></a>
-                            <a href="" class="btn btn-sm btn-danger">ยกเลิก <i class="fas fa-times"></i></a>
+                            <button class="btn btn-sm btn-success btn_save">บันทึก <i class="far fa-save"></i></button>
+                            <button class="btn btn-sm btn-danger">ยกเลิก <i class="fas fa-times"></i></button>
                         </div>
                     </div>
-                </form>
+                <!-- </form> -->
             </div>
         </div>
     </div>
