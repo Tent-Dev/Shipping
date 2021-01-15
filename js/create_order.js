@@ -26,21 +26,25 @@ $(document).ready(function() {
     });
 
     $('.btn_save').click(function(event) {
-        // event.preventDefault();
-
         getAllData();
     });
 
 });
 
 function getAllData(){
-    console.log('xxx');
+    var checkvalue = true;
+    var data_obj = {};
+    var data_items = [];
+
     $('.section').each(function (index, ele) {
         var pointer_index = $(this).closest('.section').data('index');
+        var item_obj = {};
+        var receiver_obj = {};
+        var sender_obj = {};
         if(pointer_index == 1){
             pointer_index = ''
         }
-        // var pointer_index = index == 0 ? '' : index+1;
+
         var s_phone = $(ele).find('#sender_phone'+pointer_index).val();
         var s_fname = $(ele).find('#s_fname'+pointer_index).val();
         var s_lname = $(ele).find('#s_lname'+pointer_index).val();
@@ -48,6 +52,7 @@ function getAllData(){
         var s_district = $(ele).find('#s_district'+pointer_index).val();
         var s_area = $(ele).find('#s_area'+pointer_index).val();
         var s_province = $(ele).find('#s_province'+pointer_index).val();
+        var s_postcode = $(ele).find('#s_postcode'+pointer_index).val();
 
         var r_phone = $(ele).find('#phone_number'+pointer_index).val();
         var r_fname = $(ele).find('#r_fname'+pointer_index).val();
@@ -56,23 +61,69 @@ function getAllData(){
         var r_district = $(ele).find('#r_district'+pointer_index).val();
         var r_area = $(ele).find('#r_area'+pointer_index).val();
         var r_province = $(ele).find('#r_province'+pointer_index).val();
+        var r_postcode = $(ele).find('#r_postcode'+pointer_index).val();
 
         var weight = $(ele).find('#weight'+pointer_index).val();
         var price = $(ele).find('#price'+pointer_index).val();
         var shipping_type = $(ele).find('#shipping_type'+pointer_index).val();
 
-        validateEdit(pointer_index);
-
-
         console.log('--------------------data['+index+']-----------------------');
-        console.log('ele sen-->', s_phone, s_fname, s_lname,s_address, s_district, s_area, s_province);
-        console.log('ele recev-->', r_phone, r_fname, r_lname, r_address, r_district, r_area, r_province);
+        console.log('ele sen-->', s_phone, s_fname, s_lname,s_address, s_district, s_area, s_province, s_postcode);
+        console.log('ele recev-->', r_phone, r_fname, r_lname, r_address, r_district, r_area, r_province, r_postcode);
         console.log('ele etc-->', weight, price, shipping_type);
         console.log('-------------------------------------------');
+
+        if(!validateCreate(pointer_index)){
+            checkvalue = false;
+        }else{
+            receiver_obj.firstname = r_fname;
+            receiver_obj.lastname = r_lname;
+            receiver_obj.address = r_address;
+            receiver_obj.district = r_district;
+            receiver_obj.area = r_area;
+            receiver_obj.province = r_province;
+            receiver_obj.postal = r_postcode;
+            receiver_obj.phone_number = r_phone;
+
+            sender_obj.firstname = s_fname;
+            sender_obj.lastname = s_lname;
+            sender_obj.address = s_address;
+            sender_obj.district = s_district;
+            sender_obj.area = s_area;
+            sender_obj.province = s_province;
+            sender_obj.postal = s_postcode;
+            sender_obj.phone_number = s_phone;
+
+            item_obj.weight = weight;
+            item_obj.price = price;
+            item_obj.shipping_type = 'normal';
+            item_obj.payment_type  = shipping_type;
+
+            item_obj.receiver_desc = receiver_obj;
+            item_obj.sender_desc = sender_obj;
+
+            data_items.push(item_obj);
+        }
     });
+
+    if(checkvalue){
+        var id_card = $("#id_card").val();
+        var c_fname = $("#firstname").val();
+        var c_lname = $("#lastname").val();
+        var c_phone_number = $("#customer_phone_number").val();
+
+        data_obj.firstname = c_fname;
+        data_obj.lastname = c_lname;
+        data_obj.id_card = id_card;
+        data_obj.customer_phone_number = c_phone_number;
+        data_obj.item = data_items;
+
+        console.log('Data:: ',data_obj);
+
+    }
 }
 
-function validateEdit(pointer_index){
+function validateCreate(pointer_index){
     var result = true;
     var id_card = $("#id_card").val();
     var firstname = $("#firstname").val();
