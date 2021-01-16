@@ -32,6 +32,7 @@
         <a href="lists.php" class="menu <?php if($path == 'lists.php' || $path == 'add_lists.php' || $path == 'edit_lists.php') echo "active"; ?>">รายการพัสดุ</a>
         <a href="sort_mail.php" class="menu <?php if($path == 'sort_mail.php') echo "active"; ?>">คัดแยกพัสดุ</a>
         <a href="update_status.php" class="menu <?php if($path == 'update_status.php') echo "active"; ?>">อัพเดทสถานะพัสดุ</a>
+        <a href="history.php" class="menu <?php if($path == 'history.php') echo "active"; ?>">ประวัติการทำรายการ</a>
         <?php if(isset($_SESSION['TYPE']) && $_SESSION['TYPE'] == 'admin'){?>
         <a href="manage_user.php" class="menu <?php if($path == 'manage_user.php') echo "active"; ?>">จัดการรายชื่อพนักงาน</a>
         <?php } ?>
