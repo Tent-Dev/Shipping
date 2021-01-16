@@ -65,26 +65,52 @@ class MNG_Transaction{
 
 		if($data){
 			$items = array();
-			foreach ($data as $value) {
-				$get_item = array(
-					'receiver_desc' =>  json_decode($value['receiver_desc']),
-					'sender_desc' => json_decode($value['sender_desc']),
-					'shipping_type' => $value['shipping_type'],
-					'tracking_code' => $value['tracking_code'],
-					'weight' => round($value['weight'], 2),
-					'price' => round($value['price'], 2),
-				);
-				$items['items'][] = $get_item;
-				$items['transaction_id'] = $value['transaction_id'];
-				$items['create_date'] = $value['create_date'];
-				$items['firstname'] = $value['firstname'];
-				$items['lastname'] = $value['lastname'];
-			}
 
-			$response = array(
-				'status' => 200,
-				'data' => $items
-			);
+			if(isset($param['transaction_id'])){
+				foreach ($data as $value) {
+					$get_item = array(
+						'receiver_desc' =>  json_decode($value['receiver_desc']),
+						'sender_desc' => json_decode($value['sender_desc']),
+						'shipping_type' => $value['shipping_type'],
+						'tracking_code' => $value['tracking_code'],
+						'weight' => round($value['weight'], 2),
+						'price' => round($value['price'], 2),
+					);
+					$items['items'][] = $get_item;
+					$items['transaction_id'] = $value['transaction_id'];
+					$items['create_date'] = $value['create_date'];
+					$items['firstname'] = $value['firstname'];
+					$items['lastname'] = $value['lastname'];
+				}
+
+				$response = array(
+					'status' => 200,
+					'data' => $items
+				);
+			}else{
+				foreach ($data as $value) {
+					$get_item = array(
+						'receiver_desc' =>  json_decode($value['receiver_desc']),
+						'sender_desc' => json_decode($value['sender_desc']),
+						'shipping_type' => $value['shipping_type'],
+						'tracking_code' => $value['tracking_code'],
+						'weight' => round($value['weight'], 2),
+						'price' => round($value['price'], 2),
+						'transaction_id' => $value['transaction_id'],
+						'create_date' => $value['create_date'],
+						'customer_firstname' => $value['firstname'],
+						'customer_lastname' => $value['lastname']
+					);
+					$items['items'][] = $get_item;
+					
+				}
+
+				$response = array(
+					'status' => 200,
+					'data' => $items
+				);
+			}
+			
 		}else{
 			$response = array(
 				'status' => 404,
