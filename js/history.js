@@ -67,7 +67,7 @@ function getDataFromDB(page = 1, startdate, enddate, keyword) {
             if(data.status == 200){
                 var header = '';
                 var html = "";
-                if(data.data.items.length > 0){
+                if(data.data.data.length > 0){
                     header +='<thead>';
                     header +=    '<tr>';
                     header +=        '<th>No.</th>';
@@ -80,7 +80,7 @@ function getDataFromDB(page = 1, startdate, enddate, keyword) {
                     header +='<tbody id="show_data_from_db">';
                     header +='</tbody>';
                     $('.table').html(header);
-                    $.each(data.data.items, function(index, val) {
+                    $.each(data.data.data, function(index, val) {
                         html += '<tr>'+
                                 '<td>'+(index+1)+'</td>'+
                                 '<td>'+val.transaction_id+'</td>'+
