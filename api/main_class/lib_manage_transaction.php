@@ -9,6 +9,35 @@ class MNG_Transaction{
 		$this->db_connect->Connect_db();
 	}
 
+	public function GetTransactionById($param = null){
+		$sql = "SELECT transaction_id FROM tbl_transaction WHERE id = '".$param['id']."'";
+		$data = $this->db_connect->Select_db_one($sql);
+
+		if($data){
+			$get_trans = $this->GetTransaction($data);
+
+			if($get_trans['status'] == 200){
+				$response = array(
+					'status' => 200,
+					'data' => $get_trans['data']
+				);
+			}else{
+				$response = array(
+					'status' => 404,
+					'err_msg' => 'Can not find Transaction'
+				);
+			}
+		}
+		else{
+			$response = array(
+				'status' => 404,
+				'err_msg' => 'Can not find Transaction'
+			);
+		}
+
+		return $response;
+	}
+
 	public function GetTransaction($param = null){
 		$sql = "
 		SELECT tbl_transaction.transaction_id,
@@ -25,8 +54,12 @@ class MNG_Transaction{
 		JOIN tbl_customer
 		ON tbl_customer.id = tbl_transaction.customer_id
 		JOIN tbl_product
-		ON tbl_product.id = tbl_transaction.product_id
-		WHERE tbl_transaction.transaction_id = '".$param['transaction_id']."'";
+		ON tbl_product.id = tbl_transaction.product_id";
+
+		if(isset($param['transaction_id'])){
+			$sql .= " WHERE tbl_transaction.transaction_id = '".$param['transaction_id']."' ";
+		}
+		
 
 		$data = $this->db_connect->Select_db($sql);
 

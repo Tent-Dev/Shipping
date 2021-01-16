@@ -1,5 +1,11 @@
 <?php
     include("../client_config/config.php");
+
+    if(isset($_GET['transaction_id'])){
+        $trans_id = $_GET['transaction_id'];
+    }else{
+        $trans_id = '"-"';
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +13,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slip</title>
+
+    <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var TRANSACTION_ID = <?php echo $trans_id ?>;
+    </script>
+
+    <script src="../js/slip.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 
     <style>
         * { box-sizing: border-box; }
@@ -55,39 +69,39 @@
             <img src="https://fph.tu.ac.th/uploads/fph/DownloadLogo/2018_FPHHorz%20Logo%20%28EN%29.png" alt="logo">
         </div>
         <div class="center">
-            <p><b>Cplus Express</b></p>
+            <p><b>Shipping Express</b></p>
             <p>สาขา : xxxx</p>
             <p>Tel./Fax : 000000000 </p>
             <p>*..ขอบคุณที่มาใช้บริการ..*</p>
         </div>
         <div style="margin-top: 6px;">
-            <p>วันที่ 2020-12-12 08:10:42</p>
-            <p>บิลเลขที่ : 3456i</p>
-            <p>แคชเชียร์ : มาลี</p>
+            <p>วันที่ 0000-00-00 00:00:00</p>
+            <p>บิลเลขที่ : <span class="transaction_id">-</span></p>
+            <p>แคชเชียร์ : -</p>
         </div>
         <hr>
         <div class="details">
             <p>1 เขต 10150</p>
-            <p>เลขอ้างอิง ded34353646gt</p>
+            <p>เลขอ้างอิง -</p>
             <table width="100%">
                 <tr>
                     <td width="50%">- น้ำหนัก</td>
-                    <td width="40%" align="right">777</td>
+                    <td width="40%" align="right">0</td>
                     <td width="10%" align="center">กรัม</td>
                 </tr>
                 <tr>
                     <td width="50%">- ค่าธรรมเนียม</td>
-                    <td width="40%" align="right">110.00</td>
+                    <td width="40%" align="right">0</td>
                     <td width="10%"></td>
                 </tr>
                 <tr>
                     <td width="50%">- ค่าบริการ</td>
-                    <td width="40%" align="right" style="border-bottom: 1px solid #000000;">0.00</td>
+                    <td width="40%" align="right" style="border-bottom: 1px solid #000000;">0</td>
                     <td width="10%"></td>
                 </tr>
                 <tr>
                     <td width="50%">รวมเป็นเงิน</td>
-                    <td width="40%" align="right" style="border-bottom: 1px solid #000000;">110.00</td>
+                    <td width="40%" align="right" style="border-bottom: 1px solid #000000;">0</td>
                     <td width="10%"></td>
                 </tr>
             </table>
@@ -98,15 +112,15 @@
         <table width="100%">
             <tr>
                 <td width="50%">ยอดเงิน</td>
-                <td width="50%" align="right" style="font-size: 20px; font-weight: 700; border-bottom: 1px solid #000000;">110.00</td>
+                <td width="50%" align="right" style="font-size: 20px; font-weight: 700; border-bottom: 1px solid #000000;">0</td>
             </tr>
             <tr>
                 <td width="50%">รับ :</td>
-                <td width="50%" align="right">120.00</td>
+                <td width="50%" align="right">0</td>
             </tr>
             <tr>
                 <td width="50%">ทอน :</td>
-                <td width="50%" align="right" style="border-bottom: 1px solid #000000;">10.00</td>
+                <td width="50%" align="right" style="border-bottom: 1px solid #000000;">0</td>
             </tr>
         </table>
         <div class="footer">

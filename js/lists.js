@@ -99,7 +99,7 @@ function getDataFromDB(page = 1, startdate, enddate, status, keyword){
                 '<tr>'+
                 '<td>'+val.create_date+'</td>'+
                 '<td>'+val.tracking_code+'</td>'+
-                '<td>name</td>'+
+                '<td>'+val.receiver_desc.firstname+'</td>'+
                 '<td>'+val.status+'</td>'+
                 '<td>'+
                         // '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+

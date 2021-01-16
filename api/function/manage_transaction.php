@@ -28,5 +28,17 @@ if ($cmd != "") {
 		exit();
 	}
 
+	if ($cmd == "get_transactionById") {
+		$permission = $auth->AuthPermission();
+		if($permission['permission']){
+			$result = $mng_transaction->GetTransactionById($_POST);
+		}else{
+			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+		}
+		echo json_encode($result);
+		$mysql->Close_db();
+		exit();
+	}
+
 }
 ?>

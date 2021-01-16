@@ -107,6 +107,9 @@ function getAllData(){
     });
 
     if(checkvalue){
+        $('.btn_save').html('<i class="fas fa-spinner fa-spin"></i></span>');
+        $('.btn_save, .btn_cancel').attr('disabled', true);
+
         var id_card = $("#id_card").val();
         var c_fname = $("#firstname").val();
         var c_lname = $("#lastname").val();
@@ -119,6 +122,46 @@ function getAllData(){
         data_obj.item = data_items;
 
         console.log('Data:: ',data_obj);
+
+        $.ajax({
+            url: '../api/function/manage_product.php',
+            method: 'post',
+            data: {
+                command: 'create_product',
+                create_data: JSON.stringify(data_obj),
+            },
+            success: function(data) {
+                $('.btn_save').html('บันทึก');
+                $('.btn_save, .btn_cancel').attr('disabled', false);
+                var data = JSON.parse(data);
+                console.log("result: ",data);
+
+                if(data.status == 200){
+                    //window.location.replace("lists.php");
+                    console.log('Transaction id: ', data.last_id);
+                    $('.slip_link').attr('href', 'slip.php?transaction_id='+data.last_id);
+                    $('.form_add').hide();
+                    $('.form_print').show();
+                }
+                else{
+                    Swal.fire({
+                        title: 'พบข้อผิดพลาด',
+                        text: 'ไม่สามารถสร้างรายการได้',
+                        icon: 'error',
+                        confirmButtonText: 'ตกลง'
+                    });
+                }
+            },error: function() {
+                $('.btn_save').html('บันทึก');
+                $('.btn_save, .btn_cancel').attr('disabled', false);
+                Swal.fire({
+                    title: 'พบข้อผิดพลาด',
+                    text: 'ไม่สามารถสร้างี่ยการได้',
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง'
+                });
+            }
+        });
 
     }
 }
