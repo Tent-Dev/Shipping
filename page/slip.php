@@ -1,11 +1,11 @@
 <?php
-    include("../client_config/config.php");
+include("../client_config/config.php");
 
-    if(isset($_GET['transaction_id'])){
-        $trans_id = $_GET['transaction_id'];
-    }else{
-        $trans_id = '"-"';
-    }
+if(isset($_GET['transaction_id'])){
+    $trans_id = $_GET['transaction_id'];
+}else{
+    $trans_id = '"-"';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,39 +80,41 @@
             <p>แคชเชียร์ : -</p>
         </div>
         <hr>
-        <div class="details">
-            <p>1 เขต 10150</p>
-            <p>เลขอ้างอิง -</p>
-            <table width="100%">
-                <tr>
-                    <td width="50%">- น้ำหนัก</td>
-                    <td width="40%" align="right">0</td>
-                    <td width="10%" align="center">กรัม</td>
-                </tr>
-                <tr>
-                    <td width="50%">- ค่าธรรมเนียม</td>
-                    <td width="40%" align="right">0</td>
-                    <td width="10%"></td>
-                </tr>
-                <tr>
-                    <td width="50%">- ค่าบริการ</td>
-                    <td width="40%" align="right" style="border-bottom: 1px solid #000000;">0</td>
-                    <td width="10%"></td>
-                </tr>
-                <tr>
-                    <td width="50%">รวมเป็นเงิน</td>
-                    <td width="40%" align="right" style="border-bottom: 1px solid #000000;">0</td>
-                    <td width="10%"></td>
-                </tr>
-            </table>
-            <p>ผู้รับ : คุณ​ มาลีจ้า</p>
-            <hr>
+        <div class="wrap_detail">
+            <div class="details">
+                <p>เขต ### -</p>
+                <p>เลขอ้างอิง -</p>
+                <table width="100%">
+                    <tr>
+                        <td width="50%">- น้ำหนัก</td>
+                        <td width="40%" align="right">0</td>
+                        <td width="10%" align="center">กรัม</td>
+                    </tr>
+                    <tr>
+                        <td width="50%">- ค่าธรรมเนียม</td>
+                        <td width="40%" align="right">0</td>
+                        <td width="10%"></td>
+                    </tr>
+                    <tr>
+                        <td width="50%">- ค่าบริการ</td>
+                        <td width="40%" align="right" style="border-bottom: 1px solid #000000;">0</td>
+                        <td width="10%"></td>
+                    </tr>
+                    <tr>
+                        <td width="50%">รวมเป็นเงิน</td>
+                        <td width="40%" align="right" style="border-bottom: 1px solid #000000;">0</td>
+                        <td width="10%"></td>
+                    </tr>
+                </table>
+                <p>ผู้รับ : คุณ​ มาลีจ้า</p>
+                <hr>
+            </div>
         </div>
 
         <table width="100%">
             <tr>
                 <td width="50%">ยอดเงิน</td>
-                <td width="50%" align="right" style="font-size: 20px; font-weight: 700; border-bottom: 1px solid #000000;">0</td>
+                <td class="total" width="50%" align="right" style="font-size: 20px; font-weight: 700; border-bottom: 1px solid #000000;">0</td>
             </tr>
             <tr>
                 <td width="50%">รับ :</td>
