@@ -1,39 +1,17 @@
-var startdate = "", enddate = "", keyword = "";
+var keyword = "";
 
 $(document).ready(function() {
-    getDataFromDB();
-
-    $('input#filter_date').daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            format: "YYYY-MM-DD",
-            cancelLabel: 'Clear'
-        }
-    });
-
-    $('input#filter_date').on('apply.daterangepicker', function(ev, picker) {
-        startdate = picker.startDate.format('YYYY-MM-DD');
-        enddate = picker.endDate.format('YYYY-MM-DD');
-        $(this).val(startdate + ' - ' + enddate);
-        filterAll(startdate, enddate, keyword);
-    });
-
-    $('#filter_date').on('cancel.daterangepicker', function(ev, picker) {
-        $('#filter_date').val('');
-        startdate = "";
-        enddate = "";
-        filterAll(startdate, enddate, keyword);
-    });
+    getDataFromDB(1, trans_id, keyword);
 
     $('#search').keyup(delay(function(e){
         keyword = $(this).val();
-        filterAll(startdate, enddate, keyword);
+        filterAll(keyword);
     }, 300));
 });
 
-function filterAll(startdate, enddate, keyword) {
+function filterAll(keyword) {
     $('#show_data_from_db').empty();
-    getDataFromDB(1, startdate, enddate, keyword);
+    getDataFromDB(1, trans_id, keyword);
 }
 
 function delay(callback, ms) {
@@ -47,19 +25,18 @@ function delay(callback, ms) {
     };
 }
 
-function getDataFromDB(page = 1, startdate, enddate, keyword) {
+function getDataFromDB(page = 1, trans_id, keyword) {
     $('.table_wrap_loading_box').show();
     $('.table').html('');
     $.ajax({
         url: '../api/function/manage_transaction.php',
         method: 'post',
         data: {
-            command: 'get_transaction',
+            command: 'get_transactionDesc',
             page: page,
-            startdate: startdate,
-            enddate: enddate,
+            transaction_id: trans_id,
             keyword: keyword,
-            group: 1
+            receiver: 1
         },
         success: function(data) {
             var data = JSON.parse(data);
@@ -73,9 +50,8 @@ function getDataFromDB(page = 1, startdate, enddate, keyword) {
                     header +=    '<tr>';
                     header +=        '<th>No.</th>';
                     header +=        '<th>รหัสทำรายการ</th>';
-                    header +=        '<th>ชื่อผู้ทำรายการ</th>';
-                    header +=        '<th>พนง.ทำรายการ</th>';
-                    header +=        '<th width="120px">ดูข้อมูลรายการ</th>';
+                    header +=        '<th>ชื่อผู้รับ</th>';
+                    header +=        '<th width="120px">พิมพ์ใบแปะหน้า</th>';
                     header +=    '</tr>';
                     header +='</thead>';
                     header +='<tbody id="show_data_from_db">';
@@ -84,11 +60,10 @@ function getDataFromDB(page = 1, startdate, enddate, keyword) {
                     $.each(data.data.data, function(index, val) {
                         html += '<tr>'+
                                 '<td>'+(index+1)+'</td>'+
-                                '<td>'+val.transaction_id+'</td>'+
-                                '<td>'+val.customer_firstname+' '+val.customer_lastname+'</td>'+
-                                '<td>พนง.</td>'+
-                                '<td>'+
-                                '<a href="transaction_history.php?transaction_id='+val.transaction_id+'"><button class="btn_edit btn btn-sm btn-warning mr-2"><i class="fas fa-edit"></i></button></a>'+
+                                '<td>'+val.tracking_code+'</td>'+
+                                '<td>'+val.receiver_desc.firstname+' '+val.receiver_desc.lastname+'</td>'+
+                                '<td align="center">'+
+                                '<a href="item_label.php?tracking_code='+val.tracking_code+'"><button class="btn_edit btn btn-sm btn-success mr-2"><i class="fas fa-print"></i></button></a>'+
                                 '</td>'+
                                 '</tr>';
                     });

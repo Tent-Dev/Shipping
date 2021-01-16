@@ -70,7 +70,26 @@ class MNG_Transaction{
 
 		if(isset($param['transaction_id'])){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
-			$sql_where .= " WHERE tbl_transaction.transaction_id = '".$param['transaction_id']."' ";
+			$sql_where .= " tbl_transaction.transaction_id = '".$param['transaction_id']."' ";
+		}
+		
+		if(isset($param['startdate']) && $param['startdate'] != "" && isset($param['enddate']) && $param['enddate'] != ""){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			if($param['startdate'] === $param['enddate']) {
+				$sql_where .= " tbl_product.create_date LIKE '".$param['startdate']."%' ";
+			}
+			else {
+				$sql_where .= " tbl_product.create_date BETWEEN '".$param['startdate']."' AND '".$param['enddate']."' ";
+			}
+		}
+
+		if(isset($param['keyword']) && $param['keyword'] != ""){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " CONCAT(tbl_transaction.transaction_id, tbl_customer.firstname, tbl_customer.lastname) LIKE '%".$param['keyword']."%' ";
+		}
+
+		if(isset($param['group']) && $param['group'] != "") {
+			$sql_where .= " GROUP BY tbl_transaction.transaction_id ";
 		}
 
 		$sql_query = $sql . $sql_where. $sql_limit;
@@ -117,6 +136,13 @@ class MNG_Transaction{
 	}
 
 	public function GetTransactionDescription($param = null){
+		$per_page = 10;
+		$page = 1;
+		if(isset($param['page']) && $param['page'] != ''){
+			$page = $param['page'];
+		}
+		$start_page = $this->tools->PaginationSetpage($per_page,$page);
+
 		$sql = "
 		SELECT tbl_transaction.transaction_id,
 		tbl_transaction.receiver_desc,
@@ -134,12 +160,24 @@ class MNG_Transaction{
 		JOIN tbl_product
 		ON tbl_product.id = tbl_transaction.product_id";
 
+		$sql_where = "";
+
 		if(isset($param['transaction_id'])){
-			$sql .= " WHERE tbl_transaction.transaction_id = '".$param['transaction_id']."' ";
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_transaction.transaction_id = '".$param['transaction_id']."' ";
+		}
+
+		if(isset($param['keyword'])) {
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " CONCAT(tbl_product.tracking_code, tbl_customer.firstname, tbl_customer.lastname) LIKE '%".$param['keyword']."%' ";
 		}
 		
+		$sql = $sql . $sql_where;
 
 		$data = $this->db_connect->Select_db($sql);
+
+		$rowcount = $this->db_connect->numRows($sql);
+		$total_pages = ceil($rowcount / $per_page);
 
 		if($data){
 			$items = array();
@@ -157,10 +195,11 @@ class MNG_Transaction{
 					'customer_firstname' => $value['firstname'],
 					'customer_lastname' => $value['lastname']
 				);
-				$items['items'][] = $get_item;
+				$items['data'][] = $get_item;
 
 			}
 
+			$items['total_pages'] = $total_pages;
 			$response = array(
 				'status' => 200,
 				'data' => $items
