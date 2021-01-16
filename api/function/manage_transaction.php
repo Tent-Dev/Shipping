@@ -5,9 +5,11 @@
 include("../main_class/connect_db.php");
 include("../main_class/auth.php");
 include("../main_class/lib_manage_transaction.php");
+include("../main_class/tools.php");
 
 $mysql = new Main_db;
 $auth = new Auth;
+$tools = new Tools;
 $mng_transaction = new MNG_Transaction;
 
 $mysql->Connect_db();
