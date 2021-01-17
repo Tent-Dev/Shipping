@@ -31,7 +31,7 @@ function getData(){
 					
 					$.each(data.data.data, function(index, val) {
 						total = total + val.price;
-						 GenerateItemList(val);
+						GenerateItemList(val);
 					});
 
 					$('.total').html(total);
@@ -51,6 +51,12 @@ function getData(){
 
 	}else{
 		console.log('TRANSACTION_ID : not found');
+		Swal.fire({
+			title: 'พบข้อผิดพลาด',
+			text: 'ไม่สามารถดึงข้อมูลได้',
+			icon: 'error',
+			confirmButtonText: 'ตกลง'
+		});
 	}
 }
 

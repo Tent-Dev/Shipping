@@ -1,5 +1,10 @@
 <?php
-    include("../client_config/config.php");
+include("../client_config/config.php");
+if(isset($_GET['tracking_code'])){
+    $tracking_code = $_GET['tracking_code'];
+}else{
+    $tracking_code = '-';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +12,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ใบปะหน้า</title>
+
+    <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.3/dist/JsBarcode.all.min.js"></script>
+    <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var TRACKING_CODE = <?php echo "'{$tracking_code}'" ?>;
+    </script>
+
+    <script src="../js/item_label.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 
     <style>
         * {
@@ -34,6 +48,7 @@
             padding: 10px 20px 5px 0;
             font-size: 12px;
             line-height: 16px;
+            margin-bottom: 10px;
         }
         .address1 b {
             font-size: 14px;
@@ -55,7 +70,7 @@
         }
         .address2 {
             clear: both;
-            width: 60%;
+            width: 80%;
             margin: 0 auto;
             font-size: 12px;
             line-height: 18px;
@@ -71,6 +86,9 @@
             padding: 2px 4px;
             border: 1px solid #000000;
         }
+        .postcode_arr{
+            margin-right: 3px;
+        }
 
         @media print {
             header, footer {
@@ -84,32 +102,31 @@
         <div class="boxs">
             <div class="box">
                 <div class="address1">
-                    <b>ชื่อที่อยู่ผู้ฝากส่ง</b>
-                    <p>ชื่อ</p>
-                    <p>ที่อยู่ <br>ที่อยู่ <br>ที่อยู่</p>
+                    <b>ชื่อที่อยู่ผู้ส่ง</b>
+                    <p class="s_name">ชื่อ</p>
+                    <p class="s_address">ที่อยู่ </p><p>เขต <span class="s_area"></span> แขวง <span class="s_district"></span> <span class="s_province"></span></p>
+                    <!-- <p>โทร. <span class="s_phone"></span></p> -->
                 </div>
                 <div class="address-right">
                     <img src="https://fph.tu.ac.th/uploads/fph/DownloadLogo/2018_FPHHorz%20Logo%20%28EN%29.png" alt="logo" class="logo">
-                    <svg class="barcode" jsbarcode-value="AnyValueYouWish" jsbarcode-margin="0"></svg>
+                    <svg class="barcode" jsbarcode-value="SH00000000000" jsbarcode-margin="0" jsbarcode-fontsize="40" jsbarcode-fontoptions="bold"></svg>
                 </div>
                 <div class="address2">
                     <b>ชื่อที่อยู่ผู้รับ</b>
-                    <p>ชื่อ</p>
-                    <p>ที่อยู่ <br>ที่อยู่ <br>ที่อยู่</p>
-                    <p>โทร.</p>
+                    <p class="r_name">ชื่อ</p>
+                    <p class="r_address">ที่อยู่ </p><p>เขต <span class="r_area"></span> แขวง <span class="r_district"></span> <span class="r_province"></span></p>
+                    <p>โทร. <span class="r_phone"></span></p>
                     <div class="postcode">
-                        <span>1</span>
                         <span>0</span>
-                        <span>1</span>
-                        <span>5</span>
+                        <span>0</span>
+                        <span>0</span>
+                        <span>0</span>
                         <span>0</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.3/dist/JsBarcode.all.min.js"></script>
     <script>
         JsBarcode(".barcode").init();
     </script>
