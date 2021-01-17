@@ -139,7 +139,7 @@ function getAllData(){
                 if(data.status == 200){
                     //window.location.replace("lists.php");
                     console.log('Transaction id: ', data.last_id);
-                    $('.slip_link').attr('href', 'slip.php?transaction_id='+data.last_id);
+                    $('.slip_link').attr('href', 'slip.php?transaction_id='+data.last_id+'&mode=\'id\'');
                     $('.form_add').hide();
                     $('.form_print').show();
                 }

@@ -5,14 +5,21 @@ $(document).ready(function() {
 function getData(){
 	if(TRANSACTION_ID){
 		console.log('TRANSACTION_ID: ',TRANSACTION_ID);
+		console.log('MODE: ',MODE);
+		var ajax_data = {};
+		if(MODE && MODE == 'id'){
+			ajax_data.command = 'get_transactionById';
+			ajax_data.id = TRANSACTION_ID;
+		}
+		else if(MODE && MODE == 'trans_id'){
+			ajax_data.command = 'get_transactionDesc';
+			ajax_data.transaction_id = TRANSACTION_ID;
+		}
 
 		$.ajax({
 			url: '../api/function/manage_transaction.php',
 			method: 'post',
-			data: {
-				command: 'get_transactionById',
-				id: TRANSACTION_ID,
-			},
+			data: ajax_data,
 			success: function(data) {
 				var data = JSON.parse(data);
 				console.log("result: ",data);
@@ -22,7 +29,7 @@ function getData(){
 
 					var total = 0;
 					
-					$.each(data.data.items, function(index, val) {
+					$.each(data.data.data, function(index, val) {
 						total = total + val.price;
 						 GenerateItemList(val);
 					});
@@ -32,7 +39,7 @@ function getData(){
 				}else{
 					Swal.fire({
 						title: 'พบข้อผิดพลาด',
-						text: 'ชื่อบัญชีผู้ใช้ หรือรหัสผ่านไม่ถูกต้อง',
+						text: 'ไม่สามารถดึงข้อมูลได้',
 						icon: 'error',
 						confirmButtonText: 'ตกลง'
 					});

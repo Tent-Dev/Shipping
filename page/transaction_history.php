@@ -48,7 +48,7 @@
                     <a href="history.php" class="btn-back">ประวัติการทำรายการ</a> / <h2 class="d-inline">ข้อมูลประวัติการทำรายการ</h2>
                 </div>
                 <div class="col-2 d-flex align-items-center justify-content-end">
-                    <a href="slip.php?transaction_id=<?php echo $trans_id; ?>" class="btn btn-sm btn-info">พิมพ์ใบเสร็จ</a>
+                    <a href="slip.php?transaction_id=<?php echo $trans_id; ?>&mode='trans_id'" target="_blank" class="btn btn-sm btn-info">พิมพ์ใบเสร็จ</a>
                 </div>
             </div>
             <div class="row mt-2 mb-4">

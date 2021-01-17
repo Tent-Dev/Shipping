@@ -32,7 +32,7 @@ function getDataFromDB(page = 1, trans_id, keyword) {
         url: '../api/function/manage_transaction.php',
         method: 'post',
         data: {
-            command: 'get_transactionDesc',
+            command: 'get_transactionHistory',
             page: page,
             transaction_id: trans_id,
             keyword: keyword,
@@ -49,9 +49,9 @@ function getDataFromDB(page = 1, trans_id, keyword) {
                     header +='<thead>';
                     header +=    '<tr>';
                     header +=        '<th>No.</th>';
-                    header +=        '<th>รหัสทำรายการ</th>';
+                    header +=        '<th>เลขพัสดุ</th>';
                     header +=        '<th>ชื่อผู้รับ</th>';
-                    header +=        '<th width="120px">พิมพ์ใบแปะหน้า</th>';
+                    header +=        '<th width="120px">พิมพ์ใบปะหน้า</th>';
                     header +=    '</tr>';
                     header +='</thead>';
                     header +='<tbody id="show_data_from_db">';
@@ -63,7 +63,7 @@ function getDataFromDB(page = 1, trans_id, keyword) {
                                 '<td>'+val.tracking_code+'</td>'+
                                 '<td>'+val.receiver_desc.firstname+' '+val.receiver_desc.lastname+'</td>'+
                                 '<td align="center">'+
-                                '<a href="item_label.php?tracking_code='+val.tracking_code+'"><button class="btn_edit btn btn-sm btn-success mr-2"><i class="fas fa-print"></i></button></a>'+
+                                '<a href="item_label.php?tracking_code='+val.tracking_code+'" target="_blank"><button class="btn_edit btn btn-sm btn-success mr-2"><i class="fas fa-print"></i></button></a>'+
                                 '</td>'+
                                 '</tr>';
                     });

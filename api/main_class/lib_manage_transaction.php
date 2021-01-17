@@ -136,12 +136,6 @@ class MNG_Transaction{
 	}
 
 	public function GetTransactionDescription($param = null){
-		$per_page = 10;
-		$page = 1;
-		if(isset($param['page']) && $param['page'] != ''){
-			$page = $param['page'];
-		}
-		$start_page = $this->tools->PaginationSetpage($per_page,$page);
 
 		$sql = "
 		SELECT tbl_transaction.transaction_id,
@@ -167,16 +161,91 @@ class MNG_Transaction{
 			$sql_where .= " tbl_transaction.transaction_id = '".$param['transaction_id']."' ";
 		}
 
+
+		$sql_query = $sql . $sql_where;
+
+		$data = $this->db_connect->Select_db($sql_query);
+
+
+		if($data){
+			$items = array();
+
+			foreach ($data as $value) {
+				$get_item = array(
+					'receiver_desc' =>  json_decode($value['receiver_desc']),
+					'sender_desc' => json_decode($value['sender_desc']),
+					'shipping_type' => $value['shipping_type'],
+					'tracking_code' => $value['tracking_code'],
+					'weight' => round($value['weight'], 2),
+					'price' => round($value['price'], 2),
+					'transaction_id' => $value['transaction_id'],
+					'create_date' => $value['create_date'],
+					'customer_firstname' => $value['firstname'],
+					'customer_lastname' => $value['lastname']
+				);
+				$items['data'][] = $get_item;
+
+			}
+
+			$items['transaction_id'] = $value['transaction_id'];
+			$response = array(
+				'status' => 200,
+				'data' => $items
+			);
+			
+		}else{
+			$response = array(
+				'status' => 404,
+				'err_msg' => 'Transaction not found'
+			);
+		}
+		return $response;
+	}
+
+	public function GetTransactionHistory($param = null){
+		$per_page = 10;
+		$page = 1;
+		if(isset($param['page']) && $param['page'] != ''){
+			$page = $param['page'];
+		}
+		$start_page = $this->tools->PaginationSetpage($per_page,$page);
+
+		$sql = "
+		SELECT tbl_transaction.transaction_id,
+		tbl_transaction.receiver_desc,
+		tbl_transaction.sender_desc ,
+		tbl_customer.firstname,
+		tbl_customer.lastname,
+		tbl_product.shipping_type,
+		tbl_product.tracking_code,
+		tbl_product.create_date,
+		tbl_product.weight,
+		tbl_product.price 
+		FROM tbl_transaction
+		JOIN tbl_customer
+		ON tbl_customer.id = tbl_transaction.customer_id
+		JOIN tbl_product
+		ON tbl_product.id = tbl_transaction.product_id";
+
+		$sql_limit = " ORDER BY tbl_transaction.id DESC LIMIT ".$start_page." , ".$per_page."";
+		$sql_where = "";
+
+		if(isset($param['transaction_id'])){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_transaction.transaction_id = '".$param['transaction_id']."' ";
+		}
+
 		if(isset($param['keyword'])) {
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
 			$sql_where .= " CONCAT(tbl_product.tracking_code, tbl_customer.firstname, tbl_customer.lastname) LIKE '%".$param['keyword']."%' ";
 		}
 		
-		$sql = $sql . $sql_where;
+		$sql_query = $sql . $sql_where. $sql_limit;
+		$sql_count = $sql . $sql_where;
 
-		$data = $this->db_connect->Select_db($sql);
+		$data = $this->db_connect->Select_db($sql_query);
 
-		$rowcount = $this->db_connect->numRows($sql);
+		$rowcount = $this->db_connect->numRows($sql_count);
 		$total_pages = ceil($rowcount / $per_page);
 
 		if($data){

@@ -88,7 +88,7 @@ function getDataFromDB(page = 1, startdate, enddate, keyword) {
                                 '<td>'+val.customer_firstname+' '+val.customer_lastname+'</td>'+
                                 '<td>พนง.</td>'+
                                 '<td>'+
-                                '<a href="transaction_history.php?transaction_id='+val.transaction_id+'"><button class="btn_edit btn btn-sm btn-warning mr-2"><i class="fas fa-edit"></i></button></a>'+
+                                '<a href="transaction_history.php?transaction_id='+val.transaction_id+'"><button class="btn_edit btn btn-sm btn-success mr-2"><i class="fas fa-search"></i></button></a>'+
                                 '</td>'+
                                 '</tr>';
                     });

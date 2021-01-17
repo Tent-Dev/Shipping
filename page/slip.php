@@ -4,7 +4,13 @@ include("../client_config/config.php");
 if(isset($_GET['transaction_id'])){
     $trans_id = $_GET['transaction_id'];
 }else{
-    $trans_id = '"-"';
+    $trans_id = '-';
+}
+
+if(isset($_GET['mode'])){
+    $mode = $_GET['mode'];
+}else{
+    $mode = '-';
 }
 ?>
 <!DOCTYPE html>
@@ -17,7 +23,8 @@ if(isset($_GET['transaction_id'])){
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-        var TRANSACTION_ID = <?php echo $trans_id ?>;
+        var TRANSACTION_ID = <?php echo "'{$trans_id}'" ?>;
+        var MODE = <?php echo "{$mode}" ?>;
     </script>
 
     <script src="../js/slip.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
