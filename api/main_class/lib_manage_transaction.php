@@ -140,6 +140,8 @@ class MNG_Transaction{
 		$sql = "
 		SELECT tbl_transaction.transaction_id,
 		tbl_transaction.receiver_desc,
+		tbl_transaction.employee_id,
+		tbl_transaction.create_date as trans_create_date,
 		tbl_transaction.sender_desc ,
 		tbl_customer.firstname,
 		tbl_customer.lastname,
@@ -147,12 +149,17 @@ class MNG_Transaction{
 		tbl_product.tracking_code,
 		tbl_product.create_date,
 		tbl_product.weight,
-		tbl_product.price 
+		tbl_product.price ,
+		tbl_member.firstname as employee_fname,
+		tbl_member.lastname as employee_lname
 		FROM tbl_transaction
 		JOIN tbl_customer
 		ON tbl_customer.id = tbl_transaction.customer_id
 		JOIN tbl_product
-		ON tbl_product.id = tbl_transaction.product_id";
+		ON tbl_product.id = tbl_transaction.product_id
+		LEFT JOIN tbl_member
+		ON tbl_transaction.employee_id = tbl_member.id";
+
 
 		$sql_where = "";
 
@@ -188,6 +195,11 @@ class MNG_Transaction{
 			}
 
 			$items['transaction_id'] = $value['transaction_id'];
+			$items['transaction_create_date'] = $value['trans_create_date'];
+			$items['employee_id'] = $value['employee_id'];
+			$items['employee_fname'] = $value['employee_fname'];
+			$items['employee_lname'] = $value['employee_lname'];
+			
 			$response = array(
 				'status' => 200,
 				'data' => $items

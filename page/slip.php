@@ -82,9 +82,9 @@ if(isset($_GET['mode'])){
             <p>*..ขอบคุณที่มาใช้บริการ..*</p>
         </div>
         <div style="margin-top: 6px;">
-            <p>วันที่ 0000-00-00 00:00:00</p>
+            <p>วันที่ <span class="create_date">0000-00-00 00:00:00</span></p>
             <p>บิลเลขที่ : <span class="transaction_id">-</span></p>
-            <p>แคชเชียร์ : -</p>
+            <p>แคชเชียร์ : <span class="employee_name">-</span></p>
         </div>
         <hr>
         <div class="wrap_detail">

@@ -26,6 +26,8 @@ function getData(){
 				if(data.status == 200){
 					$('.wrap_detail').html('');
 					$('.transaction_id').html(data.data.transaction_id);
+					$('.create_date').html(data.data.transaction_create_date);
+					$('.employee_name').html(data.data.employee_fname+' (EMID: '+data.data.employee_id+')');
 
 					var total = 0;
 					

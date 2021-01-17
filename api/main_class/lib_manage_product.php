@@ -262,6 +262,7 @@ class MNG_Product{
 
 					$arr_customer = array( 
 						"transaction_id" => $trans_id,
+						"employee_id" => $_SESSION['ID'],
 						"customer_id" => $get_last_customer_id,
 						"product_id" => $get_last_product_id,
 						"sender_desc" =>  json_encode($value['sender_desc'], JSON_UNESCAPED_UNICODE),
