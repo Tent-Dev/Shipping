@@ -1186,6 +1186,131 @@
 							"body": "{\"status\":200,\"data\":{\"items\":[{\"receiver_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"shipping_type\":\"normal\",\"tracking_code\":\"SH290Z7518VG6\",\"weight\":1.5,\"price\":30},{\"receiver_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"shipping_type\":\"normal\",\"tracking_code\":\"SH175W2831XA1\",\"weight\":1.5,\"price\":30}],\"transaction_id\":\"160785539365NY\",\"create_date\":\"2020-12-13 17:29:53\",\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e33\\u0e23\\u0e32\\u0e22\\u0e01\\u0e32\\u0e23\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e17\\u0e33\\u0e23\\u0e32\\u0e22\\u0e01\\u0e32\\u0e23\"}}"
 						}
 					]
+				},
+				{
+					"name": "get_transaction_desc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "get_transactionDesc",
+									"type": "text"
+								},
+								{
+									"key": "transaction_id",
+									"value": "161081422017PG",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_transaction.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_transaction.php"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get_transaction",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "command",
+											"value": "get_transaction",
+											"type": "text"
+										},
+										{
+											"key": "transaction_id",
+											"value": "160785539365NY",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1/Shipping/api/function/manage_transaction.php",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"path": [
+										"Shipping",
+										"api",
+										"function",
+										"manage_transaction.php"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 13 Dec 2020 16:25:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.27 (Win32) OpenSSL/1.1.0f PHP/7.1.8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.8"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2480"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":200,\"data\":{\"items\":[{\"receiver_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"shipping_type\":\"normal\",\"tracking_code\":\"SH290Z7518VG6\",\"weight\":1.5,\"price\":30},{\"receiver_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"shipping_type\":\"normal\",\"tracking_code\":\"SH175W2831XA1\",\"weight\":1.5,\"price\":30}],\"transaction_id\":\"160785539365NY\",\"create_date\":\"2020-12-13 17:29:53\",\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e33\\u0e23\\u0e32\\u0e22\\u0e01\\u0e32\\u0e23\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e17\\u0e33\\u0e23\\u0e32\\u0e22\\u0e01\\u0e32\\u0e23\"}}"
+						}
+					]
 				}
 			]
 		},
