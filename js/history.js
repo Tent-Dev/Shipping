@@ -15,25 +15,25 @@ $(document).ready(function() {
         startdate = picker.startDate.format('YYYY-MM-DD');
         enddate = picker.endDate.format('YYYY-MM-DD');
         $(this).val(startdate + ' - ' + enddate);
-        filterAll(startdate, enddate, keyword);
+        filterAll();
     });
 
     $('#filter_date').on('cancel.daterangepicker', function(ev, picker) {
         $('#filter_date').val('');
         startdate = "";
         enddate = "";
-        filterAll(startdate, enddate, keyword);
+        filterAll();
     });
 
     $('#search').keyup(delay(function(e){
         keyword = $(this).val();
-        filterAll(startdate, enddate, keyword);
+        filterAll();
     }, 300));
 });
 
 function filterAll(startdate, enddate, keyword) {
     $('#show_data_from_db').empty();
-    getDataFromDB(1, startdate, enddate, keyword);
+    getDataFromDB(1);
 }
 
 function delay(callback, ms) {
@@ -47,7 +47,7 @@ function delay(callback, ms) {
     };
 }
 
-function getDataFromDB(page = 1, startdate, enddate, keyword) {
+function getDataFromDB(page = 1) {
     $('.table_wrap_loading_box').show();
     $('.table').html('');
     $.ajax({

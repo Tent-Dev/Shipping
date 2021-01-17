@@ -76,10 +76,10 @@ class MNG_Transaction{
 		if(isset($param['startdate']) && $param['startdate'] != "" && isset($param['enddate']) && $param['enddate'] != ""){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
 			if($param['startdate'] === $param['enddate']) {
-				$sql_where .= " tbl_product.create_date LIKE '".$param['startdate']."%' ";
+				$sql_where .= " tbl_transaction.create_date LIKE '".$param['startdate']."%' ";
 			}
 			else {
-				$sql_where .= " tbl_product.create_date BETWEEN '".$param['startdate']."' AND '".$param['enddate']."' ";
+				$sql_where .= " tbl_transaction.create_date BETWEEN '".$param['startdate']."' AND '".$param['enddate']."' ";
 			}
 		}
 
