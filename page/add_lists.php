@@ -285,7 +285,7 @@ include("auth_onpage.php");
                                     <div class="checklist_print"><i class="far fa-check-circle"></i></div>
                                     <div class="textlist_print">ใบปะหน้าพัสดุ</div>
                                     <div>
-                                        <a><button type="button" class="btn btn-sm btn-success">
+                                        <a class="label_link" href="" target="_blank"><button type="button" class="btn btn-sm btn-success">
                                             <i class="fas fa-print"></i>
                                         </button></a>
                                     </div>

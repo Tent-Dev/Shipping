@@ -58,7 +58,7 @@ include("auth_onpage.php");
                             <input class="filter datepicker mt-2 mt-md-0" type="text" name="filter_date" id="filter_date" placeholder="เลือกช่วงวัน" readonly>
                             <br class="d-block d-lg-none">
                             <span class="filter-title">สถานะ</span>
-                            <select class="filter mt-2 mt-lg-0" name="filter_status" id="filter_status" onchange="filterStatus(this.value)">
+                            <select class="filter mt-2 mt-lg-0" name="filter_status" id="filter_status">
                                 <option value="" selected>ทั้งหมด</option>
                                 <option value="waiting">พัสดุถูกนำเข้าสู่ระบบ</option>
                                 <option value="sending">พัสดุกำลังถูกนำส่งไปยังผู้รับ</option>

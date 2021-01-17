@@ -1,7 +1,7 @@
 var keyword = "";
 
 $(document).ready(function() {
-    getDataFromDB(1, trans_id, keyword);
+    getDataFromDB(1, keyword);
 
     $('#search').keyup(delay(function(e){
         keyword = $(this).val();
@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 function filterAll(keyword) {
     $('#show_data_from_db').empty();
-    getDataFromDB(1, trans_id, keyword);
+    getDataFromDB(1, keyword);
 }
 
 function delay(callback, ms) {
@@ -25,7 +25,7 @@ function delay(callback, ms) {
     };
 }
 
-function getDataFromDB(page = 1, trans_id, keyword) {
+function getDataFromDB(page = 1) {
     $('.table_wrap_loading_box').show();
     $('.table').html('');
     $.ajax({

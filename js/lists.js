@@ -1,4 +1,4 @@
-var startdate = "", enddate = "", keyword = "";
+var startdate = "", enddate = "", status = "", keyword = "";
 
 $(document).ready(function() {
 	getDataFromDB();
@@ -22,31 +22,37 @@ $(document).ready(function() {
         enddate = picker.endDate.format('YYYY-MM-DD');
         $(this).val(startdate + ' - ' + enddate);
         var status = $('#filter_status option:selected').val();
-        filterAll(startdate, enddate, status, keyword);
+        filterAll();
     });
 
     $('#filter_date').on('cancel.daterangepicker', function(ev, picker) {
         $('#filter_date').val('');
         startdate = "";
         enddate = "";
-        filterAll(startdate, enddate, status, keyword);
+        filterAll();
     });
 
     $('#search').keyup(delay(function(e){
         var status = $('#filter_status option:selected').val();
         keyword = $(this).val();
-        filterAll(startdate, enddate, status, keyword);
+        filterAll();
     }, 300));
+
+    $('#filter_status').change(function(event) {
+        status = $(this).val();
+        /* Act on the event */
+        filterAll();
+    });
 });
 
 function filterStatus(status) {
     $('#show_data_from_db').empty();
-    getDataFromDB(1, startdate, enddate, status, keyword);
+    getDataFromDB(1);
 }
 
 function filterAll(startdate, enddate, status, keyword) {
     $('#show_data_from_db').empty();
-    getDataFromDB(1, startdate, enddate, status, keyword);
+    getDataFromDB(1);
 }
 
 function delay(callback, ms) {
@@ -60,7 +66,7 @@ function delay(callback, ms) {
     };
 }
 
-function getDataFromDB(page = 1, startdate, enddate, status, keyword){
+function getDataFromDB(page = 1){
     $('.table_wrap_loading_box').show();
     $('.table').html('');
     $.ajax({

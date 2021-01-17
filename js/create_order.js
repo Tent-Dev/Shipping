@@ -140,6 +140,7 @@ function getAllData(){
                     //window.location.replace("lists.php");
                     console.log('Transaction id: ', data.last_id);
                     $('.slip_link').attr('href', 'slip.php?transaction_id='+data.last_id+'&mode=\'id\'');
+                    $('.label_link').attr('href', 'item_label.php?tracking_code='+'XXXXXXXX');
                     $('.form_add').hide();
                     $('.form_print').show();
                 }

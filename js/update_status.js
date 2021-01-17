@@ -48,39 +48,39 @@ $(document).ready(function() {
 		$(this).val(startdate + ' - ' + enddate);
 		status = $('#filter_status option:selected').val();
 		shipper = $('#filter_shipper option:selected').val();
-		filterAll(startdate, enddate, status, keyword, shipper);
+		filterAll();
 	});
 
 	$('#filter_date').on('cancel.daterangepicker', function(ev, picker) {
 		$('#filter_date').val('');
 		startdate = "";
 		enddate = "";
-		filterAll(startdate, enddate, status, keyword, shipper);
+		filterAll();
 	});
 
 	$('#search').keyup(delay(function(e){
 		status = $('#filter_status option:selected').val();
 		shipper = $('#filter_shipper option:selected').val();
 		keyword = $(this).val();
-		filterAll(startdate, enddate, status, keyword, shipper);
+		filterAll();
 	}, 300));
 });
 
 function filterStatus(value) {
 	$('#show_data_from_db').empty();
 	status = value;
-	getDataFromDB(1, startdate, enddate, status, keyword, shipper);
+	getDataFromDB(1);
 }
 
 function filterShipper(value) {
 	$('#show_data_from_db').empty();
 	shipper = value;
-	getDataFromDB(1, startdate, enddate, status, keyword, shipper);
+	getDataFromDB(1);
 }
 
-function filterAll(startdate, enddate, status, keyword, shipper) {
+function filterAll() {
 	$('#show_data_from_db').empty();
-	getDataFromDB(1, startdate, enddate, status, keyword, shipper);
+	getDataFromDB(1);
 }
 
 function delay(callback, ms) {
@@ -94,7 +94,7 @@ function delay(callback, ms) {
 	};
 }
 
-function getDataFromDB(page = 1, startdate, enddate, status, keyword, shipper){
+function getDataFromDB(page = 1){
 	$('.table_wrap_loading_box').show();
 	$('.table').html('');
 	$.ajax({
