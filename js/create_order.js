@@ -1,3 +1,11 @@
+var check_sender_history_timeout = 0;
+var sender_history_set = [];
+
+var check_receiver_history_timeout = 0;
+var receiver_history_set = [];
+
+var check_customer_history_timeout = 0;
+var customer_history_set = [];
 
 $(document).ready(function() {
 	
@@ -27,6 +35,68 @@ $(document).ready(function() {
 
     $('.btn_save').click(function(event) {
         getAllData();
+    });
+
+    $(document).on('keyup', '.phone_number', function(event) {
+        var pointer_index = $(this).closest('.section').attr('data-index');
+        clearTimeout(check_receiver_history_timeout);
+        check_receiver_history_timeout = setTimeout(function() {
+            getHistory('receiver', pointer_index);
+        }, 1000);
+    });
+
+    $(document).on('keyup', '.sender_phone', function(event) {
+        var pointer_index = $(this).closest('.section').attr('data-index');
+        clearTimeout(check_sender_history_timeout);
+        check_sender_history_timeout = setTimeout(function() {
+            getHistory('sender', pointer_index);
+        }, 1000);
+    });
+
+
+    $("#customer_phone_number").keyup(function(event) {
+        clearTimeout(check_customer_history_timeout);
+        check_customer_history_timeout = setTimeout(function() {
+            getHistory('customer');
+        }, 1000);
+    });
+
+    $(document).on('click', '.sender_history', function(event) {
+        var sender_history = $(this).data('index');
+        var pointer_index = $(this).closest('.section').attr('data-index');
+
+        pointer_index = pointer_index == 1 ? '' : pointer_index;
+        $("#sender_phone"+pointer_index).val(sender_history_set[sender_history].phone_number);
+        $("#s_fname"+pointer_index).val(sender_history_set[sender_history].firstname);
+        $("#s_lname"+pointer_index).val(sender_history_set[sender_history].lastname);
+        $("#s_address"+pointer_index).val(sender_history_set[sender_history].address.address);
+        $("#s_district"+pointer_index).val(sender_history_set[sender_history].address.district);
+        $("#s_area"+pointer_index).val(sender_history_set[sender_history].address.area);
+        $("#s_province"+pointer_index).val(sender_history_set[sender_history].address.province);
+        $("#s_postcode"+pointer_index).val(sender_history_set[sender_history].address.postal);
+    });
+
+    $(document).on('click', '.receiver_history', function(event) {
+        var receiver_history = $(this).data('index');
+        var pointer_index = $(this).closest('.section').attr('data-index');
+
+        pointer_index = pointer_index == 1 ? '' : pointer_index;
+        $("#phone_number"+pointer_index).val(receiver_history_set[receiver_history].phone_number);
+        $("#r_fname"+pointer_index).val(receiver_history_set[receiver_history].firstname);
+        $("#r_lname"+pointer_index).val(receiver_history_set[receiver_history].lastname);
+        $("#r_address"+pointer_index).val(receiver_history_set[receiver_history].address.address);
+        $("#r_district"+pointer_index).val(receiver_history_set[receiver_history].address.district);
+        $("#r_area"+pointer_index).val(receiver_history_set[receiver_history].address.area);
+        $("#r_province"+pointer_index).val(receiver_history_set[receiver_history].address.province);
+        $("#r_postcode"+pointer_index).val(receiver_history_set[receiver_history].address.postal);
+    });
+
+    $(document).on('click', '.customer_history', function(event) {
+        var customer_history = $(this).data('index');
+        $("#customer_phone_number").val(customer_history_set[customer_history].phone_number);
+        $("#firstname").val(customer_history_set[customer_history].firstname);
+        $("#lastname").val(customer_history_set[customer_history].lastname);
+        $("#id_card").val(customer_history_set[customer_history].id_card);
     });
 
 });
@@ -390,4 +460,88 @@ function validateCreate(pointer_index){
     }
 
     return result;
+}
+
+function getHistory(type = null, pointer_index = null){
+
+    var phone_number = '';
+    var command = '';
+    var class_name = '';
+    var sub_class_name = '';
+    var url = '';
+    if(type == 'sender'){
+        $('.section[data-index="'+pointer_index+'"]').find('.sender-suggest').html('');
+        phone_number = $('.section[data-index="'+pointer_index+'"]').find(".sender_phone").val();
+        command = 'get_sender';
+        class_name = $('.section[data-index="'+pointer_index+'"]').find('.sender-suggest');
+        sub_class_name = 'sender_history';
+        url = 'manage_sender.php';
+    }
+    else if(type == 'receiver'){
+        $('.section[data-index="'+pointer_index+'"]').find('.receiver-suggest').html('');
+        phone_number = $('.section[data-index="'+pointer_index+'"]').find(".phone_number").val();
+        command = 'get_receiver';
+        class_name = $('.section[data-index="'+pointer_index+'"]').find('.receiver-suggest');
+        sub_class_name = 'receiver_history';
+        url = 'manage_receiver.php';
+    }
+    else if(type == 'customer'){
+        $('.customer-suggest').html('');
+        phone_number = $("#customer_phone_number").val();
+        command = 'get_customer';
+        class_name = $('.customer-suggest');
+        sub_class_name = 'customer_history';
+        url = 'manage_customer.php';
+    }
+    
+    $.ajax({
+        url: '../api/function/'+url,
+        method: 'post',
+        data: {
+            command: command,
+            phone_number: phone_number,
+        },
+        success: function(data) {
+            var data = JSON.parse(data);
+            console.log("result: ",data);
+
+            if(data.status == 200){
+                var html = '';
+                if(type == 'sender'){
+                    sender_history_set = data.data.items;
+                }
+                else if(type == 'receiver'){
+                    receiver_history_set = data.data.items;
+                }
+                else if(type == 'customer'){
+                    customer_history_set = data.data.items;
+                }
+
+                if(type == 'customer'){
+                    $.each(data.data.items, function(index, val) {
+                        html += '<div class="suggest-detail '+sub_class_name+'" data-index='+index+'>';
+                        html +=    '<p>'+val.phone_number+'</p>';
+                        html +=    '<p>'+val.firstname+' '+val.lastname+'</p>';
+                        html +=    '<p>เลขบัตรประชาขน '+val.id_card+'</p>';
+                        html += '</div>';
+                    });
+                }else{
+                    $.each(data.data.items, function(index, val) {
+                        html += '<div class="suggest-detail '+sub_class_name+'" data-index='+index+'>';
+                        html +=    '<p>'+val.phone_number+'</p>';
+                        html +=    '<p>'+val.firstname+' '+val.lastname+'</p>';
+                        html +=    '<p>'+val.address.address+'</p>';
+                        html +=    '<p>เขต '+val.address.area+' แขวง '+val.address.district+' '+val.address.province+' '+val.address.postal+'</p>';
+                        html += '</div>';
+                    });
+                }
+                
+
+                class_name.html(html);
+            }
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
 }
