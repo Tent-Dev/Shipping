@@ -313,7 +313,8 @@ class MNG_Product{
 						if($result_transport['status']){
 							$response = array(
 								'status' => 200,
-								'last_id' => $result_transaction['last_id']
+								'last_id' => $result_transaction['last_id'],
+								'transaction_id' => $trans_id
 							);
 						}else{
 							$response = array(

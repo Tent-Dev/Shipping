@@ -5,6 +5,18 @@ if(isset($_GET['tracking_code'])){
 }else{
     $tracking_code = '-';
 }
+
+if(isset($_GET['mode'])){
+    $mode = $_GET['mode'];
+}else{
+    $mode = '';
+}
+
+if(isset($_GET['transaction_id'])){
+    $transaction_id = $_GET['transaction_id'];
+}else{
+    $transaction_id = '';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +30,8 @@ if(isset($_GET['tracking_code'])){
     <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         var TRACKING_CODE = <?php echo "'{$tracking_code}'" ?>;
+        var MODE = <?php echo "'{$mode}'" ?>;
+        var TRANSACTION_ID = <?php echo "'{$transaction_id}'" ?>;
     </script>
 
     <script src="../js/item_label.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
@@ -34,6 +48,7 @@ if(isset($_GET['tracking_code'])){
         .boxs {
             display: flex;
             flex-wrap: wrap;
+            margin-bottom: 2.1mm;
         }
         .box {
             width: 100mm;
@@ -99,13 +114,12 @@ if(isset($_GET['tracking_code'])){
 </head>
 <body>
     <div class="page">
-        <div class="boxs">
+        <!-- <div class="boxs">
             <div class="box">
                 <div class="address1">
                     <b>ชื่อที่อยู่ผู้ส่ง</b>
                     <p class="s_name">ชื่อ</p>
                     <p class="s_address">ที่อยู่ </p><p>เขต <span class="s_area"></span> แขวง <span class="s_district"></span> <span class="s_province"></span></p>
-                    <!-- <p>โทร. <span class="s_phone"></span></p> -->
                 </div>
                 <div class="address-right">
                     <img src="https://fph.tu.ac.th/uploads/fph/DownloadLogo/2018_FPHHorz%20Logo%20%28EN%29.png" alt="logo" class="logo">
@@ -125,7 +139,7 @@ if(isset($_GET['tracking_code'])){
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <script>
         JsBarcode(".barcode").init();

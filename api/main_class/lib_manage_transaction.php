@@ -46,6 +46,7 @@ class MNG_Transaction{
 		if(isset($param['page']) && $param['page'] != ''){
 			$page = $param['page'];
 		}
+		
 		$start_page = $this->tools->PaginationSetpage($per_page,$page);
 		$sql = "
 
@@ -65,7 +66,11 @@ class MNG_Transaction{
 		JOIN tbl_product
 		ON tbl_product.id = tbl_transaction.product_id";
 
-		$sql_limit = " ORDER BY tbl_transaction.id DESC LIMIT ".$start_page." , ".$per_page."";
+		$sql_limit = " ORDER BY tbl_transaction.id DESC ";
+		if($mode == ''){
+			$sql_limit .= " LIMIT ".$start_page." , ".$per_page."";
+		}
+		
 		$sql_where = "";
 
 		if(isset($param['transaction_id'])){
@@ -220,6 +225,11 @@ class MNG_Transaction{
 		if(isset($param['page']) && $param['page'] != ''){
 			$page = $param['page'];
 		}
+		if(isset($param['mode']) && $param['mode'] != ''){
+			$mode = $param['mode'];
+		}else{
+			$mode = '';
+		}
 		$start_page = $this->tools->PaginationSetpage($per_page,$page);
 
 		$sql = "
@@ -239,7 +249,10 @@ class MNG_Transaction{
 		JOIN tbl_product
 		ON tbl_product.id = tbl_transaction.product_id";
 
-		$sql_limit = " ORDER BY tbl_transaction.id DESC LIMIT ".$start_page." , ".$per_page."";
+		$sql_limit = " ORDER BY tbl_transaction.id DESC ";
+		if($mode == ''){
+			$sql_limit .= " LIMIT ".$start_page." , ".$per_page."";
+		}
 		$sql_where = "";
 
 		if(isset($param['transaction_id'])){

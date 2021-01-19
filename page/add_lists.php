@@ -281,7 +281,7 @@ include("auth_onpage.php");
                                 <b style="font-size: 20px">นำพัสดุเข้าสู่ระบบเรียบร้อยแล้ว</b>
                             </div>
                             <div align="center" style="margin-bottom: 10px;">
-                                ขั้นตอนสุดท้าย: ปริ้นใบปะหน้าพัสดุ และใบเสร็จรับเงิน
+                                ขั้นตอนสุดท้าย: พิมพ์ใบปะหน้าพัสดุ และใบเสร็จรับเงิน
                             </div>
                             <div align="center" style="margin-bottom: 30px;">
                                 <div class="row wrap_checklist">
@@ -305,7 +305,7 @@ include("auth_onpage.php");
                                 </div>
                             </div>
                             <div align="center" style="margin-bottom: 10px;">
-                                หมายเหตุ: ท่านสามารถปริ้นใบปะหน้าและใบเสร็จรับเงินภายหลังได้
+                                หมายเหตุ: ท่านสามารถพิมพ์ใบปะหน้าและใบเสร็จรับเงินภายหลังได้
                             </div>
                         </div>
                     </div>
