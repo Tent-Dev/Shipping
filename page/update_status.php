@@ -1,5 +1,10 @@
 <?php
 include("auth_onpage.php");
+if(isset($_SESSION['TYPE']) && isset($_SESSION['ID']) && $_SESSION['TYPE'] == 'shipper') {
+        $employee_id = $_SESSION['ID'];
+    } else {
+        $employee_id = '';
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +21,10 @@ include("auth_onpage.php");
     <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="../css/main_custom.css" rel="stylesheet">
 
+    <script type="text/javascript">
+        var SHIPPER_ID = '<?php echo $employee_id; ?>';
+    </script>
+
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -23,6 +32,7 @@ include("auth_onpage.php");
     <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/Signature/jq-signature.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/logout.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
     <script src="../js/update_status.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 
     <style>

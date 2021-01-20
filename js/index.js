@@ -18,7 +18,11 @@ $(document).ready(function() {
 					var data = JSON.parse(data);
 					console.log("result: ",data);
 					if(data.status == 200){
-						location.href = 'page/lists.php';
+						if(data.data.member_type == 'shipper'){
+							location.href = 'page/update_status.php';
+						}else{
+							location.href = 'page/lists.php';
+						}
 					}else{
 						console.log("result: ",data);
 						$('#login').html('เข้าสู่ระบบ');

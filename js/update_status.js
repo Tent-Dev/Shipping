@@ -1,8 +1,12 @@
 var startdate = "", enddate = "", status = "", keyword = "", shipper = "";
 
 $(document).ready(function() {
-	getDataFromDB();
-	getShipperList();
+	if(SHIPPER_ID !== ''){
+		getShipperList();
+	}else{
+		getDataFromDB();
+		getShipperList();
+	}
 
 	$(document).on('click', '.btn_edit', function(event) {
 		var product_id = $(this).data('id');
@@ -299,6 +303,10 @@ function getShipperList(){
 				SHIPPER_LIST.forEach(element => {
 					$('#filter_shipper').append('<option value="'+element.id+'">'+element.firstname+' '+element.lastname+'</option>');
 				});
+			}
+			if(SHIPPER_ID !== ''){
+				$("#filter_shipper").val(SHIPPER_ID).change();
+				getDataFromDB();
 			}
 		},
 		error: function() {

@@ -1,5 +1,9 @@
 <?php
 include("auth_onpage.php");
+if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
+    header("Location: javascript://history.go(-1)");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

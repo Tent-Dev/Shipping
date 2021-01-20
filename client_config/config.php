@@ -1,7 +1,7 @@
 <?php
 
-$member_type = array('staff', 'admin');
+$member_type = array('shipper','staff', 'admin');
 
-define('JS_VERSION', 10);
+define('JS_VERSION', 11);
 define('MEMBER_TYPE', json_encode($member_type));
 ?>

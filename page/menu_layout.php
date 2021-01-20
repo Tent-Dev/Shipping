@@ -29,10 +29,14 @@
         <img src="https://fph.tu.ac.th/uploads/fph/DownloadLogo/2018_FPHHorz%20Logo%20%28EN%29.png" alt="">
     </div>
     <div class="menu-content">
+        <?php if(isset($_SESSION['TYPE']) && $_SESSION['TYPE'] == 'admin' || $_SESSION['TYPE'] == 'staff'){?>
         <a href="lists.php" class="menu <?php if($path == 'lists.php' || $path == 'add_lists.php' || $path == 'edit_lists.php') echo "active"; ?>">รายการพัสดุ</a>
         <a href="sort_mail.php" class="menu <?php if($path == 'sort_mail.php') echo "active"; ?>">คัดแยกพัสดุ</a>
+        <?php } ?>
         <a href="update_status.php" class="menu <?php if($path == 'update_status.php') echo "active"; ?>">อัพเดทสถานะพัสดุ</a>
+        <?php if(isset($_SESSION['TYPE']) && $_SESSION['TYPE'] == 'admin' || $_SESSION['TYPE'] == 'staff'){?>
         <a href="history.php" class="menu <?php if($path == 'history.php' || $path == 'transaction_history.php') echo "active"; ?>">ประวัติการทำรายการ</a>
+        <?php } ?>
         <?php if(isset($_SESSION['TYPE']) && $_SESSION['TYPE'] == 'admin'){?>
         <a href="manage_user.php" class="menu <?php if($path == 'manage_user.php') echo "active"; ?>">จัดการรายชื่อพนักงาน</a>
         <?php } ?>
