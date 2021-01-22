@@ -87,3 +87,22 @@ input.filter::placeholder {
 .table td {
   height: 42px;
 }
+
+.tool_col{
+  text-align: center;
+}
+
+.profile_img{
+  align-items: center;
+}
+
+.page-link{
+  color: #1560bd;
+}
+
+.page-item.active .page-link{
+ background-color: #1560bd;
+ color: #fff;
+ border-color: #1560bd;
+
+}
