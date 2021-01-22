@@ -135,15 +135,30 @@ function getDataFromDB(page = 1){
 					header +='</tbody>';
 					$('.table').html(header);
 					$.each(data.data.data, function(index, val) {
+						var null_class = '';
+						var shipper_name = '';
+						var btn_disable = '';
+						if(val.shipper_name == null){
+							shipper_name = 'ไม่มีคนนำจ่าย&nbsp;<i class="fas fa-exclamation-circle"></i>';
+							null_class = 'shipper_null';
+						}else{
+							shipper_name = val.shipper_name;
+						}
+
 						html +=
 						'<tr class="_rowid-'+val.id+'">'+
 						'<td>'+val.create_date+'</td>'+
 						'<td>'+val.tracking_code+'</td>'+
 						'<td>'+val.receiver_desc.firstname+'</td>'+
 						'<td class="_td-status">'+val.status+'</td>'+
-						'<td>'+val.shipper_name+'</td>'+
-						'<td align="center">'+
-						'<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
+						'<td class="'+null_class+'">'+shipper_name+'</td>'+
+						'<td align="center">';
+						if(val.shipper_name == null){
+							html += '';
+						}else{
+							html += '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>';
+						}
+						html +=
 						'</td>'+
 						'</tr>';
 					});

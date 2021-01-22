@@ -86,7 +86,7 @@ function getDataFromDB(page = 1) {
                                 '<td>'+(index+1)+'</td>'+
                                 '<td>'+val.transaction_id+'</td>'+
                                 '<td>'+val.customer_firstname+' '+val.customer_lastname+'</td>'+
-                                '<td>พนง.</td>'+
+                                '<td>'+val.employee_fname+' '+val.employee_lname+'</td>'+
                                 '<td>'+
                                 '<a href="transaction_history.php?transaction_id='+val.transaction_id+'"><button class="btn_edit btn btn-sm btn-success mr-2"><i class="fas fa-search"></i></button></a>'+
                                 '</td>'+

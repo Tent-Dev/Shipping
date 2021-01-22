@@ -107,13 +107,23 @@ function getDataFromDB(page = 1){
 					header +=        '<th>เขตจัดส่ง</th>';
 					header +=        '<th>สถานะ</th>';
 					header +=        '<th>คนนำจ่าย</th>';
-					header +=        '<th width="120px">แก้ไข</th>';
+					header +=        '<th width="120px">เลือกคนนำจ่าย</th>';
 					header +=    '</tr>';
 					header +='</thead>';
 					header +='<tbody id="show_data_from_db">';
 					header +='</tbody>';
 					$('.table').html(header);
 					$.each(data.data.data, function(index, val) {
+						var null_class = '';
+						var shipper_name = '';
+
+						if(val.shipper_name == null){
+							shipper_name = 'ไม่มีคนนำจ่าย&nbsp;<i class="fas fa-exclamation-circle"></i>';
+							null_class = 'shipper_null';
+						}else{
+							shipper_name = val.shipper_name;
+						}
+
 						html +=
 						'<tr class="_rowid-'+val.id+'">'+
 						'<td >'+val.create_date+'</td>'+
@@ -121,7 +131,7 @@ function getDataFromDB(page = 1){
 						'<td>'+val.receiver_desc.firstname+'</td>'+
 						'<td>'+val.receiver_desc.area+'</td>'+
 						'<td>'+val.status+'</td>'+
-						'<td class="_td-shippername">'+val.shipper_name+'</td>'+
+						'<td class="_td-shippername '+null_class+'">'+shipper_name+'</td>'+
 						'<td>'+
 						// '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
 						'<button class="btn btn-sm btn-warning mr-2 btn_edit" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
@@ -328,6 +338,7 @@ function saveData(product_id){
 				$('.btn_save, .btn_cancel').attr('disabled', false);
 				if(data.status == 200){
 					$('._rowid-'+product_id+'').find('._td-shippername').html($('#sender > option:selected').html());
+					$('._rowid-'+product_id+'').find('._td-shippername').removeClass('shipper_null');
 					$("#editData").modal('hide');
 				}else{
 					Swal.fire({
