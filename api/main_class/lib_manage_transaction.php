@@ -53,18 +53,23 @@ class MNG_Transaction{
 		SELECT tbl_transaction.transaction_id,
 		tbl_transaction.receiver_desc,
 		tbl_transaction.sender_desc ,
+		tbl_transaction.employee_id,
 		tbl_customer.firstname,
 		tbl_customer.lastname,
 		tbl_product.shipping_type,
 		tbl_product.tracking_code,
 		tbl_product.create_date,
 		tbl_product.weight,
-		tbl_product.price 
+		tbl_product.price,
+		tbl_member.firstname as employee_fname,
+		tbl_member.lastname as employee_lname 
 		FROM tbl_transaction
 		JOIN tbl_customer
 		ON tbl_customer.id = tbl_transaction.customer_id
 		JOIN tbl_product
-		ON tbl_product.id = tbl_transaction.product_id";
+		ON tbl_product.id = tbl_transaction.product_id
+		LEFT JOIN tbl_member
+		ON tbl_transaction.employee_id = tbl_member.id";
 
 		$sql_limit = " ORDER BY tbl_transaction.id DESC ";
 		if($mode == ''){
@@ -119,7 +124,10 @@ class MNG_Transaction{
 					'transaction_id' => $value['transaction_id'],
 					'create_date' => $value['create_date'],
 					'customer_firstname' => $value['firstname'],
-					'customer_lastname' => $value['lastname']
+					'customer_lastname' => $value['lastname'],
+					'employee_id' => $value['employee_id'],
+					'employee_fname' => $value['employee_fname'],
+					'employee_lname' => $value['employee_lname']
 				);
 				$items[] = $get_item;
 

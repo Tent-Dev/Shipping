@@ -36,6 +36,9 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
             margin-bottom: 0;
             text-decoration: underline;
         }
+        .shipper_null{
+            color: red;
+        }
     </style>
 </head>
 <body>

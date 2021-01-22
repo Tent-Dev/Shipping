@@ -62,6 +62,9 @@ if(isset($_SESSION['TYPE']) && isset($_SESSION['ID']) && $_SESSION['TYPE'] == 's
         .clear-sign:hover {
             color: #ff0000;
         }
+        .shipper_null{
+            color: red;
+        }
         canvas{
             width: calc(100% - 0vw) !important
         }
