@@ -44,24 +44,24 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-8 mt-3 mb-2">
+                <div class="col-lg-8 mt-3 mb-2">
                     <a href="history.php" class="btn-back">ประวัติการทำรายการ</a> / <h2 class="d-inline">ข้อมูลประวัติการทำรายการ</h2>
                 </div>
-                <div class="col-4 d-flex align-items-center justify-content-end">
+                <div class="col-lg-4 d-flex align-items-center justify-content-end">
                     <a href="slip.php?transaction_id=<?php echo $trans_id; ?>&mode='trans_id'" target="_blank" class="btn btn-sm btn-info mr-2">พิมพ์ใบเสร็จ</a>
                     <a href="item_label.php?transaction_id=<?php echo $trans_id; ?>&mode=all" target="_blank" class="btn btn-sm btn-info">พิมพ์ใบปะหน้าทั้งหมด</a>
                 </div>
             </div>
             <div class="row mt-2 mb-4">
-                <div class="col-12">
-                    <span class="mr-2">Filter</span>
-                    <input class="filter" type="text" name="search" id="search" placeholder="ค้นหา">
-                </div>
+                <div class="col-lg-1">ค้นหา</div>
+                <div class="col-lg-3"><input class="filter mt-2 mt-lg-0 mb-2 mb-lg-0" type="text" name="search" id="search" placeholder="ค้นหา"></div>
             </div>
 
             <div class="row">
                 <div class="col-12">
-                    <table class="table table-sm table-hover"></table>
+                    <div class="oveflow-auto">
+                        <table class="table table-sm table-hover"></table>
+                    </div>
                 </div>
             </div>
 

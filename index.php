@@ -24,11 +24,17 @@
 </head>
 <body>
 	<style>
+		body {
+			background-color: #1560bd;
+		}
 		.login-box {
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
+		}
+		@media (max-width: 767px) {
+			.login-box { width: 90%; }
 		}
 	</style>
 
@@ -53,7 +59,7 @@
 				</div>
 			</div>
 		</div>
-		<p align="center">Copyright 2020 Shipping System by <a href="#">Dev-Team</a></p>
+		<p align="center" class="text-white">Copyright 2020 Shipping System by <a href="#" class="text-white">Dev-Team</a></p>
 	</div>
 </body>
 </html>

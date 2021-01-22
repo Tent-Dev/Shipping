@@ -123,12 +123,12 @@ function getDataFromDB(page = 1){
 				if(data.data.data.length > 0){
 					header +='<thead>';
 					header +=    '<tr>';
-					header +=        '<th>วันที่นำเข้าพัสดุ</th>';
+					header +=        '<th width="100px">อัพเดทสถานะ</th>';
+					header +=        '<th>สถานะ</th>';
 					header +=        '<th>เลขพัสดุ</th>';
 					header +=        '<th>ชื่อผู้รับ</th>';
-					header +=        '<th>สถานะ</th>';
 					header +=        '<th>คนนำจ่าย</th>';
-					header +=        '<th width="100px">แก้ไขสถานะ</th>';
+					header +=        '<th>วันที่นำเข้าพัสดุ</th>';
 					header +=    '</tr>';
 					header +='</thead>';
 					header +='<tbody id="show_data_from_db">';
@@ -137,14 +137,14 @@ function getDataFromDB(page = 1){
 					$.each(data.data.data, function(index, val) {
 						html +=
 						'<tr class="_rowid-'+val.id+'">'+
-						'<td>'+val.create_date+'</td>'+
-						'<td>'+val.tracking_code+'</td>'+
-						'<td>'+val.receiver_desc.firstname+'</td>'+
-						'<td class="_td-status">'+val.status+'</td>'+
-						'<td>'+val.shipper_name+'</td>'+
 						'<td align="center">'+
 						'<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
 						'</td>'+
+						'<td class="_td-status">'+val.status+'</td>'+
+						'<td>'+val.tracking_code+'</td>'+
+						'<td>'+val.receiver_desc.firstname+'</td>'+
+						'<td>'+val.shipper_name+'</td>'+
+						'<td>'+val.create_date+'</td>'+
 						'</tr>';
 					});
 					pagination(page,data.data.total_pages);

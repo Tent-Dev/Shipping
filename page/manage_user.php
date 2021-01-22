@@ -38,10 +38,10 @@ if($_SESSION['TYPE'] != 'admin'){
             <div class="row">
                 <div class="col-12 mt-3 mb-5">
                     <div class="row">
-                        <div class="col-9">
+                        <div class="col-lg-9">
                             <h1>จัดการรายชื่อพนักงาน</h1>
                         </div>
-                        <div class="col-3 d-flex align-items-center justify-content-end">
+                        <div class="col-lg-3 d-flex align-items-center justify-content-end mb-4 mb-lg-0">
                             <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#addData">เพิ่มบัญชีผู้ใช้ <i class="fas fa-plus"></i></button>
                         </div>
                     </div>

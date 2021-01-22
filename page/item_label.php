@@ -48,12 +48,14 @@ if(isset($_GET['transaction_id'])){
         .boxs {
             display: flex;
             flex-wrap: wrap;
+            justify-content: space-around;
             margin-bottom: 2.1mm;
         }
         .box {
             width: 100mm;
             height: 75mm;
             padding: 10px;
+            margin-bottom: 10px;
             border: 1px solid #ababab;
         }
         .address1 {
@@ -66,7 +68,7 @@ if(isset($_GET['transaction_id'])){
             margin-bottom: 10px;
         }
         .address1 b {
-            font-size: 14px;
+            font-size: 12px;
         }
         .address-right {
             position: relative;
@@ -87,15 +89,18 @@ if(isset($_GET['transaction_id'])){
             clear: both;
             width: 80%;
             margin: 0 auto;
-            font-size: 12px;
+            font-size: 14px;
             line-height: 18px;
         }
         .address2 b {
-            font-size: 16px;
+            font-size: 12px;
         }
         p {
             margin-top: 2px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
+        }
+        .postcode {
+            margin-top: 10px;
         }
         .postcode span {
             padding: 2px 4px;
@@ -103,6 +108,10 @@ if(isset($_GET['transaction_id'])){
         }
         .postcode_arr{
             margin-right: 3px;
+        }
+        .date {
+            font-size: 10px;
+            text-align: right;
         }
 
         @media print {
@@ -114,8 +123,8 @@ if(isset($_GET['transaction_id'])){
 </head>
 <body>
     <div class="page">
-        <!-- <div class="boxs">
-            <div class="box">
+        <div class="boxs">
+            <!-- <div class="box">
                 <div class="address1">
                     <b>ชื่อที่อยู่ผู้ส่ง</b>
                     <p class="s_name">ชื่อ</p>
@@ -138,8 +147,8 @@ if(isset($_GET['transaction_id'])){
                         <span>0</span>
                     </div>
                 </div>
-            </div>
-        </div> -->
+            </div> -->
+        </div>
     </div>
     <script>
         JsBarcode(".barcode").init();

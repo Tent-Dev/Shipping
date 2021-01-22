@@ -318,10 +318,10 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
         </section>
 
         <script>
-            $('.form-suggest').on('focus', function() {
+            $('body').delegate('.form-suggest', 'focus', function() {
                 $(this).parent().find('.box-suggest').addClass('active');
             });
-            $('.form-suggest').on('focusout', function() {
+            $('body').delegate('.form-suggest', 'focusout', function() {
                 $(this).parent().find('.box-suggest.active').removeClass('active');
             });
         </script>

@@ -155,6 +155,27 @@ a.tel {
 .StepProgress strong {
   display: block;
 }
+.sign_title {
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.signature {
+  opacity: 0;
+  visibility: hidden;
+}
+.signature.open {
+  height: 80px;
+  opacity: 1;
+  visibility: visible;
+}
+.signature img {
+  display: none;
+  height: 100%;
+}
+.signature.open img {
+  display: block;
+}
 
 @media (max-width: 992px) {
   .box {

@@ -49,6 +49,8 @@
 }
 
 .filter {
+  width: 100%;
+  height: 30px;
   padding: 1.5px 10px;
   font-size: 14px;
   color: #4e4e4e;
@@ -59,10 +61,6 @@
 
 input.filter::placeholder {
   color: #9c9c9c !important;
-}
-
-.datepicker {
-  width: 200px;
 }
 
 .table_wrap_loading_box{
@@ -81,4 +79,11 @@ input.filter::placeholder {
   height: 400px;
   font-size: 40px;
   color: #9999;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}
+.table td {
+  height: 42px;
 }

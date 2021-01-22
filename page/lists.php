@@ -46,23 +46,25 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
             <div class="row">
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-9">
+                        <div class="col-lg-9">
                             <h1>รายการพัสดุ</h1>
                         </div>
-                        <div class="col-3 d-flex align-items-center justify-content-end">
+                        <div class="col-lg-3 d-flex align-items-center justify-content-end">
                             <a href="add_lists.php">
                                 <button type="button" class="btn btn-sm btn-success">เพิ่มรายการพัสดุ <i class="fas fa-plus"></i></button>
                             </a>
                         </div>
                     </div>
-                    <div class="row mt-2 mb-4">
-                        <div class="col-12">
-                            <span class="mr-2">Filter</span>
-                            <input class="filter" type="text" name="search" id="search" placeholder="ค้นหา">
-                            <input class="filter datepicker mt-2 mt-md-0" type="text" name="filter_date" id="filter_date" placeholder="เลือกช่วงวัน" readonly>
-                            <br class="d-block d-lg-none">
-                            <span class="filter-title">สถานะ</span>
-                            <select class="filter mt-2 mt-lg-0" name="filter_status" id="filter_status">
+                    <div class="row mt-2 mb-2">
+                        <div class="col-lg-1">ค้นหา</div>
+                        <div class="col-lg-3"><input class="filter mt-2 mt-lg-0 mb-2 mb-lg-0" type="text" name="search" id="search" placeholder="ค้นหา"></div>
+                        <div class="col-lg-2">วันนำเข้าพัสดุ</div>
+                        <div class="col-lg-3"><input class="filter datepicker mt-2 mt-lg-0" type="text" name="filter_date" id="filter_date" placeholder="เลือกช่วงวัน" readonly></div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-1">สถานะ</div>
+                        <div class="col-lg-3">
+                            <select class="filter mt-2 mt-lg-0" name="filter_status" id="filter_status" onchange="filterStatus(this.value)">
                                 <option value="" selected>ทั้งหมด</option>
                                 <option value="waiting">พัสดุถูกนำเข้าสู่ระบบ</option>
                                 <option value="sending">พัสดุกำลังถูกนำส่งไปยังผู้รับ</option>

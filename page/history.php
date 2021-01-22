@@ -40,16 +40,17 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                 </div>
             </div>
             <div class="row mt-2 mb-4">
-                <div class="col-12">
-                    <span class="mr-2">Filter</span>
-                    <input class="filter" type="text" name="search" id="search" placeholder="ค้นหา">
-                    <input class="filter datepicker mt-2 mt-md-0" type="text" name="filter_date" id="filter_date" placeholder="เลือกช่วงวัน" readonly>
-                </div>
+                <div class="col-lg-1">ค้นหา</div>
+                <div class="col-lg-3"><input class="filter mt-2 mt-lg-0 mb-2 mb-lg-0" type="text" name="search" id="search" placeholder="ค้นหา"></div>
+                <div class="col-lg-2">วันนำเข้าพัสดุ</div>
+                <div class="col-lg-3"><input class="filter datepicker mt-2 mt-lg-0" type="text" name="filter_date" id="filter_date" placeholder="เลือกช่วงวัน" readonly></div>
             </div>
 
             <div class="row">
                 <div class="col-12">
-                    <table class="table table-sm table-hover"></table>
+                    <div class="overflow-auto">
+                        <table class="table table-sm table-hover"></table>
+                    </div>
                 </div>
             </div>
 

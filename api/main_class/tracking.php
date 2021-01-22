@@ -21,6 +21,7 @@ class Tracking{
 		tbl_transaction.transaction_id,
 		tbl_transaction.id as 'trans_id',
 		tbl_product.status,
+		tbl_product.image_signature,
 		tbl_transport.timestamp 
 		FROM tbl_product
 		JOIN tbl_transaction
@@ -58,11 +59,21 @@ class Tracking{
 
 				if($data_transport){
 					foreach ($data_transport as $value ) {
-						$get_item = array(
-							'status' =>  $value['status'],
-							'timestamp' => $value['timestamp'],
-							'note' => $value['note']
-						);
+						if($value['status'] == "success") {
+							$get_item = array(
+								'status' =>  $value['status'],
+								'timestamp' => $value['timestamp'],
+								'note' => $value['note'],
+								'signature' => $data['image_signature']
+							);
+						} else {
+							$get_item = array(
+								'status' =>  $value['status'],
+								'timestamp' => $value['timestamp'],
+								'note' => $value['note'],
+								'signature' => null
+							);
+						}
 						$data['transport_history'][] = $get_item;
 					}
 

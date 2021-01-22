@@ -42,6 +42,10 @@ $(document).ready(function() {
 							html +='	<div>หมายเหตุ: '+val.note+'</div>';
 						}
 						html +='	<div class="time_stamp">เมื่อ: '+val.timestamp+'</div>';
+						if(val.status == 'success') {
+							html += '<div class="sign_title">ดูลายเซ็น</div>';
+							html += '<div class="signature"><img src="../assets/signature/'+val.signature+'"></div>';
+						}
 						html +='</li>';
 
 						// html +='<div class="row warp_status" align="center">';
@@ -66,5 +70,9 @@ $(document).ready(function() {
 				console.log("error");
 			}
 		});
+	});
+
+	$('body').delegate('.sign_title', 'click', function() {
+		$('.signature').toggleClass('open');
 	});
 });
