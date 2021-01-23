@@ -716,6 +716,45 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "delete_product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "delete_product",
+									"type": "text"
+								},
+								{
+									"key": "product_id",
+									"value": "46",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1/Shipping/api/function/manage_product.php",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_product.php"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
