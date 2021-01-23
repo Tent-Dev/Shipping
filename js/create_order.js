@@ -22,6 +22,24 @@ $(document).ready(function() {
             $(this).closest('.section').attr('data-index', sectionsCount);
         }).end().appendTo('#form-section');
 
+        $.Thailand({ 
+            autocomplete_size: 5,
+            database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+            $district: $('#r_district'+sectionsCount), // input ของตำบล
+            $amphoe: $('#r_area'+sectionsCount), // input ของอำเภอ
+            $province: $('#r_province'+sectionsCount), // input ของจังหวัด
+            $zipcode: $('#r_postcode'+sectionsCount), // input ของรหัสไปรษณีย์
+        });
+
+        $.Thailand({ 
+            autocomplete_size: 5,
+            database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+            $district: $('#s_district'+sectionsCount), // input ของตำบล
+            $amphoe: $('#s_area'+sectionsCount), // input ของอำเภอ
+            $province: $('#s_province'+sectionsCount), // input ของจังหวัด
+            $zipcode: $('#s_postcode'+sectionsCount), // input ของรหัสไปรษณีย์
+        });
+
         return false;
     });
 
@@ -36,6 +54,25 @@ $(document).ready(function() {
     $('.btn_save').click(function(event) {
         getAllData();
     });
+
+     $.Thailand({ 
+            autocomplete_size: 5,
+            database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+            $district: $('#r_district'), // input ของตำบล
+            $amphoe: $('#r_area'), // input ของอำเภอ
+            $province: $('#r_province'), // input ของจังหวัด
+            $zipcode: $('#r_postcode'), // input ของรหัสไปรษณีย์
+        });
+
+        $.Thailand({ 
+            autocomplete_size: 5,
+            database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+            $district: $('#s_district'), // input ของตำบล
+            $amphoe: $('#s_area'), // input ของอำเภอ
+            $province: $('#s_province'), // input ของจังหวัด
+            $zipcode: $('#s_postcode'), // input ของรหัสไปรษณีย์
+        });
+
 
     $(document).on('keyup', '.phone_number', function(event) {
         var pointer_index = $(this).closest('.section').attr('data-index');
@@ -98,6 +135,35 @@ $(document).ready(function() {
         $("#lastname").val(customer_history_set[customer_history].lastname);
         $("#id_card").val(customer_history_set[customer_history].id_card);
     });
+
+    // $(document).on('change', '.r_district', function(event) {
+    //     event.preventDefault();
+    //     var pointer_index = $(this).closest('.section').attr('data-index');
+    //     pointer_index = pointer_index == 1 ? '' : pointer_index;
+    //     $.Thailand({ 
+    //         autocomplete_size: 5,
+    //         database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+    //         $district: $('#r_district'+pointer_index), // input ของตำบล
+    //         $amphoe: $('#r_area'+pointer_index), // input ของอำเภอ
+    //         $province: $('#r_province'+pointer_index), // input ของจังหวัด
+    //         $zipcode: $('#r_postcode'+pointer_index), // input ของรหัสไปรษณีย์
+    //     });
+    // });
+
+    // $(document).on('change', '.s_district', function(event) {
+    //     event.preventDefault();
+    //     var pointer_index = $(this).closest('.section').attr('data-index');
+    //     pointer_index = pointer_index == 1 ? '' : pointer_index;
+    //     $.Thailand({ 
+    //         autocomplete_size: 5,
+    //         database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+    //         $district: $('#s_district'+pointer_index), // input ของตำบล
+    //         $amphoe: $('#s_area'+pointer_index), // input ของอำเภอ
+    //         $province: $('#s_province'+pointer_index), // input ของจังหวัด
+    //         $zipcode: $('#s_postcode'+pointer_index), // input ของรหัสไปรษณีย์
+    //     });
+    // });
+
 
 });
 

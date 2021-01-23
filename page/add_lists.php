@@ -16,10 +16,16 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
     <link href="../lib/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
     <link href="../css/main_custom.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
     <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/JQL.min.js"></script>
+    <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
+    <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
+
     <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
 
@@ -161,35 +167,35 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                         </div>
                                         <div class="col-md-4">
                                             <label for="s_fname" class="col-form-label col-form-label-sm">ชื่อผู้ส่ง</label>
-                                            <input type="text" name="s_fname[]" id="s_fname" class="form-control form-control-sm">
+                                            <input type="text" name="s_fname[]" id="s_fname" class="form-control form-control-sm s_fname">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="s_lname" class="col-form-label col-form-label-sm">นามสกุลผู้ส่ง</label>
-                                            <input type="text" name="s_lname[]" id="s_lname" class="form-control form-control-sm">
+                                            <input type="text" name="s_lname[]" id="s_lname" class="form-control form-control-sm s_lname">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="s_address" class="col-form-label col-form-label-sm">ที่อยู่</label>
-                                            <input type="text" name="s_address[]" id="s_address" class="form-control form-control-sm">
+                                            <input type="text" name="s_address[]" id="s_address" class="form-control form-control-sm s_address">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="s_district" class="col-form-label col-form-label-sm">เขต</label>
-                                            <input type="text" name="s_district[]" id="s_district" class="form-control form-control-sm">
+                                            <input type="text" name="s_district[]" id="s_district" class="form-control form-control-sm s_district">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="s_area" class="col-form-label col-form-label-sm">แขวง</label>
-                                            <input type="text" name="s_area[]" id="s_area" class="form-control form-control-sm">
+                                            <input type="text" name="s_area[]" id="s_area" class="form-control form-control-sm s_area">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="s_province" class="col-form-label col-form-label-sm">จังหวัด</label>
-                                            <input type="text" name="s_province[]" id="s_province" class="form-control form-control-sm">
+                                            <input type="text" name="s_province[]" id="s_province" class="form-control form-control-sm s_province">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="s_postcode" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
-                                            <input type="text" name="s_postcode[]" id="s_postcode" class="form-control form-control-sm">
+                                            <input type="text" name="s_postcode[]" id="s_postcode" class="form-control form-control-sm s_postcode">
                                         </div>
                                     </div>
                                     <!-- receive -->
@@ -209,35 +215,35 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                         </div>
                                         <div class="col-md-4">
                                             <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อผู้รับ</label>
-                                            <input type="text" name="r_fname[]" id="r_fname" class="form-control form-control-sm">
+                                            <input type="text" name="r_fname[]" id="r_fname" class="form-control form-control-sm r_fname">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุลผู้รับ</label>
-                                            <input type="text" name="r_lname[]" id="r_lname" class="form-control form-control-sm">
+                                            <input type="text" name="r_lname[]" id="r_lname" class="form-control form-control-sm r_lname">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="r_address" class="col-form-label col-form-label-sm">ที่อยู่</label>
-                                            <input type="text" name="r_address[]" id="r_address" class="form-control form-control-sm">
+                                            <input type="text" name="r_address[]" id="r_address" class="form-control form-control-sm r_address">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="r_district" class="col-form-label col-form-label-sm">เขต</label>
-                                            <input type="text" name="r_district[]" id="r_district" class="form-control form-control-sm">
+                                            <input type="text" name="r_district[]" id="r_district" class="form-control form-control-sm r_district">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="r_area" class="col-form-label col-form-label-sm">แขวง</label>
-                                            <input type="text" name="r_area[]" id="r_area" class="form-control form-control-sm">
+                                            <input type="text" name="r_area[]" id="r_area" class="form-control form-control-sm r_area">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="r_province" class="col-form-label col-form-label-sm">จังหวัด</label>
-                                            <input type="text" name="r_province[]" id="r_province" class="form-control form-control-sm">
+                                            <input type="text" name="r_province[]" id="r_province" class="form-control form-control-sm r_province">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="r_postcode" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
-                                            <input type="text" name="r_postcode[]" id="r_postcode" class="form-control form-control-sm">
+                                            <input type="text" name="r_postcode[]" id="r_postcode" class="form-control form-control-sm r_postcode">
                                         </div>
                                     </div>
                                     <div class="row">
