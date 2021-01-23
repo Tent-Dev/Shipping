@@ -72,6 +72,24 @@ $(document).ready(function() {
 		$("#id_card").val(customer_history_set[customer_history].id_card);
 	});
 
+	$.Thailand({ 
+        autocomplete_size: 5,
+        database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+        $district: $('#s_district'), // input ของตำบล
+        $amphoe: $('#s_area'), // input ของอำเภอ
+        $province: $('#s_province'), // input ของจังหวัด
+        $zipcode: $('#s_postcode'), // input ของรหัสไปรษณีย์
+    });
+
+    $.Thailand({ 
+        autocomplete_size: 5,
+        database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+        $district: $('#r_district'), // input ของตำบล
+        $amphoe: $('#r_area'), // input ของอำเภอ
+        $province: $('#r_province'), // input ของจังหวัด
+        $zipcode: $('#r_postcode'), // input ของรหัสไปรษณีย์
+    });
+
 });
 
 function getDescription(){
