@@ -76,7 +76,7 @@ class MNG_Transaction{
 			$sql_limit .= " LIMIT ".$start_page." , ".$per_page."";
 		}
 		
-		$sql_where = "";
+		$sql_where = " WHERE tbl_transaction.active_status = 'T'";
 
 		if(isset($param['transaction_id'])){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";

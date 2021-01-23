@@ -66,5 +66,17 @@ if ($cmd != "") {
 		exit();
 	}
 
+	if ($cmd == "delete_product") {
+		$permission = $auth->AuthPermission();
+		if($permission['permission']){
+			$result = $mng_product->DeleteProduct($_POST);
+		}else{
+			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+		}
+		echo json_encode($result);
+		$mysql->Close_db();
+		exit();
+	}
+
 }
 ?>

@@ -43,7 +43,7 @@ class MNG_Product{
 
 		$sql_limit = " ORDER BY tbl_product.id DESC LIMIT ".$start_page." , ".$per_page."";
 
-		$sql_where = "";
+		$sql_where = " WHERE tbl_product.active_status = 'T' ";
 
 		if(isset($param['status']) && $param['status'] != ""){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
@@ -471,6 +471,25 @@ class MNG_Product{
 			$response = array(
 				'status' => 500,
 				'err_msg' => 'receiver and sender not update'
+			);
+		}
+		return $response;
+	}
+
+	public function DeleteProduct($param = null){
+		$arr['id'] = $param['product_id'];
+		$arr['active_status'] = 'F';
+		$key = array("id");
+		$result = $this->db_connect->Update_db($arr, $key, "tbl_product");
+
+		if($result == 1){
+			$response = array(
+				'status' => 200
+			);
+		}else{
+			$response = array(
+				'status' => 500,
+				'err_msg' => 'Can not delete product'
 			);
 		}
 		return $response;
