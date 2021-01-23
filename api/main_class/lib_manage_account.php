@@ -76,9 +76,9 @@ class MNG_Account{
 
 		$sql_where = "";
 
-		if(isset($param['member_type'])){
+		if(isset($param['member_type']) && $param['member_type'] != ""){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
-			$sql_where .= " tbl_product.status = '".$param['member_type']."' ";
+			$sql_where .= " member_type = '".$param['member_type']."' ";
 		}
 
 		if(isset($param['firstname'])){
@@ -89,6 +89,10 @@ class MNG_Account{
 		if(isset($param['username'])){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
 			$sql_where .= " username = '".$param['username']."' ";
+		}
+		if(isset($param['keyword'])) {
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " CONCAT(firstname, lastname, username) LIKE '%".$param['keyword']."%' ";
 		}
 
 		$sql_query = $sql . $sql_where. $sql_limit;

@@ -45,6 +45,18 @@ if($_SESSION['TYPE'] != 'admin'){
                             <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#addData">เพิ่มบัญชีผู้ใช้ <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
+                    <div class="row mt-2 mb-4">
+                        <div class="col-lg-1">ค้นหา</div>
+                        <div class="col-lg-3"><input class="filter mt-2 mt-lg-0 mb-2 mb-lg-0" type="text" name="search" id="search" placeholder="ค้นหา"></div>
+                        <div class="col-lg-1">ตำแหน่ง</div>
+                        <div class="col-lg-3">
+                            <select class="filter mt-2 mt-lg-0" name="filter_member_type" id="filter_member_type">
+                                <option value="" selected>ทั้งหมด</option>
+                                <option value="admin">Admin</option>
+                                <option value="staff">Staff</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="overflow-auto">
                         <div class="table_wrap_loading_box">
                             <div>

@@ -1,3 +1,5 @@
+var keyword = "", member_type = "";
+
 $(document).ready(function() {
 	getDataFromDB();
 
@@ -9,7 +11,7 @@ $(document).ready(function() {
     $(document).on('click', '.btn_edit', function(event) {
       var account_id = $(this).data('id');
       getDescription(account_id);
-  });
+    });
 
     $(document).on('click', '.btn_add', function(event) {
         insertAccount();
@@ -23,9 +25,34 @@ $(document).ready(function() {
       $(this).find("input,select").val('').end();
       $(this).find(':input').removeAttr('placeholder');
       $(this).find(':input').removeClass('custom_has_err');
-  });
+    });
 
+    $('#search').keyup(delay(function(event){
+        keyword = $(this).val();
+        filterAll();
+    }, 300));
+
+    $('#filter_member_type').change(function(event) {
+        member_type = $(this).find('option:selected').val();
+        filterAll();
+    });
 });
+
+function filterAll() {
+    $('#show_data_from_db').empty();
+    getDataFromDB(1);
+}
+
+function delay(callback, ms) {
+    var timer = 0;
+    return function() {
+        var context = this, args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            callback.apply(context, args);
+        }, ms || 0);
+    };
+}
 
 function getDataFromDB(page = 1){
     $('.table_wrap_loading_box').show();
@@ -35,7 +62,9 @@ function getDataFromDB(page = 1){
         method: 'post',
         data: {
             command: 'get_account',
-            page: page
+            page: page,
+            keyword: keyword,
+            member_type: member_type
         },
         success: function(data) {
             var data = JSON.parse(data)

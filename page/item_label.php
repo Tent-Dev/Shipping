@@ -45,12 +45,6 @@ if(isset($_GET['transaction_id'])){
             height: 29.7cm;
             margin: 1rem auto;
         }
-        .boxs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin-bottom: 2.1mm;
-        }
         .box {
             width: 100mm;
             height: 75mm;
