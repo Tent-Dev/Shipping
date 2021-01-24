@@ -147,8 +147,8 @@ function getDataFromDB(page = 1){
 
 						html +=
 						'<tr class="_rowid-'+val.id+'">'+
-						'<td align="center">';
-						if(val.shipper_name == null){
+						'<td align="center" class="btn_tools">';
+						if(val.shipper_name == null || val.status == 'success'){
 							html += '';
 						}else{
 							html += '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>';
@@ -296,7 +296,7 @@ function generateHtml(data){
 	if(data.data.payment_type == 'cod'){
 		html += '                                <div class="col-sm-6">';
 		html += '                                    <label for="payment_type" class="col-form-label col-form-label-sm"><b>จำนวนเงินที่ต้องชำระ</b></label>';
-		html += '                                    <div>'+'xxxx ฿'+'</div>';
+		html += '                                    <div>'+NumberFormat(data.data.cod_price)+' บาท</div>';
 		html += '                                </div>';
 	}
 	html += '                            </div>';
@@ -380,6 +380,10 @@ async function saveData(product_id){
 				$('.btn_save, .btn_cancel').attr('disabled', false);
 				if(data.status == 200){
 					$('._rowid-'+product_id+'').find('._td-status').html(status);
+
+					if(status == 'success'){
+						$('._rowid-'+product_id+'').find('.btn_tools').html('');
+					}
 					$("#editData").modal('hide');
 				}else{
 					Swal.fire({
