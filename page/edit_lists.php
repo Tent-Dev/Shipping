@@ -99,6 +99,9 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
         .suggest-detail p:first-child {
             color: #1560bd;
         }
+        .price_type {
+            width: 30px;
+        }
     </style>
 </head>
 <body>
@@ -248,13 +251,26 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                         <option value="cod">ส่งแบบธรรมดา แบบเก็บเงินปลายทาง</option>
                                     </select>
                                 </div>
+                                <div class="col-md-4 money_cod d-none">
+                                    <label for="money_cod" class="col-form-label col-form-label-sm">จำนวนเงินที่ต้องเก็บปลายทาง</label>
+                                    <input type="text" name="money_cod[]" id="money_cod" class="form-control form-control-sm" value="">
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-4">
                                     <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กรัม)</label>
-                                    <input type="text" name="weight[]" id="weight" class="form-control form-control-sm" value="">
+                                    <input type="text" name="weight[]" id="weight" class="form-control form-control-sm weight" value="">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="price" class="col-form-label col-form-label-sm">ราคา</label>
-                                    <input type="text" name="price[]" id="price" class="form-control form-control-sm" value="">
+                                    <input type="text" name="price[]" id="price" class="form-control form-control-sm price" value="">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="p_type" class="col-form-label col-form-label-sm">คำนวณราคา</label>
+                                    <div class="d-flex align-items-center">
+                                        <label for="price_type" class="col-form-label col-form-label-sm mb-0 mr-3">คิดตามน้ำหนักพัสดุ</label>
+                                        <input type="checkbox" name="price_type[]" id="price_type" class="form-control form-control-sm price_type" checked>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -280,6 +296,22 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
     });
     $('.form-suggest').on('focusout', function() {
         $(this).parent().find('.box-suggest.active').removeClass('active');
+    });
+
+    $(document).ready(function() {
+        if($('#shipping_type option:selected').val() == 'cod') {
+            $('#money_cod').parent().removeClass('d-none');
+        } else {
+            $('#money_cod').parent().addClass('d-none');
+        }
+    });
+
+    $(document).on('change', '.shipping_type', function() {
+        if($('#shipping_type option:selected').val() == 'cod') {
+            $('#money_cod').parent().removeClass('d-none');
+        } else {
+            $('#money_cod').parent().addClass('d-none');
+        }
     });
 </script>
 </body>

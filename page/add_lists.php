@@ -114,6 +114,9 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
             margin-top: 20px;
             margin-bottom: 10px;
         }
+        .price_type {
+            width: 30px;
+        }
     </style>
 </head>
 <body>
@@ -249,18 +252,31 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="shipping_type" class="col-form-label col-form-label-sm">ประเภทการส่ง</label>
-                                            <select name="shipping_type[]" id="shipping_type" class="form-control form-control-sm">
+                                            <select name="shipping_type[]" id="shipping_type" class="form-control form-control-sm shipping_type">
                                                 <option value="normal" selected>ส่งแบบธรรมดา</option>
                                                 <option value="cod">ส่งแบบธรรมดา แบบเก็บเงินปลายทาง</option>
                                             </select>
                                         </div>
+                                        <div class="col-md-4 money_cod d-none">
+                                            <label for="money_cod" class="col-form-label col-form-label-sm">จำนวนเงินที่ต้องเก็บปลายทาง</label>
+                                            <input type="text" name="money_cod[]" id="money_cod" class="form-control form-control-sm" value="">
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-4">
                                             <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กรัม)</label>
-                                            <input type="text" name="weight[]" id="weight" class="form-control form-control-sm" value="">
+                                            <input type="text" name="weight[]" id="weight" class="form-control form-control-sm weight" value="">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="price" class="col-form-label col-form-label-sm">ราคา</label>
-                                            <input type="text" name="price[]" id="price" class="form-control form-control-sm" value="">
+                                            <input type="text" name="price[]" id="price" class="form-control form-control-sm price" value="">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="p_type" class="col-form-label col-form-label-sm">คำนวณราคา</label>
+                                            <div class="d-flex align-items-center">
+                                                <label for="price_type" class="col-form-label col-form-label-sm mb-0 mr-3">คิดตามน้ำหนักพัสดุ</label>
+                                                <input type="checkbox" name="price_type[]" id="price_type" class="form-control form-control-sm price_type" checked>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="text-right">
@@ -273,6 +289,19 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                             <div class="row">
                                 <div class="col-6">
                                     <a href="#" class="addsection btn btn-sm btn-info"><i class="fas fa-plus"></i> เพิ่มผู้รับ</a>
+                                </div>
+                            </div>
+                            <div class="row my-4 mt-md-0">
+                                <div class="col-md-4 d-flex align-items-center">
+                                    ราคารวม : <b id="sum_price" class="mx-3">0</b> บาท
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="m_received" class="col-form-label col-form-label-sm">รับเงินมา</label>
+                                    <input type="text" name="m_received" id="m_received" class="form-control form-control-sm" value="">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="change" class="col-form-label col-form-label-sm">เงินทอน</label>
+                                    <input type="text" name="change" id="change" class="form-control form-control-sm form-control-plaintext" value="" disabled readonly>
                                 </div>
                             </div>
                             <div class="row">
@@ -324,12 +353,69 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
         </section>
 
         <script>
-            $('body').delegate('.form-suggest', 'focus', function() {
+            $(document).on('focus', '.form-suggest', function() {
                 $(this).parent().find('.box-suggest').addClass('active');
             });
-            $('body').delegate('.form-suggest', 'focusout', function() {
+            $(document).on('focusout', '.form-suggest', function() {
                 $(this).parent().find('.box-suggest.active').removeClass('active');
             });
+
+            $(document).on('change', '.shipping_type', function() {
+                var pointer_index = $(this).closest('.section').attr('data-index');
+                pointer_index = pointer_index == 1 ? '' : pointer_index;
+
+                if($('#shipping_type'+pointer_index+' option:selected').val() == 'cod') {
+                    $('#money_cod').parent().removeClass('d-none');
+                } else {
+                    $('#money_cod').parent().addClass('d-none');
+                }
+                getPrice(pointer_index);
+            });
+
+            $(document).on('keyup', '.weight', function() {
+                var pointer_index = $(this).closest('.section').attr('data-index');
+                pointer_index = pointer_index == 1 ? '' : pointer_index;
+                
+                if($('#price_type'+pointer_index).is(":checked") == true) {
+                    getPrice(pointer_index);
+                }
+            });
+            
+            $(document).on('change', '.price, .weight', function() {
+                sumPrice();
+            });
+
+            $(document).on('click', '.price_type', function() {
+                var pointer_index = $(this).closest('.section').attr('data-index');
+                pointer_index = pointer_index == 1 ? '' : pointer_index;
+
+                if($('#price_type'+pointer_index).is(":checked") == true) {
+                    getPrice(pointer_index);
+                }
+            });
+
+            function getPrice(pointer_index) {
+                var price = "", weight = "";
+                if($('#shipping_type'+pointer_index+' option:selected').val() == 'normal') {
+                    weight = $('#weight'+pointer_index).val();
+                    price = weight * 10;
+                } else if($('#shipping_type'+pointer_index+' option:selected').val() == 'cod') {
+                    weight = $('#weight'+pointer_index).val();
+                    price = weight * 100;
+                }
+                $('#price'+pointer_index).val(price);
+            }
+
+            function sumPrice() {
+                var sum_price = 0;
+                $('.section').each(function (index, ele) {
+                    var pointer_index = $(this).closest('.section').data('index');
+                    pointer_index = pointer_index == 1 ? '' : pointer_index;
+                    var price = $(ele).find('#price'+pointer_index).val();
+                    sum_price = sum_price + parseInt(price);
+                });
+                $('#sum_price').html(sum_price);
+            }
         </script>
     </body>
     </html>
