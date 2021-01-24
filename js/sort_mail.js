@@ -194,11 +194,12 @@ function getDescription(product_id, tracking_code){
 			command: 'get_product_desc',
 			product_id: product_id
 		},
-		success: function(data) {
+		success: async function(data) {
 			var data = JSON.parse(data)
 			console.log("result: ",data);
 
 			if(data.status == 200){
+				await getShipperList('get_for_add');
 				var get_body_html = generateHtml(data);
 				$('.modal-body').html(get_body_html);
 				$("#shipping_type").val(data.data.payment_type).change();
@@ -296,7 +297,7 @@ function generateHtml(data){
 	return html;
 }
 
-function getShipperList(){
+function getShipperList(mode = ''){
 	$.ajax({
 		url: '../api/function/manage_account.php',
 		method: 'post',
@@ -308,9 +309,12 @@ function getShipperList(){
 			console.log("result: ",data);
 			if(data.status == 200){
 				SHIPPER_LIST = data.data;
-				SHIPPER_LIST.forEach(element => {
-					$('#filter_shipper').append('<option value="'+element.id+'">'+element.firstname+' '+element.lastname+'</option>');
-				});
+				if(mode !== 'get_for_add'){
+					SHIPPER_LIST.forEach(element => {
+
+						$('#filter_shipper').append('<option value="'+element.id+'">'+element.firstname+' '+element.lastname+'</option>');
+					});
+				}
 			}
 		},
 		error: function() {
