@@ -225,7 +225,9 @@ function generateHtml(data){
 	html += '                                    <select name="sender" id="sender" class="form-control form-control-sm">';
 	html += '                                        <option value="" selected>กรุณาเลือกคนนำจ่ายพัสดุ</option>';
 	$.each(SHIPPER_LIST, function(index, val) {
-		html += '<option value="'+val.id+'">'+val.firstname+' '+val.lastname+'</option>';
+		if(val.active_status == 'T'){
+			html += '<option value="'+val.id+'">'+val.firstname+' '+val.lastname+'</option>';
+		}
 	});
 	html += '                                    </select>';
 	html += '                                </div>';

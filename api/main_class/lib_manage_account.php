@@ -157,7 +157,7 @@ class MNG_Account{
 
 	public function GetAccountForShipperList($param = null){
 
-		$sql = "SELECT id, firstname, lastname, member_type, username FROM tbl_member";
+		$sql = "SELECT id, firstname, lastname, member_type, username, active_status FROM tbl_member";
 
 		$sql_where = "";
 
@@ -169,11 +169,6 @@ class MNG_Account{
 		// if(isset($param['firstname'])){
 		// 	$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
 		// 	$sql_where .= " firstname = '".$param['firstname']."' ";
-		// }
-
-		// if(isset($param['username'])){
-		// 	$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
-		// 	$sql_where .= " username = '".$param['username']."' ";
 		// }
 
 		$sql_query = $sql . $sql_where;
