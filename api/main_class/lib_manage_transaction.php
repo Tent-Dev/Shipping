@@ -174,7 +174,7 @@ class MNG_Transaction{
 		ON tbl_transaction.employee_id = tbl_member.id";
 
 
-		$sql_where = "";
+		$sql_where = " WHERE tbl_product.active_status = 'T' ";
 
 		if(isset($param['transaction_id'])){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
@@ -250,6 +250,7 @@ class MNG_Transaction{
 		tbl_product.tracking_code,
 		tbl_product.create_date,
 		tbl_product.weight,
+		tbl_product.active_status,
 		tbl_product.price 
 		FROM tbl_transaction
 		JOIN tbl_customer
@@ -271,6 +272,11 @@ class MNG_Transaction{
 		if(isset($param['keyword'])) {
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
 			$sql_where .= " CONCAT(tbl_product.tracking_code, tbl_customer.firstname, tbl_customer.lastname) LIKE '%".$param['keyword']."%' ";
+		}
+
+		if(isset($param['active_status'])) {
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.active_status = 'T' ";
 		}
 		
 		$sql_query = $sql . $sql_where. $sql_limit;
@@ -295,7 +301,8 @@ class MNG_Transaction{
 					'transaction_id' => $value['transaction_id'],
 					'create_date' => $value['create_date'],
 					'customer_firstname' => $value['firstname'],
-					'customer_lastname' => $value['lastname']
+					'customer_lastname' => $value['lastname'],
+					'active_status' => $value['active_status']
 				);
 				$items['data'][] = $get_item;
 

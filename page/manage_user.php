@@ -52,8 +52,9 @@ if($_SESSION['TYPE'] != 'admin'){
                         <div class="col-lg-3">
                             <select class="filter mt-2 mt-lg-0" name="filter_member_type" id="filter_member_type">
                                 <option value="" selected>ทั้งหมด</option>
-                                <option value="admin">Admin</option>
-                                <option value="staff">Staff</option>
+                                <?php foreach ($member_type as $value) { ?>
+                                    <option value="<?php echo $value ?>"><?php echo ucfirst($value) ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>

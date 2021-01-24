@@ -58,14 +58,27 @@ function getDataFromDB(page = 1) {
                     header +='</tbody>';
                     $('.table').html(header);
                     $.each(data.data.data, function(index, val) {
-                        html += '<tr>'+
-                                '<td>'+(index+1)+'</td>'+
-                                '<td>'+val.tracking_code+'</td>'+
-                                '<td>'+val.receiver_desc.firstname+' '+val.receiver_desc.lastname+'</td>'+
-                                '<td align="center">'+
-                                '<a href="item_label.php?tracking_code='+val.tracking_code+'" target="_blank"><button class="btn_edit btn btn-sm btn-success mr-2"><i class="fas fa-print"></i></button></a>'+
-                                '</td>'+
-                                '</tr>';
+                        var null_class = '';
+                        var null_class_row = '';
+                        if(val.active_status == 'F'){
+                            null_class = 'cancel';
+                            null_class_row = 'cancel_row';
+                        }else{
+
+                        }
+
+                        html += '<tr class="'+null_class_row+'">'+
+                        '<td>'+(index+1)+'</td>'+
+                        '<td>'+val.tracking_code+'</td>'+
+                        '<td>'+val.receiver_desc.firstname+' '+val.receiver_desc.lastname+'</td>'+
+                        '<td align="center" class="'+null_class+'">';
+                        if(val.active_status == 'F'){
+                            html += 'ถูกยกเลิก&nbsp;<i class="fas fa-exclamation-circle"></i>';
+                        }else{
+                            html += '<a href="item_label.php?tracking_code='+val.tracking_code+'" target="_blank"><button class="btn_edit btn btn-sm btn-success mr-2"><i class="fas fa-print"></i></button></a>';
+                        }
+                        html += '</td>'+
+                        '</tr>';
                     });
                     pagination(page,data.data.total_pages);
                 }else{

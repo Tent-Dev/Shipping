@@ -12,6 +12,7 @@ function getData(){
 			ajax_data.command = 'get_transactionHistory';
 			ajax_data.transaction_id = TRANSACTION_ID;
 			ajax_data.mode = 'all';
+			ajax_data.active_status = 'T';
 			url = '../api/function/manage_transaction.php';
 		}
 		else{

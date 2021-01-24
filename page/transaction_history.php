@@ -36,6 +36,13 @@
             color: #464646;
             text-decoration: none;
         }
+        .cancel{
+            color: red;
+        }
+        .cancel_row{
+            background-color: #efefef;
+            color: #909090;
+        }
     </style>
 </head>
 <body>
