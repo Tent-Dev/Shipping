@@ -106,3 +106,7 @@ input.filter::placeholder {
  border-color: #1560bd;
 
 }
+
+.employee_null{
+  color: red;
+}
