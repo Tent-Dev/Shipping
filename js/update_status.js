@@ -148,11 +148,11 @@ function getDataFromDB(page = 1){
 						html +=
 						'<tr class="_rowid-'+val.id+'">'+
 						'<td align="center">';
-							if(val.shipper_name == null){
-								html += '';
-							}else{
-								html += '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>';
-							}
+						if(val.shipper_name == null){
+							html += '';
+						}else{
+							html += '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>';
+						}
 						html +=
 						'</td>'+
 						'<td class="_td-status">'+val.status+'</td>'+
@@ -250,7 +250,12 @@ function getDescription(product_id, tracking_code){
 
 function generateHtml(data){
 	var html = '';
-	
+	var payment_type = '';
+	if(data.data.payment_type == 'normal'){
+		payment_type = 'ชำระเงินแล้ว';
+	} else if(data.data.payment_type == 'cod'){
+		payment_type = 'เก็บเงินปลายทาง';
+	}
 	html += '<form action="" method="post">';
 	html += '                            <div class="row">';
 	html += '                                <div class="col">';
@@ -265,23 +270,35 @@ function generateHtml(data){
 	html += '                            </div>';
 	html += '                            <div class="row">';
 	html += '                                <div class="col-sm-6">';
-	html += '                                    <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>';
+	html += '                                    <label for="phone_number" class="col-form-label col-form-label-sm"><b>เบอร์โทรผู้รับ</b></label>';
 	html += '                                    <div>'+data.data.receiver_desc.phone_number+'</div>';
 	html += '                                </div>';
 	html += '                                <div class="col-sm-6">';
-	html += '                                    <label for="shipper" class="col-form-label col-form-label-sm">คนนำจ่าย</label>';
+	html += '                                    <label for="shipper" class="col-form-label col-form-label-sm"><b>คนนำจ่าย</b></label>';
 	html += '                                    <div>'+data.data.shipper_name+'</div>';
 	html += '                                </div>';
 	html += '                            </div>';
 	html += '                            <div class="row">';
 	html += '                                <div class="col-sm-6">';
-	html += '                                    <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อผู้รับ</label>';
+	html += '                                    <label for="r_fname" class="col-form-label col-form-label-sm"><b>ชื่อผู้รับ</b></label>';
 	html += '                                    <div>'+data.data.receiver_desc.firstname+'</div>';
 	html += '                                </div>';
 	html += '                                <div class="col-sm-6">';
-	html += '                                    <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุลผู้รับ</label>';
+	html += '                                    <label for="r_lname" class="col-form-label col-form-label-sm"><b>นามสกุลผู้รับ</b></label>';
 	html += '                                    <div>'+data.data.receiver_desc.lastname+'</div>';
 	html += '                                </div>';
+	html += '                            </div>';
+	html += '                            <div class="row">';
+	html += '                                <div class="col-sm-6">';
+	html += '                                    <label for="payment_type" class="col-form-label col-form-label-sm"><b>ประเภทการชำระเงิน</b></label>';
+	html += '                                    <div>'+payment_type+'</div>';
+	html += '                                </div>';
+	if(data.data.payment_type == 'cod'){
+		html += '                                <div class="col-sm-6">';
+		html += '                                    <label for="payment_type" class="col-form-label col-form-label-sm"><b>จำนวนเงินที่ต้องชำระ</b></label>';
+		html += '                                    <div>'+'xxxx ฿'+'</div>';
+		html += '                                </div>';
+	}
 	html += '                            </div>';
 	html += '                            <div class="row">';
 	html += '                                <div class="col signature">';
