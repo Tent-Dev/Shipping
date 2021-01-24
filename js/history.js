@@ -82,15 +82,28 @@ function getDataFromDB(page = 1) {
                     header +='</tbody>';
                     $('.table').html(header);
                     $.each(data.data.data, function(index, val) {
+                        var employee_null = '';
+                        var employeeIsnull = false;
+                        if((val.employee_fname == null && val.employee_fname == null) || val.employee_id == '0'){
+                            employee_null = 'employee_null';
+                            employeeIsnull = true;
+                        }
+
                         html += '<tr>'+
-                                '<td>'+(index+1)+'</td>'+
-                                '<td>'+val.transaction_id+'</td>'+
-                                '<td>'+val.customer_firstname+' '+val.customer_lastname+'</td>'+
-                                '<td>'+val.employee_fname+' '+val.employee_lname+'</td>'+
-                                '<td align="center">'+
-                                '<a href="transaction_history.php?transaction_id='+val.transaction_id+'"><button class="btn_edit btn btn-sm btn-success mr-2"><i class="fas fa-search"></i></button></a>'+
-                                '</td>'+
-                                '</tr>';
+                        '<td>'+(index+1)+'</td>'+
+                        '<td>'+val.transaction_id+'</td>'+
+                        '<td>'+val.customer_firstname+' '+val.customer_lastname+'</td>'+
+                        '<td class="'+employee_null+'">';
+                        if(!employeeIsnull){
+                            html += val.employee_fname+' '+val.employee_lname;
+                        }else{
+                            html += 'ไม่มีพนักงานทำรายการ&nbsp;<i class="fas fa-exclamation-circle"></i>';
+                        }  
+                        html += '</td>'+
+                        '<td align="center">'+
+                        '<a href="transaction_history.php?transaction_id='+val.transaction_id+'"><button class="btn_edit btn btn-sm btn-success mr-2"><i class="fas fa-search"></i></button></a>'+
+                        '</td>'+
+                        '</tr>';
                     });
                     pagination(page,data.data.total_pages);
                 }else{

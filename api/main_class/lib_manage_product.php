@@ -135,6 +135,7 @@ class MNG_Product{
 		tbl_product.price,
 		tbl_product.shipper_id,
 		tbl_product.payment_type,
+		tbl_product.cod_price,
 		tbl_transaction.transaction_id,
 		tbl_transaction.receiver_desc,
 		tbl_transaction.sender_desc,
@@ -193,6 +194,7 @@ class MNG_Product{
 				'weight' => round($data['weight'], 2),
 				'price' => round($data['price'], 2),
 				'payment_type' => $data['payment_type'],
+				'cod_price' => $data['cod_price'],
 				'shipper_name' => $data['shipper_name'],
 				'shipper_id' => $data['shipper_id']
 			);
@@ -245,6 +247,7 @@ class MNG_Product{
 
 				$get_last_customer_id = $result_customer['last_id'];
 				$tracking_code = $this->GenerateTrackingCode();
+
 				$arr_customer = array( 
 					"shipping_type" => $value['shipping_type'],
 					"payment_type" => $value['payment_type'],
@@ -253,6 +256,10 @@ class MNG_Product{
 					"tracking_code" => $tracking_code,
 					"status" => 'waiting'
 				);
+
+				if(!empty($value['cod_price']) && $value['payment_type'] == 'cod'){
+					$arr_customer['cod_price'] = $value['cod_price'];
+				}
 
 				$result_product = $this->db_connect->Insert_db($arr_customer,"tbl_product");
 
@@ -379,6 +386,10 @@ class MNG_Product{
 
 		if(isset($param['payment_type']) && $param['payment_type'] !== ''){
 			$arr['payment_type'] = $param['payment_type'];
+		}
+
+		if(isset($param['cod_price']) && $param['cod_price'] !== ''){
+			$arr['cod_price'] = $param['cod_price'];
 		}
 
 		if(!empty($param['customer_idcard']) && !empty($param['customer_firstname']) && !empty($param['customer_lastname']) && !empty($param['customer_phone_number'])){

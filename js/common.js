@@ -80,3 +80,12 @@ function showErrorAjax(text = ''){
     $('.table_wrap_loading_box').hide();
     $('.table').show();
 }
+
+function NumberFormat(value){
+	var result = value;
+	if(value){
+		var value_convert = parseFloat(value);
+		result = value_convert.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+	}
+	return result;
+}
