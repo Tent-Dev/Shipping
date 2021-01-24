@@ -11,7 +11,7 @@ $(document).ready(function() {
     $(document).on('click', '.btn_edit', function(event) {
       var account_id = $(this).data('id');
       getDescription(account_id);
-    });
+  });
 
     $(document).on('click', '.btn_add', function(event) {
         insertAccount();
@@ -25,7 +25,7 @@ $(document).ready(function() {
       $(this).find("input,select").val('').end();
       $(this).find(':input').removeAttr('placeholder');
       $(this).find(':input').removeClass('custom_has_err');
-    });
+  });
 
     $('#search').keyup(delay(function(event){
         keyword = $(this).val();
@@ -36,6 +36,23 @@ $(document).ready(function() {
         member_type = $(this).find('option:selected').val();
         filterAll();
     });
+
+    $(document).on('click', '.btn_delete', function(event) {
+        var account_id = $(this).data('id');
+        console.log('DELETE ACCOUNT ID: ', account_id);
+        Swal.fire({
+          title: 'คุณต้องการลบบัญชีนี้?',
+          showCancelButton: true,
+          confirmButtonColor: '#dc3545',
+          confirmButtonText: `ยืนยัน`,
+          cancelButtonText: 'ยกเลิก',
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            deleteAccount(account_id);
+        } 
+    })
+  });
 });
 
 function filterAll() {
@@ -54,9 +71,11 @@ function delay(callback, ms) {
     };
 }
 
-function getDataFromDB(page = 1){
-    $('.table_wrap_loading_box').show();
-    $('.table').html('');
+function getDataFromDB(page = 1, mode = ''){
+    if(mode !== 'delete'){
+        $('.table_wrap_loading_box').show();
+        $('.table').html('');
+    }
     $.ajax({
         url: '../api/function/manage_account.php',
         method: 'post',
@@ -64,7 +83,8 @@ function getDataFromDB(page = 1){
             command: 'get_account',
             page: page,
             keyword: keyword,
-            member_type: member_type
+            member_type: member_type,
+            active_status: 'T'
         },
         success: function(data) {
             var data = JSON.parse(data)
@@ -93,7 +113,7 @@ function getDataFromDB(page = 1){
                         '<td class="_td-type">'+val.member_type+'</td>'+
                         '<td>'+
                         '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
-                        '<button class="btn btn-sm btn-danger" data-id="'+val.id+'"><i class="fas fa-trash"></i></button>'+
+                        '<button class="btn_delete btn btn-sm btn-danger" data-id="'+val.id+'"><i class="fas fa-trash"></i></button>'+
                         '</td>'+
                         '</tr>';
                     });
@@ -150,23 +170,23 @@ function getDescription(account_id){
       url: '../api/function/manage_account.php',
       method: 'post',
       data: {
-         command: 'get_account_desc',
-         account_id: account_id
-     },
-     success: function(data) {
-         var data = JSON.parse(data);
-         console.log("result: ",data);
+       command: 'get_account_desc',
+       account_id: account_id
+   },
+   success: function(data) {
+       var data = JSON.parse(data);
+       console.log("result: ",data);
 
-         if(data.status == 200){
-            var get_body_html = generateHtml(data.data);
-            $('.modal-edit-body').html(get_body_html);
-            $("#member_type_edit").val(data.data.member_type).change();
-        }
+       if(data.status == 200){
+        var get_body_html = generateHtml(data.data);
+        $('.modal-edit-body').html(get_body_html);
+        $("#member_type_edit").val(data.data.member_type).change();
+    }
 
-    },
-    error: function() {
-     console.log("error");
- }
+},
+error: function() {
+   console.log("error");
+}
 });
 
 }
@@ -318,6 +338,41 @@ function updateAccount(){
     } 
 }
 
+function deleteAccount(account_id){
+    $.ajax({
+        url: '../api/function/manage_account.php',
+        method: 'post',
+        data: {
+            command: 'delete_account',
+            account_id: account_id
+        },
+        success: function(data) {
+            var data = JSON.parse(data)
+            console.log("result: ",data);
+
+            if(data.status == 200){
+                Swal.fire({
+                  icon: 'success',
+                  title: 'ลบบัญชีผู้ใช้สำเร็จ',
+                  showConfirmButton: false,
+                  timer: 1500
+              });
+                getDataFromDB(thispage_is, 'delete');
+            }else{
+                Swal.fire({
+                  icon: 'error',
+                  title: 'ไม่สามารถลบบัญชีผู้ใช้ได้',
+                  showConfirmButton: false,
+                  timer: 1500
+              });
+            }
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
+
 function validate(){
     var result = true;
     var firstname = $('#firstname').val();
@@ -439,102 +494,3 @@ function validateEdit(){
 
     return result;
 }
-// function generateModal(){
-// 	html = '';
-
-// 	html += '<div class="modal-content">';
-//     html += '	<div class="modal-header">';
-//     html += '		<h5 class="modal-title" id="editDataLabel">แก้ไขข้อมูลพัสดุ No.xxxxx</h5>';
-//     html += '		<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-//     html += '			<span aria-hidden="true"><i class="fas fa-times"></i></span>';
-//     html += '		</button>';
-//     html += '	</div>';
-//     html += '	<div class="modal-body">';
-//     html += '		<form action="" method="post">';
-//     html += '			<p class="form-title">ข้อมูลผู้ทำรายการ</p>';
-//     html += '			<div class="row">';
-//     html += '				<div class="col">';
-//     html += '					<label for="firstname" class="col-form-label col-form-label-sm">ชื่อ</label>';
-//     html += '					<input type="text" name="firstname" id="firstname" class="form-control form-control-sm" value="">';
-//     html += '				</div>';
-//     html += '				<div class="col">';
-//     html += '					<label for="lastname" class="col-form-label col-form-label-sm">นามสกุล</label>';
-//     html += '					<input type="text" name="lastname" id="lastname" class="form-control form-control-sm" value="">';
-//     html += '				</div>';
-//     html += '			</div>';
-//     html += '			<div class="row">';
-//     html += '				<div class="col-6">';
-//     html += '					<label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชน</label>';
-//     html += '					<input type="text" name="id_card" id="id_card" class="form-control form-control-sm">';
-//     html += '				</div>';
-//     html += '			</div>';
-//     html += '			<p class="form-title">ข้อมูลผู้รับ</p>';
-//     html += '				<div class="row">';
-//     html += '					<div class="col">';
-//     html += '						<label for="r_fname" class="col-form-label col-form-label-sm">ชื่อ</label>';
-//     html += '						<input type="text" name="r_fname" id="r_fname" class="form-control form-control-sm" value="">';
-//     html += '					</div>';
-//     html += '					<div class="col">';
-//     html += '						<label for="r_lname" class="col-form-label col-form-label-sm">นามสกุล</label>';
-//     html += '						<input type="text" name="r_lname" id="r_lname" class="form-control form-control-sm" value="">';
-//     html += '					</div>';
-//     html += '				</div>';
-//     html += '				<div class="row">';
-//     html += '					<div class="col-6">';
-//     html += '						<label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทร</label>';
-//     html += '						<input type="text" name="phone_number" id="phone_number" class="form-control form-control-sm" value="">';
-//     html += '					</div>';
-//     html += '				</div>';
-//     html += '				<div class="row">';
-//     html += '					<div class="col">';
-//     html += '						<label for="address" class="col-form-label col-form-label-sm">ที่อยู่</label>';
-//     html += '						<input type="text" name="address" id="address" class="form-control form-control-sm">';
-//     html += '					</div>';
-//     html += '					<div class="col">';
-//     html += '						<label for="district" class="col-form-label col-form-label-sm">เขต</label>';
-//     html += '						<input type="text" name="district" id="district" class="form-control form-control-sm">';
-//     html += '					</div>';
-//     html += '				</div>';
-//     html += '				<div class="row">';
-//     html += '					<div class="col">';
-//     html += '						<label for="area" class="col-form-label col-form-label-sm">แขวง</label>';
-//     html += '						<input type="text" name="area" id="area" class="form-control form-control-sm">';
-//     html += '					</div>'
-//     html += '					<div class="col">'
-//     html += '						<label for="province" class="col-form-label col-form-label-sm">จังหวัด</label>'
-//     html += '						<input type="text" name="province" id="province" class="form-control form-control-sm">'
-//     html += '					</div>';
-//     html += '				</div>';
-//     html += '				<div class="row">';
-//     html += '					<div class="col">';
-//     html += '						<label for="province" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>';
-//     html += '						<input type="text" name="province" id="province" class="form-control form-control-sm">';
-//     html += '					</div>';
-//     html += '					<div class="col">';
-//     html += '						<label for="shipping_type" class="col-form-label col-form-label-sm">ประเภทการส่ง</label>';
-//     html += '						<select name="shipping_type[]" id="shipping_type" class="form-control form-control-sm">';
-//     html += '							<option value="normal" selected>ส่งแบบธรรมดา</option>';
-//     html += '							<option value="cod">ส่งแบบธรรมดา แบบเก็บเงินปลายทาง</option>';
-//     html += '						</select>';
-//     html += '					</div>';
-//     html += '				</div>';
-//     html += '				<div class="row">';
-//     html += '					<div class="col">';
-//     html += '						<label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กรัม)</label>';
-//     html += '						<input type="text" name="weight" id="weight" class="form-control form-control-sm" value="">';
-//     html += '					</div>';
-//     html += '				<div class="col">';
-//     html += '					<label for="price" class="col-form-label col-form-label-sm">ราคา</label>';
-//     html += '					<input type="text" name="price" id="price" class="form-control form-control-sm" value="">';
-//     html += '				</div>';
-//     html += '			</div>';
-//     html += '		</form>';
-//     html += '	</div>';
-//     html += '	<div class="modal-footer">';
-//     html += '		<button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>';
-//     html += '		<button type="button" class="btn btn-success">บันทึก</button>';
-//     html += '	</div>';
-//     html += '</div>';
-
-//     return html;
-// }

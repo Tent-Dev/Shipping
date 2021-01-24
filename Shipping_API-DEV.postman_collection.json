@@ -37,13 +37,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/system_sign.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/system_sign.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -166,13 +162,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/system_sign.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/system_sign.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -210,13 +202,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_tracking.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_tracking.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -401,9 +389,8 @@
 								},
 								{
 									"key": "tracking_code",
-									"value": "SH431C2604NW3",
-									"type": "text",
-									"disabled": true
+									"value": "SH072P3175JB9",
+									"type": "text"
 								},
 								{
 									"key": "page",
@@ -414,18 +401,15 @@
 								{
 									"key": "product_id",
 									"value": "1",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_product.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_product.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -476,13 +460,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_product.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_product.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -515,13 +495,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_product.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_product.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -699,13 +675,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_product.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_product.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -732,19 +704,15 @@
 								},
 								{
 									"key": "product_id",
-									"value": "46",
+									"value": "41",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_product.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_product.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -808,13 +776,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_account.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_account.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -880,13 +844,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_account.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_account.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -914,13 +874,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_account.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_account.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -953,13 +909,44 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_account.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_account.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
+							],
+							"path": [
+								"Shipping",
+								"api",
+								"function",
+								"manage_account.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "delete_account",
+									"type": "text"
+								},
+								{
+									"key": "account_id",
+									"value": "9",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/Shipping/api/function/manage_account.php",
+							"host": [
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -991,19 +978,16 @@
 								},
 								{
 									"key": "transaction_id",
-									"value": "160785539365NY",
-									"type": "text"
+									"value": "160968104743KQ",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_transaction.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_transaction.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -1122,13 +1106,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_transaction.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_transaction.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -1241,19 +1221,20 @@
 								},
 								{
 									"key": "transaction_id",
-									"value": "161081422017PG",
+									"value": "161089939093BE",
+									"type": "text"
+								},
+								{
+									"key": "active_status",
+									"value": "T",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_transaction.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_transaction.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -1377,13 +1358,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_transport.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_transport.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -1426,13 +1403,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_transport.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_transport.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -1470,13 +1443,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_receiver.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_receiver.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -1544,13 +1513,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_receiver.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_receiver.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -1588,13 +1553,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_sender.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_sender.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -1662,13 +1623,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_sender.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_sender.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -1706,13 +1663,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_customer.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_customer.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",
@@ -1760,13 +1713,9 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1/Shipping/api/function/manage_customer.php",
-							"protocol": "http",
+							"raw": "{{base_url}}/Shipping/api/function/manage_customer.php",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{base_url}}"
 							],
 							"path": [
 								"Shipping",

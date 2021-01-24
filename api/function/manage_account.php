@@ -76,5 +76,17 @@ if ($cmd != "") {
 		$mysql->Close_db();
 		exit();
 	}
+
+	if ($cmd == "delete_account") {
+		$permission = $auth->AuthPermission();
+		if($permission['permission']){
+			$result = $mng_account->DeleteAccount($_POST);
+		}else{
+			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+		}
+		echo json_encode($result);
+		$mysql->Close_db();
+		exit();
+	}
 }
 ?>

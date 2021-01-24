@@ -95,6 +95,11 @@ class MNG_Account{
 			$sql_where .= " CONCAT(firstname, lastname, username) LIKE '%".$param['keyword']."%' ";
 		}
 
+		if(isset($param['active_status'])) {
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " active_status = '".$param['active_status']."' ";
+		}
+
 		$sql_query = $sql . $sql_where. $sql_limit;
 		$sql_count = $sql . $sql_where;
 
@@ -255,6 +260,25 @@ class MNG_Account{
 			$response = array(
 				'status' => 500,
 				'err_msg' => 'Can not update account'
+			);
+		}
+		return $response;
+	}
+
+	public function DeleteAccount($param = null){
+		$arr['id'] = $param['account_id'];
+		$arr['active_status'] = 'F';
+		$key = array("id");
+		$result = $this->db_connect->Update_db($arr, $key, "tbl_member");
+
+		if($result == 1){
+			$response = array(
+				'status' => 200
+			);
+		}else{
+			$response = array(
+				'status' => 500,
+				'err_msg' => 'Can not delete member'
 			);
 		}
 		return $response;
