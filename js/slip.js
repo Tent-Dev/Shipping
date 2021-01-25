@@ -28,6 +28,8 @@ function getData(){
 					$('.transaction_id').html(data.data.transaction_id);
 					$('.create_date').html(data.data.transaction_create_date);
 					$('.employee_name').html(data.data.employee_fname+' (EMID: '+data.data.employee_id+')');
+					$('.get_price').html(data.data.get_price);
+					$('.change_price').html(data.data.change_price);
 
 					var total = 0;
 					

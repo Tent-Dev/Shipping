@@ -164,12 +164,17 @@ class MNG_Transaction{
 		tbl_product.weight,
 		tbl_product.price ,
 		tbl_member.firstname as employee_fname,
-		tbl_member.lastname as employee_lname
+		tbl_member.lastname as employee_lname,
+		tbl_map_transaction.total_price,
+		tbl_map_transaction.get_price,
+		tbl_map_transaction.change_price 
 		FROM tbl_transaction
 		JOIN tbl_customer
 		ON tbl_customer.id = tbl_transaction.customer_id
 		JOIN tbl_product
 		ON tbl_product.id = tbl_transaction.product_id
+		JOIN tbl_map_transaction
+		ON tbl_map_transaction.transaction_id = tbl_transaction.transaction_id
 		LEFT JOIN tbl_member
 		ON tbl_transaction.employee_id = tbl_member.id";
 
@@ -200,8 +205,7 @@ class MNG_Transaction{
 					'price' => round($value['price'], 2),
 					'transaction_id' => $value['transaction_id'],
 					'create_date' => $value['create_date'],
-					'customer_firstname' => $value['firstname'],
-					'customer_lastname' => $value['lastname']
+					'customer_firstname' => $value['firstname']
 				);
 				$items['data'][] = $get_item;
 
@@ -212,6 +216,9 @@ class MNG_Transaction{
 			$items['employee_id'] = $value['employee_id'];
 			$items['employee_fname'] = $value['employee_fname'];
 			$items['employee_lname'] = $value['employee_lname'];
+			$items['total_price'] =  $value['total_price'];
+			$items['get_price'] = $value['get_price'];
+			$items['change_price'] = $value['change_price'];
 			
 			$response = array(
 				'status' => 200,

@@ -125,11 +125,11 @@ if(isset($_GET['mode'])){
             </tr>
             <tr>
                 <td width="50%">รับ :</td>
-                <td width="50%" align="right">0</td>
+                <td width="50%" align="right" class="get_price">0</td>
             </tr>
             <tr>
                 <td width="50%">ทอน :</td>
-                <td width="50%" align="right" style="border-bottom: 1px solid #000000;">0</td>
+                <td width="50%" align="right" class="change_price" style="border-bottom: 1px solid #000000;">0</td>
             </tr>
         </table>
         <div class="footer">

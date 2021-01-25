@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 24, 2021 at 02:31 PM
+-- Generation Time: Jan 25, 2021 at 05:08 PM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -59,6 +59,29 @@ INSERT INTO `tbl_customer` (`id`, `firstname`, `lastname`, `id_card`, `phone_num
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_map_transaction`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_map_transaction` (
+  `id` int(11) NOT NULL,
+  `transaction_id` varchar(20) NOT NULL,
+  `total_price` float NOT NULL,
+  `get_price` float NOT NULL,
+  `change_price` float NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_map_transaction`
+--
+
+INSERT INTO `tbl_map_transaction` (`id`, `transaction_id`, `total_price`, `get_price`, `change_price`) VALUES
+(1, '161159203342SX', 60, 60, 0),
+(2, '161159400273GU', 0, 0, 0),
+(3, '161159440378XH', 450, 1000, 550);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_member`
 --
 
@@ -78,14 +101,14 @@ CREATE TABLE IF NOT EXISTS `tbl_member` (
 --
 
 INSERT INTO `tbl_member` (`id`, `firstname`, `lastname`, `member_type`, `username`, `password`, `session_id`, `active_status`) VALUES
-(4, 'มาลี2', 'ไม่อร่อยนะ', 'admin', 'admin', '$2y$12$BP0jqnze1LL/VfJe3DcT.eB/ODAhkxDZtO9oTaKmvXi.2tVGNtFKu', '$2y$12$HS4Hk/Cg5CidebCNwgCW0.Ss1pnIZ.las10qW8J.6N2w9PbM7AZqW', 'T'),
+(4, 'มาลี2', 'ไม่อร่อยนะ', 'admin', 'admin', '$2y$12$BP0jqnze1LL/VfJe3DcT.eB/ODAhkxDZtO9oTaKmvXi.2tVGNtFKu', '$2y$12$Ra3dGFK4RMerPrWkcz0l2e82FMGKovcTD66DKD2XRAtIf2ixH/sBO', 'T'),
 (5, 'Test', 'Create2', 'staff', 'testaccount', '$2y$12$i0G.Xb3tKE50HPqzsWkhQ.U00Nz1uR8xSUOpj4b9JVMYxuO/xuFmy', NULL, 'F'),
 (6, 'Testadd', 'Onpage', 'admin', 'admin2', '$2y$12$xQfZzkrtApWh/D280A0BseVN/d2rh8KcylzpTQAvMCsciEVBcVPIW', NULL, 'T'),
 (7, 'Chutipas2', 'Borsub', 'staff', 'itsofun01', '$2y$12$H.ISNtFqC.jCeGTsJmOiW.WepH7w0hGbsw9VKbFLXHwZxhy9eH0e.', '$2y$12$5VBl0Inj..C/ld5GSad0ae0LL52OL1clFtcXTIEHFxEgKEt5ZH5gC', 'T'),
 (8, 'Manee', 'Aroina', 'admin', 'Manee01', '$2y$12$SLL7v8bGgA7VMLs.kyUwIuroR9qGUsLiLTl0EEqssuZN7lPb942oy', NULL, 'T'),
 (9, 'Bot', 'test', 'staff', 'Bot01', '$2y$12$DoRHcqnFtQ.56dLRkKK9feQvFrR/rIWn6lBs9F.N5EnaAtfd4lH/q', NULL, 'F'),
 (10, 'Bot2', 'Test', 'staff', 'Bot02', '$2y$12$TDPRxMF3RBFwu.AwQ0zz3e/fVJBBM93ssU4OWla7/ih2u5l.VEAq2', NULL, 'F'),
-(11, 'Test', 'Postman', 'admin', 'admin_postman', '$2y$12$g.CiobjIU9wgVm6b526Z9.mLh40omKe7IFomwyfw/pxF2sXyaTNqO', '$2y$12$w/c6k9QPCE7O8PaxHoER/eItgKZ51DpHW8UWsucB73eXoce9RcqPq', 'T'),
+(11, 'Test', 'Postman', 'admin', 'admin_postman', '$2y$12$g.CiobjIU9wgVm6b526Z9.mLh40omKe7IFomwyfw/pxF2sXyaTNqO', '$2y$12$B/03GH96moHNaHPmlY3HWuPzDpskWrxwQZ23SixcYaHvV2pRi2cyq', 'T'),
 (12, 'Test', 'Shipper', 'shipper', 'shipper01', '$2y$12$RuFmO0OLmbCtdvJJ5gNVjuvGvgrrWG81XQ4qJwTw.wEx2Opm8wm4m', '$2y$12$9Kh3botS8H1QX5ogpNKbb.U6m4t4azGEOwij9MmVakZMGVHyzeBru', 'T');
 
 -- --------------------------------------------------------
@@ -107,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `tbl_product` (
   `cod_price` float NOT NULL DEFAULT '0',
   `image_signature` text NOT NULL,
   `active_status` varchar(1) NOT NULL DEFAULT 'T'
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_product`
@@ -158,7 +181,11 @@ INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_c
 (44, 'normal', 1.5, 599, 'SH380Q9032RX3', 'waiting', '2021-01-17 16:03:10', 0, 'normal', 0, '', 'T'),
 (45, 'normal', 1.5, 305, 'SH874R6194MD3', 'waiting', '2021-01-19 16:03:44', 0, 'normal', 0, '', 'T'),
 (46, 'normal', 50, 599, 'SH420Y3614XQ4', 'waiting', '2021-01-19 16:03:44', 0, 'cod', 0, '', 'F'),
-(47, 'normal', 1.5, 50, 'SH608Y8261PZ1', 'success', '2021-01-19 16:03:44', 7, 'normal', 0, '600d8378d1877_product47.png', 'T');
+(47, 'normal', 1.5, 50, 'SH608Y8261PZ1', 'success', '2021-01-19 16:03:44', 7, 'normal', 0, '600d8378d1877_product47.png', 'T'),
+(48, 'normal', 1.5, 30, 'SH738P2584JD8', 'waiting', '2021-01-25 16:27:13', 0, 'normal', 0, '', 'T'),
+(49, 'normal', 1.5, 30, 'SH793O8963SL6', 'waiting', '2021-01-25 16:27:13', 0, 'normal', 0, '', 'T'),
+(50, 'normal', 20, 2000, 'SH517O7852WT6', 'waiting', '2021-01-25 17:00:02', 6, 'cod', 4500, '', 'T'),
+(51, 'normal', 45, 450, 'SH287M3241BU0', 'waiting', '2021-01-25 17:06:43', 4, 'normal', 0, '', 'T');
 
 -- --------------------------------------------------------
 
@@ -172,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `tbl_receiver` (
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `address` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_receiver`
@@ -192,7 +219,9 @@ INSERT INTO `tbl_receiver` (`id`, `phone_number`, `firstname`, `lastname`, `addr
 (11, '0830884161', 'ชุติภาส', 'บ่อทรัพย์', '{"firstname":"ชุติภาส","lastname":"บ่อทรัพย์","address":"99 ถนนพัฒนาการ","district":"บางแค","area":"บางแค","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0830884161"}'),
 (12, '0830884161', 'E-TENTR00', 'Studio', '{"firstname":"E-TENTR00","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}'),
 (13, '0830884161', 'E-TENT', 'Studio', '{"firstname":"E-TENT","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}'),
-(14, '0830884161', 'E-TENT', 'Studio', '{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0830884161"}');
+(14, '0830884161', 'E-TENT', 'Studio', '{"address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0830884161"}'),
+(15, '0830884161', 'Chutipas', 'Borsub', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0830884161"}'),
+(16, '0830884161', 'E-TENT2', 'Studio', '{"firstname":"E-TENT2","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0830884161"}');
 
 -- --------------------------------------------------------
 
@@ -206,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `tbl_sender` (
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `address` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_sender`
@@ -227,7 +256,9 @@ INSERT INTO `tbl_sender` (`id`, `phone_number`, `firstname`, `lastname`, `addres
 (14, '0830884161', 'E-TENTRRR', 'StudioR', '{"firstname":"E-TENTRRR","lastname":"StudioR","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}'),
 (15, '0830884161', 'E-TENT', 'Studio', '{"firstname":"E-TENT","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}'),
 (16, '0847775556', 'E-TENT', 'Studio', '{"address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0847775556"}'),
-(17, '0830884161', 'Chutipas', 'Borsub', '{"address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}');
+(17, '0830884161', 'Chutipas', 'Borsub', '{"address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}'),
+(18, '0830884161', 'Chutipas', 'Borsub', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0830884161"}'),
+(19, '0830884161', 'Chutipas', 'Borsub', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"บางแค","area":"บางแค","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}');
 
 -- --------------------------------------------------------
 
@@ -245,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `tbl_transaction` (
   `sender_desc` text NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `active_status` varchar(1) NOT NULL DEFAULT 'T'
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_transaction`
@@ -294,7 +325,11 @@ INSERT INTO `tbl_transaction` (`id`, `transaction_id`, `employee_id`, `customer_
 (44, '161089939093BE', 4, 17, 44, '{"firstname":"E-TENT","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '{"firstname":"E-TENT","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0847775556"}', '2021-01-17 16:03:10', 'T'),
 (45, '161107222419BE', 4, 17, 45, '{"firstname":"E-TENT","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '{"firstname":"E-TENT","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-01-19 16:03:44', 'T'),
 (46, '161107222419BE', 4, 17, 46, '{"firstname":"คนไม่ดี","lastname":"จ่ะ","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"นครปฐม","postal":"10160","phone_number":"0830884161"}', '{"firstname":"คนดี","lastname":"นะจะ","address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-01-19 16:03:44', 'T'),
-(47, '161107222419BE', 4, 17, 47, '{"firstname":"E-TENT","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-01-19 16:03:44', 'T');
+(47, '161107222419BE', 4, 17, 47, '{"firstname":"E-TENT","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"หนองแขม","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-01-19 16:03:44', 'T'),
+(48, '161159203342SX', 11, 2, 48, '{"firstname":"ชื่อคนรับ1","lastname":"นามสกุลคนรับ1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '2021-01-25 16:27:13', 'T'),
+(49, '161159203342SX', 11, 2, 49, '{"firstname":"ชื่อคนรับ2","lastname":"นามสกุลคนรับ2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '{"firstname":"ชื่อคนส่ง2","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}', '2021-01-25 16:27:13', 'T'),
+(50, '161159400273GU', 4, 17, 50, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0830884161"}', '2021-01-25 17:00:02', 'T'),
+(51, '161159440378XH', 4, 17, 51, '{"firstname":"E-TENT2","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"บางแค","area":"บางแค","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-01-25 17:06:43', 'T');
 
 -- --------------------------------------------------------
 
@@ -308,7 +343,7 @@ CREATE TABLE IF NOT EXISTS `tbl_transport` (
   `status` varchar(100) NOT NULL DEFAULT 'waiting',
   `note` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_transport`
@@ -381,7 +416,12 @@ INSERT INTO `tbl_transport` (`id`, `product_id`, `status`, `note`, `timestamp`) 
 (64, '47', 'waiting', '', '2021-01-19 16:03:44'),
 (65, '47', 'success', '', '2021-01-24 14:23:18'),
 (66, '47', 'waiting', '', '2021-01-24 14:23:22'),
-(67, '47', 'success', '', '2021-01-24 14:26:00');
+(67, '47', 'success', '', '2021-01-24 14:26:00'),
+(68, '48', 'waiting', '', '2021-01-25 16:27:13'),
+(69, '49', 'waiting', '', '2021-01-25 16:27:14'),
+(70, '50', 'waiting', '', '2021-01-25 17:00:02'),
+(71, '50', 'waiting', '', '2021-01-25 17:01:52'),
+(72, '51', 'waiting', '', '2021-01-25 17:06:43');
 
 --
 -- Indexes for dumped tables
@@ -391,6 +431,12 @@ INSERT INTO `tbl_transport` (`id`, `product_id`, `status`, `note`, `timestamp`) 
 -- Indexes for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_map_transaction`
+--
+ALTER TABLE `tbl_map_transaction`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -439,6 +485,11 @@ ALTER TABLE `tbl_transport`
 ALTER TABLE `tbl_customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
+-- AUTO_INCREMENT for table `tbl_map_transaction`
+--
+ALTER TABLE `tbl_map_transaction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `tbl_member`
 --
 ALTER TABLE `tbl_member`
@@ -447,27 +498,27 @@ ALTER TABLE `tbl_member`
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `tbl_receiver`
 --
 ALTER TABLE `tbl_receiver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `tbl_sender`
 --
 ALTER TABLE `tbl_sender`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `tbl_transaction`
 --
 ALTER TABLE `tbl_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `tbl_transport`
 --
 ALTER TABLE `tbl_transport`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=73;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

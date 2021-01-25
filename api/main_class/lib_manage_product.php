@@ -215,7 +215,8 @@ class MNG_Product{
 	public function CreateProduct($param = null){
 		$receiver_save_phone = '';
 		$sender_save_phone = '';
-		$dumpmy_data = '{"firstname":"ชื่อคนทำรายการ","lastname":"นามสกุลคนทำรายการ","id_card":"1102002841486","customer_phone_number":"0819584848","item":[{"weight":1.5,"price":30,"shipping_type":"normal","payment_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ1","lastname":"นามสกุลคนรับ1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}},{"weight":1.5,"price":30,"shipping_type":"normal","payment_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ2","lastname":"นามสกุลคนรับ2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง2","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}}]}';
+		$trans_id_added = false;
+		$dumpmy_data = '{"firstname":"ชื่อคนทำรายการ","lastname":"นามสกุลคนทำรายการ","id_card":"1102002841486","customer_phone_number":"0819584848", "payment":{"get_price":60,"change_price": 0, "total_price":60},"item":[{"weight":1.5,"price":30,"shipping_type":"normal","payment_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ1","lastname":"นามสกุลคนรับ1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง1","lastname":"นามสกุลคนส่ง1","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}},{"weight":1.5,"price":30,"shipping_type":"normal","payment_type":"normal","receiver_desc":{"firstname":"ชื่อคนรับ2","lastname":"นามสกุลคนรับ2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"},"sender_desc":{"firstname":"ชื่อคนส่ง2","lastname":"นามสกุลคนส่ง2","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0987786666"}}]}';
 
 		$json_en = json_decode($param['create_data'], true);
 
@@ -228,6 +229,7 @@ class MNG_Product{
 			"id_card" => $json_en['id_card'],
 			"phone_number" => $json_en['customer_phone_number']
 		);
+
 		$sql = 
 		"SELECT * FROM tbl_customer WHERE phone_number = '".$json_en['customer_phone_number']."'";
 
@@ -251,6 +253,7 @@ class MNG_Product{
 				$arr_customer = array( 
 					"shipping_type" => $value['shipping_type'],
 					"payment_type" => $value['payment_type'],
+					"cod_price" => $value['cod_price'],
 					"weight" => $value['weight'],
 					"price" => $value['price'],
 					"tracking_code" => $tracking_code,
@@ -278,7 +281,30 @@ class MNG_Product{
 
 					$result_transaction = $this->db_connect->Insert_db($arr_customer,"tbl_transaction");
 
-					if($result_transaction['status']){
+					if(!$trans_id_added){
+						$arr_map_transaction = array(
+							"transaction_id" => $trans_id,
+							"total_price" => $json_en['payment']['total_price'], 
+							"get_price" => $json_en['payment']['get_price'],
+							"change_price" => $json_en['payment']['change_price']
+						);
+
+						$result_map_transaction = $this->db_connect->Insert_db($arr_map_transaction,"tbl_map_transaction");
+
+						if(!$result_map_transaction['status']){
+							$response = array(
+								'status' => 500,
+								'err_msg' => 'Cannot mapping transaction'
+							);
+							return $response;
+							exit();
+						}else{
+							$trans_id_added = true;
+						}
+
+					}
+					
+					if($result_transaction['status'] && $trans_id_added){
 
 						if($receiver_save_phone !== $value['receiver_desc']['phone_number']){
 							$check_receiver_same = $this->CheckReceiverSame($value['receiver_desc']['phone_number'], $value['receiver_desc']);
