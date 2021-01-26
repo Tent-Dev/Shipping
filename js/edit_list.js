@@ -100,6 +100,12 @@ $(document).ready(function() {
         $zipcode: $('#r_postcode'), // input ของรหัสไปรษณีย์
     });
 
+    $(document).on('keyup', '.weight', function() {
+        if($('#price_type').is(":checked") == true) {
+            getPrice();
+        }
+    });
+
 });
 
 function getDescription(){
@@ -567,4 +573,16 @@ function getHistory(type = null){
 			console.log("error");
 		}
 	});
+}
+
+function getPrice() {
+    var price = "", weight = "";
+    if($('#shipping_type option:selected').val() == 'normal') {
+        weight = $('#weight').val();
+        price = weight * 10;
+    } else if($('#shipping_type option:selected').val() == 'cod') {
+        weight = $('#weight').val();
+        price = weight * 100;
+    }
+    $('#price').val(price.toFixed(2));
 }

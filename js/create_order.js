@@ -658,7 +658,7 @@ function getPrice(pointer_index) {
         weight = $('#weight'+pointer_index).val();
         price = weight * 100;
     }
-    $('#price'+pointer_index).val(price);
+    $('#price'+pointer_index).val(price.toFixed(2));
 }
 
 function sumPrice() {
@@ -671,7 +671,7 @@ function sumPrice() {
             sum_price = sum_price + parseInt(price);
         }
     });
-    $('#sum_price').html(sum_price);
+    $('#sum_price').html(NumberFormat(sum_price));
 
     return sum_price;
 }
