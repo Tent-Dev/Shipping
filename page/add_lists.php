@@ -301,7 +301,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                 </div>
                                 <div class="col-md-4">
                                     <label for="change" class="col-form-label col-form-label-sm">เงินทอน</label>
-                                    <input type="text" name="change" id="change" class="form-control form-control-sm form-control-plaintext" value="" disabled readonly>
+                                    <input type="text" name="change" id="change" class="form-control form-control-sm" value="" disabled readonly>
                                 </div>
                             </div>
                             <div class="row">
