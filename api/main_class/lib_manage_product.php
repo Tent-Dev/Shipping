@@ -260,6 +260,12 @@ class MNG_Product{
 					"status" => 'waiting'
 				);
 
+				if($value['payment_type'] == 'cod'){
+					$arr_customer["cod_price"] = $value['payment_type'];
+				}else{
+					$arr_customer["cod_price"] = 0;
+				}
+
 				if(!empty($value['cod_price']) && $value['payment_type'] == 'cod'){
 					$arr_customer['cod_price'] = $value['cod_price'];
 				}
@@ -415,7 +421,12 @@ class MNG_Product{
 		}
 
 		if(isset($param['cod_price']) && $param['cod_price'] !== ''){
-			$arr['cod_price'] = $param['cod_price'];
+			if($param['payment_type'] == 'cod'){
+				$arr['cod_price'] = $param['cod_price'];
+			}else{
+				$arr['cod_price'] = 0;
+			}
+			
 		}
 
 		if(!empty($param['customer_idcard']) && !empty($param['customer_firstname']) && !empty($param['customer_lastname']) && !empty($param['customer_phone_number'])){

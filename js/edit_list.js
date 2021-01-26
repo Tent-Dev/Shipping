@@ -40,6 +40,16 @@ $(document).ready(function() {
 		}, 1000);
 	});
 
+	$(document).on('change', '#shipping_type', function() {
+
+        if($('#shipping_type option:selected').val() == 'cod') {
+            $('#money_cod').parent().removeClass('d-none');
+        } else {
+            $('#money_cod').parent().addClass('d-none');
+        }
+        //getPrice(pointer_index);
+    });
+
 	$(document).on('click', '.sender_history', function(event) {
 		var sender_history = $(this).data('index');
 		$("#sender_phone").val(sender_history_set[sender_history].phone_number);
@@ -132,6 +142,7 @@ function getDescription(){
 				$("#weight").val(data.data.weight);
 				$("#price").val(data.data.price);
 				$("#shipping_type").val(data.data.payment_type).change();
+				$("#money_cod").val(data.data.cod_price);
 
 				getHistory('customer');
 				getHistory('sender');
@@ -186,6 +197,7 @@ function updateAccount(){
 	var weight = $("#weight").val();
 	var price = $("#price").val();
 	var shipping_type = $("#shipping_type").val();
+	var cod_price = $("#money_cod").val();
 
 	if(validateEdit()){
 		$('.btn_save').html('<i class="fas fa-spinner fa-spin"></i></span>');
@@ -219,7 +231,8 @@ function updateAccount(){
 				sender_province: s_province,
 				sender_postal: s_postcode,
 				sender_phone_number: sender_phone,
-				payment_type: shipping_type
+				payment_type: shipping_type,
+				cod_price: cod_price
 
 			},
 			success: function(data) {
