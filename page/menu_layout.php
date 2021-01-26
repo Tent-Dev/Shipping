@@ -32,6 +32,7 @@
     </div>
     <div class="menu-content">
         <?php if(isset($_SESSION['TYPE']) && $_SESSION['TYPE'] == 'admin' || $_SESSION['TYPE'] == 'staff'){?>
+        <a href="dashboard.php" class="menu <?php if($path == 'dashboard.php') echo "active"; ?>">Dashboard</a>
         <a href="lists.php" class="menu <?php if($path == 'lists.php' || $path == 'add_lists.php' || $path == 'edit_lists.php') echo "active"; ?>">รายการพัสดุ</a>
         <a href="sort_mail.php" class="menu <?php if($path == 'sort_mail.php') echo "active"; ?>">คัดแยกพัสดุ</a>
         <?php } ?>
