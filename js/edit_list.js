@@ -106,6 +106,12 @@ $(document).ready(function() {
         }
     });
 
+    $(document).on('change', '.price_type', function(event) {
+    	if($(this).is(':checked')){
+    		getPrice();
+    	}
+    });
+
 });
 
 function getDescription(){

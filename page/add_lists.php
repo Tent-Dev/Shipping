@@ -269,7 +269,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                         </div>
                                         <div class="col-md-4">
                                             <label for="price" class="col-form-label col-form-label-sm">ราคา</label>
-                                            <input type="text" name="price[]" id="price" class="form-control form-control-sm price" value="">
+                                            <input type="text" name="price[]" id="price" class="form-control form-control-sm price" value="" disabled>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="p_type" class="col-form-label col-form-label-sm">คำนวณราคา</label>

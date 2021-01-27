@@ -185,6 +185,17 @@ $(document).ready(function() {
         }
     });
 
+    $(document).on('change', '.price_type', function(event) {
+        var pointer_index = $(this).closest('.section').attr('data-index');
+        pointer_index = pointer_index == 1 ? '' : pointer_index;
+        if($(this).is(':checked')){
+            $('#price'+pointer_index).attr('disabled', true);
+            getPrice(pointer_index);
+            sumPrice();
+        }else{
+            $('#price'+pointer_index).attr('disabled', false);
+        }
+    });
 
 });
 
