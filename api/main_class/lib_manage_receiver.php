@@ -64,6 +64,7 @@ class MNG_Receiver{
 			$arr['lastname'] = $param['lastname'];
 			$arr['phone_number'] = $param['phone_number'];
 			$arr['address'] = json_encode($receiver_arr, JSON_UNESCAPED_UNICODE);
+			$arr['area'] = $receiver_arr['area'];
 
 			$check_receiver_data = $this->GetReceiver($arr);
 

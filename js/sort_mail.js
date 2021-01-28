@@ -1,5 +1,5 @@
 var SHIPPER_LIST = [];
-var startdate = "", enddate = "", status = "", keyword = "", shipper = "";
+var startdate = "", enddate = "", status = "", keyword = "", shipper = "", area = "";
 
 $(document).ready(function() {
 	getDataFromDB();
@@ -46,6 +46,21 @@ $(document).ready(function() {
 		keyword = $(this).val();
 		filterAll();
 	}, 300));
+
+	$('#search_area').keyup(delay(function(e){
+		area = $(this).val();
+		filterAll();
+	}, 300));
+
+	$.Thailand({ 
+		autocomplete_size: 5,
+        database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+        $district: $('#search_area'), // input ของตำบล
+        onDataFill: function(data){ 
+        	area = data.district;
+        	filterAll();
+        },
+    });
 });
 
 function filterStatus(value) {
@@ -89,6 +104,7 @@ function getDataFromDB(page = 1){
 			enddate: enddate,
 			status: status,
 			keyword: keyword,
+			area: area,
 			shipper: shipper
 		},
 		success: function(data) {

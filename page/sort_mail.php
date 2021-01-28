@@ -13,6 +13,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
     <title>คัดแยกพัสดุ</title>
 
     <link rel="stylesheet" href="../lib/bootstrap-4.5.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.css">
     <link href="../lib/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
@@ -25,6 +26,10 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/JQL.min.js"></script>
+    <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
+    <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
 
     <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
     <script src="../js/sort_mail.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
@@ -70,9 +75,10 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                 </div>
                 <div class="col-lg-1">เขตจัดส่ง</div>
                 <div class="col-lg-3">
-                    <select class="filter mt-2 mt-lg-0 mb-2 mb-lg-0" name="filter_district" id="filter_district">
+                    <!-- <select class="filter mt-2 mt-lg-0 mb-2 mb-lg-0" name="filter_district" id="filter_district">
                         <option value="" selected>ทั้งหมด</option>
-                    </select>
+                    </select> -->
+                    <input class="filter mt-2 mt-lg-0 mb-2 mb-lg-0" type="text" name="search_area" id="search_area" placeholder="ค้นหาเขต">
                 </div>
                 <div class="col-lg-1">คนนำจ่าย</div>
                 <div class="col-lg-3">

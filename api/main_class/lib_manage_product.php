@@ -75,6 +75,11 @@ class MNG_Product{
 			$sql_where .= " CONCAT(tbl_product.tracking_code, tbl_receiver.firstname, tbl_receiver.lastname) LIKE '%".$param['keyword']."%' ";
 		}
 
+		if(isset($param['area']) && $param['area'] != ""){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_receiver.area LIKE '%".$param['area']."%' ";
+		}
+
 		if(isset($param['shipper']) && $param['shipper'] != ""){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
 			$sql_where .= " tbl_product.shipper_id = '".$param['shipper']."' ";
@@ -320,6 +325,7 @@ class MNG_Product{
 									"firstname" => $value['receiver_desc']['firstname'],
 									"lastname" => $value['receiver_desc']['lastname'],
 									"address" =>  json_encode($value['receiver_desc'], JSON_UNESCAPED_UNICODE),
+									"area" =>  $value['receiver_desc']['area']
 								);
 
 								$result_receiver = $this->db_connect->Insert_db($arr_receiver,"tbl_receiver");
