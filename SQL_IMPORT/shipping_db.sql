@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 28, 2021 at 05:07 PM
+-- Generation Time: Jan 28, 2021 at 05:12 PM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -32,7 +32,14 @@ CREATE TABLE IF NOT EXISTS `tbl_customer` (
   `lastname` varchar(255) NOT NULL,
   `id_card` varchar(13) NOT NULL,
   `phone_number` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_customer`
+--
+
+INSERT INTO `tbl_customer` (`id`, `firstname`, `lastname`, `id_card`, `phone_number`) VALUES
+(1, 'สมหาย', 'ใจดี', '1102005555888', '0830884161');
 
 -- --------------------------------------------------------
 
@@ -46,7 +53,14 @@ CREATE TABLE IF NOT EXISTS `tbl_map_transaction` (
   `total_price` float NOT NULL,
   `get_price` float NOT NULL,
   `change_price` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_map_transaction`
+--
+
+INSERT INTO `tbl_map_transaction` (`id`, `transaction_id`, `total_price`, `get_price`, `change_price`) VALUES
+(1, '161185388391LK', 4500, 5000, 500);
 
 -- --------------------------------------------------------
 
@@ -99,7 +113,14 @@ CREATE TABLE IF NOT EXISTS `tbl_product` (
   `cod_price` float NOT NULL DEFAULT '0',
   `image_signature` text NOT NULL,
   `active_status` varchar(1) NOT NULL DEFAULT 'T'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_product`
+--
+
+INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_code`, `status`, `create_date`, `shipper_id`, `payment_type`, `cod_price`, `image_signature`, `active_status`) VALUES
+(1, 'normal', 450, 4500, 'SH291U7513ZT5', 'waiting', '2021-01-28 17:11:23', 0, 'normal', 0, '', 'T');
 
 -- --------------------------------------------------------
 
@@ -114,7 +135,14 @@ CREATE TABLE IF NOT EXISTS `tbl_receiver` (
   `lastname` varchar(255) NOT NULL,
   `address` text NOT NULL,
   `area` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_receiver`
+--
+
+INSERT INTO `tbl_receiver` (`id`, `phone_number`, `firstname`, `lastname`, `address`, `area`) VALUES
+(1, '0859484777', 'มานี', 'มีเงิน', '{"firstname":"มานี","lastname":"มีเงิน","address":"12/998","district":"บางบอน","area":"บางบอน","province":"กรุงเทพมหานคร","postal":"10150","phone_number":"0859484777"}', 'บางบอน');
 
 -- --------------------------------------------------------
 
@@ -128,7 +156,14 @@ CREATE TABLE IF NOT EXISTS `tbl_sender` (
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `address` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_sender`
+--
+
+INSERT INTO `tbl_sender` (`id`, `phone_number`, `firstname`, `lastname`, `address`) VALUES
+(1, '0897456565', 'สมหาย', 'ใจดี', '{"firstname":"สมหาย","lastname":"ใจดี","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0897456565"}');
 
 -- --------------------------------------------------------
 
@@ -146,7 +181,14 @@ CREATE TABLE IF NOT EXISTS `tbl_transaction` (
   `sender_desc` text NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `active_status` varchar(1) NOT NULL DEFAULT 'T'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_transaction`
+--
+
+INSERT INTO `tbl_transaction` (`id`, `transaction_id`, `employee_id`, `customer_id`, `product_id`, `receiver_desc`, `sender_desc`, `create_date`, `active_status`) VALUES
+(1, '161185388391LK', 4, 1, 1, '{"firstname":"มานี","lastname":"มีเงิน","address":"12/998","district":"บางบอน","area":"บางบอน","province":"กรุงเทพมหานคร","postal":"10150","phone_number":"0859484777"}', '{"firstname":"สมหาย","lastname":"ใจดี","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0897456565"}', '2021-01-28 17:11:23', 'T');
 
 -- --------------------------------------------------------
 
@@ -160,7 +202,14 @@ CREATE TABLE IF NOT EXISTS `tbl_transport` (
   `status` varchar(100) NOT NULL DEFAULT 'waiting',
   `note` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_transport`
+--
+
+INSERT INTO `tbl_transport` (`id`, `product_id`, `status`, `note`, `timestamp`) VALUES
+(1, '1', 'waiting', '', '2021-01-28 17:11:23');
 
 --
 -- Indexes for dumped tables
@@ -222,12 +271,12 @@ ALTER TABLE `tbl_transport`
 -- AUTO_INCREMENT for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_map_transaction`
 --
 ALTER TABLE `tbl_map_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_member`
 --
@@ -237,27 +286,27 @@ ALTER TABLE `tbl_member`
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_receiver`
 --
 ALTER TABLE `tbl_receiver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_sender`
 --
 ALTER TABLE `tbl_sender`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_transaction`
 --
 ALTER TABLE `tbl_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_transport`
 --
 ALTER TABLE `tbl_transport`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
