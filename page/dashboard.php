@@ -61,44 +61,32 @@ include("auth_onpage.php");
                 </div>
             </div>
 
-            <div class="row wrap_overall">
-                <div class="col-lg-3">
-                    <div class="box">
-                        <div class="title"><i class="fas fa-dolly-flatbed"></i> จำนวนพัสดุในระบบ</div>
-                        <div class="detail summary_items_in_system"></div>
-                    </div>
+            <div class="wrap_overall">
+                <div class="box">
+                    <div class="title"><i class="fas fa-dolly-flatbed"></i> จำนวนพัสดุในระบบ</div>
+                    <div class="detail summary_items_in_system"></div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="box">
-                        <div class="title"><i class="fas fa-truck"></i> พัสดุที่รอดำเนินการส่ง</div>
-                        <div class="detail summary_items_waiting"></div>
-                    </div>
+                <div class="box">
+                    <div class="title"><i class="fas fa-truck"></i> พัสดุที่รอดำเนินการส่ง</div>
+                    <div class="detail summary_items_waiting"></div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="box">
-                        <div class="title"><i class="fas fa-shipping-fast"></i> พัสดุที่อยู่ระหว่างจัดส่ง</div>
-                        <div class="detail summary_items_sending"></div>
-                    </div>
+                <div class="box">
+                    <div class="title"><i class="fas fa-shipping-fast"></i> พัสดุที่อยู่ระหว่างจัดส่ง</div>
+                    <div class="detail summary_items_sending"></div>
                 </div>
             </div>
-            <div class="row wrap_overall">
-                <div class="col-lg-3">
-                    <div class="box">
-                        <div class="title"><i class="fas fa-receipt"></i> จำนวนการทำรายการ</div>
-                        <div class="detail summary_total_transaction"></div>
-                    </div>
+            <div class="wrap_overall">
+                <div class="box">
+                    <div class="title"><i class="fas fa-receipt"></i> จำนวนการทำรายการ</div>
+                    <div class="detail summary_total_transaction"></div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="box">
-                        <div class="title"><i class="fas fa-hand-holding-usd"></i> รายได้</div>
-                        <div class="detail summary_total_price"></div>
-                    </div>
+                <div class="box">
+                    <div class="title"><i class="fas fa-hand-holding-usd"></i> รายได้</div>
+                    <div class="detail summary_total_price"></div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="box">
-                        <div class="title"><i class="fas fa-coins"></i> เก็บเงินปลายทาง</div>
-                        <div class="detail summary_items_cod_price"></div>
-                    </div>
+                <div class="box">
+                    <div class="title"><i class="fas fa-coins"></i> เก็บเงินปลายทาง</div>
+                    <div class="detail summary_items_cod_price"></div>
                 </div>
             </div>
         </div>

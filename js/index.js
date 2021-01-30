@@ -21,7 +21,7 @@ $(document).ready(function() {
 						if(data.data.member_type == 'shipper'){
 							location.href = 'page/update_status.php';
 						}else{
-							location.href = 'page/lists.php';
+							location.href = 'page/dashboard.php';
 						}
 					}else{
 						console.log("result: ",data);
