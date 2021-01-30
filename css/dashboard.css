@@ -1,8 +1,9 @@
+/* แก้ตรงนี้จ้า เอาไปหมดเลยกะได้ */
 .wrap_overall {
-  position: relative;
-  align-items: center;
   display: flex;
-  margin-top: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 20px -10px 0;
 }
 
 .title {
@@ -30,8 +31,11 @@
   background-color: #d0ffbb;
 }
 
+/* เพิ่ม width and margin */
 .box {
+  width: calc(33.333% - 20px);
   padding: 20px;
+  margin: 0 10px;
   border-radius: 4px;
   text-align: center;
   border: 1px solid #e0e0e0;
