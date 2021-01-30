@@ -1,5 +1,7 @@
 var startdate = '', enddate = '';
 $(document).ready(function() {
+	enddate = moment().format('YYYY-MM-DD');
+	startdate = moment().format('YYYY-MM-DD');
 	getAllData();
 	//$('.detail').html('<i class="fas fa-spinner fa-spin loading_box_icon"></i></span>');
 	$('input#filter_date').daterangepicker({
@@ -17,13 +19,26 @@ $(document).ready(function() {
 
 		} else if(value == "all"){
 			$('.datepicker').hide();
+			$('#filter_date').val('');
 			startdate = "";
 			enddate = "";
+			getAllData();
+		} else if(value == "last_7"){
+			enddate = moment().format('YYYY-MM-DD');
+			startdate = moment().subtract(7,'d').format('YYYY-MM-DD');
+			getAllData();
+		} else if(value == "all"){
+			enddate = '';
+			startdate = '';
+			getAllData();
+		} else if(value == "today"){
+			enddate = moment().format('YYYY-MM-DD');
+			startdate = moment().format('YYYY-MM-DD');
 			getAllData();
 		}
 		else {
 			$('.datepicker').hide();
-
+			$('#filter_date').val('');
 			getAllData();
 		}
 	});

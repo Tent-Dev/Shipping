@@ -49,11 +49,11 @@ include("auth_onpage.php");
                 <div class="col-lg-1">ช่วงเวลา</div>
                 <div class="col-lg-2">
                     <select class="filter mt-2 mt-lg-0" name="filter_date_absoulte" id="filter_date_absoulte">
-                        <option value="all" selected>วันนี้</option>
-                        <option value="">7วันที่ผ่านมา</option>
-                        <option value="">30วันที่ผ่านมา</option>
+                        <option value="today" selected>วันนี้</option>
+                        <option value="last_7">7วันที่ผ่านมา</option>
+                        <option value="last_30">30วันที่ผ่านมา</option>
                         <option value="custom_date">กำหนดเอง</option>
-                        <option value="">ทั้งหมด</option>
+                        <option value="all">ทั้งหมด</option>
                     </select>
                 </div>
                 <div class="col-lg-3">
