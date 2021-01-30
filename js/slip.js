@@ -40,6 +40,8 @@ function getData(){
 
 					$('.total').html(total);
 
+					window.print();
+
 				}else{
 					Swal.fire({
 						title: 'พบข้อผิดพลาด',

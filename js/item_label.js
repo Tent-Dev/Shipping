@@ -39,29 +39,8 @@ function getData(){
 						var html = generateLabel(val);
 
 						$('.boxs').append(html);
-						// var r_postal_html = '';
-						// $('.r_name').html(val.receiver_desc.firstname +' '+val.receiver_desc.lastname );
-						// $('.r_address').html(val.receiver_desc.address);
-						// $('.r_area').html(val.receiver_desc.area);
-						// $('.r_district').html(val.receiver_desc.district);
-						// $('.r_province').html(val.receiver_desc.province);
-						// $('.r_phone').html(val.receiver_desc.phone_number);
-
-						// $('.s_name').html(val.sender_desc.firstname +' '+val.sender_desc.lastname );
-						// $('.s_address').html(val.sender_desc.address);
-						// $('.s_area').html(val.sender_desc.area);
-						// $('.s_district').html(val.sender_desc.district);
-						// $('.s_province').html(val.sender_desc.province);
-
-						// for (var i = 0; i < val.sender_desc.postal.length; i++) {
-						// 	r_postal_html += '<span class="postcode_arr">'+val.sender_desc.postal[i]+'</span>';
-						// }
-
-						// $('.postcode').html(r_postal_html);
-
-
-						// $('.barcode').attr('jsbarcode-value',val.tracking_code);
 						JsBarcode(".barcode").init();
+						window.print();
 					});
 
 				}else{
