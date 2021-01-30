@@ -1,37 +1,39 @@
-.wrap_overall{
-	position: relative;
-	align-items: center;
-	display: flex;
-	//justify-content: center;
-	margin-top: 20px;
+.wrap_overall {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .title {
-	font-size: 18px;
-	font-weight: 700;
-	line-height: 24px;
-	text-align: left;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
 }
+
 .detail {
-	margin-top: 10px;
-	font-size: 28px;
-	line-height: 32px;
+  margin-top: 10px;
+  font-size: 28px;
+  line-height: 32px;
 }
 
 .bg-blue {
-	background-color: #d2e5ff;
+  background-color: #d2e5ff;
 }
+
 .bg-yellow {
-	background-color: #ffdc90;
+  background-color: #ffdc90;
 }
+
 .bg-green {
-	background-color: #d0ffbb;
+  background-color: #d0ffbb;
 }
 
 .box {
   width: calc(33.333% - 20px);
   padding: 20px;
-  margin: 0 10px;
+  margin: 10px;
   border-radius: 4px;
   text-align: center;
   border: 1px solid #e0e0e0;
@@ -39,5 +41,20 @@
 }
 
 .datepicker {
-	display: none;
+  display: none;
 }
+
+@media (max-width: 992px) {
+  .box {
+    width: calc(50% - 10px);
+    margin: 5px;
+  }
+}
+
+@media (max-width: 767px) {
+  .box {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=dashboard.css.map */
