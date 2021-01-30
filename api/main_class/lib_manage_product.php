@@ -13,9 +13,15 @@ class MNG_Product{
 	public function GetProduct($param = null){
 		$per_page = 10;
 		$page = 1;
+		$ignore_pagination = false;
+		$mode = '';
 		if(isset($param['page']) && $param['page'] != ''){
 			$page = $param['page'];
 		}
+		if(isset($param['ignore_pagination']) && $param['ignore_pagination'] != ''){
+			$ignore_pagination = $param['ignore_pagination'];
+		}
+
 		$start_page = $this->tools->PaginationSetpage($per_page,$page);
 		
 		$sql =
@@ -41,8 +47,11 @@ class MNG_Product{
 		ON tbl_transaction.customer_id = tbl_receiver.id
 		";
 
-		$sql_limit = " ORDER BY tbl_product.id DESC LIMIT ".$start_page." , ".$per_page."";
-
+		$sql_limit = " ORDER BY tbl_product.id DESC ";
+		if(!$ignore_pagination){
+			$sql_limit = " LIMIT ".$start_page." , ".$per_page."";
+		}
+		
 		$sql_where = " WHERE tbl_product.active_status = 'T' ";
 
 		if(isset($param['status']) && $param['status'] != ""){
@@ -113,7 +122,10 @@ class MNG_Product{
 				);
 				$items[] = $get_item;
 			}
-			$data_final['total_pages'] = $total_pages;
+			if(!$ignore_pagination){
+				$data_final['total_pages'] = $total_pages;
+			}
+			
 			$data_final['data'] = $items;
 			$response = array(
 				'status' => 200,

@@ -35,10 +35,10 @@ include("auth_onpage.php");
     <?php include('menu_layout.php'); ?>
 
     <section>
-        <div class="container">
+        <div class="container" style="margin-bottom: 20px">
             <div class="row">
                 <div class="col-lg-9">
-                    <h1>Dashboard</h1>
+                    <h1>ภาพรวม</h1>
                 </div>
                 <div class="col-lg-3 d-flex justify-content-end align-items-center">
                     <button type="button" class="btn btn-sm btn-success">Export</button>
@@ -96,7 +96,7 @@ include("auth_onpage.php");
                 </div>
                 <div class="col-lg-3">
                     <div class="box">
-                        <div class="title">เก็บเงินปลายทาง</div>
+                        <div class="title"><i class="fas fa-coins"></i> เก็บเงินปลายทาง</div>
                         <div class="detail"><span class="">100</span> บาท</div>
                     </div>
                 </div>
