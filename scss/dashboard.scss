@@ -27,12 +27,15 @@
 .bg-green {
 	background-color: #d0ffbb;
 }
+
 .box {
-	padding: 20px;
-	border-radius: 4px;
-	text-align: center;
-	border: 1px solid #e0e0e0;
-	box-shadow: 0px 0px 10px -5px #a5a5a5;
+  width: calc(33.333% - 20px);
+  padding: 20px;
+  margin: 0 10px;
+  border-radius: 4px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 0px 10px -5px #a5a5a5;
 }
 
 .datepicker {

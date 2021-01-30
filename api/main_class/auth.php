@@ -23,7 +23,7 @@ class Auth{
 			$stmt->bind_result($session_id);
 			$result = $stmt->fetch();
 			if($result){
-				if(password_verify($_SESSION['SESSION_ID'], $session_id)){
+				if(password_verify($_SESSION['SESSION_ID'], $session_id) || !AUTH_CHECK_SESSION){
 					if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > (SESSION_EXPIRE_MINUTE*60))) {
 						session_unset(); 
 						session_destroy();

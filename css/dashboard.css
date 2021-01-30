@@ -1,4 +1,3 @@
-/* แก้ตรงนี้จ้า เอาไปหมดเลยกะได้ */
 .wrap_overall {
   display: flex;
   flex-wrap: wrap;
@@ -31,7 +30,6 @@
   background-color: #d0ffbb;
 }
 
-/* เพิ่ม width and margin */
 .box {
   width: calc(33.333% - 20px);
   padding: 20px;
