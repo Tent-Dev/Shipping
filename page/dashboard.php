@@ -74,8 +74,6 @@ include("auth_onpage.php");
                     <div class="title"><i class="fas fa-shipping-fast"></i> พัสดุที่อยู่ระหว่างจัดส่ง</div>
                     <div class="detail summary_items_sending"></div>
                 </div>
-            </div>
-            <div class="wrap_overall">
                 <div class="box">
                     <div class="title"><i class="fas fa-receipt"></i> จำนวนการทำรายการ</div>
                     <div class="detail summary_total_transaction"></div>
