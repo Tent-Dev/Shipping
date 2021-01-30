@@ -41,7 +41,7 @@ include("auth_onpage.php");
                     <h1>ภาพรวม</h1>
                 </div>
                 <div class="col-lg-3 d-flex justify-content-end align-items-center">
-                    <button type="button" class="btn btn-sm btn-success">Export</button>
+                    <!-- <button type="button" class="btn btn-sm btn-success">Export</button> -->
                 </div>
             </div>
 
