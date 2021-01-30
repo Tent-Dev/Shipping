@@ -1,0 +1,39 @@
+.wrap_overall{
+	position: relative;
+	align-items: center;
+	display: flex;
+	//justify-content: center;
+	margin-top: 20px;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 24px;
+}
+.detail {
+	margin-top: 10px;
+	font-size: 28px;
+	line-height: 32px;
+}
+
+.bg-blue {
+	background-color: #d2e5ff;
+}
+.bg-yellow {
+	background-color: #ffdc90;
+}
+.bg-green {
+	background-color: #d0ffbb;
+}
+.box {
+	padding: 20px;
+	border-radius: 4px;
+	text-align: center;
+	border: 1px solid #e0e0e0;
+	box-shadow: 0px 0px 10px -5px #a5a5a5;
+}
+
+.datepicker {
+	display: none;
+}

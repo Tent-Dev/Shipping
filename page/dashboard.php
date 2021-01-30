@@ -1,9 +1,9 @@
 <?php
 include("auth_onpage.php");
-if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
-    header("Location: javascript://history.go(-1)");
-    exit;
-}
+// if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
+//     header("Location: javascript://history.go(-1)");
+//     exit;
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +16,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
     <link href="../lib/fontawesome-free-5.15.1-web/css/all.css" rel="stylesheet">
     <link href="../css/main_custom.css" rel="stylesheet">
     <link href="../css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <link rel="stylesheet" href="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
@@ -23,6 +24,12 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/dashboard.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/logout.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
     <?php include('menu_layout.php'); ?>
@@ -39,29 +46,58 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
             </div>
 
             <div class="row mt-2 mb-4">
-                <div class="col-lg-1">ค้นหา</div>
+                <div class="col-lg-1">ช่วงเวลา</div>
+                <div class="col-lg-2">
+                    <select class="filter mt-2 mt-lg-0" name="filter_date_absoulte" id="filter_date_absoulte">
+                        <option value="" selected>วันนี้</option>
+                        <option value="">7วันที่ผ่านมา</option>
+                        <option value="">30วันที่ผ่านมา</option>
+                        <option value="">กำหนดเอง</option>
+                        <option value="">ทั้งหมด</option>
+                    </select>
+                </div>
                 <div class="col-lg-3">
-                    <input type="datetime" name="" id="" class="filter mt-2 mt-lg-0 mb-2 mb-lg-0" placeholder="วัน-เวลา">
+                    <input class="filter datepicker mt-2 mt-lg-0" type="text" name="filter_date" id="filter_date" placeholder="เลือกช่วงวัน" readonly>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row wrap_overall">
                 <div class="col-lg-3">
-                    <div class="box bg-blue">
+                    <div class="box">
                         <div class="title">จำนวนพัสดุในระบบ</div>
-                        <div class="detail">100</div>
+                        <div class="detail"><span class="">100</span> ชิ้น</div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="box bg-yellow">
+                    <div class="box">
+                        <div class="title">พัสดุที่รอดำเนินการส่ง</div>
+                        <div class="detail"><span class="">100</span> ชิ้น</div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="box">
+                        <div class="title">พัสดุที่อยู่ระหว่างจัดส่ง</div>
+                        <div class="detail"><span class="">100</span> ชิ้น</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row wrap_overall">
+                <div class="col-lg-3">
+                    <div class="box">
                         <div class="title">จำนวนการทำรายการ</div>
-                        <div class="detail">100</div>
+                        <div class="detail"><span class="">100</span> รายการ</div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="box bg-green">
-                        <div class="title">ยอดเงินรวมทั้งหมด</div>
-                        <div class="detail">100</div>
+                    <div class="box">
+                        <div class="title">รายได้</div>
+                        <div class="detail"><span class="">100</span> บาท</div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="box">
+                        <div class="title">เก็บเงินปลายทาง</div>
+                        <div class="detail"><span class="">100</span> บาท</div>
                     </div>
                 </div>
             </div>
