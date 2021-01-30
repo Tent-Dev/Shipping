@@ -64,19 +64,19 @@ include("auth_onpage.php");
             <div class="row wrap_overall">
                 <div class="col-lg-3">
                     <div class="box">
-                        <div class="title">จำนวนพัสดุในระบบ</div>
+                        <div class="title"><i class="fas fa-dolly-flatbed"></i> จำนวนพัสดุในระบบ</div>
                         <div class="detail"><span class="">100</span> ชิ้น</div>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="box">
-                        <div class="title">พัสดุที่รอดำเนินการส่ง</div>
+                        <div class="title"><i class="fas fa-truck"></i> พัสดุที่รอดำเนินการส่ง</div>
                         <div class="detail"><span class="">100</span> ชิ้น</div>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="box">
-                        <div class="title">พัสดุที่อยู่ระหว่างจัดส่ง</div>
+                        <div class="title"><i class="fas fa-shipping-fast"></i> พัสดุที่อยู่ระหว่างจัดส่ง</div>
                         <div class="detail"><span class="">100</span> ชิ้น</div>
                     </div>
                 </div>
@@ -84,13 +84,13 @@ include("auth_onpage.php");
             <div class="row wrap_overall">
                 <div class="col-lg-3">
                     <div class="box">
-                        <div class="title">จำนวนการทำรายการ</div>
+                        <div class="title"><i class="fas fa-receipt"></i> จำนวนการทำรายการ</div>
                         <div class="detail"><span class="">100</span> รายการ</div>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="box">
-                        <div class="title">รายได้</div>
+                        <div class="title"><i class="fas fa-hand-holding-usd"></i> รายได้</div>
                         <div class="detail"><span class="">100</span> บาท</div>
                     </div>
                 </div>
