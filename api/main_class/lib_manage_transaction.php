@@ -148,6 +148,56 @@ class MNG_Transaction{
 		return $response;
 	}
 
+	public function GetTransactionDashboard($param = null){
+		
+		$sql ="
+		SELECT tbl_transaction.transaction_id, tbl_map_transaction.total_price 
+		FROM tbl_transaction 
+		JOIN tbl_map_transaction 
+		ON tbl_transaction.transaction_id = tbl_map_transaction.transaction_id ";
+
+		$sql_where = " WHERE tbl_transaction.active_status = 'T' ";
+
+		if(isset($param['startdate']) && $param['startdate'] != "" && isset($param['enddate']) && $param['enddate'] != ""){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			if($param['startdate'] === $param['enddate']) {
+				$sql_where .= " tbl_transaction.create_date LIKE '".$param['startdate']."%' ";
+			}
+			else {
+				$sql_where .= " tbl_transaction.create_date BETWEEN '".$param['startdate']."' AND '".$param['enddate']."' ";
+			}
+		}
+
+		$sql_count = $sql . $sql_where;
+
+		$data = $this->db_connect->Select_db($sql_count);
+
+		if($data){
+			$data_final = array();
+			$items = array();
+			foreach ($data as $value) {
+				$get_item = array(
+					'transaction_id' => $value['transaction_id'],
+					'price' => $value['total_price']
+				);
+				$items[] = $get_item;
+			}
+			
+			$data_final['data'] = $items;
+			$response = array(
+				'status' => 200,
+				'data' => $data_final
+			);
+		}else{
+			$response = array(
+				'status' => 404,
+				'err_msg' => 'Transaction not found'
+			);
+		}
+
+		return $response;
+	}
+
 	public function GetTransactionDescription($param = null){
 
 		$sql = "

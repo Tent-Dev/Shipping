@@ -49,10 +49,10 @@ include("auth_onpage.php");
                 <div class="col-lg-1">ช่วงเวลา</div>
                 <div class="col-lg-2">
                     <select class="filter mt-2 mt-lg-0" name="filter_date_absoulte" id="filter_date_absoulte">
-                        <option value="" selected>วันนี้</option>
+                        <option value="all" selected>วันนี้</option>
                         <option value="">7วันที่ผ่านมา</option>
                         <option value="">30วันที่ผ่านมา</option>
-                        <option value="">กำหนดเอง</option>
+                        <option value="custom_date">กำหนดเอง</option>
                         <option value="">ทั้งหมด</option>
                     </select>
                 </div>
@@ -65,19 +65,19 @@ include("auth_onpage.php");
                 <div class="col-lg-3">
                     <div class="box">
                         <div class="title"><i class="fas fa-dolly-flatbed"></i> จำนวนพัสดุในระบบ</div>
-                        <div class="detail"><span class="">100</span> ชิ้น</div>
+                        <div class="detail summary_items_in_system"></div>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="box">
                         <div class="title"><i class="fas fa-truck"></i> พัสดุที่รอดำเนินการส่ง</div>
-                        <div class="detail"><span class="">100</span> ชิ้น</div>
+                        <div class="detail summary_items_waiting"></div>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="box">
                         <div class="title"><i class="fas fa-shipping-fast"></i> พัสดุที่อยู่ระหว่างจัดส่ง</div>
-                        <div class="detail"><span class="">100</span> ชิ้น</div>
+                        <div class="detail summary_items_sending"></div>
                     </div>
                 </div>
             </div>
@@ -85,19 +85,19 @@ include("auth_onpage.php");
                 <div class="col-lg-3">
                     <div class="box">
                         <div class="title"><i class="fas fa-receipt"></i> จำนวนการทำรายการ</div>
-                        <div class="detail"><span class="">100</span> รายการ</div>
+                        <div class="detail summary_total_transaction"></div>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="box">
                         <div class="title"><i class="fas fa-hand-holding-usd"></i> รายได้</div>
-                        <div class="detail"><span class="">100</span> บาท</div>
+                        <div class="detail summary_total_price"></div>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="box">
                         <div class="title"><i class="fas fa-coins"></i> เก็บเงินปลายทาง</div>
-                        <div class="detail"><span class="">100</span> บาท</div>
+                        <div class="detail summary_items_cod_price"></div>
                     </div>
                 </div>
             </div>

@@ -141,6 +141,63 @@ class MNG_Product{
 		return $response;
 	}
 
+	public function GetProductDashboard($param = null){
+		
+		$sql ="SELECT tracking_code, status, cod_price FROM tbl_product ";
+
+		$sql_where = " WHERE active_status = 'T' ";
+
+		if(isset($param['status']) && $param['status'] != ""){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.status = '".$param['status']."' ";
+		}
+
+		if(isset($param['startdate']) && $param['startdate'] != "" && isset($param['enddate']) && $param['enddate'] != ""){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			if($param['startdate'] === $param['enddate']) {
+				$sql_where .= " tbl_product.create_date LIKE '".$param['startdate']."%' ";
+			}
+			else {
+				$sql_where .= " tbl_product.create_date BETWEEN '".$param['startdate']."' AND '".$param['enddate']."' ";
+			}
+		}
+
+		if(isset($param['shipper']) && $param['shipper'] != ""){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_product.shipper_id = '".$param['shipper']."' ";
+		}
+
+		$sql_count = $sql . $sql_where;
+
+		$data = $this->db_connect->Select_db($sql_count);
+
+		if($data){
+			$data_final = array();
+			$items = array();
+			foreach ($data as $value) {
+				$get_item = array(
+					'tracking_code' => $value['tracking_code'],
+					'status' => $value['status'],
+					'cod_price' => $value['cod_price']
+				);
+				$items[] = $get_item;
+			}
+			
+			$data_final['data'] = $items;
+			$response = array(
+				'status' => 200,
+				'data' => $data_final
+			);
+		}else{
+			$response = array(
+				'status' => 404,
+				'err_msg' => 'Product not found'
+			);
+		}
+
+		return $response;
+	}
+
 	public function GetProductDescription($param = null){
 		$sql =
 		"

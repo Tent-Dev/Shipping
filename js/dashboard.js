@@ -1,68 +1,168 @@
 var startdate = '', enddate = '';
 $(document).ready(function() {
-	getProduct();
+	getAllData();
+	//$('.detail').html('<i class="fas fa-spinner fa-spin loading_box_icon"></i></span>');
 	$('input#filter_date').daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            format: "YYYY-MM-DD",
-            cancelLabel: 'Clear'
-        }
-    });
+		autoUpdateInput: false,
+		locale: {
+			format: "YYYY-MM-DD",
+			cancelLabel: 'Clear'
+		}
+	});
 
-    $('input#filter_date').on('apply.daterangepicker', function(ev, picker) {
-        startdate = picker.startDate.format('YYYY-MM-DD');
-        enddate = picker.endDate.format('YYYY-MM-DD');
-        $(this).val(startdate + ' - ' + enddate);
-        var status = $('#filter_status option:selected').val();
-        //filterAll();
-    });
+	$(document).on('change', 'select#filter_date_absoulte', function() {
+		var value = $(this).children('option:selected').val();
+		if(value == "custom_date") {
+			$('.datepicker').show();
 
-    $('#filter_date').on('cancel.daterangepicker', function(ev, picker) {
-        $('#filter_date').val('');
-        startdate = "";
-        enddate = "";
-        //filterAll();
-    });
+		} else if(value == "all"){
+			$('.datepicker').hide();
+			startdate = "";
+			enddate = "";
+			getAllData();
+		}
+		else {
+			$('.datepicker').hide();
+
+			getAllData();
+		}
+	});
+
+	$('input#filter_date').on('apply.daterangepicker', function(ev, picker) {
+		startdate = picker.startDate.format('YYYY-MM-DD');
+		enddate = picker.endDate.format('YYYY-MM-DD');
+		$(this).val(startdate + ' - ' + enddate);
+		var status = $('#filter_status option:selected').val();
+		getAllData();
+	});
+
+	$('#filter_date').on('cancel.daterangepicker', function(ev, picker) {
+		$('#filter_date').val('');
+		startdate = "";
+		enddate = "";
+		getAllData();
+	});
 });
+
+function getAllData(){
+	$('.detail').html('<i class="fas fa-spinner fa-spin loading_box_icon"></i></span>');
+	getProduct();
+	getTransaction();
+}
 
 
 function getProduct(page = 1, mode = ''){
 
-    if(mode !== 'delete'){
-        $('.table_wrap_loading_box').show();
-        $('.table').html('');
-    }
-    $.ajax({
-        url: '../api/function/manage_product.php',
-        method: 'post',
-        data: {
-            command: 'get_product',
-            page: page,
-            startdate: startdate,
-            enddate: enddate,
-            ignore_pagination: true
-        },
-        success: function(data) {
-            var data = JSON.parse(data)
-            console.log("result: ",data);
+	if(mode !== 'delete'){
+		$('.table_wrap_loading_box').show();
+		$('.table').html('');
+	}
+	$.ajax({
+		url: '../api/function/manage_product.php',
+		method: 'post',
+		data: {
+			command: 'get_product_dashboard',
+			page: page,
+			startdate: startdate,
+			enddate: enddate,
+			ignore_pagination: true
+		},
+		success: function(data) {
+			var data = JSON.parse(data);
+			console.log("result: ",data);
+			
+			if(data.status == 200){
+				if(data.data.data.length > 0){
+					var items_waiting = 0;
+					var items_sending = 0;
+					var items_cod_price = 0;
+					$('.summary_items_in_system').html('<span class="">'+data.data.data.length+'</span> ชิ้น');
 
-            if(data.status == 200){
-                if(data.data.data.length > 0){
-                   
-                }else{
-                   
-                }
-            }
-            else if(data.status == 404){
+					$.each(data.data.data, function(index, val) {
+						if (val.status == 'waiting'){
+							items_waiting++;
+						}
+						if (val.status == 'sending'){
+							items_sending++;
+						}
+						if(val.cod_price >0){
+							items_cod_price = items_cod_price+parseFloat(val.cod_price);
+						}
+					});
+					$('.summary_items_in_system').html('<span class="">'+data.data.data.length+'</span> ชิ้น');
+					$('.summary_items_waiting').html('<span class="">'+NumberFormat(items_waiting.toString(),0)+'</span> ชิ้น');
+					$('.summary_items_sending').html('<span class="">'+NumberFormat(items_sending.toString(),0)+'</span> ชิ้น');
+					$('.summary_items_cod_price').html('<span class="">'+NumberFormat(items_cod_price)+'</span> ฿');
+				}else{
+					$('.summary_items_in_system').html('<span class="">0</span> ชิ้น');
+					$('.summary_items_sending').html('<span class="">0</span> ชิ้น');
+					$('.summary_items_waiting').html('<span class="">0</span> ชิ้น');
+					$('.summary_items_cod_price').html('<span class="">0</span> ฿');
+				}
+			}
+			else if(data.status == 404){
+				$('.summary_items_in_system').html('<span class="">0</span> ชิ้น');
+				$('.summary_items_sending').html('<span class="">0</span> ชิ้น');
+				$('.summary_items_waiting').html('<span class="">0</span> ชิ้น');
+				$('.summary_items_cod_price').html('<span class="">0</span> ฿');
+			}
+			else{
+				$('.summary_items_in_system, .summary_items_sending, .summary_items_waiting, .summary_items_cod_price').html('<span class="">เกิดข้อผิดพลาด</span>');
+			}
 
-            }
-            else{
+		},
+		error: function() {
+			console.log("error");
+			$('.summary_items_in_system').html('<span class="">เกิดข้อผิดพลาด</span>');
+		}
+	});
+};
 
-            }
+function getTransaction(page = 1, mode = ''){
 
-        },
-        error: function() {
-            console.log("error");
-        }
-    });
+	if(mode !== 'delete'){
+		$('.table_wrap_loading_box').show();
+		$('.table').html('');
+	}
+	$.ajax({
+		url: '../api/function/manage_transaction.php',
+		method: 'post',
+		data: {
+			command: 'get_transaction_dashboard',
+			startdate: startdate,
+			enddate: enddate,
+		},
+		success: function(data) {
+			var data = JSON.parse(data)
+			console.log("result: ",data);
+			
+			if(data.status == 200){
+				if(data.data.data.length > 0){
+					var total_income = 0;
+					$.each(data.data.data, function(index, val) {
+						if (val.price > 0){
+							total_income = total_income+parseFloat(val.price);
+						}
+					});
+					$('.summary_total_transaction').html('<span class="">'+NumberFormat(data.data.data.length.toString(), 0)+'</span> รายการ');
+					$('.summary_total_price').html('<span class="">'+NumberFormat(total_income)+'</span> ฿');
+				}else{
+					$('.summary_total_transaction').html('<span class="">0</span> รายการ');
+					$('.summary_total_price').html('<span class="">0</span> ฿');
+				}
+			}
+			else if(data.status == 404){
+				$('.summary_total_transaction').html('<span class="">0</span> รายการ');
+				$('.summary_total_price').html('<span class="">0</span> ฿');
+			}
+			else{
+				$('.summary_total_transaction, .summary_total_price').html('<span class="">เกิดข้อผิดพลาด</span>');
+			}
+
+		},
+		error: function() {
+			console.log("error");
+			$('.summary_total_transaction, .summary_total_price').html('<span class="">เกิดข้อผิดพลาด</span>');
+		}
+	});
 };

@@ -81,11 +81,11 @@ function showErrorAjax(text = ''){
     $('.table').show();
 }
 
-function NumberFormat(value){
+function NumberFormat(value, fixed = 2){
 	var result = value;
 	if(value){
 		var value_convert = parseFloat(value);
-		result = value_convert.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+		result = value_convert.toFixed(fixed).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 	}
 	return result;
 }

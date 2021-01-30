@@ -78,5 +78,17 @@ if ($cmd != "") {
 		exit();
 	}
 
+	if ($cmd == "get_product_dashboard") {
+		$permission = $auth->AuthPermission();
+		if($permission['permission']){
+			$result = $mng_product->GetProductDashboard($_POST);
+		}else{
+			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+		}
+		echo json_encode($result);
+		$mysql->Close_db();
+		exit();
+	}
+
 }
 ?>
