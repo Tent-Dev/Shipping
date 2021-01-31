@@ -1854,6 +1854,40 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Export",
+			"item": [
+				{
+					"name": "export_summary",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "export_summary",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/function/manage_export.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"function",
+								"manage_export.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
