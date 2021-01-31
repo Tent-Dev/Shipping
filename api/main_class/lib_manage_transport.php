@@ -70,6 +70,8 @@ class MNG_Transport{
 		}
 		if(isset($param['note']) && $param['note'] !== ''){
 			$arr_transport['note'] = $param['note'];
+		}else{
+			$arr_transport['note'] = null;
 		}
 		if(isset($param['image_signature']) && $param['image_signature'] !== ''){
 			$img = str_replace('data:image/png;base64,', '', $param['image_signature']);

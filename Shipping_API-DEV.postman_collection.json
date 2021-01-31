@@ -37,12 +37,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/system_sign.php",
+							"raw": "{{base_url}}/api/function/system_sign.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"system_sign.php"
@@ -162,12 +161,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/system_sign.php",
+							"raw": "{{base_url}}/api/function/system_sign.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"system_sign.php"
@@ -202,12 +200,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_tracking.php",
+							"raw": "{{base_url}}/api/function/manage_tracking.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_tracking.php"
@@ -407,12 +404,40 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_product.php",
+							"raw": "{{base_url}}/api/function/manage_product.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
+								"api",
+								"function",
+								"manage_product.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_product_dashboard",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "get_product_dashboard",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/function/manage_product.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
 								"api",
 								"function",
 								"manage_product.php"
@@ -460,12 +485,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_product.php",
+							"raw": "{{base_url}}/api/function/manage_product.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_product.php"
@@ -489,18 +513,17 @@
 								},
 								{
 									"key": "create_data",
-									"value": "{\"firstname\":\"ชื่อคนทำรายการ\",\"lastname\":\"นามสกุลคนทำรายการ\",\"id_card\":\"1102002841486\",\"customer_phone_number\":\"0819584848\", \"payment\":{\"get_price\":60,\"change_price\": 0, \"total_price\":60},\"item\":[{\"weight\":1.5,\"price\":30,\"shipping_type\":\"normal\",\"payment_type\":\"normal\",\"receiver_desc\":{\"firstname\":\"ชื่อคนรับ1\",\"lastname\":\"นามสกุลคนรับ1\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"ชื่อคนส่ง1\",\"lastname\":\"นามสกุลคนส่ง1\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"}},{\"weight\":1.5,\"price\":30,\"shipping_type\":\"normal\",\"payment_type\":\"normal\",\"receiver_desc\":{\"firstname\":\"ชื่อคนรับ2\",\"lastname\":\"นามสกุลคนรับ2\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"ชื่อคนส่ง2\",\"lastname\":\"นามสกุลคนส่ง2\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"}}]}",
+									"value": "{\"firstname\":\"ชื่อคนทำรายการAAA\",\"lastname\":\"นามสกุลคนทำรายการ\",\"id_card\":\"1102002841486\",\"customer_phone_number\":\"0819584848\", \"payment\":{\"get_price\":60,\"change_price\": 0, \"total_price\":60},\"item\":[{\"weight\":1.5,\"price\":30,\"shipping_type\":\"normal\",\"payment_type\":\"normal\",\"receiver_desc\":{\"firstname\":\"ชื่อคนรับ1\",\"lastname\":\"นามสกุลคนรับ1AA\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"ชื่อคนส่ง1\",\"lastname\":\"นามสกุลคนส่ง1\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"}},{\"weight\":1.5,\"price\":30,\"shipping_type\":\"normal\",\"payment_type\":\"normal\",\"receiver_desc\":{\"firstname\":\"ชื่อคนรับ2\",\"lastname\":\"นามสกุลคนรับ2\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"ชื่อคนส่ง2\",\"lastname\":\"นามสกุลคนส่ง2\",\"address\":\"99 ถนนพัฒนาการ\",\"district\":\"สวนหลวง\",\"area\":\"สวนหลวง\",\"province\":\"กรุงเทพมหานคร\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"}}]}",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_product.php",
+							"raw": "{{base_url}}/api/function/manage_product.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_product.php"
@@ -681,12 +704,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_product.php",
+							"raw": "{{base_url}}/api/function/manage_product.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_product.php"
@@ -716,12 +738,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_product.php",
+							"raw": "{{base_url}}/api/function/manage_product.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_product.php"
@@ -782,12 +803,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_account.php",
+							"raw": "{{base_url}}/api/function/manage_account.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_account.php"
@@ -850,12 +870,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_account.php",
+							"raw": "{{base_url}}/api/function/manage_account.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_account.php"
@@ -880,12 +899,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_account.php",
+							"raw": "{{base_url}}/api/function/manage_account.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_account.php"
@@ -915,12 +933,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_account.php",
+							"raw": "{{base_url}}/api/function/manage_account.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_account.php"
@@ -950,12 +967,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_account.php",
+							"raw": "{{base_url}}/api/function/manage_account.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_account.php"
@@ -991,12 +1007,126 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_transaction.php",
+							"raw": "{{base_url}}/api/function/manage_transaction.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
+								"api",
+								"function",
+								"manage_transaction.php"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get_transaction",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "command",
+											"value": "get_transaction",
+											"type": "text"
+										},
+										{
+											"key": "transaction_id",
+											"value": "160785539365NY",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1/Shipping/api/function/manage_transaction.php",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"path": [
+										"Shipping",
+										"api",
+										"function",
+										"manage_transaction.php"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 13 Dec 2020 16:25:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.27 (Win32) OpenSSL/1.1.0f PHP/7.1.8"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.1.8"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 19 Nov 1981 08:52:00 GMT"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-store, no-cache, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2480"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\"status\":200,\"data\":{\"items\":[{\"receiver_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"shipping_type\":\"normal\",\"tracking_code\":\"SH290Z7518VG6\",\"weight\":1.5,\"price\":30},{\"receiver_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e2a\\u0e48\\u0e07\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"sender_desc\":{\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e23\\u0e31\\u0e1a\",\"address\":\"99 \\u0e16\\u0e19\\u0e19\\u0e1e\\u0e31\\u0e12\\u0e19\\u0e32\\u0e01\\u0e32\\u0e23\",\"district\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"area\":\"\\u0e2a\\u0e27\\u0e19\\u0e2b\\u0e25\\u0e27\\u0e07\",\"province\":\"\\u0e01\\u0e23\\u0e38\\u0e07\\u0e40\\u0e17\\u0e1e\\u0e21\\u0e2b\\u0e32\\u0e19\\u0e04\\u0e23\",\"postal\":\"10250\",\"phone_number\":\"0987786666\"},\"shipping_type\":\"normal\",\"tracking_code\":\"SH175W2831XA1\",\"weight\":1.5,\"price\":30}],\"transaction_id\":\"160785539365NY\",\"create_date\":\"2020-12-13 17:29:53\",\"firstname\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e33\\u0e23\\u0e32\\u0e22\\u0e01\\u0e32\\u0e23\",\"lastname\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\\u0e04\\u0e19\\u0e17\\u0e33\\u0e23\\u0e32\\u0e22\\u0e01\\u0e32\\u0e23\"}}"
+						}
+					]
+				},
+				{
+					"name": "get_transaction_dashboard",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "command",
+									"value": "get_transaction_dashboard",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/function/manage_transaction.php",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
 								"api",
 								"function",
 								"manage_transaction.php"
@@ -1112,12 +1242,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_transaction.php",
+							"raw": "{{base_url}}/api/function/manage_transaction.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_transaction.php"
@@ -1238,12 +1367,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_transaction.php",
+							"raw": "{{base_url}}/api/function/manage_transaction.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_transaction.php"
@@ -1364,12 +1492,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_transport.php",
+							"raw": "{{base_url}}/api/function/manage_transport.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_transport.php"
@@ -1409,12 +1536,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_transport.php",
+							"raw": "{{base_url}}/api/function/manage_transport.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_transport.php"
@@ -1449,12 +1575,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_receiver.php",
+							"raw": "{{base_url}}/api/function/manage_receiver.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_receiver.php"
@@ -1519,12 +1644,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_receiver.php",
+							"raw": "{{base_url}}/api/function/manage_receiver.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_receiver.php"
@@ -1559,12 +1683,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_sender.php",
+							"raw": "{{base_url}}/api/function/manage_sender.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_sender.php"
@@ -1629,12 +1752,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_sender.php",
+							"raw": "{{base_url}}/api/function/manage_sender.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_sender.php"
@@ -1669,12 +1791,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_customer.php",
+							"raw": "{{base_url}}/api/function/manage_customer.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_customer.php"
@@ -1719,12 +1840,11 @@
 							]
 						},
 						"url": {
-							"raw": "{{base_url}}/Shipping/api/function/manage_customer.php",
+							"raw": "{{base_url}}/api/function/manage_customer.php",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"Shipping",
 								"api",
 								"function",
 								"manage_customer.php"
