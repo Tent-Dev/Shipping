@@ -13,4 +13,7 @@ define("AUTH_CHECK_SESSION", false);
 
 define("SESSION_EXPIRE_MINUTE",30);
 
+//URL Config==============
+
+define("BASE_URL", (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/');
 ?>

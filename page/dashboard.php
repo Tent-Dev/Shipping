@@ -24,6 +24,7 @@ include("auth_onpage.php");
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/bootstrap-4.5.3-dist/js/bootstrap.bundle.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
@@ -41,7 +42,7 @@ include("auth_onpage.php");
                     <h1>ภาพรวม</h1>
                 </div>
                 <div class="col-lg-3 d-flex justify-content-end align-items-center">
-                    <!-- <button type="button" class="btn btn-sm btn-success">Export</button> -->
+                    <button type="button" class="btn btn-sm btn-success btn_export"><i class="fas fa-file-export"></i> ส่งออกข้อมูล</button>
                 </div>
             </div>
 

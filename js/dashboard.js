@@ -57,6 +57,10 @@ $(document).ready(function() {
 		enddate = "";
 		getAllData();
 	});
+
+	$('.btn_export').click(function(event) {
+		ExportSummary();
+	});
 });
 
 function getAllData(){
@@ -181,3 +185,45 @@ function getTransaction(page = 1, mode = ''){
 		}
 	});
 };
+
+function ExportSummary(){
+	$('.btn_export').attr('disabled', true);
+	$('.btn_export').html('<i class="fas fa-spinner fa-spin"></i> ส่งออกข้อมูล');
+	$.ajax({
+		url: '../api/function/manage_export.php',
+		method: 'post',
+		data: {
+			command: 'export_summary',
+			startdate: startdate,
+			enddate: enddate,
+		},
+		success: function(data) {
+			$('.btn_export').attr('disabled', false);
+			$('.btn_export').html('<i class="fas fa-file-export"></i> ส่งออกข้อมูล');
+			var data = JSON.parse(data);
+			console.log(data);
+			Swal.fire({
+				title: 'ส่ออกข้อมูลสำเร็จ',
+				text: 'ดาวน์โหลดข้อมูลของคุณด้านล่าง',
+				icon: 'info',
+				confirmButtonText: 'ดาวน์โหลด'
+			}).then((result) =>{
+				if (result.isConfirmed) {
+					window.location.assign(data.url);
+					Swal.fire('ดาวน์โหลดสำเร็จ', '', 'success');
+				}
+			});
+		},
+		error: function() {
+			$('.btn_export').attr('disabled', false);
+			$('.btn_export').html('<i class="fas fa-file-export"></i> ส่งออกข้อมูล');
+			console.log("error");
+			Swal.fire({
+				title: 'พบข้อผิดพลาด',
+				text: 'ไม่สามารถส่งออกข้อมูลได้',
+				icon: 'error',
+				confirmButtonText: 'ตกลง'
+			});
+		}
+	});
+}
