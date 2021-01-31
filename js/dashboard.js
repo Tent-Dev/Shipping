@@ -202,17 +202,27 @@ function ExportSummary(){
 			$('.btn_export').html('<i class="fas fa-file-export"></i> ส่งออกข้อมูล');
 			var data = JSON.parse(data);
 			console.log(data);
-			Swal.fire({
-				title: 'ส่ออกข้อมูลสำเร็จ',
-				text: 'ดาวน์โหลดข้อมูลของคุณด้านล่าง',
-				icon: 'info',
-				confirmButtonText: 'ดาวน์โหลด'
-			}).then((result) =>{
-				if (result.isConfirmed) {
-					window.location.assign(data.url);
-					Swal.fire('ดาวน์โหลดสำเร็จ', '', 'success');
-				}
-			});
+			if(data.status == 200){
+				Swal.fire({
+					title: 'ส่งออกข้อมูลสำเร็จ',
+					text: 'ดาวน์โหลดข้อมูลของคุณด้านล่าง',
+					icon: 'info',
+					confirmButtonText: 'ดาวน์โหลด'
+				}).then((result) =>{
+					if (result.isConfirmed) {
+						window.location.assign(data.url);
+						Swal.fire('ดาวน์โหลดสำเร็จ', '', 'success');
+					}
+				});
+			} else if(data.status == 404){
+				Swal.fire({
+					title: 'ไม่พบข้อมูล',
+					text: 'ไม่พบข้อมูลตามช่วงเวลาที่เลือก',
+					icon: 'cancel',
+					confirmButtonText: 'ตกลง'
+				});
+			}
+			
 		},
 		error: function() {
 			$('.btn_export').attr('disabled', false);

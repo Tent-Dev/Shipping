@@ -160,9 +160,9 @@ class MNG_ExportSummary{
 			// 	$sheet->getColumnDimension($columnID)->setAutoSize(true);
 			// }
 
-			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-			header('Content-Disposition: attachment;filename="summary_export.xlsx"');
-			header('Cache-Control: max-age=0');
+			// header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+			// header('Content-Disposition: attachment;filename="summary_export.xlsx"');
+			// header('Cache-Control: max-age=0');
 
 			$writer = new Xlsx($spreadsheet);
 
