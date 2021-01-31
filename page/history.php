@@ -49,6 +49,11 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
             <div class="row">
                 <div class="col-12">
                     <div class="overflow-auto">
+                        <div class="table_wrap_loading_box">
+                            <div>
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
                         <table class="table table-sm table-hover"></table>
                     </div>
                 </div>

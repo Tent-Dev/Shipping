@@ -1,11 +1,11 @@
 <?php
-    include("auth_onpage.php");
+include("auth_onpage.php");
 
-    if(isset($_GET['transaction_id'])) {
-        $trans_id = $_GET['transaction_id'];
-    } else {
-        $trans_id = '"-"';
-    }
+if(isset($_GET['transaction_id'])) {
+    $trans_id = $_GET['transaction_id'];
+} else {
+    $trans_id = '"-"';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,6 +67,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="oveflow-auto">
+                        <div class="table_wrap_loading_box">
+                            <div>
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
                         <table class="table table-sm table-hover"></table>
                     </div>
                 </div>
