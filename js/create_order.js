@@ -46,6 +46,7 @@ $(document).ready(function() {
     $('#form-section').on('click', '.remove', function() {
         $(this).parent().fadeOut(300, function(){
             $(this).parent().remove();
+            sumPrice();
             return false;
         });
         return false;

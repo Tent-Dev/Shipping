@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 30, 2021 at 06:52 PM
+-- Generation Time: Jan 31, 2021 at 11:06 AM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `tbl_member` (
 --
 
 INSERT INTO `tbl_member` (`id`, `firstname`, `lastname`, `member_type`, `username`, `password`, `session_id`, `active_status`) VALUES
-(4, 'มาลี2', 'ไม่อร่อยนะ', 'admin', 'admin', '$2y$12$BP0jqnze1LL/VfJe3DcT.eB/ODAhkxDZtO9oTaKmvXi.2tVGNtFKu', '$2y$12$yRlsjsyJHaZTWAGVpc4xWeXGVYAf7Iu.GnsxeJVcnmFpO74HEmUBG', 'T'),
+(4, 'มาลี2', 'ไม่อร่อยนะ', 'admin', 'admin', '$2y$12$BP0jqnze1LL/VfJe3DcT.eB/ODAhkxDZtO9oTaKmvXi.2tVGNtFKu', '$2y$12$jCXSNCyQ9EQLEgHwrWAWE.7KTjtPjPlUujJBdBQ7IhgzDHTFaqQW2', 'T'),
 (5, 'Test', 'Create2', 'staff', 'testaccount', '$2y$12$i0G.Xb3tKE50HPqzsWkhQ.U00Nz1uR8xSUOpj4b9JVMYxuO/xuFmy', NULL, 'F'),
 (6, 'Testadd', 'Onpage', 'admin', 'admin2', '$2y$12$xQfZzkrtApWh/D280A0BseVN/d2rh8KcylzpTQAvMCsciEVBcVPIW', NULL, 'T'),
 (7, 'Chutipas2', 'Borsub', 'staff', 'itsofun01', '$2y$12$H.ISNtFqC.jCeGTsJmOiW.WepH7w0hGbsw9VKbFLXHwZxhy9eH0e.', '$2y$12$5VBl0Inj..C/ld5GSad0ae0LL52OL1clFtcXTIEHFxEgKEt5ZH5gC', 'T'),
@@ -111,10 +111,10 @@ CREATE TABLE IF NOT EXISTS `tbl_product` (
   `tracking_code` varchar(100) NOT NULL,
   `status` varchar(50) NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `shipper_id` int(11) NOT NULL,
+  `shipper_id` int(11) DEFAULT NULL,
   `payment_type` text NOT NULL,
   `cod_price` float NOT NULL DEFAULT '0',
-  `image_signature` text NOT NULL,
+  `image_signature` text,
   `active_status` varchar(1) NOT NULL DEFAULT 'T'
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
@@ -213,9 +213,9 @@ CREATE TABLE IF NOT EXISTS `tbl_transport` (
   `id` int(11) NOT NULL,
   `product_id` varchar(50) NOT NULL,
   `status` varchar(100) NOT NULL DEFAULT 'waiting',
-  `note` text NOT NULL,
+  `note` text,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_transport`
@@ -226,7 +226,8 @@ INSERT INTO `tbl_transport` (`id`, `product_id`, `status`, `note`, `timestamp`) 
 (2, '2', 'waiting', '', '2021-01-30 15:45:29'),
 (3, '3', 'waiting', '', '2021-01-30 15:45:29'),
 (4, '1', 'sending', '', '2021-01-30 16:26:57'),
-(5, '4', 'waiting', '', '2021-01-30 18:08:33');
+(5, '4', 'waiting', '', '2021-01-30 18:08:33'),
+(6, '1', 'sending', '', '2021-01-30 20:15:51');
 
 --
 -- Indexes for dumped tables
@@ -323,7 +324,7 @@ ALTER TABLE `tbl_transaction`
 -- AUTO_INCREMENT for table `tbl_transport`
 --
 ALTER TABLE `tbl_transport`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
