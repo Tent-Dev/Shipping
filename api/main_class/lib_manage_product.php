@@ -331,17 +331,15 @@ class MNG_Product{
 					"weight" => $value['weight'],
 					"price" => $value['price'],
 					"tracking_code" => $tracking_code,
+					"image_signature" => null,
+					"active_status" => 'T',
 					"status" => 'waiting'
 				);
 
-				if($value['payment_type'] == 'cod'){
-					$arr_customer["cod_price"] = $value['payment_type'];
-				}else{
-					$arr_customer["cod_price"] = 0;
-				}
-
 				if(!empty($value['cod_price']) && $value['payment_type'] == 'cod'){
 					$arr_customer['cod_price'] = $value['cod_price'];
+				}else{
+					$arr_customer["cod_price"] = 0;
 				}
 
 				$result_product = $this->db_connect->Insert_db($arr_customer,"tbl_product");
@@ -420,6 +418,7 @@ class MNG_Product{
 						$arr_customer = array( 
 							"product_id" => $get_last_product_id,
 							"status" => 'waiting',
+							"note" => null
 						);
 
 						$result_transport = $this->db_connect->Insert_db($arr_customer,"tbl_transport");
