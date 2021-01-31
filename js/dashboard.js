@@ -218,7 +218,7 @@ function ExportSummary(){
 				Swal.fire({
 					title: 'ไม่พบข้อมูล',
 					text: 'ไม่พบข้อมูลตามช่วงเวลาที่เลือก',
-					icon: 'cancel',
+					icon: 'warning',
 					confirmButtonText: 'ตกลง'
 				});
 			}
