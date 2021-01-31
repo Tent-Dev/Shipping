@@ -22,6 +22,10 @@ $(document).ready(function() {
             $(this).closest('.section').attr('data-index', sectionsCount);
         }).end().appendTo('#form-section');
 
+        if($('.section').length > 0){
+                $('.btn_save').attr('disabled', false);
+            }
+
         $.Thailand({ 
             autocomplete_size: 5,
             database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
@@ -47,6 +51,10 @@ $(document).ready(function() {
         $(this).parent().fadeOut(300, function(){
             $(this).parent().remove();
             sumPrice();
+
+            if($('.section').length == 0){
+                $('.btn_save').attr('disabled', true);
+            }
             return false;
         });
         return false;
