@@ -1,4 +1,6 @@
 <?php
+// ini_set('display_errors',1);
+// error_reporting(E_ALL);
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
