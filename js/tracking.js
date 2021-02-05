@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$('#check_tracking').click(function(event) {
-		$('#transport_history').html('<div class="wrap_loading_box"><div> <i class="fas fa-spinner fa-spin"></i></div></div>');
+		if($('#tracking_code').val() !== ''){
+			$('#transport_history').html('<div class="wrap_loading_box"><div> <i class="fas fa-spinner fa-spin"></i></div></div>');
 		var tracking_code = $('#tracking_code').val();
 		$.ajax({
 			url: '../api/function/manage_tracking.php',
@@ -73,6 +74,7 @@ $(document).ready(function() {
 				showErrorAjaxPage();
 			}
 		});
+		}
 	});
 
 	$('body').delegate('.sign_title', 'click', function() {
