@@ -58,7 +58,7 @@ class MNG_Transport{
 	}
 
 	public function CreateTransport($param = null){
-
+		$date = date("Y-m-d G:i:s");
 		$arr_transport = array();
 		$file_name='';
 
@@ -89,6 +89,8 @@ class MNG_Transport{
 				exit();
 			}
 		}
+
+		$arr_transport['timestamp'] = $date;
 
 		$result_transport = $this->db_connect->Insert_db($arr_transport,"tbl_transport");
 

@@ -287,6 +287,7 @@ class MNG_Product{
 	}
 
 	public function CreateProduct($param = null){
+		$date = date("Y-m-d G:i:s");
 		$receiver_save_phone = '';
 		$sender_save_phone = '';
 		$trans_id_added = false;
@@ -333,7 +334,8 @@ class MNG_Product{
 					"tracking_code" => $tracking_code,
 					"image_signature" => null,
 					"active_status" => 'T',
-					"status" => 'waiting'
+					"status" => 'waiting',
+					"create_date" => $date
 				);
 
 				if(!empty($value['cod_price']) && $value['payment_type'] == 'cod'){
@@ -354,7 +356,8 @@ class MNG_Product{
 						"customer_id" => $get_last_customer_id,
 						"product_id" => $get_last_product_id,
 						"sender_desc" =>  json_encode($value['sender_desc'], JSON_UNESCAPED_UNICODE),
-						"receiver_desc" => json_encode($value['receiver_desc'], JSON_UNESCAPED_UNICODE)
+						"receiver_desc" => json_encode($value['receiver_desc'], JSON_UNESCAPED_UNICODE),
+						"create_date" => $date
 					);
 
 					$result_transaction = $this->db_connect->Insert_db($arr_customer,"tbl_transaction");
@@ -418,7 +421,8 @@ class MNG_Product{
 						$arr_customer = array( 
 							"product_id" => $get_last_product_id,
 							"status" => 'waiting',
-							"note" => null
+							"note" => null,
+							"timestamp" => $date
 						);
 
 						$result_transport = $this->db_connect->Insert_db($arr_customer,"tbl_transport");
