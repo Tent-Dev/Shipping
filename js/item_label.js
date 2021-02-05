@@ -29,19 +29,20 @@ function getData(){
 			url: url,
 			method: 'post',
 			data: ajax_data,
-			success: function(data) {
+			success: async function(data) {
 				var data = JSON.parse(data);
 				console.log("result: ",data);
 				if(data.status == 200){
 
-					$.each(data.data.data, function(index, val) {
+					await $.each(data.data.data, function(index, val) {
 						/* iterate through array or object */
 						var html = generateLabel(val);
 
 						$('.boxs').append(html);
 						JsBarcode(".barcode").init();
-						window.print();
 					});
+
+					window.print();
 
 				}else{
 					Swal.fire({
