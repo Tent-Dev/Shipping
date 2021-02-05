@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$('#check_tracking').click(function(event) {
+		$('#transport_history').html('<div class="wrap_loading_box"><div> <i class="fas fa-spinner fa-spin"></i></div></div>');
 		var tracking_code = $('#tracking_code').val();
 		$.ajax({
 			url: '../api/function/manage_tracking.php',
@@ -64,10 +65,12 @@ $(document).ready(function() {
 					$('#transport_history').html(html);
 				}else{
 					console.log("result: ",data);
+					showErrorAjaxPage('ไม่พบข้อมูล');
 				}
 			},
 			error: function() {
 				console.log("error");
+				showErrorAjaxPage();
 			}
 		});
 	});
@@ -76,3 +79,17 @@ $(document).ready(function() {
 		$('.signature').toggleClass('open');
 	});
 });
+
+function showErrorAjaxPage(text = ''){
+	if(text == ''){
+		text = 'ไม่สามารถเชื่อมต่อฐานข้อมูลได้';
+	}
+    var header = '';
+    header +='<div class="wrap_empty">';
+    header +='  <div class="text-center">';
+    header +='      <div>'+text+'</div>';
+    header +='      <div><i class="fas fa-times"></i></div>';
+    header +='  </div>';
+    header +='</div>';
+    $('#transport_history').html(header);
+}
