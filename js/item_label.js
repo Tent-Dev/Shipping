@@ -42,7 +42,7 @@ function getData(){
 						JsBarcode(".barcode").init();
 					});
 
-					window.print();
+					setTimeout(function() {window.print();},1000);
 
 				}else{
 					Swal.fire({
@@ -84,7 +84,7 @@ function generateLabel(val){
 					'<p class="s_address">'+val.sender_desc.address+' </p><p>เขต <span class="s_area">'+val.sender_desc.area+'</span> แขวง <span class="s_district">'+val.sender_desc.district+'</span> <span class="s_province">'+val.sender_desc.province+'</span></p>'+
 				'</div>'+
 				'<div class="address-right">'+
-					'<img src="https://fph.tu.ac.th/uploads/fph/DownloadLogo/2018_FPHHorz%20Logo%20%28EN%29.png" alt="logo" class="logo">'+
+					'<img src="../assets/logo/logo.png" alt="logo" class="logo">'+
 					'<svg class="barcode" jsbarcode-value="'+val.tracking_code+'" jsbarcode-margin="0" jsbarcode-fontsize="40" jsbarcode-fontoptions="bold"></svg>'+
 				'</div>'+
 				'<div class="address2">'+

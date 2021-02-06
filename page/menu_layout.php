@@ -13,35 +13,35 @@
            <span class="profile_img">
             <i class="fas fa-user-circle" style="font-size: 20px"></i>&nbsp;<?php echo $_SESSION['USERNAME'] ?>
         </span>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a id="" class="dropdown-item" href="account.php"><i class="fas fa-user-cog mr-2"></i>แก้ไขข้อมูล</a>
-            <a id="logout" class="dropdown-item logout" href=""><i class="fas fa-power-off mr-2"></i>ออกจากระบบ</a>
-        </div>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a id="" class="dropdown-item" href="account.php"><i class="fas fa-user-cog mr-2"></i>แก้ไขข้อมูล</a>
+        <a id="logout" class="dropdown-item logout" href=""><i class="fas fa-power-off mr-2"></i>ออกจากระบบ</a>
     </div>
+</div>
 </div>
 
 <?php
-    $path = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+$path = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
 ?>
 
 <!-- Side Menu -->
 <div class="side-menu">
     <div class="logo">
-        <img src="https://fph.tu.ac.th/uploads/fph/DownloadLogo/2018_FPHHorz%20Logo%20%28EN%29.png" alt="">
+        <img src="../assets/logo/logo_transparent.png" alt="">
     </div>
     <div class="menu-content">
         <?php if(isset($_SESSION['TYPE']) && $_SESSION['TYPE'] == 'admin' || $_SESSION['TYPE'] == 'staff'){?>
-        <a href="dashboard.php" class="menu <?php if($path == 'dashboard.php') echo "active"; ?>">ภาพรวม</a>
-        <a href="lists.php" class="menu <?php if($path == 'lists.php' || $path == 'add_lists.php' || $path == 'edit_lists.php') echo "active"; ?>">รายการพัสดุ</a>
-        <a href="sort_mail.php" class="menu <?php if($path == 'sort_mail.php') echo "active"; ?>">คัดแยกพัสดุ</a>
+            <a href="dashboard.php" class="menu <?php if($path == 'dashboard.php') echo "active"; ?>">ภาพรวม</a>
+            <a href="lists.php" class="menu <?php if($path == 'lists.php' || $path == 'add_lists.php' || $path == 'edit_lists.php') echo "active"; ?>">รายการพัสดุ</a>
+            <a href="sort_mail.php" class="menu <?php if($path == 'sort_mail.php') echo "active"; ?>">คัดแยกพัสดุ</a>
         <?php } ?>
         <a href="update_status.php" class="menu <?php if($path == 'update_status.php') echo "active"; ?>">อัพเดทสถานะพัสดุ</a>
         <?php if(isset($_SESSION['TYPE']) && $_SESSION['TYPE'] == 'admin' || $_SESSION['TYPE'] == 'staff'){?>
-        <a href="history.php" class="menu <?php if($path == 'history.php' || $path == 'transaction_history.php') echo "active"; ?>">ประวัติการทำรายการ</a>
+            <a href="history.php" class="menu <?php if($path == 'history.php' || $path == 'transaction_history.php') echo "active"; ?>">ประวัติการทำรายการ</a>
         <?php } ?>
         <?php if(isset($_SESSION['TYPE']) && $_SESSION['TYPE'] == 'admin'){?>
-        <a href="manage_user.php" class="menu <?php if($path == 'manage_user.php') echo "active"; ?>">จัดการรายชื่อพนักงาน</a>
+            <a href="manage_user.php" class="menu <?php if($path == 'manage_user.php') echo "active"; ?>">จัดการรายชื่อพนักงาน</a>
         <?php } ?>
     </div>
     <div class="dropup m-profile d-none d-md-none">
@@ -58,6 +58,7 @@
 <div class="overlay"></div>
 
 <script>
+    var ham_click = false;
     $('#COmenu').on('click', function(){
         $('body').toggleClass('no-scroll');
         $(this).toggleClass('active');
@@ -73,6 +74,24 @@
         $('.m-profile').toggleClass('d-none');
         $('.m-profile').toggleClass('d-block');
     });
+
+    $(document).ready(function() {
+
+        setLogo();
+        $(window).resize(function() {
+            setLogo();
+        });
+
+        $('#COmenu').click(function(event) {
+            ham_click = !ham_click;
+            if(ham_click){
+                $('.logo').html(' <img src="../assets/logo/logo.png" alt="">');
+            }else{
+                setLogo();
+            }
+            
+        });
+    });
     
     $(window).resize(function() {
         if($(window).width() > 992) {
@@ -83,4 +102,12 @@
             $('.m-profile').toggleClass('d-none');
         }
     });
+
+    function setLogo(){
+        if($(window).width() > 992) {
+            $('.logo').html(' <img src="../assets/logo/logo.png" alt="">');
+        }else{
+            $('.logo').html(' <img src="../assets/logo/logo_transparent.png" alt="">');
+        }
+    }
 </script>

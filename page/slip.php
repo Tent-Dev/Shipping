@@ -73,7 +73,7 @@ if(isset($_GET['mode'])){
 <body>
     <div class="slip">
         <div class="logo">
-            <img src="https://fph.tu.ac.th/uploads/fph/DownloadLogo/2018_FPHHorz%20Logo%20%28EN%29.png" alt="logo">
+            <img src="../assets/logo/logo.png" alt="logo">
         </div>
         <div class="center">
             <p><b>Shipping Express</b></p>

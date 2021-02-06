@@ -25,7 +25,7 @@ include("../client_config/config.php");
 <body>
 	<nav>
 		<div class="nav-logo">
-			<img src="https://fph.tu.ac.th/uploads/fph/DownloadLogo/2018_FPHHorz%20Logo%20%28EN%29.png" alt="">
+			<img src="../assets/logo/logo_transparent.png" alt="">
 		</div>
 		<div class="nav-right">
 			ติดต่อ <a href="tel:099-999999" class="tel">099-999999</a>
