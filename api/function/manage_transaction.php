@@ -23,7 +23,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_transaction->GetTransaction($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();
@@ -35,7 +35,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_transaction->GetTransactionById($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();
@@ -47,7 +47,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_transaction->GetTransactionDescription($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();
@@ -59,7 +59,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_transaction->GetTransactionHistory($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();
@@ -71,7 +71,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_transaction->GetTransactionDashboard($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();

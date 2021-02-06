@@ -145,6 +145,18 @@ function getDataFromDB(page = 1){
 							shipper_name = val.shipper_name;
 						}
 
+						var status_convert = '';
+
+                        if(val.status == 'waiting'){
+                            status_convert = 'นำเข้าระบบแล้ว';
+                        } else if(val.status == 'sending'){
+                            status_convert = 'กำลังจัดส่ง';
+                        } else if(val.status == 'success'){
+                            status_convert = 'ส่งถึงมือผู้รับแล้ว';
+                        } else if(val.status == 'return_distribution_center'){
+                            status_convert = 'ถูกตีกลับ';
+                        }
+
 						html +=
 						'<tr class="_rowid-'+val.id+'">'+
 						'<td align="center" class="btn_tools">';
@@ -155,7 +167,7 @@ function getDataFromDB(page = 1){
 						}
 						html +=
 						'</td>'+
-						'<td class="_td-status">'+val.status+'</td>'+
+						'<td class="_td-status">'+status_convert+'</td>'+
 						'<td>'+val.tracking_code+'</td>'+
 						'<td>'+val.receiver_desc.firstname+'</td>'+
 						'<td class="'+null_class+'">'+shipper_name+'</td>'+

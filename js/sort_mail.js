@@ -140,13 +140,25 @@ function getDataFromDB(page = 1){
 							shipper_name = val.shipper_name;
 						}
 
+						var status_convert = '';
+
+                        if(val.status == 'waiting'){
+                            status_convert = 'นำเข้าระบบแล้ว';
+                        } else if(val.status == 'sending'){
+                            status_convert = 'กำลังจัดส่ง';
+                        } else if(val.status == 'success'){
+                            status_convert = 'ส่งถึงมือผู้รับแล้ว';
+                        } else if(val.status == 'return_distribution_center'){
+                            status_convert = 'ถูกตีกลับ';
+                        }
+
 						html +=
 						'<tr class="_rowid-'+val.id+'">'+
 						'<td >'+val.create_date+'</td>'+
 						'<td>'+val.tracking_code+'</td>'+
 						'<td>'+val.receiver_desc.firstname+'</td>'+
 						'<td>'+val.receiver_desc.area+'</td>'+
-						'<td>'+val.status+'</td>'+
+						'<td>'+status_convert+'</td>'+
 						'<td class="_td-shippername '+null_class+'">'+shipper_name+'</td>'+
 						'<td align="center">'+
 						// '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+

@@ -22,7 +22,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_account->UpdateAccount($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();
@@ -34,7 +34,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_account->CreateAccount($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();
@@ -46,7 +46,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_account->GetAccount($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();
@@ -58,7 +58,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_account->GetAccountDescription($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();
@@ -70,7 +70,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_account->GetAccountForShipperList($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();
@@ -82,7 +82,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_account->DeleteAccount($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();

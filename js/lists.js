@@ -121,12 +121,23 @@ function getDataFromDB(page = 1, mode = ''){
                     header +='</tbody>';
                     $('.table').html(header);
                     $.each(data.data.data, function(index, val) {
+                        var status_convert = '';
+
+                        if(val.status == 'waiting'){
+                            status_convert = 'นำเข้าระบบแล้ว';
+                        } else if(val.status == 'sending'){
+                            status_convert = 'กำลังจัดส่ง';
+                        } else if(val.status == 'success'){
+                            status_convert = 'ส่งถึงมือผู้รับแล้ว';
+                        } else if(val.status == 'return_distribution_center'){
+                            status_convert = 'ถูกตีกลับ';
+                        }
                         html +=
                         '<tr>'+
                         '<td>'+val.create_date+'</td>'+
                         '<td>'+val.tracking_code+'</td>'+
                         '<td>'+val.receiver_desc.firstname+'</td>'+
-                        '<td>'+val.status+'</td>'+
+                        '<td>'+status_convert+'</td>'+
                         '<td>';
 
                         if(val.status == 'waiting'){

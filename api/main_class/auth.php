@@ -30,6 +30,7 @@ class Auth{
 						$response = array(
 							'permission' => false,
 							'msg' => 'Session expired',
+							'err_code' => 9999
 						);
 					}else if(isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] <= (SESSION_EXPIRE_MINUTE*60))){
 						$_SESSION['LAST_ACTIVITY'] = time();
@@ -42,18 +43,21 @@ class Auth{
 						$response = array(
 							'permission' => false,
 							'msg' => 'Cannot find your last session activity',
+							'err_code' => 9998
 						);
 					}
 				}else{
 					$response = array(
 						'permission' => false,
 						'msg' => 'Session invalid',
+						'err_code' => 9997
 					);
 				}
 			}else{
 				$response = array(
 					'permission' => false,
 					'msg' => 'Cannot find your account',
+					'err_code' => 9996
 				);
 			}
 		}
@@ -61,6 +65,7 @@ class Auth{
 			$response = array(
 				'permission' => false,
 				'msg' => 'Cannot find your session',
+				'err_code' => 9995
 			);
 		}
 		return $response;

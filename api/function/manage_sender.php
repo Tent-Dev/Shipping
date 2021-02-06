@@ -21,7 +21,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_sender->GetSender($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();
@@ -33,7 +33,7 @@ if ($cmd != "") {
 		if($permission['permission']){
 			$result = $mng_sender->UpdateSender($_POST);
 		}else{
-			$result = array('status' => 500, 'err_msg' => $permission['msg']);
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
 		}
 		echo json_encode($result);
 		$mysql->Close_db();
