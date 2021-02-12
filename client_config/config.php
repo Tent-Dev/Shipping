@@ -2,6 +2,6 @@
 
 $member_type = array('shipper', 'staff', 'admin');
 
-define('JS_VERSION', 25);
+define('JS_VERSION', 26);
 define('MEMBER_TYPE', json_encode($member_type));
 ?>
