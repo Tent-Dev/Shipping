@@ -128,3 +128,11 @@ input.filter::placeholder {
 .employee_null{
   color: red;
 }
+
+.btn-back {
+  color: #464646;
+}
+.btn-back:hover {
+  color: #464646;
+  text-decoration: none;
+}

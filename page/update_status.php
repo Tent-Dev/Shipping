@@ -78,8 +78,13 @@ if(isset($_SESSION['TYPE']) && isset($_SESSION['ID']) && $_SESSION['TYPE'] == 's
             <div class="row">
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-9">
                             <h1>อัพเดทสถานะพัสดุ</h1>
+                        </div>
+                        <div class="col-lg-3 d-flex align-items-center justify-content-end">
+                            <a href="scan_update_status.php">
+                                <button type="button" class="btn btn-sm btn-success"><i class="fas fa-qrcode"></i> อัพเดทด้วยเครื่องสแกน</button>
+                            </a>
                         </div>
                     </div>
                     <div class="row mt-2 mb-2">
