@@ -1,7 +1,7 @@
 let timerInterval;
 $(document).ready(function() {
 	let html5QrcodeScanner = new Html5QrcodeScanner(
-		"reader", { fps: 10, qrbox: 250 }, /* verbose= */ true);
+		"reader", { fps: 2, qrbox: 250 }, /* verbose= */ true);
 	html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 });
 
@@ -41,10 +41,10 @@ function onScanSuccess(qrMessage) {
 function onScanFailure(error) {
 	// handle scan failure, usually better to ignore and keep scanning
 	console.warn(`QR error = ${error}`);
-	Swal.fire({
-		title: 'พบข้อผิดพลาด',
-		text: 'ไม่สามารถสแกนได้',
-		icon: 'error',
-		confirmButtonText: 'ตกลง'
-	});
+	// Swal.fire({
+	// 	title: 'พบข้อผิดพลาด',
+	// 	text: 'ไม่สามารถสแกนได้',
+	// 	icon: 'error',
+	// 	confirmButtonText: 'ตกลง'
+	// });
 }
