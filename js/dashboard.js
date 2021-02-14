@@ -27,6 +27,11 @@ $(document).ready(function() {
 			enddate = moment().format('YYYY-MM-DD');
 			startdate = moment().subtract(7,'d').format('YYYY-MM-DD');
 			getAllData();
+
+		} else if(value == "last_30"){
+			enddate = moment().format('YYYY-MM-DD');
+			startdate = moment().subtract(30,'d').format('YYYY-MM-DD');
+			getAllData();
 		} else if(value == "all"){
 			enddate = '';
 			startdate = '';
