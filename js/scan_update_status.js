@@ -22,19 +22,36 @@ $(document).ready(function() {
 
 	$(document).on('change', 'select#filter_status', function() {
 		var value = $(this).children('option:selected').val();
-		if(scanner_open){
-			stopScanner();
-		}
-		if(value !== "") {
-			startScanner();
-		} else {
+		if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+			if(scanner_open){
+				stopScanner();
+			}
+			if(value !== "") {
+				startScanner();
+			} else {
+			}
+		}else{
+			web_header = '';
+			web_header +='<div class="table_wrap_empty">';
+			web_header +='  <div class="text-center">';
+			web_header +='      <div>ระบบสแกนQR CODE รองรับบนมือถือเท่านั้น</div>';
+			web_header +='      <div><i class="fas fa-exclamation-triangle"></i></div>';
+			web_header +='  </div>';
+			web_header +='</div>';
+
+			$('#reader').html(web_header);
 		}
 	});
 });
 
 function startScanner() {
 	var status = $('#filter_status option:selected').val();
-	html5QrcodeScanner = new Html5Qrcode("reader");
+	try{
+		html5QrcodeScanner = new Html5Qrcode("reader");
+	}catch(e){
+		console.log('xxxxx');
+	}
+	
 	const qrCodeSuccessCallback = message => { 
 		var get_message = message;
 

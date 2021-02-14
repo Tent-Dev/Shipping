@@ -24,12 +24,14 @@ $(document).ready(function() {
 			enddate = "";
 			getAllData();
 		} else if(value == "last_7"){
-			enddate = moment().format('YYYY-MM-DD');
+			enddate = moment().format('YYYY-MM-DD 23:59:59');
 			startdate = moment().subtract(7,'d').format('YYYY-MM-DD');
 			getAllData();
 
+			console.log('S', startdate , 'E', enddate);
+
 		} else if(value == "last_30"){
-			enddate = moment().format('YYYY-MM-DD');
+			enddate = moment().format('YYYY-MM-DD 23:59:59');
 			startdate = moment().subtract(30,'d').format('YYYY-MM-DD');
 			getAllData();
 		} else if(value == "all"){
@@ -37,8 +39,8 @@ $(document).ready(function() {
 			startdate = '';
 			getAllData();
 		} else if(value == "today"){
-			enddate = moment().format('YYYY-MM-DD');
-			startdate = moment().format('YYYY-MM-DD');
+			enddate = moment().format('YYYY-MM-DD 23:59:59');
+			startdate = moment().format('YYYY-MM-DD 00:00:00');
 			getAllData();
 		}
 		else {

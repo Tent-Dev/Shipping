@@ -83,8 +83,8 @@ if(isset($_GET['transaction_id'])){
         .address2 {
             position: relative;
             clear: both;
-            width: 80%;
-            margin: 0 auto;
+            /*width: 80%;*/
+            /*margin: 0 auto;*/
             font-size: 14px;
             line-height: 18px;
         }
@@ -120,7 +120,7 @@ if(isset($_GET['transaction_id'])){
             width: 145px;
             display: flex;
             position: absolute;
-            right: 25px;
+            left: 135px;
             bottom: -45px;
         }
 
