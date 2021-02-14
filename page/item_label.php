@@ -26,6 +26,7 @@ if(isset($_GET['transaction_id'])){
     <title>ใบปะหน้า</title>
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/Barcode/qrcode_generate.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.3/dist/JsBarcode.all.min.js"></script>
     <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
@@ -80,6 +81,7 @@ if(isset($_GET['transaction_id'])){
             left: 0;
         }
         .address2 {
+            position: relative;
             clear: both;
             width: 80%;
             margin: 0 auto;
@@ -106,6 +108,20 @@ if(isset($_GET['transaction_id'])){
         .date {
             font-size: 10px;
             text-align: right;
+        }
+
+        .qr_gen{
+            position: absolute;
+            left: 15px;
+            text-align: -webkit-center;
+        }
+
+        .wrap_barcode {
+            width: 145px;
+            display: flex;
+            position: absolute;
+            right: 25px;
+            bottom: -45px;
         }
 
         @media print {

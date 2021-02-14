@@ -40,6 +40,15 @@ function getData(){
 
 						$('.boxs').append(html);
 						JsBarcode(".barcode").init();
+
+						var qrcode = new QRCode("qr_gen_"+val.id+"", {
+							text: val.id,
+							width: 100,
+							height: 100,
+							colorDark : "#000000",
+							colorLight : "#ffffff",
+							correctLevel : QRCode.CorrectLevel.H
+						});
 					});
 
 					setTimeout(function() {window.print();},1000);
@@ -78,27 +87,29 @@ function generateLabel(val){
 	var date = val.create_date.split(" ");
 	var html = '';
 	html += '<div class="box">'+
-				'<div class="address1">'+
-					'<b>ชื่อที่อยู่ผู้ส่ง</b>'+
-					'<p class="s_name">'+val.sender_desc.firstname +' '+val.sender_desc.lastname+'</p>'+
-					'<p class="s_address">'+val.sender_desc.address+' </p><p>เขต <span class="s_area">'+val.sender_desc.area+'</span> แขวง <span class="s_district">'+val.sender_desc.district+'</span> <span class="s_province">'+val.sender_desc.province+'</span></p>'+
-				'</div>'+
-				'<div class="address-right">'+
-					'<img src="../assets/logo/logo.png" alt="logo" class="logo">'+
-					'<svg class="barcode" jsbarcode-value="'+val.tracking_code+'" jsbarcode-margin="0" jsbarcode-fontsize="40" jsbarcode-fontoptions="bold"></svg>'+
-				'</div>'+
-				'<div class="address2">'+
-					'<b>ชื่อที่อยู่ผู้รับ</b>'+
-					'<p class="r_name">'+val.receiver_desc.firstname +' '+val.receiver_desc.lastname+'</p>'+
-					'<p class="r_address">'+val.receiver_desc.address+' </p><p>เขต <span class="r_area">'+val.receiver_desc.area+'</span> แขวง <span class="r_district">'+val.receiver_desc.district+'</span> <span class="r_province">'+val.receiver_desc.province+'</span></p>'+
-					'<p>โทร. <span class="r_phone">'+val.receiver_desc.phone_number+'</span></p>'+
-					'<div class="postcode">';
-						for (var i = 0; i < val.sender_desc.postal.length; i++) {
-							html += '<span class="postcode_arr">'+val.sender_desc.postal[i]+'</span>';
-						}
-					html +='</div>'+
-				'</div>'+
-				'<div class="date">'+date[0]+'</div>'+
-			'</div>';
+	'<div class="address1">'+
+	'<b>ชื่อที่อยู่ผู้ส่ง</b>'+
+	'<p class="s_name">'+val.sender_desc.firstname +' '+val.sender_desc.lastname+'</p>'+
+	'<p class="s_address">'+val.sender_desc.address+' </p><p>เขต <span class="s_area">'+val.sender_desc.area+'</span> แขวง <span class="s_district">'+val.sender_desc.district+'</span> <span class="s_province">'+val.sender_desc.province+'</span></p>'+
+	'</div>'+
+	'<div class="address-right">'+
+	'<img src="../assets/logo/logo.png" alt="logo" class="logo">'+
+	// '<div><svg class="barcode" jsbarcode-value="'+val.tracking_code+'" jsbarcode-margin="0" jsbarcode-fontsize="40" jsbarcode-fontoptions="bold"></svg></div>'+
+	'<div class="qr_gen" id="qr_gen_'+val.id+'" >'+val.tracking_code+'</div>'+
+	'</div>'+
+	'<div class="address2">'+
+	'<div class="wrap_barcode"><svg class="barcode" jsbarcode-value="'+val.tracking_code+'"jsbarcode-displayValue="false" jsbarcode-margin="0" jsbarcode-fontsize="40" jsbarcode-fontoptions="bold"></svg></div>'+
+	'<b>ชื่อที่อยู่ผู้รับ</b>'+
+	'<p class="r_name">'+val.receiver_desc.firstname +' '+val.receiver_desc.lastname+'</p>'+
+	'<p class="r_address">'+val.receiver_desc.address+' </p><p>เขต <span class="r_area">'+val.receiver_desc.area+'</span> แขวง <span class="r_district">'+val.receiver_desc.district+'</span> <span class="r_province">'+val.receiver_desc.province+'</span></p>'+
+	'<p>โทร. <span class="r_phone">'+val.receiver_desc.phone_number+'</span></p>'+
+	'<div class="postcode">';
+	for (var i = 0; i < val.sender_desc.postal.length; i++) {
+		html += '<span class="postcode_arr">'+val.sender_desc.postal[i]+'</span>';
+	}
+	html +='</div>'+
+	'</div>'+
+	'<div class="date">'+date[0]+'</div>'+
+	'</div>';
 	return html;
 }
