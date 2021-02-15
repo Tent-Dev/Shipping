@@ -112,7 +112,9 @@ async function saveData(product_id){
 	data_ajax.append('command', 'create_transport');
 	data_ajax.append('product_id', product_id);
 	data_ajax.append('status', status);
-
+	if(SHIPPER_ID !== ''){
+		data_ajax.append('shipper_id', SHIPPER_ID);
+	}
 	//data_ajax.append('note', note);
 
 	// if(status == 'success'){
