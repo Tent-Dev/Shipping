@@ -47,7 +47,7 @@ $(document).ready(function() {
 			web_header +='      <div><i class="fas fa-exclamation-triangle"></i></div>';
 			web_header +='  </div>';
 			web_header +='</div>';
-			getDescription(7);
+			//getDescription(7);
 			$('#reader').html(web_header);
 		}
 	});
