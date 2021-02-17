@@ -35,10 +35,42 @@ if(isset($_SESSION['TYPE']) && isset($_SESSION['ID'])) {
     <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script src="../lib/Barcode/html5-qrcode.min.js" type="text/javascript" charset="utf-8"></script>
-
+    <script src="../lib/Signature/jq-signature.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
     <script src="../js/scan_update_status.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
     <script src="../js/logout.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
+
+    <style>
+        .signature {
+            height: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s linear;
+        }
+        .signature.success {
+            height: auto;
+            opacity: 1;
+            visibility: visible;
+        } 
+        .signature.success .signature-box {
+            height: 120px;
+            border-radius: 10px;
+            border: 1px solid #a6a6a6;
+            text-align: center;
+        }
+        .clear-sign {
+            font-size: 12px;
+            color: #ed5f5f;
+            border: none;
+            background: none;
+        }
+        .clear-sign:hover {
+            color: #ff0000;
+        }
+        canvas{
+            width: calc(100% - 0vw) !important
+        }
+    </style>
 </head>
 <body>
     <?php include('menu_layout.php'); ?>
@@ -84,6 +116,63 @@ if(isset($_SESSION['TYPE']) && isset($_SESSION['ID'])) {
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="editData" tabindex="-1" aria-labelledby="editDataLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editDataLabel">อัพเดทสถานะพัสดุ No.xxxxx</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <form action="" method="post">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="status" class="col-form-label col-form-label-sm">สถานะพัสดุ</label>
+                                    <select name="status" id="status" class="form-control form-control-sm">
+                                        <option value="waiting">พัสดุถูกนำเข้าสู่ระบบ</option>
+                                        <option value="sending">พัสดุกำลังถูกนำส่งไปยังผู้รับ</option>
+                                        <option value="success">พัสดุถูกนำส่งถึงมือผู้รับเรียบร้อยแล้ว</option>
+                                        <option value="return_distribution_center">พัสดุถูกตีกลับสู่ศูนย์กระจายสินค้า</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>
+                                    <div>099-9999999</div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="shipper" class="col-form-label col-form-label-sm">คนนำจ่าย</label>
+                                    <div>ใครนำจ่าย</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อผู้รับ</label>
+                                    <div>ชื่อผู้รับ</div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุลผู้รับ</label>
+                                    <div>นามสกุลผู้รับ</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col signature">
+                                    <label for="signature" class="col-form-label col-form-label-sm">ลายเซ็น</label>
+                                    <div class="signature-box"></div>
+                                </div>
+                            </div>
+                        </form> -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                        <button type="button" class="btn btn-success">บันทึก</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         </section>
     </body>
     </html>
