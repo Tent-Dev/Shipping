@@ -76,9 +76,9 @@ if(isset($_GET['mode'])){
             <img src="../assets/logo/logo.png" alt="logo">
         </div>
         <div class="center">
-            <p><b>Shipping Express</b></p>
-            <p>สาขา : xxxx</p>
-            <p>Tel./Fax : 000000000 </p>
+            <p><b>PSP Express</b></p>
+            <p>สาขา : นครปฐม</p>
+            <p>Tel./Fax : 092-591-9946 </p>
             <p>*..ขอบคุณที่มาใช้บริการ..*</p>
         </div>
         <div style="margin-top: 6px;">
@@ -134,7 +134,7 @@ if(isset($_GET['mode'])){
         </table>
         <div class="footer">
             <p>เวลาเปิดทำการ จันทร์-อาทิตย์ เวลา 9.00-18.00 น.</p>
-            <p>สามารถเช็คพัสดุของท่านได้ที่<br>https://cplus-express.com/check</p>
+            <p>สามารถเช็คพัสดุของท่านได้ที่<br>http://bit.do/psp_tracking</p>
             <p>ขอบคุณที่ใช้บริการ โปรดเก็บใบเสร็จไว้เพื่อเป็นหลักฐานในการเคลมสินค้า</p>
             <p>ห้ามส่งพัสดุที่ผิดกฎหมายทุกชนิด ทางบริษัทจะไม่รับประกัน</p>
             <p>**เงื่อนไขในการรับประกันเป็นไปตามนโยบายที่ทางบริษัทกำหนด**</p>

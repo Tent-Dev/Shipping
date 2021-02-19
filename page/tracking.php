@@ -28,7 +28,7 @@ include("../client_config/config.php");
 			<img src="../assets/logo/logo_transparent.png" alt="">
 		</div>
 		<div class="nav-right">
-			ติดต่อ <a href="tel:099-999999" class="tel">099-999999</a>
+			ติดต่อ <a href="tel:099-999999" class="tel">092-591-9946</a>
 		</div>
 	</nav>
 
