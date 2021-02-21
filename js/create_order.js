@@ -285,8 +285,10 @@ function getAllData(){
         $('.btn_save, .btn_cancel').attr('disabled', true);
 
         var id_card = $("#id_card").val();
-        var c_fname = $("#firstname").val();
-        var c_lname = $("#lastname").val();
+        // var c_fname = $("#firstname").val();
+        // var c_lname = $("#lastname").val();
+        var c_fname = $("#firstname").val().split(' ')[0];
+        var c_lname = $("#firstname").val().split(' ')[1] || '';
         var c_phone_number = $("#customer_phone_number").val();
 
         var get_price = $('#m_received').val();
@@ -353,8 +355,10 @@ function getAllData(){
 function validateCreate(pointer_index){
     var result = true;
     var id_card = $("#id_card").val();
+    // var firstname = $("#firstname").val();
+    // var lastname = $("#lastname").val();
     var firstname = $("#firstname").val();
-    var lastname = $("#lastname").val();
+    //var lastname = $("#firstname").val();
     var c_phone_number = $("#customer_phone_number").val();
 
     var get_price = $('#m_received').val();
@@ -381,7 +385,10 @@ function validateCreate(pointer_index){
     var price = $("#price"+pointer_index).val();
     var shipping_type = $("#shipping_type"+pointer_index).val();
 
-    if(id_card == '' ||  firstname == '' || lastname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
+    // if(id_card == '' ||  firstname == '' || lastname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
+    //     s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
+    //     r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' || get_price == '' ){
+    if(id_card == '' ||  firstname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
         s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
         r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' || get_price == '' ){
         result = false;
@@ -402,13 +409,13 @@ function validateCreate(pointer_index){
         $("#firstname").attr("placeholder", "");
     }
 
-    if(lastname == ''){
-        $('#lastname').addClass('custom_has_err');
-        $("#lastname").attr("placeholder", "โปรดกรอกนามสกุลผู้ทำรายการ");
-    }else{
-        $('#lastname').removeClass('custom_has_err');
-        $("#lastname").attr("placeholder", "");
-    }
+    // if(lastname == ''){
+    //     $('#lastname').addClass('custom_has_err');
+    //     $("#lastname").attr("placeholder", "โปรดกรอกนามสกุลผู้ทำรายการ");
+    // }else{
+    //     $('#lastname').removeClass('custom_has_err');
+    //     $("#lastname").attr("placeholder", "");
+    // }
 
     if(c_phone_number == ''){
         $('#customer_phone_number'+pointer_index).addClass('custom_has_err');

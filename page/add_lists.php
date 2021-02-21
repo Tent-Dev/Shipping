@@ -143,13 +143,17 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                         <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
                                         <input type="text" name="id_card" id="id_card" class="form-control form-control-sm">
                                     </div>
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <label for="firstname" class="col-form-label col-form-label-sm">ชื่อผู้ทำรายการ</label>
                                         <input type="text" name="firstname" id="firstname" class="form-control form-control-sm">
                                     </div>
                                     <div class="col-md-3">
                                         <label for="lastname" class="col-form-label col-form-label-sm">นามสกุลผู้ทำรายการ</label>
                                         <input type="text" name="lastname" id="lastname" class="form-control form-control-sm">
+                                    </div> -->
+                                    <div class="col-md-3">
+                                        <label for="firstname" class="col-form-label col-form-label-sm">ชื่อ-นามสกุลผู้ทำรายการ</label>
+                                        <input type="text" name="firstname" id="firstname" class="form-control form-control-sm">
                                     </div>
                                 </div>
 

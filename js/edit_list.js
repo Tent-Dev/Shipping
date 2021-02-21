@@ -77,8 +77,9 @@ $(document).ready(function() {
 	$(document).on('click', '.customer_history', function(event) {
 		var customer_history = $(this).data('index');
 		$("#customer_phone_number").val(customer_history_set[customer_history].phone_number);
-		$("#firstname").val(customer_history_set[customer_history].firstname);
-		$("#lastname").val(customer_history_set[customer_history].lastname);
+		$("#firstname").val(customer_history_set[customer_history].firstname +' '+ customer_history_set[customer_history].lastname);
+		// $("#firstname").val(customer_history_set[customer_history].firstname);
+		// $("#lastname").val(customer_history_set[customer_history].lastname);
 		$("#id_card").val(customer_history_set[customer_history].id_card);
 	});
 
@@ -129,8 +130,9 @@ function getDescription(){
 			if(data.status == 200){
 
 				$("#id_card").val(data.data.customer_desc.id_card);
-				$("#firstname").val(data.data.customer_desc.firstname);
-				$("#lastname").val(data.data.customer_desc.lastname);
+				// $("#firstname").val(data.data.customer_desc.firstname);
+				// $("#lastname").val(data.data.customer_desc.lastname);
+				$("#firstname").val(data.data.customer_desc.firstname+' '+data.data.customer_desc.lastname);
 				$("#customer_phone_number").val(data.data.customer_desc.customer_phone_number);
 
 				$("#sender_phone").val(data.data.sender_desc.phone_number);
@@ -184,8 +186,10 @@ function getDescription(){
 
 function updateAccount(){
 	var id_card = $("#id_card").val();
-	var c_fname = $("#firstname").val();
-	var c_lname = $("#lastname").val();
+	// var c_fname = $("#firstname").val();
+	// var c_lname = $("#lastname").val();
+	var c_fname = $("#firstname").val().split(' ')[0];
+	var c_lname = $("#firstname").val().split(' ')[1];
 	var c_phone_number = $("#customer_phone_number").val();
 
 	var sender_phone = $("#sender_phone").val();
@@ -276,8 +280,10 @@ function updateAccount(){
 function validateEdit(){
 	var result = true;
 	var id_card = $("#id_card").val();
+	// var firstname = $("#firstname").val();
+	// var lastname = $("#lastname").val();
 	var firstname = $("#firstname").val();
-	var lastname = $("#lastname").val();
+	// var lastname = $("#lastname").val();
 	var c_phone_number = $("#customer_phone_number").val();
 
 	var sender_phone = $("#sender_phone").val();
@@ -302,9 +308,12 @@ function validateEdit(){
 	var price = $("#price").val();
 	var shipping_type = $("#shipping_type").val();
 
-	if(id_card == '' ||  firstname == '' || lastname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
+	// if(id_card == '' ||  firstname == '' || lastname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
+	// 	s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
+	// 	r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' ){
+	if(id_card == '' ||  firstname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
 		s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
-		r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' ){
+		r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' ){	
 		result = false;
 
 	if(id_card == ''){
@@ -323,13 +332,13 @@ function validateEdit(){
 		$("#firstname").attr("placeholder", "");
 	}
 
-	if(lastname == ''){
-		$('#lastname').addClass('custom_has_err');
-		$("#lastname").attr("placeholder", "โปรดกรอกนามสกุลผู้ทำรายการ");
-	}else{
-		$('#lastname').removeClass('custom_has_err');
-		$("#lastname").attr("placeholder", "");
-	}
+	// if(lastname == ''){
+	// 	$('#lastname').addClass('custom_has_err');
+	// 	$("#lastname").attr("placeholder", "โปรดกรอกนามสกุลผู้ทำรายการ");
+	// }else{
+	// 	$('#lastname').removeClass('custom_has_err');
+	// 	$("#lastname").attr("placeholder", "");
+	// }
 
 	if(c_phone_number == ''){
 		$('#customer_phone_number').addClass('custom_has_err');
