@@ -63,12 +63,19 @@ if(isset($_GET['mode'])){
 
         @media print {
             @page {
-                /* size: 80mm 160mm; */
+                /*size: 80mm 160mm !important; */
+                /*size: 80mm !important;*/
                 padding: 0;
                 margin: 0;
             }
-        }
-    </style>
+            html, body {
+              /*height:100vh; 
+              margin: 0 !important; 
+              padding: 0 !important;
+              /*overflow: hidden;*/*/
+          }
+      }
+  </style>
 </head>
 <body>
     <div class="slip">
