@@ -24,11 +24,11 @@ if(isset($_GET['transaction_id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ใบปะหน้า</title>
-
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/Barcode/qrcode_generate.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.3/dist/JsBarcode.all.min.js"></script>
     <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         var TRACKING_CODE = <?php echo "'{$tracking_code}'" ?>;
         var MODE = <?php echo "'{$mode}'" ?>;
@@ -42,8 +42,8 @@ if(isset($_GET['transaction_id'])){
             box-sizing: border-box;
         }
         .page {
-            width: 21cm;
-            height: 29.7cm;
+            width: 100mm;
+            height: 75mm;
             margin: 1rem auto;
         }
         .box {

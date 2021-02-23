@@ -19,9 +19,9 @@ if(isset($_GET['mode'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slip</title>
-
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         var TRANSACTION_ID = <?php echo "'{$trans_id}'" ?>;
         var MODE = <?php echo "{$mode}" ?>;

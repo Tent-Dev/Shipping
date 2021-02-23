@@ -1,4 +1,8 @@
 var thispage_is;
+$(document).ready(function() {
+	$('img[src="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').prop('hidden',true);	
+});
+
 function pagination(page, total_pages){
 
 	if(thispage_is == undefined){
