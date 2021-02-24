@@ -47,10 +47,11 @@ class MNG_Product{
 		ON tbl_transaction.customer_id = tbl_receiver.id
 		";
 
-		$sql_limit = " ORDER BY tbl_product.id DESC ";
 		if(!$ignore_pagination){
 			$sql_limit = " LIMIT ".$start_page." , ".$per_page."";
 		}
+
+		$sql_limit = " ORDER BY tbl_product.id DESC ";
 		
 		$sql_where = " WHERE tbl_product.active_status = 'T' ";
 
