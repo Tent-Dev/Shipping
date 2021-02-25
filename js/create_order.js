@@ -162,9 +162,9 @@ $(document).ready(function() {
 
     $(document).on('click', '.receiver_history', function(event) {
         var receiver_history = $(this).data('index');
-        // var pointer_index = $(this).closest('.section').attr('data-index');
-        var pointer_index = '';
-        // pointer_index = pointer_index == 1 ? '' : pointer_index;
+        var pointer_index = $(this).closest('.section').attr('data-index');
+
+        pointer_index = pointer_index == 1 ? '' : pointer_index;
         $("#phone_number"+pointer_index).val(receiver_history_set[receiver_history].phone_number);
         $("#r_fname"+pointer_index).val(receiver_history_set[receiver_history].firstname);
         $("#r_lname"+pointer_index).val(receiver_history_set[receiver_history].lastname);
@@ -199,7 +199,6 @@ $(document).ready(function() {
         } else {
             $('#money_cod'+pointer_index).parent().addClass('d-none');
         }
-        console.log('pointer_index', pointer_index);
         getPrice(pointer_index);
     });
 
@@ -717,20 +716,22 @@ function getHistory(type = null, pointer_index = null){
 
 function getPrice(pointer_index) {
     var price = "", weight = "";
-    if($('#shipping_type'+' option:selected').val() == 'normal') {
-        weight = $('#weight').val();
+    if($('#shipping_type'+pointer_index+' option:selected').val() == 'normal') {
+        weight = $('#weight'+pointer_index).val();
         price = weight * 10;
-    } else if($('#shipping_type'+' option:selected').val() == 'cod') {
-        weight = $('#weight').val();
+    } else if($('#shipping_type'+pointer_index+' option:selected').val() == 'cod') {
+        weight = $('#weight'+pointer_index).val();
         price = weight * 100;
     }
-    $('#price').val(price.toFixed(2));
+    $('#price'+pointer_index).val(price.toFixed(2));
 }
 
 function sumPrice() {
     var sum_price = 0;
     $('.section').each(function (index, ele) {
-        var price = $(ele).find('#price').val();
+        var pointer_index = $(this).closest('.section').data('index');
+        pointer_index = pointer_index == 1 ? '' : pointer_index;
+        var price = $(ele).find('#price'+pointer_index).val();
         if(!isNaN(price) && price !== '' ){
             sum_price = sum_price + parseInt(price);
         }
