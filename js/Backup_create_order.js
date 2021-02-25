@@ -13,74 +13,36 @@ $(document).ready(function() {
     var sectionsCount = 1;
 
     $('body').on('click', '.addsection', function() {
-        // sectionsCount++;
+        sectionsCount++;
 
-        // var section = form_clone.clone().find(':input').each(function(){
-        //     var newId = this.id + sectionsCount;
-        //     $(this).prev().attr('for', newId);
-        //     this.id = newId;
-        //     $(this).closest('.section').attr('data-index', sectionsCount);
-        // }).end().appendTo('#form-section');
-        if(validateCreate('')){
-            html = '';
-            html += '<tr>';
-            html +=
-            '<td>SH0000001</td>'+
-            '<td>test aaaa</td>'+
-            '<td>0859948484</td>'+
-            '<td>12/100 หมู่บ้านพระปิ่น4</td>'+
-            '<td>10250</td>'+
-            '<td>25</td>'+
-            '<td>300</td>'+
-            '<td>-</td>';
-            html += '</tr>';
+        var section = form_clone.clone().find(':input').each(function(){
+            var newId = this.id + sectionsCount;
+            $(this).prev().attr('for', newId);
+            this.id = newId;
+            $(this).closest('.section').attr('data-index', sectionsCount);
+        }).end().appendTo('#form-section');
 
-            $('#order_list').append(html);
+        if($('.section').length > 0){
+                $('.btn_save').attr('disabled', false);
+            }
 
-            $("#sender_phone").val('');
-            $("#s_fname").val('');
-            $("#s_lname").val('');
-            $("#s_address").val('');
-            $("#s_district").val('');
-            $("#s_area").val('');
-            $("#s_province").val('');
-            $("#s_postcode").val('');
+        $.Thailand({ 
+            autocomplete_size: 5,
+            database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+            $district: $('#r_district'+sectionsCount), // input ของตำบล
+            $amphoe: $('#r_area'+sectionsCount), // input ของอำเภอ
+            $province: $('#r_province'+sectionsCount), // input ของจังหวัด
+            $zipcode: $('#r_postcode'+sectionsCount), // input ของรหัสไปรษณีย์
+        });
 
-            $("#phone_number").val('');
-            $("#r_fname").val('');
-            $("#r_lname").val('');
-            $("#r_address").val('');
-            $("#r_district").val('');
-            $("#r_area").val('');
-            $("#r_province").val('');
-            $("#r_postcode").val('');
-
-            $("#weight").val('');
-            $("#price").val('');
-            $("#shipping_type").val();
-        }
-        
-        // if($('.section').length > 0){
-        //         $('.btn_save').attr('disabled', false);
-        //     }
-
-        // $.Thailand({ 
-        //     autocomplete_size: 5,
-        //     database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
-        //     $district: $('#r_district'+sectionsCount), // input ของตำบล
-        //     $amphoe: $('#r_area'+sectionsCount), // input ของอำเภอ
-        //     $province: $('#r_province'+sectionsCount), // input ของจังหวัด
-        //     $zipcode: $('#r_postcode'+sectionsCount), // input ของรหัสไปรษณีย์
-        // });
-
-        // $.Thailand({ 
-        //     autocomplete_size: 5,
-        //     database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
-        //     $district: $('#s_district'+sectionsCount), // input ของตำบล
-        //     $amphoe: $('#s_area'+sectionsCount), // input ของอำเภอ
-        //     $province: $('#s_province'+sectionsCount), // input ของจังหวัด
-        //     $zipcode: $('#s_postcode'+sectionsCount), // input ของรหัสไปรษณีย์
-        // });
+        $.Thailand({ 
+            autocomplete_size: 5,
+            database: '../lib/jquery.Thailand.js/database/db.json', // path หรือ url ไปยัง database
+            $district: $('#s_district'+sectionsCount), // input ของตำบล
+            $amphoe: $('#s_area'+sectionsCount), // input ของอำเภอ
+            $province: $('#s_province'+sectionsCount), // input ของจังหวัด
+            $zipcode: $('#s_postcode'+sectionsCount), // input ของรหัสไปรษณีย์
+        });
 
         return false;
     });
@@ -162,9 +124,9 @@ $(document).ready(function() {
 
     $(document).on('click', '.receiver_history', function(event) {
         var receiver_history = $(this).data('index');
-        // var pointer_index = $(this).closest('.section').attr('data-index');
-        var pointer_index = '';
-        // pointer_index = pointer_index == 1 ? '' : pointer_index;
+        var pointer_index = $(this).closest('.section').attr('data-index');
+
+        pointer_index = pointer_index == 1 ? '' : pointer_index;
         $("#phone_number"+pointer_index).val(receiver_history_set[receiver_history].phone_number);
         $("#r_fname"+pointer_index).val(receiver_history_set[receiver_history].firstname);
         $("#r_lname"+pointer_index).val(receiver_history_set[receiver_history].lastname);
@@ -199,7 +161,6 @@ $(document).ready(function() {
         } else {
             $('#money_cod'+pointer_index).parent().addClass('d-none');
         }
-        console.log('pointer_index', pointer_index);
         getPrice(pointer_index);
     });
 
@@ -427,26 +388,26 @@ function validateCreate(pointer_index){
     // if(id_card == '' ||  firstname == '' || lastname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
     //     s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
     //     r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' || get_price == '' ){
-        if(id_card == '' ||  firstname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
-            s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
-            r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' || get_price == '' ){
-            result = false;
+    if(id_card == '' ||  firstname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
+        s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
+        r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' || get_price == '' ){
+        result = false;
 
-        if(id_card == ''){
-            $('#id_card').addClass('custom_has_err');
-            $("#id_card").attr("placeholder", "โปรดกรอกเลขบัตรประชาชนผู้ทำรายการ");
-        }else{
-            $('#id_card').removeClass('custom_has_err');
-            $("#id_card").attr("placeholder", "");
-        }
+    if(id_card == ''){
+        $('#id_card').addClass('custom_has_err');
+        $("#id_card").attr("placeholder", "โปรดกรอกเลขบัตรประชาชนผู้ทำรายการ");
+    }else{
+        $('#id_card').removeClass('custom_has_err');
+        $("#id_card").attr("placeholder", "");
+    }
 
-        if(firstname == ''){
-            $('#firstname').addClass('custom_has_err');
-            $("#firstname").attr("placeholder", "โปรดกรอกชื่อผู้ทำรายการ");
-        }else{
-            $('#firstname').removeClass('custom_has_err');
-            $("#firstname").attr("placeholder", "");
-        }
+    if(firstname == ''){
+        $('#firstname').addClass('custom_has_err');
+        $("#firstname").attr("placeholder", "โปรดกรอกชื่อผู้ทำรายการ");
+    }else{
+        $('#firstname').removeClass('custom_has_err');
+        $("#firstname").attr("placeholder", "");
+    }
 
     // if(lastname == ''){
     //     $('#lastname').addClass('custom_has_err');
@@ -717,20 +678,22 @@ function getHistory(type = null, pointer_index = null){
 
 function getPrice(pointer_index) {
     var price = "", weight = "";
-    if($('#shipping_type'+' option:selected').val() == 'normal') {
-        weight = $('#weight').val();
+    if($('#shipping_type'+pointer_index+' option:selected').val() == 'normal') {
+        weight = $('#weight'+pointer_index).val();
         price = weight * 10;
-    } else if($('#shipping_type'+' option:selected').val() == 'cod') {
-        weight = $('#weight').val();
+    } else if($('#shipping_type'+pointer_index+' option:selected').val() == 'cod') {
+        weight = $('#weight'+pointer_index).val();
         price = weight * 100;
     }
-    $('#price').val(price.toFixed(2));
+    $('#price'+pointer_index).val(price.toFixed(2));
 }
 
 function sumPrice() {
     var sum_price = 0;
     $('.section').each(function (index, ele) {
-        var price = $(ele).find('#price').val();
+        var pointer_index = $(this).closest('.section').data('index');
+        pointer_index = pointer_index == 1 ? '' : pointer_index;
+        var price = $(ele).find('#price'+pointer_index).val();
         if(!isNaN(price) && price !== '' ){
             sum_price = sum_price + parseInt(price);
         }
