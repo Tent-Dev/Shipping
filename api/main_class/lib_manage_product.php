@@ -469,9 +469,9 @@ class MNG_Product{
 	public function CreateMapTransaction($param = null){
 
 		$trans_id = $param['transaction_generate'];
-		$total_price = $param['payment']['total_price'];
-		$get_price = $param['payment']['get_price'];
-		$change_price = $param['payment']['change_price'];
+		$total_price = $param['total_price'];
+		$get_price = $param['get_price'];
+		$change_price = $param['change_price'];
 
 		$arr_map_transaction = array(
 			"transaction_id" => $trans_id,
@@ -482,19 +482,17 @@ class MNG_Product{
 
 		$result_map_transaction = $this->db_connect->Insert_db($arr_map_transaction,"tbl_map_transaction");
 
-		if(!$result_map_transaction['status']){
+		if($result_map_transaction){
+			$response = array(
+				'status' => 200
+			);
+		}else{
 			$response = array(
 				'status' => 500,
 				'err_msg' => 'Cannot mapping transaction'
 			);
-			return $response;
-			exit();
-		}else{
-			$response = array(
-				'status' => 200
-			);
 		}
-
+		return $response;
 	}
 
 	public function UpdateProduct($param = null){

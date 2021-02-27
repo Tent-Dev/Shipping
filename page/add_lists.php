@@ -159,7 +159,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-12">
+                        <div class="col-lg-6 col-12 item_detail">
                             <div class="form_add section" data-index="1">
                                 <p class="form-title-2">ข้อมูลพัสดุ</p>
                                 <div class="row">

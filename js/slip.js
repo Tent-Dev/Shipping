@@ -31,14 +31,14 @@ function getData(){
 					$('.get_price').html(data.data.get_price);
 					$('.change_price').html(data.data.change_price);
 
-					var total = 0;
+					// var total = 0;
 					
-					$.each(data.data.data, function(index, val) {
-						total = total + val.price;
-						GenerateItemList(val);
-					});
+					// $.each(data.data.data, function(index, val) {
+					// 	total = total + val.price;
+					// 	GenerateItemList(val);
+					// });
 
-					$('.total').html(total);
+					$('.total').html(data.data.total_price);
 
 					window.print();
 

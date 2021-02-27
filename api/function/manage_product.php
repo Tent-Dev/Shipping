@@ -54,6 +54,18 @@ if ($cmd != "") {
 		exit();
 	}
 
+	if ($cmd == "create_order") {
+		$permission = $auth->AuthPermission();
+		if($permission['permission']){
+			$result = $mng_product->CreateMapTransaction($_POST);
+		}else{
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
+		}
+		echo json_encode($result);
+		$mysql->Close_db();
+		exit();
+	}
+
 	if ($cmd == "update_product") {
 		$permission = $auth->AuthPermission();
 		if($permission['permission']){
