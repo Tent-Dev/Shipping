@@ -233,14 +233,14 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <label for="s_fname" class="col-form-label col-form-label-sm">ชื่อผู้ส่ง</label>
+                                            <div class="col-md-8">
+                                                <label for="s_fname" class="col-form-label col-form-label-sm">ชื่อ-นามสกุลผู้ส่ง</label>
                                                 <input type="text" name="s_fname[]" id="s_fname" class="form-control form-control-sm s_fname">
                                             </div>
-                                            <div class="col-md-4">
+                                            <!-- <div class="col-md-4">
                                                 <label for="s_lname" class="col-form-label col-form-label-sm">นามสกุลผู้ส่ง</label>
                                                 <input type="text" name="s_lname[]" id="s_lname" class="form-control form-control-sm s_lname">
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
@@ -281,14 +281,14 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อผู้รับ</label>
+                                            <div class="col-md-8">
+                                                <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อ-นามสกุลผู้รับ</label>
                                                 <input type="text" name="r_fname[]" id="r_fname" class="form-control form-control-sm r_fname">
                                             </div>
-                                            <div class="col-md-4">
+                                            <!-- <div class="col-md-4">
                                                 <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุลผู้รับ</label>
                                                 <input type="text" name="r_lname[]" id="r_lname" class="form-control form-control-sm r_lname">
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">

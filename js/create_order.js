@@ -252,71 +252,65 @@ function getAllData(){
     var map_payment = {};
     var data_items = [];
 
-    $('.section').each(function (index, ele) {
-        var pointer_index = $(this).closest('.section').data('index');
-        var item_obj = {};
-        var receiver_obj = {};
-        var sender_obj = {};
-        if(pointer_index == 1){
-            pointer_index = ''
-        }
+    var item_obj = {};
+    var receiver_obj = {};
+    var sender_obj = {};
 
-        var s_phone = $(ele).find('#sender_phone'+pointer_index).val();
-        var s_fname = $(ele).find('#s_fname'+pointer_index).val();
-        var s_lname = $(ele).find('#s_lname'+pointer_index).val();
-        var s_address = $(ele).find('#s_address'+pointer_index).val();
-        var s_district = $(ele).find('#s_district'+pointer_index).val();
-        var s_area = $(ele).find('#s_area'+pointer_index).val();
-        var s_province = $(ele).find('#s_province'+pointer_index).val();
-        var s_postcode = $(ele).find('#s_postcode'+pointer_index).val();
+    var s_phone = $('#sender_phone').val();
+    var s_fname =  $("#s_fname").val().split(' ')[0];
+    var s_lname = $("#s_fname").val().split(' ')[1] || '';
+    var s_address = $('#s_address').val();
+    var s_district = $('#s_district').val();
+    var s_area = $('#s_area').val();
+    var s_province = $('#s_province').val();
+    var s_postcode = $('#s_postcode').val();
 
-        var r_phone = $(ele).find('#phone_number'+pointer_index).val();
-        var r_fname = $(ele).find('#r_fname'+pointer_index).val();
-        var r_lname = $(ele).find('#r_lname'+pointer_index).val();
-        var r_address = $(ele).find('#r_address'+pointer_index).val();
-        var r_district = $(ele).find('#r_district'+pointer_index).val();
-        var r_area = $(ele).find('#r_area'+pointer_index).val();
-        var r_province = $(ele).find('#r_province'+pointer_index).val();
-        var r_postcode = $(ele).find('#r_postcode'+pointer_index).val();
+    var r_phone = $('#phone_number').val();
+    var r_fname = $("#r_fname").val().split(' ')[0];
+    var r_lname = $("#r_fname").val().split(' ')[1] || '';
+    var r_address = $('#r_address').val();
+    var r_district = $('#r_district').val();
+    var r_area = $('#r_area').val();
+    var r_province = $('#r_province').val();
+    var r_postcode = $('#r_postcode').val();
 
-        var weight = $(ele).find('#weight'+pointer_index).val();
-        var price = $(ele).find('#price'+pointer_index).val();
-        var shipping_type = $(ele).find('#shipping_type'+pointer_index).val();
-        var cod_price = $(ele).find('#money_cod'+pointer_index).val();
+    var weight = $('#weight').val();
+    var price = $('#price').val();
+    var shipping_type = $('#shipping_type').val();
+    var cod_price = $('#money_cod').val();
 
-        if(!validateCreate(pointer_index)){
-            checkvalue = false;
-        }else{
-            receiver_obj.firstname = r_fname;
-            receiver_obj.lastname = r_lname;
-            receiver_obj.address = r_address;
-            receiver_obj.district = r_district;
-            receiver_obj.area = r_area;
-            receiver_obj.province = r_province;
-            receiver_obj.postal = r_postcode;
-            receiver_obj.phone_number = r_phone;
+    if(!validateCreate('')){
+        checkvalue = false;
+    }else{
+        receiver_obj.firstname = r_fname;
+        receiver_obj.lastname = r_lname;
+        receiver_obj.address = r_address;
+        receiver_obj.district = r_district;
+        receiver_obj.area = r_area;
+        receiver_obj.province = r_province;
+        receiver_obj.postal = r_postcode;
+        receiver_obj.phone_number = r_phone;
 
-            sender_obj.firstname = s_fname;
-            sender_obj.lastname = s_lname;
-            sender_obj.address = s_address;
-            sender_obj.district = s_district;
-            sender_obj.area = s_area;
-            sender_obj.province = s_province;
-            sender_obj.postal = s_postcode;
-            sender_obj.phone_number = s_phone;
+        sender_obj.firstname = s_fname;
+        sender_obj.lastname = s_lname;
+        sender_obj.address = s_address;
+        sender_obj.district = s_district;
+        sender_obj.area = s_area;
+        sender_obj.province = s_province;
+        sender_obj.postal = s_postcode;
+        sender_obj.phone_number = s_phone;
 
-            item_obj.weight = weight;
-            item_obj.price = price;
-            item_obj.shipping_type = 'normal';
-            item_obj.payment_type  = shipping_type;
-            item_obj.cod_price = cod_price;
+        item_obj.weight = weight;
+        item_obj.price = price;
+        item_obj.shipping_type = 'normal';
+        item_obj.payment_type  = shipping_type;
+        item_obj.cod_price = cod_price;
 
-            item_obj.receiver_desc = receiver_obj;
-            item_obj.sender_desc = sender_obj;
+        item_obj.receiver_desc = receiver_obj;
+        item_obj.sender_desc = sender_obj;
 
-            data_items.push(item_obj);
-        }
-    });
+        data_items.push(item_obj);
+    }
 
     if(checkvalue){
         $('.btn_save').html('<i class="fas fa-spinner fa-spin"></i></span>');
