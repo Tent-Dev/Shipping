@@ -127,24 +127,23 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
             <div class="row">
                 <div class="col-12 mt-3 mb-5">
                     <a href="lists.php" class="btn-back">รายการพัสดุ</a> / <h2 class="d-inline">เพิ่มพัสดุ</h2>
-                    <!-- <form action="" method="post"> -->
-                        <div class="row">
-
-                            <div class="form-section col-12">
-                                <div class="section" data-index="1">
-                                    <p class="form-title-1">ข้อมูลผู้ทำรายการ</p>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label for="customer_phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้ทำรายการ</label>
-                                            <input type="text" name="customer_phone_number" id="customer_phone_number" class="form-control form-control-sm form-suggest" autocomplete="off">
-                                            <div class="box-suggest customer-suggest">
-                                                <div class="suggest-detail"></div>
-                                            </div>
+                        <!-- <form action="" method="post"> -->
+                    <div class="row">
+                        <div class="form-section col-12">
+                            <div class="section" data-index="1">
+                                <p class="form-title-2">ข้อมูลผู้ทำรายการ</p>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="customer_phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้ทำรายการ</label>
+                                        <input type="text" name="customer_phone_number" id="customer_phone_number" class="form-control form-control-sm form-suggest" autocomplete="off">
+                                        <div class="box-suggest customer-suggest">
+                                            <div class="suggest-detail"></div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
-                                            <input type="text" name="id_card" id="id_card" class="form-control form-control-sm">
-                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="id_card" class="col-form-label col-form-label-sm">เลขประจำตัวประชาชนผู้ทำรายการ</label>
+                                        <input type="text" name="id_card" id="id_card" class="form-control form-control-sm">
+                                    </div>
                                     <!-- <div class="col-md-3">
                                         <label for="firstname" class="col-form-label col-form-label-sm">ชื่อผู้ทำรายการ</label>
                                         <input type="text" name="firstname" id="firstname" class="form-control form-control-sm">
@@ -161,232 +160,250 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
-                        <div class="form_add section" data-index="1">
-                            <p class="form-title-3">ข้อมูลพัสดุ</p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="shipping_type" class="col-form-label col-form-label-sm">ประเภทการส่ง</label>
-                                    <select name="shipping_type[]" id="shipping_type" class="form-control form-control-sm shipping_type">
-                                        <option value="normal" selected>ส่งแบบธรรมดา</option>
-                                        <option value="cod">ส่งแบบธรรมดา แบบเก็บเงินปลายทาง</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-5 money_cod d-none">
-                                    <label for="money_cod" class="col-form-label col-form-label-sm">จำนวนเงินที่ต้องเก็บปลายทาง</label>
-                                    <input type="text" name="money_cod[]" id="money_cod" class="form-control form-control-sm" value="">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กรัม)</label>
-                                    <input type="text" name="weight[]" id="weight" class="form-control form-control-sm weight" value="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="price" class="col-form-label col-form-label-sm">ราคา</label>
-                                    <input type="text" name="price[]" id="price" class="form-control form-control-sm price" value="" disabled>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="p_type" class="col-form-label col-form-label-sm">คำนวณราคา</label>
-                                    <div class="d-flex align-items-center">
-                                        <label for="price_type" class="col-form-label col-form-label-sm mb-0 mr-3">คิดตามน้ำหนักพัสดุ</label>
-                                        <input type="checkbox" name="price_type[]" id="price_type" class="form-control form-control-sm price_type" checked>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="overflow-auto mt-3" style="height: 500px">
-                           <!--  <div class="table_wrap_loading_box">
-                                <div>
-                                    <i class="fas fa-spinner fa-spin"></i>
-                                </div>
-                            </div> -->
-                            <table class="table table-sm table-hover">
-                                <thead>
-                                    <th>เลขพัสดุ</th>
-                                    <th>ชื่อ</th>
-                                    <th>เบอร์โทร</th>
-                                    <th>ที่อยู่โดยระเอียด</th>
-                                    <th>รหัสไปรษณีย์</th>
-                                    <th>น้ำหนัก</th>
-                                    <th>ราคา</th>
-                                    <th>เก็บเงินปลายทาง</th>
-                                </thead>
-                                <tbody id="order_list">
-                                </tbody>
-                            </table>   
-                        </div>
-                    </div>
-                            <div class="form_add col-lg-6 col-12">
-                                <div id="form-section">
-                                    <div class="section" data-index="1">
-                                        <p class="form-title-2" style="background-color: #9ec6ff;">ข้อมูลผู้ส่ง</p>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="sender_phone" class="col-form-label col-form-label-sm">เบอร์โทรผู้ส่ง</label>
-                                                <input type="text" name="sender_phone[]" id="sender_phone" class="form-control form-control-sm form-suggest sender_phone" autocomplete="off">
-                                                <div class="box-suggest sender-suggest">
-                                                    <div class="suggest-detail">
-                                                        <!-- <p>เบอร์โทรผู้ส่ง</p>
-                                                        <p>ชื่อ</p>
-                                                        <p>ที่อยู่</p>
-                                                        <p>เขต แขวง จังหวัด รหัสไปรษณีย์</p> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <label for="s_fname" class="col-form-label col-form-label-sm">ชื่อ-นามสกุลผู้ส่ง</label>
-                                                <input type="text" name="s_fname[]" id="s_fname" class="form-control form-control-sm s_fname">
-                                            </div>
-                                            <!-- <div class="col-md-4">
-                                                <label for="s_lname" class="col-form-label col-form-label-sm">นามสกุลผู้ส่ง</label>
-                                                <input type="text" name="s_lname[]" id="s_lname" class="form-control form-control-sm s_lname">
-                                            </div> -->
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="s_address" class="col-form-label col-form-label-sm">ที่อยู่</label>
-                                                <input type="text" name="s_address[]" id="s_address" class="form-control form-control-sm s_address">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="s_district" class="col-form-label col-form-label-sm">เขต</label>
-                                                <input type="text" name="s_district[]" id="s_district" class="form-control form-control-sm s_district">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="s_area" class="col-form-label col-form-label-sm">แขวง</label>
-                                                <input type="text" name="s_area[]" id="s_area" class="form-control form-control-sm s_area">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="s_province" class="col-form-label col-form-label-sm">จังหวัด</label>
-                                                <input type="text" name="s_province[]" id="s_province" class="form-control form-control-sm s_province">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="s_postcode" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
-                                                <input type="text" name="s_postcode[]" id="s_postcode" class="form-control form-control-sm s_postcode">
-                                            </div>
-                                        </div>
-                                        <!-- receive -->
-                                        <p class="form-title-3">ข้อมูลผู้รับ</p>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>
-                                                <input type="text" name="phone_number[]" id="phone_number" class="form-control form-control-sm form-suggest phone_number" autocomplete="off">
-                                                <div class="box-suggest receiver-suggest">
-                                                    <div class="suggest-detail">
-                                                        <!-- <p>เบอร์โทรผู้ส่ง</p>
-                                                        <p>ชื่อ</p>
-                                                        <p>ที่อยู่</p>
-                                                        <p>เขต แขวง จังหวัด รหัสไปรษณีย์</p> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อ-นามสกุลผู้รับ</label>
-                                                <input type="text" name="r_fname[]" id="r_fname" class="form-control form-control-sm r_fname">
-                                            </div>
-                                            <!-- <div class="col-md-4">
-                                                <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุลผู้รับ</label>
-                                                <input type="text" name="r_lname[]" id="r_lname" class="form-control form-control-sm r_lname">
-                                            </div> -->
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="r_address" class="col-form-label col-form-label-sm">ที่อยู่</label>
-                                                <input type="text" name="r_address[]" id="r_address" class="form-control form-control-sm r_address">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="r_district" class="col-form-label col-form-label-sm">เขต</label>
-                                                <input type="text" name="r_district[]" id="r_district" class="form-control form-control-sm r_district">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="r_area" class="col-form-label col-form-label-sm">แขวง</label>
-                                                <input type="text" name="r_area[]" id="r_area" class="form-control form-control-sm r_area">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="r_province" class="col-form-label col-form-label-sm">จังหวัด</label>
-                                                <input type="text" name="r_province[]" id="r_province" class="form-control form-control-sm r_province">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="r_postcode" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
-                                                <input type="text" name="r_postcode[]" id="r_postcode" class="form-control form-control-sm r_postcode">
-                                            </div>
-                                        </div>
-
-                                       <!--  <div class="text-right">
-                                            <button type="button" class="btn btn-sm btn-danger remove mt-3"><i class="fas fa-trash"></i></button>
-                                        </div> -->
-                                    </div>
-                                </div>
-
-                                <!-- <hr> -->
-                                <div class="row mt-3">
+                            <div class="form_add section" data-index="1">
+                                <p class="form-title-2">ข้อมูลพัสดุ</p>
+                                <div class="row">
                                     <div class="col-6">
-                                        <a href="#" class="addsection btn btn-sm btn-info"><i class="fas fa-plus"></i> เพิ่มผู้รับ</a>
+                                        <label for="product_type" class="col-form-label col-form-label-sm">ประเภทสินค้า</label>
+                                        <select name="product_type[]" id="product_type" class="form-control form-control-sm product_type">
+                                            <option value="none" selected>ไม่มี</option>
+                                            <option value="doc">เอกสาร</option>
+                                            <option value="dried_food">อาหารแห้ง</option>
+                                            <option value="wares">ของใช้</option>
+                                            <option value="it">อุปกรณ์ไอที</option>
+                                            <option value="clothes">เสื้อผ้า</option>
+                                            <option value="entertainment">สื่อบันเทิง</option>
+                                            <option value="cars">อะไหล่ยนต์</option>
+                                            <option value="shoes_bags">รองเท้า/กระเป๋า</option>
+                                            <option value="cosmetics">เครื่องสำอาง</option>
+                                            <option value="furniture">เฟอร์นิเจอร์</option>
+                                            <option value="fruits">ผลไม้</option>
+                                            <option value="others">อื่นๆ</option>
+                                        </select>
                                     </div>
-                                </div>
-                                <div class="row my-4 mt-md-0">
-                                    <div class="col-md-4 d-flex align-items-center">
-                                        ราคารวม : <b id="sum_price" class="mx-3">0</b> บาท
+                                    <div class="col-6">
+                                        <label for="shipping_type" class="col-form-label col-form-label-sm">ประเภทการส่ง</label>
+                                        <select name="shipping_type[]" id="shipping_type" class="form-control form-control-sm shipping_type">
+                                            <option value="normal" selected>ส่งแบบธรรมดา</option>
+                                            <option value="cod">ส่งแบบธรรมดา แบบเก็บเงินปลายทาง</option>
+                                        </select>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="m_received" class="col-form-label col-form-label-sm">รับเงินมา</label>
-                                        <input type="text" name="m_received" id="m_received" class="form-control form-control-sm" value="">
+                                    <div class="col-6 money_cod d-none">
+                                        <label for="money_cod" class="col-form-label col-form-label-sm">จำนวนเงินที่ต้องเก็บปลายทาง</label>
+                                        <input type="text" name="money_cod[]" id="money_cod" class="form-control form-control-sm" value="">
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="change" class="col-form-label col-form-label-sm">เงินทอน</label>
-                                        <input type="text" name="change" id="change" class="form-control form-control-sm" value="" disabled readonly>
+                                    <div class="col-4">
+                                        <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กรัม)</label>
+                                        <input type="text" name="weight[]" id="weight" class="form-control form-control-sm weight" value="">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 text-center">
-                                        <button class="btn btn-sm btn-success btn_save">บันทึก <i class="far fa-save"></i></button>
-                                        <button class="btn btn-sm btn-danger">ยกเลิก <i class="fas fa-times"></i></button>
+                                    <div class="col-6">
+                                        <label for="price" class="col-form-label col-form-label-sm">ราคา</label>
+                                        <input type="text" name="price[]" id="price" class="form-control form-control-sm price" value="" disabled>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="p_type" class="col-form-label col-form-label-sm">คำนวณราคา</label>
+                                        <div class="d-flex align-items-center">
+                                            <label for="price_type" class="col-form-label col-form-label-sm mb-0 mr-3">คิดตามน้ำหนักพัสดุ</label>
+                                            <input type="checkbox" name="price_type[]" id="price_type" class="form-control form-control-sm price_type" checked>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- </form> -->
+                            </div>
+                            <div id="form-section">
+                                <div class="section" data-index="1">
+                                    <p class="form-title-2" style="background-color: #9ec6ff;">ข้อมูลผู้ส่ง</p>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="sender_phone" class="col-form-label col-form-label-sm">เบอร์โทรผู้ส่ง</label>
+                                            <input type="text" name="sender_phone[]" id="sender_phone" class="form-control form-control-sm form-suggest sender_phone" autocomplete="off">
+                                            <div class="box-suggest sender-suggest">
+                                                <div class="suggest-detail">
+                                                    <!-- <p>เบอร์โทรผู้ส่ง</p>
+                                                    <p>ชื่อ</p>
+                                                    <p>ที่อยู่</p>
+                                                    <p>เขต แขวง จังหวัด รหัสไปรษณีย์</p> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label for="s_fname" class="col-form-label col-form-label-sm">ชื่อ-นามสกุลผู้ส่ง</label>
+                                            <input type="text" name="s_fname[]" id="s_fname" class="form-control form-control-sm s_fname">
+                                        </div>
+                                        <!-- <div class="col-md-4">
+                                            <label for="s_lname" class="col-form-label col-form-label-sm">นามสกุลผู้ส่ง</label>
+                                            <input type="text" name="s_lname[]" id="s_lname" class="form-control form-control-sm s_lname">
+                                        </div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label for="s_address" class="col-form-label col-form-label-sm">ที่อยู่</label>
+                                            <input type="text" name="s_address[]" id="s_address" class="form-control form-control-sm s_address">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="s_district" class="col-form-label col-form-label-sm">เขต</label>
+                                            <input type="text" name="s_district[]" id="s_district" class="form-control form-control-sm s_district">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="s_area" class="col-form-label col-form-label-sm">แขวง</label>
+                                            <input type="text" name="s_area[]" id="s_area" class="form-control form-control-sm s_area">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="s_province" class="col-form-label col-form-label-sm">จังหวัด</label>
+                                            <input type="text" name="s_province[]" id="s_province" class="form-control form-control-sm s_province">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="s_postcode" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
+                                            <input type="text" name="s_postcode[]" id="s_postcode" class="form-control form-control-sm s_postcode">
+                                        </div>
+                                    </div>
+                                    <!-- receive -->
+                                    <p class="form-title-3">ข้อมูลผู้รับ</p>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>
+                                            <input type="text" name="phone_number[]" id="phone_number" class="form-control form-control-sm form-suggest phone_number" autocomplete="off">
+                                            <div class="box-suggest receiver-suggest">
+                                                <div class="suggest-detail">
+                                                    <!-- <p>เบอร์โทรผู้ส่ง</p>
+                                                    <p>ชื่อ</p>
+                                                    <p>ที่อยู่</p>
+                                                    <p>เขต แขวง จังหวัด รหัสไปรษณีย์</p> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อ-นามสกุลผู้รับ</label>
+                                            <input type="text" name="r_fname[]" id="r_fname" class="form-control form-control-sm r_fname">
+                                        </div>
+                                        <!-- <div class="col-md-4">
+                                            <label for="r_lname" class="col-form-label col-form-label-sm">นามสกุลผู้รับ</label>
+                                            <input type="text" name="r_lname[]" id="r_lname" class="form-control form-control-sm r_lname">
+                                        </div> -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label for="r_address" class="col-form-label col-form-label-sm">ที่อยู่</label>
+                                            <input type="text" name="r_address[]" id="r_address" class="form-control form-control-sm r_address">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="r_district" class="col-form-label col-form-label-sm">เขต</label>
+                                            <input type="text" name="r_district[]" id="r_district" class="form-control form-control-sm r_district">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="r_area" class="col-form-label col-form-label-sm">แขวง</label>
+                                            <input type="text" name="r_area[]" id="r_area" class="form-control form-control-sm r_area">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="r_province" class="col-form-label col-form-label-sm">จังหวัด</label>
+                                            <input type="text" name="r_province[]" id="r_province" class="form-control form-control-sm r_province">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="r_postcode" class="col-form-label col-form-label-sm">รหัสไปรษณีย์</label>
+                                            <input type="text" name="r_postcode[]" id="r_postcode" class="form-control form-control-sm r_postcode">
+                                        </div>
+                                    </div>
+
+                                    <!--  <div class="text-right">
+                                        <button type="button" class="btn btn-sm btn-danger remove mt-3"><i class="fas fa-trash"></i></button>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <a href="#" class="addsection btn btn-sm btn-info"><i class="fas fa-plus"></i> เพิ่มพัสดุ</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="form_print" style="display: none;">
-                            <div align="center" style="margin-bottom: 10px;">
-                                <div class="col-12">
-                                    <i class="far fa-check-circle icon_add_success"></i>
-                                </div>
-                                <b style="font-size: 20px">นำพัสดุเข้าสู่ระบบเรียบร้อยแล้ว</b>
-                            </div>
-                            <div align="center" style="margin-bottom: 10px;">
-                                ขั้นตอนสุดท้าย: พิมพ์ใบปะหน้าพัสดุ และใบเสร็จรับเงิน
-                            </div>
-                            <div align="center" style="margin-bottom: 30px;">
-                                <div class="row wrap_checklist">
-                                    <div class="checklist_print"><i class="far fa-check-circle"></i></div>
-                                    <div class="textlist_print">ใบปะหน้าพัสดุ</div>
+                        <div class="form_add col-lg-6 col-12">
+                            <div class="overflow-auto mt-3" style="height: 300px; max-height: 500px">
+                                <!--  <div class="table_wrap_loading_box">
                                     <div>
-                                        <a class="label_link" href="" target="_blank"><button type="button" class="btn btn-sm btn-success">
-                                            <i class="fas fa-print"></i>
-                                        </button></a>
+                                        <i class="fas fa-spinner fa-spin"></i>
                                     </div>
-                                </div>
-                                <div style="margin-bottom: 10px;"></div>
-                                <div class="row wrap_checklist">
-                                    <div class="checklist_print"><i class="far fa-check-circle"></i></div>
-                                    <div class="textlist_print">ใบเสร็จรับเงิน</div>
-                                    <div>
-                                        <a class="slip_link" href="" target="_blank"><button type="button" class="btn btn-sm btn-success">
-                                            <i class="fas fa-print"></i>
-                                        </button></a>
-                                    </div>
+                                </div> -->
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <th>เลขพัสดุ</th>
+                                        <th>ชื่อ</th>
+                                        <th>เบอร์โทร</th>
+                                        <th>ที่อยู่โดยระเอียด</th>
+                                        <th>รหัสไปรษณีย์</th>
+                                        <th>น้ำหนัก</th>
+                                        <th>ราคา</th>
+                                        <th>เก็บเงินปลายทาง</th>
+                                    </thead>
+                                    <tbody id="order_list">
+                                    </tbody>
+                                </table>   
+                            </div>
+                            <div class="row my-4 mb-md-2">
+                                <div class="col-md-4 d-flex align-items-center">
+                                    ราคารวม : <b id="sum_price" class="mx-3">0</b> บาท
                                 </div>
                             </div>
-                            <div align="center" style="margin-bottom: 10px;">
-                                หมายเหตุ: ท่านสามารถพิมพ์ใบปะหน้าและใบเสร็จรับเงินภายหลังได้
+                            <div class="row my-4 mt-md-0">
+                                <div class="col-md-6">
+                                    <label for="m_received" class="col-form-label col-form-label-sm">รับเงินมา</label>
+                                    <input type="text" name="m_received" id="m_received" class="form-control form-control-sm" value="">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="change" class="col-form-label col-form-label-sm">เงินทอน</label>
+                                    <input type="text" name="change" id="change" class="form-control form-control-sm" value="" disabled readonly>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-sm btn-success btn_save">บันทึก <i class="far fa-save"></i></button>
+                                    <button class="btn btn-sm btn-danger">ยกเลิก <i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                    <div class="form_print" style="display: none;">
+                        <div align="center" style="margin-bottom: 10px;">
+                            <div class="col-12">
+                                <i class="far fa-check-circle icon_add_success"></i>
+                            </div>
+                            <b style="font-size: 20px">นำพัสดุเข้าสู่ระบบเรียบร้อยแล้ว</b>
+                        </div>
+                        <div align="center" style="margin-bottom: 10px;">
+                            ขั้นตอนสุดท้าย: พิมพ์ใบปะหน้าพัสดุ และใบเสร็จรับเงิน
+                        </div>
+                        <div align="center" style="margin-bottom: 30px;">
+                            <div class="row wrap_checklist">
+                                <div class="checklist_print"><i class="far fa-check-circle"></i></div>
+                                <div class="textlist_print">ใบปะหน้าพัสดุ</div>
+                                <div>
+                                    <a class="label_link" href="" target="_blank"><button type="button" class="btn btn-sm btn-success">
+                                        <i class="fas fa-print"></i>
+                                    </button></a>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 10px;"></div>
+                            <div class="row wrap_checklist">
+                                <div class="checklist_print"><i class="far fa-check-circle"></i></div>
+                                <div class="textlist_print">ใบเสร็จรับเงิน</div>
+                                <div>
+                                    <a class="slip_link" href="" target="_blank"><button type="button" class="btn btn-sm btn-success">
+                                        <i class="fas fa-print"></i>
+                                    </button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div align="center" style="margin-bottom: 10px;">
+                            หมายเหตุ: ท่านสามารถพิมพ์ใบปะหน้าและใบเสร็จรับเงินภายหลังได้
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </body>
-    </html>
+        </div>
+    </section>
+</body>
+</html>
