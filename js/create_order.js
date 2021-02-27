@@ -7,10 +7,37 @@ var receiver_history_set = [];
 var check_customer_history_timeout = 0;
 var customer_history_set = [];
 
+var TRANSACTION_GENERATE = '';
+
 $(document).ready(function() {
-	
+    var random_a = makeid('2',0);
+    var random_b = makeid('2',1);
+    TRANSACTION_GENERATE = moment().format('x')+random_a+random_b;
+
+    console.log(TRANSACTION_GENERATE);
     var form_clone = $('#form-section .section:first').clone();
     var sectionsCount = 1;
+
+    $(document).on('click', '.btn_checkprice', function(){
+        var total = 0;
+        $('.sync_price').addClass('fa-spin');
+        console.log('Start', total);
+        $('#order_list tr').each(function(){
+            $(this).find('.price').each(function(){
+                var this_price = Number(parseFloat($(this).html())).toFixed(2);
+                console.log('>>>>', this_price);
+
+                total = total+this_price;
+            })
+        })
+
+        console.log('TOTAL: ',total);
+
+        setTimeout(function(){
+            $('.sync_price').removeClass('fa-spin');
+        }, 1000);
+        
+    });
 
     $('body').on('click', '.addsection', function() {
         // sectionsCount++;
@@ -46,42 +73,8 @@ $(document).ready(function() {
             var shipping_type = $('#shipping_type').val();
             var cod_price = $('#money_cod').val();
 
-            html = '';
-            html += '<tr>';
-            html +=
-            '<td>SH0000001</td>'+
-            '<td>'+r_fname+' '+r_lname+'</td>'+
-            '<td>'+r_phone+'</td>'+
-            '<td>'+r_address+'</td>'+
-            '<td>'+r_postcode+'</td>'+
-            '<td>'+weight+'</td>'+
-            '<td>'+price+'</td>'+
-            '<td>'+cod_price+'</td>';
-            html += '</tr>';
+            getAllData();
 
-            $('#order_list').append(html);
-
-            $("#sender_phone").val('');
-            $("#s_fname").val('');
-            $("#s_lname").val('');
-            $("#s_address").val('');
-            $("#s_district").val('');
-            $("#s_area").val('');
-            $("#s_province").val('');
-            $("#s_postcode").val('');
-
-            $("#phone_number").val('');
-            $("#r_fname").val('');
-            $("#r_lname").val('');
-            $("#r_address").val('');
-            $("#r_district").val('');
-            $("#r_area").val('');
-            $("#r_province").val('');
-            $("#r_postcode").val('');
-
-            $("#weight").val('');
-            $("#price").val('');
-            $("#shipping_type").val();
         }
         
         // if($('.section').length > 0){
@@ -361,6 +354,7 @@ function getAllData(){
         data_obj.customer_phone_number = c_phone_number;
         data_obj.item = data_items;
         data_obj.payment = map_payment;
+        data_obj.transaction_generate = TRANSACTION_GENERATE;
 
         console.log('Data:: ',data_obj);
 
@@ -380,10 +374,47 @@ function getAllData(){
                 if(data.status == 200){
                     //window.location.replace("lists.php");
                     console.log('Transaction id: ', data.last_id);
-                    $('.slip_link').attr('href', 'slip.php?transaction_id='+data.last_id+'&mode=\'id\'');
-                    $('.label_link').attr('href', 'item_label.php?transaction_id='+data.transaction_id+'&mode=all');
-                    $('.form_add').hide();
-                    $('.form_print').show();
+                    // $('.slip_link').attr('href', 'slip.php?transaction_id='+data.last_id+'&mode=\'id\'');
+                    // $('.label_link').attr('href', 'item_label.php?transaction_id='+data.transaction_id+'&mode=all');
+                    // $('.form_add').hide();
+                    // $('.form_print').show();
+
+                    html = '';
+                    html += '<tr>';
+                    html +=
+                    '<td>'+data.tracking_code+'</td>'+
+                    '<td>'+r_fname+' '+r_lname+'</td>'+
+                    '<td>'+r_phone+'</td>'+
+                    '<td>'+r_address+'</td>'+
+                    '<td>'+r_postcode+'</td>'+
+                    '<td>'+weight+'</td>'+
+                    '<td class="price">'+price+'</td>'+
+                    '<td>'+cod_price+'</td>';
+                    html += '</tr>';
+
+                    $('#order_list').append(html);
+
+                    // $("#sender_phone").val('');
+                    // $("#s_fname").val('');
+                    // $("#s_lname").val('');
+                    // $("#s_address").val('');
+                    // $("#s_district").val('');
+                    // $("#s_area").val('');
+                    // $("#s_province").val('');
+                    // $("#s_postcode").val('');
+
+                    $("#phone_number").val('');
+                    $("#r_fname").val('');
+                    $("#r_lname").val('');
+                    $("#r_address").val('');
+                    $("#r_district").val('');
+                    $("#r_area").val('');
+                    $("#r_province").val('');
+                    $("#r_postcode").val('');
+
+                    $("#weight").val('');
+                    $("#price").val('');
+                    $("#shipping_type").val();
                 }
                 else{
                     Swal.fire({
@@ -757,4 +788,14 @@ function sumPrice() {
     $('#sum_price').html(NumberFormat(sum_price));
 
     return sum_price;
+}
+
+function makeid(length, type) {
+   var result           = '';
+   var characters       = ['0123456789', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+   var charactersLength = characters[type].length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters[type].charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 }

@@ -47,12 +47,14 @@ class MNG_Product{
 		ON tbl_transaction.customer_id = tbl_receiver.id
 		";
 
+		$sql_limit = '';
+
+		$sql_limit .= " ORDER BY tbl_product.id DESC ";
+
 		if(!$ignore_pagination){
-			$sql_limit = " LIMIT ".$start_page." , ".$per_page."";
+			$sql_limit .= " LIMIT ".$start_page." , ".$per_page." ";
 		}
 
-		$sql_limit = " ORDER BY tbl_product.id DESC ";
-		
 		$sql_where = " WHERE tbl_product.active_status = 'T' ";
 
 		if(isset($param['status']) && $param['status'] != ""){
@@ -349,7 +351,7 @@ class MNG_Product{
 
 				if($result_product['status']){
 					$get_last_product_id = $result_product['last_id'];
-					$trans_id = strtotime("now").$ran_transac1.$ran_transac2;
+					$trans_id = $json_en['transaction_generate'];
 
 					$arr_customer = array( 
 						"transaction_id" => $trans_id,
@@ -363,30 +365,30 @@ class MNG_Product{
 
 					$result_transaction = $this->db_connect->Insert_db($arr_customer,"tbl_transaction");
 
-					if(!$trans_id_added){
-						$arr_map_transaction = array(
-							"transaction_id" => $trans_id,
-							"total_price" => $json_en['payment']['total_price'], 
-							"get_price" => $json_en['payment']['get_price'],
-							"change_price" => $json_en['payment']['change_price']
-						);
+					// if(!$trans_id_added){
+					// 	$arr_map_transaction = array(
+					// 		"transaction_id" => $trans_id,
+					// 		"total_price" => $json_en['payment']['total_price'], 
+					// 		"get_price" => $json_en['payment']['get_price'],
+					// 		"change_price" => $json_en['payment']['change_price']
+					// 	);
 
-						$result_map_transaction = $this->db_connect->Insert_db($arr_map_transaction,"tbl_map_transaction");
+					// 	$result_map_transaction = $this->db_connect->Insert_db($arr_map_transaction,"tbl_map_transaction");
 
-						if(!$result_map_transaction['status']){
-							$response = array(
-								'status' => 500,
-								'err_msg' => 'Cannot mapping transaction'
-							);
-							return $response;
-							exit();
-						}else{
-							$trans_id_added = true;
-						}
+					// 	if(!$result_map_transaction['status']){
+					// 		$response = array(
+					// 			'status' => 500,
+					// 			'err_msg' => 'Cannot mapping transaction'
+					// 		);
+					// 		return $response;
+					// 		exit();
+					// 	}else{
+					// 		$trans_id_added = true;
+					// 	}
 
-					}
+					// }
 					
-					if($result_transaction['status'] && $trans_id_added){
+					if($result_transaction['status']){
 
 						if($receiver_save_phone !== $value['receiver_desc']['phone_number']){
 							$check_receiver_same = $this->CheckReceiverSame($value['receiver_desc']['phone_number'], $value['receiver_desc']);
@@ -432,7 +434,8 @@ class MNG_Product{
 							$response = array(
 								'status' => 200,
 								'last_id' => $result_transaction['last_id'],
-								'transaction_id' => $trans_id
+								'transaction_id' => $trans_id,
+								'tracking_code' => $tracking_code
 							);
 						}else{
 							$response = array(
@@ -461,6 +464,37 @@ class MNG_Product{
 		}
 
 		return $response;
+	}
+
+	public function CreateMapTransaction($param = null){
+
+		$trans_id = $param['transaction_generate'];
+		$total_price = $param['payment']['total_price'];
+		$get_price = $param['payment']['get_price'];
+		$change_price = $param['payment']['change_price'];
+
+		$arr_map_transaction = array(
+			"transaction_id" => $trans_id,
+			"total_price" => $total_price, 
+			"get_price" => $get_price,
+			"change_price" => $change_price
+		);
+
+		$result_map_transaction = $this->db_connect->Insert_db($arr_map_transaction,"tbl_map_transaction");
+
+		if(!$result_map_transaction['status']){
+			$response = array(
+				'status' => 500,
+				'err_msg' => 'Cannot mapping transaction'
+			);
+			return $response;
+			exit();
+		}else{
+			$response = array(
+				'status' => 200
+			);
+		}
+
 	}
 
 	public function UpdateProduct($param = null){

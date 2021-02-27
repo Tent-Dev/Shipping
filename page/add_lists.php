@@ -21,7 +21,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
     <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <script src="../lib/jQuery/jquery-3.5.1.min.js" type="text/javascript" charset="utf-8"></script>
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/JQL.min.js"></script>
     <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
     <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
@@ -343,8 +343,11 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                 </table>   
                             </div>
                             <div class="row my-4 mb-md-2">
-                                <div class="col-md-4 d-flex align-items-center">
+                                <div class="col-md-6 d-flex align-items-center">
                                     ราคารวม : <b id="sum_price" class="mx-3">0</b> บาท
+                                </div>
+                                <div class="col-md-6 d-flex align-items-center">
+                                    <button class="btn btn-sm btn-success btn_checkprice">คำนวนเงินทั้งหมด <i class="fas fa-sync-alt sync_price"></i></button>
                                 </div>
                             </div>
                             <div class="row my-4 mt-md-0">
