@@ -22,17 +22,41 @@ $(document).ready(function() {
         //     $(this).closest('.section').attr('data-index', sectionsCount);
         // }).end().appendTo('#form-section');
         if(validateCreate('')){
+
+            var s_phone = $('#sender_phone').val();
+            var s_fname =  $("#s_fname").val().split(' ')[0];
+            var s_lname = $("#s_fname").val().split(' ')[1] || '';
+            var s_address = $('#s_address').val();
+            var s_district = $('#s_district').val();
+            var s_area = $('#s_area').val();
+            var s_province = $('#s_province').val();
+            var s_postcode = $('#s_postcode').val();
+
+            var r_phone = $('#phone_number').val();
+            var r_fname = $("#r_fname").val().split(' ')[0];
+            var r_lname = $("#r_fname").val().split(' ')[1] || '';
+            var r_address = $('#r_address').val();
+            var r_district = $('#r_district').val();
+            var r_area = $('#r_area').val();
+            var r_province = $('#r_province').val();
+            var r_postcode = $('#r_postcode').val();
+
+            var weight = $('#weight').val();
+            var price = $('#price').val();
+            var shipping_type = $('#shipping_type').val();
+            var cod_price = $('#money_cod').val();
+
             html = '';
             html += '<tr>';
             html +=
             '<td>SH0000001</td>'+
-            '<td>test aaaa</td>'+
-            '<td>0859948484</td>'+
-            '<td>12/100 หมู่บ้านพระปิ่น4</td>'+
-            '<td>10250</td>'+
-            '<td>25</td>'+
-            '<td>300</td>'+
-            '<td>-</td>';
+            '<td>'+r_fname+' '+r_lname+'</td>'+
+            '<td>'+r_phone+'</td>'+
+            '<td>'+r_address+'</td>'+
+            '<td>'+r_postcode+'</td>'+
+            '<td>'+weight+'</td>'+
+            '<td>'+price+'</td>'+
+            '<td>'+cod_price+'</td>';
             html += '</tr>';
 
             $('#order_list').append(html);
@@ -151,8 +175,8 @@ $(document).ready(function() {
 
         pointer_index = pointer_index == 1 ? '' : pointer_index;
         $("#sender_phone"+pointer_index).val(sender_history_set[sender_history].phone_number);
-        $("#s_fname"+pointer_index).val(sender_history_set[sender_history].firstname);
-        $("#s_lname"+pointer_index).val(sender_history_set[sender_history].lastname);
+        $("#s_fname"+pointer_index).val(sender_history_set[sender_history].firstname+' '+sender_history_set[sender_history].lastname);
+        // $("#s_lname"+pointer_index).val(sender_history_set[sender_history].lastname);
         $("#s_address"+pointer_index).val(sender_history_set[sender_history].address.address);
         $("#s_district"+pointer_index).val(sender_history_set[sender_history].address.district);
         $("#s_area"+pointer_index).val(sender_history_set[sender_history].address.area);
@@ -166,8 +190,8 @@ $(document).ready(function() {
 
         pointer_index = pointer_index == 1 ? '' : pointer_index;
         $("#phone_number"+pointer_index).val(receiver_history_set[receiver_history].phone_number);
-        $("#r_fname"+pointer_index).val(receiver_history_set[receiver_history].firstname);
-        $("#r_lname"+pointer_index).val(receiver_history_set[receiver_history].lastname);
+        $("#r_fname"+pointer_index).val(receiver_history_set[receiver_history].firstname+' '+receiver_history_set[receiver_history].lastname);
+        // $("#r_lname"+pointer_index).val(receiver_history_set[receiver_history].lastname);
         $("#r_address"+pointer_index).val(receiver_history_set[receiver_history].address.address);
         $("#r_district"+pointer_index).val(receiver_history_set[receiver_history].address.district);
         $("#r_area"+pointer_index).val(receiver_history_set[receiver_history].address.area);
@@ -178,8 +202,8 @@ $(document).ready(function() {
     $(document).on('click', '.customer_history', function(event) {
         var customer_history = $(this).data('index');
         $("#customer_phone_number").val(customer_history_set[customer_history].phone_number);
-        $("#firstname").val(customer_history_set[customer_history].firstname);
-        $("#lastname").val(customer_history_set[customer_history].lastname);
+        $("#firstname").val(customer_history_set[customer_history].firstname+' '+customer_history_set[customer_history].lastname);
+        // $("#lastname").val(customer_history_set[customer_history].lastname);
         $("#id_card").val(customer_history_set[customer_history].id_card);
     });
 
@@ -422,7 +446,7 @@ function validateCreate(pointer_index){
     //     r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' || get_price == '' ){
         if(id_card == '' ||  firstname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
             s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
-            r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' || get_price == '' ){
+            r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' ){
             result = false;
 
         if(id_card == ''){
@@ -457,13 +481,13 @@ function validateCreate(pointer_index){
         $("#customer_phone_number"+pointer_index).attr("placeholder", "");
     }
 
-    if(get_price == ''){
-        $('#m_received').addClass('custom_has_err');
-        $("#m_received").attr("placeholder", "โปรดกรอกจำนวนเงินที่ได้รับ");
-    }else{
-        $('#m_received').removeClass('custom_has_err');
-        $("#m_received").attr("placeholder", "");
-    }
+    // if(get_price == ''){
+    //     $('#m_received').addClass('custom_has_err');
+    //     $("#m_received").attr("placeholder", "โปรดกรอกจำนวนเงินที่ได้รับ");
+    // }else{
+    //     $('#m_received').removeClass('custom_has_err');
+    //     $("#m_received").attr("placeholder", "");
+    // }
 
     if(sender_phone == ''){
         $('#sender_phone'+pointer_index).addClass('custom_has_err');
@@ -715,7 +739,7 @@ function getPrice(pointer_index) {
         price = weight * 10;
     } else if($('#shipping_type'+pointer_index+' option:selected').val() == 'cod') {
         weight = $('#weight'+pointer_index).val();
-        price = weight * 100;
+        price = weight * 10;
     }
     $('#price'+pointer_index).val(price.toFixed(2));
 }

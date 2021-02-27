@@ -104,8 +104,8 @@ function generateLabel(val){
 	'<p class="r_address">'+val.receiver_desc.address+' </p><p>เขต <span class="r_area">'+val.receiver_desc.area+'</span> แขวง <span class="r_district">'+val.receiver_desc.district+'</span> <span class="r_province">'+val.receiver_desc.province+'</span></p>'+
 	'<p>โทร. <span class="r_phone">'+val.receiver_desc.phone_number+'</span></p>'+
 	'<div class="postcode">';
-	for (var i = 0; i < val.sender_desc.postal.length; i++) {
-		html += '<span class="postcode_arr">'+val.sender_desc.postal[i]+'</span>';
+	for (var i = 0; i < val.receiver_desc.postal.length; i++) {
+		html += '<span class="postcode_arr">'+val.receiver_desc.postal[i]+'</span>';
 	}
 	html +='</div>'+
 	'</div>'+

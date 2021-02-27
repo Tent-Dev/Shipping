@@ -316,7 +316,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                             </div>
                             <div class="row mt-3">
                                 <div class="col-6">
-                                    <a href="#" class="addsection btn btn-sm btn-info"><i class="fas fa-plus"></i> เพิ่มพัสดุ</a>
+                                    <a href="#" class="addsection btn btn-sm btn-info"><i class="fas fa-plus"></i> บันทึก / ปริ้นใบปะหน้าพัสดุ</a>
                                 </div>
                             </div>
                         </div>
