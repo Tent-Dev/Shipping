@@ -215,7 +215,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                 <div class="section" data-index="1">
                                     <p class="form-title-2" style="background-color: #9ec6ff;">ข้อมูลผู้ส่ง</p>
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <label for="sender_phone" class="col-form-label col-form-label-sm">เบอร์โทรผู้ส่ง</label>
                                             <input type="text" name="sender_phone[]" id="sender_phone" class="form-control form-control-sm form-suggest sender_phone" autocomplete="off">
                                             <div class="box-suggest sender-suggest">
@@ -227,7 +227,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-6">
                                             <label for="s_fname" class="col-form-label col-form-label-sm">ชื่อ-นามสกุลผู้ส่ง</label>
                                             <input type="text" name="s_fname[]" id="s_fname" class="form-control form-control-sm s_fname">
                                         </div>
@@ -263,7 +263,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                     <!-- receive -->
                                     <p class="form-title-3">ข้อมูลผู้รับ</p>
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <label for="phone_number" class="col-form-label col-form-label-sm">เบอร์โทรผู้รับ</label>
                                             <input type="text" name="phone_number[]" id="phone_number" class="form-control form-control-sm form-suggest phone_number" autocomplete="off">
                                             <div class="box-suggest receiver-suggest">
@@ -275,7 +275,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-6">
                                             <label for="r_fname" class="col-form-label col-form-label-sm">ชื่อ-นามสกุลผู้รับ</label>
                                             <input type="text" name="r_fname[]" id="r_fname" class="form-control form-control-sm r_fname">
                                         </div>
@@ -316,7 +316,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                             </div>
                             <div class="row mt-3">
                                 <div class="col-6">
-                                    <a href="#" class="addsection btn btn-sm btn-info"><i class="fas fa-plus"></i> บันทึก / ปริ้นใบปะหน้าพัสดุ</a>
+                                    <a href="#" class="addsection btn btn-sm btn-info"><i class="fas fa-plus"></i> นำเข้าระบบ / ปริ้นใบปะหน้าพัสดุ</a>
                                 </div>
                             </div>
                         </div>
@@ -363,7 +363,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <button class="btn btn-sm btn-success btn_save">บันทึก <i class="far fa-save"></i></button>
-                                    <button class="btn btn-sm btn-danger">ยกเลิก <i class="fas fa-times"></i></button>
+                                    <button class="btn btn-sm btn-danger btn_clearall">ยกเลิก <i class="fas fa-times"></i></button>
                                 </div>
                             </div>
                             <!-- </form> -->
@@ -377,19 +377,9 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                             <b style="font-size: 20px">นำพัสดุเข้าสู่ระบบเรียบร้อยแล้ว</b>
                         </div>
                         <div align="center" style="margin-bottom: 10px;">
-                            ขั้นตอนสุดท้าย: พิมพ์ใบปะหน้าพัสดุ และใบเสร็จรับเงิน
+                            ขั้นตอนสุดท้าย: พิมพ์ใบเสร็จรับเงิน
                         </div>
                         <div align="center" style="margin-bottom: 30px;">
-                            <div class="row wrap_checklist">
-                                <div class="checklist_print"><i class="far fa-check-circle"></i></div>
-                                <div class="textlist_print">ใบปะหน้าพัสดุ</div>
-                                <div>
-                                    <a class="label_link" href="" target="_blank"><button type="button" class="btn btn-sm btn-success">
-                                        <i class="fas fa-print"></i>
-                                    </button></a>
-                                </div>
-                            </div>
-                            <div style="margin-bottom: 10px;"></div>
                             <div class="row wrap_checklist">
                                 <div class="checklist_print"><i class="far fa-check-circle"></i></div>
                                 <div class="textlist_print">ใบเสร็จรับเงิน</div>
@@ -401,7 +391,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                             </div>
                         </div>
                         <div align="center" style="margin-bottom: 10px;">
-                            หมายเหตุ: ท่านสามารถพิมพ์ใบปะหน้าและใบเสร็จรับเงินภายหลังได้
+                            หมายเหตุ: ท่านสามารถพิมพ์ใบปะหน้าและใบเสร็จรับเงินภายหลังได้ที่ <a href="history.php">"ประวัติการทำรายการ"</a>
                         </div>
                     </div>
                 </div>

@@ -33,10 +33,10 @@ function getData(){
 
 					// var total = 0;
 					
-					// $.each(data.data.data, function(index, val) {
-					// 	total = total + val.price;
-					// 	GenerateItemList(val);
-					// });
+					$.each(data.data.data, function(index, val) {
+						// total = total + val.price;
+						GenerateItemList(val);
+					});
 
 					$('.total').html(data.data.total_price);
 

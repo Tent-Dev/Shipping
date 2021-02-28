@@ -79,10 +79,14 @@ class Main_db{
 		return $response;
 	}
 
-	public function Update_db($arr,$key,$tableName){
+	public function Update_db($arr,$key,$tableName,$sql_string = null){
 		$sql = "UPDATE ".$tableName." SET ";
 		$last_key = end(array_keys($arr));
-		$last_arr = end($key);
+
+		if(isset($key) && $key !== ''){
+			$last_arr = end($key);
+		}
+		
 		$where = " WHERE ";
 		foreach ($arr as $k => $value) {
 			$value = $this->quote($value);
@@ -92,7 +96,7 @@ class Main_db{
 			if ($k != $last_key){
 				$sql.=",";
 			}
-			if (in_array($k, $key)){
+			if (isset($key) && $key !== '' && in_array($k, $key)){
 				$where.= $k." = '".$value."' ";
 
 				if ($k != $last_arr){
@@ -101,6 +105,10 @@ class Main_db{
 				}
 
 			}
+		}
+
+		if($sql_string){
+			$where.= $sql_string;
 		}
 
 		$result = mysqli_query($this->db_connection,$sql.$where);

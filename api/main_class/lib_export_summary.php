@@ -20,6 +20,7 @@ class MNG_ExportSummary{
 		tbl_product.create_date,
 		tbl_product.weight,
 		tbl_product.price,
+		tbl_product.product_type,
 		tbl_product.shipper_id,
 		tbl_product.cod_price,
 		tbl_product.active_status,
@@ -61,23 +62,60 @@ class MNG_ExportSummary{
 		if($data_result){
 			$all_item = array();
 			foreach ($data_result as $data) {
+				$active_status = 'ไม่พบสถานะ';
+				$status_item = 'ไม่พบสถานะ';
+				$product_type = 'ไม่พบประเภทพัสดุ';
 				$receiver_data = json_decode($data['receiver_desc'], true);
 				$sender_data = json_decode($data['sender_desc'], true);
-				if($data['active_status'] == 'T'){
-					$active_status = 'ปกติ';
-				}else{
-					$active_status = 'ถูกลบออกจากระบบ';
-				}
 
-				if($data['status'] == 'waiting'){
-					$status_item = 'พัสดุถูกนำเข้าระบบแล้ว';
-				}else if($data['status'] == 'sending'){
-					$status_item = 'พัสดุกำลังถูกส่งไปยังผู้รับ';
-				}else if($data['status'] == 'success'){
-					$status_item = 'พัสดุถูกส่งถึงมือผู้รับเรียบร้อย';
-				}else if($data['status'] == 'return_distribution_center'){
-					$status_item = 'พัสดุถูกตีกลับ';
+				if(isset($data['active_status'])){
+					if($data['active_status'] == 'T'){
+						$active_status = 'ปกติ';
+					}else{
+						$active_status = 'ถูกลบออกจากระบบ';
+					}
+
+					if($data['status'] == 'waiting'){
+						$status_item = 'พัสดุถูกนำเข้าระบบแล้ว';
+					}else if($data['status'] == 'sending'){
+						$status_item = 'พัสดุกำลังถูกส่งไปยังผู้รับ';
+					}else if($data['status'] == 'success'){
+						$status_item = 'พัสดุถูกส่งถึงมือผู้รับเรียบร้อย';
+					}else if($data['status'] == 'return_distribution_center'){
+						$status_item = 'พัสดุถูกตีกลับ';
+					}
 				}
+				
+				if(isset($data['product_type'])){
+					if($data['product_type'] == 'none'){
+						$product_type = 'ไม่มี';
+					}else if($data['product_type'] == 'doc'){
+						$product_type = 'เอกสาร';
+					}else if($data['product_type'] == 'dried_food'){
+						$product_type = 'อาหารแห้ง';
+					}else if($data['product_type'] == 'wares'){
+						$product_type = 'ของใช้';
+					}else if($data['product_type'] == 'it'){
+						$product_type = 'อุปกรณ์ไอที';
+					}else if($data['product_type'] == 'clothes'){
+						$product_type = 'เสื้อผ้า';
+					}else if($data['product_type'] == 'entertainment'){
+						$product_type = 'สื่อบันเทิง';
+					}else if($data['product_type'] == 'cars'){
+						$product_type = 'อะไหล่รถยนต์';
+					}else if($data['product_type'] == 'shoes_bags'){
+						$product_type = 'รองเท้า/กระเป๋า';
+					}else if($data['product_type'] == 'cosmetics'){
+						$product_type = 'เครื่องสำอาง';
+					}else if($data['product_type'] == 'furniture'){
+						$product_type = 'เฟอร์นิเจอร์';
+					}else if($data['product_type'] == 'fruits'){
+						$product_type = 'ผลไม้';
+					}else if($data['product_type'] == 'others'){
+						$product_type = 'อื่นๆ';
+					}
+				}
+				
 
 				$get_item = array(
 					$data['create_date'],
@@ -92,9 +130,10 @@ class MNG_ExportSummary{
 					$receiver_data['address'].' '.$receiver_data['area'].' '.$receiver_data['district'].' '.$receiver_data['province'].' '.$receiver_data['postal'],
 					$receiver_data['area'],
 					$receiver_data['postal'],
+					$product_type,
 					$data['weight'],
 					$data['cod_price'],
-					$data['total_price'],
+					$data['price'],
 					$status_item,
 					$active_status,
 					$data['employee_name'].' (EMID: '.$data['employee_id'].')'
@@ -147,12 +186,13 @@ class MNG_ExportSummary{
 			$sheet->setCellValue('K1', 'ชื่อเขต');
 			$sheet->setCellValue('L1', 'รหัสไปรษณีย์');
 
-			$sheet->setCellValue('M1', 'น้ำหนัก');
-			$sheet->setCellValue('N1', 'เก็บเงินปลายทาง');
-			$sheet->setCellValue('O1', 'ค่าบริการรวมสุทธิ');
-			$sheet->setCellValue('P1', 'สถานะพัสดุ');
-			$sheet->setCellValue('Q1', 'สถานะรายการ');
-			$sheet->setCellValue('R1', 'พนักงานนำเข้าระบบ');
+			$sheet->setCellValue('M1', 'ประเภทพัสดุ');
+			$sheet->setCellValue('N1', 'น้ำหนัก');
+			$sheet->setCellValue('O1', 'เก็บเงินปลายทาง');
+			$sheet->setCellValue('P1', 'ค่าบริการรวมสุทธิ');
+			$sheet->setCellValue('Q1', 'สถานะพัสดุ');
+			$sheet->setCellValue('R1', 'สถานะรายการ');
+			$sheet->setCellValue('S1', 'พนักงานนำเข้าระบบ');
 
 			$sheet->fromArray($data, null, 'A2');
 

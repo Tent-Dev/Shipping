@@ -27,32 +27,25 @@ $(document).ready(function() {
         $('#m_received, #change').val('');
     });
 
+    $(document).on('click', '.btn_clearall', function(){ 
+
+        Swal.fire({
+          title: 'คุณต้องการยกเลิกการทำรายการนี้?',
+          showCancelButton: true,
+          confirmButtonColor: '#dc3545',
+          confirmButtonText: `ยืนยัน`,
+          cancelButtonText: 'ปิด',
+      }).then((result) => {
+        if (result.isConfirmed) {
+            location.reload();
+        } 
+    })
+  });
+
+
     $('body').on('click', '.addsection', function() {
 
         if(validateCreate('')){
-
-            var s_phone = $('#sender_phone').val();
-            var s_fname =  $("#s_fname").val().split(' ')[0];
-            var s_lname = $("#s_fname").val().split(' ')[1] || '';
-            var s_address = $('#s_address').val();
-            var s_district = $('#s_district').val();
-            var s_area = $('#s_area').val();
-            var s_province = $('#s_province').val();
-            var s_postcode = $('#s_postcode').val();
-
-            var r_phone = $('#phone_number').val();
-            var r_fname = $("#r_fname").val().split(' ')[0];
-            var r_lname = $("#r_fname").val().split(' ')[1] || '';
-            var r_address = $('#r_address').val();
-            var r_district = $('#r_district').val();
-            var r_area = $('#r_area').val();
-            var r_province = $('#r_province').val();
-            var r_postcode = $('#r_postcode').val();
-
-            var weight = $('#weight').val();
-            var price = $('#price').val();
-            var shipping_type = $('#shipping_type').val();
-            var cod_price = $('#money_cod').val();
 
             getAllData();
 
@@ -304,6 +297,7 @@ function getAllData(){
     var r_province = $('#r_province').val();
     var r_postcode = $('#r_postcode').val();
 
+    var product_type = $('#product_type').val();
     var weight = $('#weight').val();
     var price = $('#price').val();
     var shipping_type = $('#shipping_type').val();
@@ -312,6 +306,7 @@ function getAllData(){
     if(!validateCreate('')){
         checkvalue = false;
     }else{
+        $('.addsection').attr('disabled', true);
         receiver_obj.firstname = r_fname;
         receiver_obj.lastname = r_lname;
         receiver_obj.address = r_address;
@@ -330,6 +325,7 @@ function getAllData(){
         sender_obj.postal = s_postcode;
         sender_obj.phone_number = s_phone;
 
+        item_obj.product_type = product_type;
         item_obj.weight = weight;
         item_obj.price = price;
         item_obj.shipping_type = 'normal';
@@ -343,8 +339,7 @@ function getAllData(){
     }
 
     if(checkvalue){
-        $('.btn_save').html('<i class="fas fa-spinner fa-spin"></i></span>');
-        $('.btn_save, .btn_cancel').attr('disabled', true);
+        $('.btn_save, .btn_clearall').attr('disabled', true);
 
         var id_card = $("#id_card").val();
         // var c_fname = $("#firstname").val();
@@ -355,11 +350,6 @@ function getAllData(){
 
         var get_price = $('#m_received').val();
         var change_price = $('#change').val();
-        var total_price = sumPrice();
-
-        // map_payment.get_price = get_price;
-        // map_payment.change_price = change_price;
-        // map_payment.total_price = total_price;
 
         data_obj.firstname = c_fname;
         data_obj.lastname = c_lname;
@@ -379,8 +369,8 @@ function getAllData(){
                 create_data: JSON.stringify(data_obj),
             },
             success: function(data) {
-                $('.btn_save').html('บันทึก');
-                $('.btn_save, .btn_cancel').attr('disabled', false);
+                $('.btn_save').html('บันทึก <i class="far fa-save"></i>');
+                $('.btn_save, .btn_clearall').attr('disabled', false);
                 var data = JSON.parse(data);
                 console.log("result: ",data);
 
@@ -391,7 +381,6 @@ function getAllData(){
                     // $('.label_link').attr('href', 'item_label.php?transaction_id='+data.transaction_id+'&mode=all');
                     // $('.form_add').hide();
                     // $('.form_print').show();
-
                     html = '';
                     html += '<tr>';
                     html +=
@@ -428,6 +417,11 @@ function getAllData(){
                     $("#weight").val('');
                     $("#price").val('');
                     $("#shipping_type").val();
+                    sumPrice();
+                    setTimeout(function(){
+                        window.open('item_label.php?tracking_code='+data.tracking_code,'_blank');
+                    }, 2000);
+                    
                 }
                 else{
                     Swal.fire({
@@ -437,15 +431,16 @@ function getAllData(){
                         confirmButtonText: 'ตกลง'
                     });
                 }
+                $('.addsection').attr('disabled', false);
             },error: function() {
-                $('.btn_save').html('บันทึก');
-                $('.btn_save, .btn_cancel').attr('disabled', false);
+                $('.btn_save, .btn_clearall').attr('disabled', false);
                 Swal.fire({
                     title: 'พบข้อผิดพลาด',
                     text: 'ไม่สามารถสร้างี่ยการได้',
                     icon: 'error',
                     confirmButtonText: 'ตกลง'
                 });
+                $('.addsection').attr('disabled', false);
             }
         });
 
@@ -484,14 +479,15 @@ function validateCreate(pointer_index){
     var weight = $("#weight"+pointer_index).val();
     var price = $("#price"+pointer_index).val();
     var shipping_type = $("#shipping_type"+pointer_index).val();
+    var cod_money = $('#money_cod').val();
 
     // if(id_card == '' ||  firstname == '' || lastname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
     //     s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
     //     r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' || get_price == '' ){
-        if(id_card == '' ||  firstname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
-            s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
-            r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' ){
-            result = false;
+    if(id_card == '' ||  firstname == '' || sender_phone == '' || s_fname == '' || s_lname == '' || s_address == '' || s_district == '' || s_area == '' || 
+        s_province == '' || s_postcode == '' || phone_number == '' || r_fname == '' || r_lname == '' || r_address == '' || r_district == '' || r_area == '' || r_province == '' || 
+        r_postcode == '' || weight == '' || price == '' || shipping_type == '' || c_phone_number == '' || (shipping_type == 'cod' && cod_money == '') ){
+        result = false;
 
         if(id_card == ''){
             $('#id_card').addClass('custom_has_err');
@@ -509,184 +505,180 @@ function validateCreate(pointer_index){
             $("#firstname").attr("placeholder", "");
         }
 
-    // if(lastname == ''){
-    //     $('#lastname').addClass('custom_has_err');
-    //     $("#lastname").attr("placeholder", "โปรดกรอกนามสกุลผู้ทำรายการ");
-    // }else{
-    //     $('#lastname').removeClass('custom_has_err');
-    //     $("#lastname").attr("placeholder", "");
-    // }
 
-    if(c_phone_number == ''){
-        $('#customer_phone_number'+pointer_index).addClass('custom_has_err');
-        $("#customer_phone_number"+pointer_index).attr("placeholder", "โปรดกรอกเบอร์โทรผู้ทำรายการ");
-    }else{
-        $('#customer_phone_number'+pointer_index).removeClass('custom_has_err');
-        $("#customer_phone_number"+pointer_index).attr("placeholder", "");
-    }
-
-    // if(get_price == ''){
-    //     $('#m_received').addClass('custom_has_err');
-    //     $("#m_received").attr("placeholder", "โปรดกรอกจำนวนเงินที่ได้รับ");
-    // }else{
-    //     $('#m_received').removeClass('custom_has_err');
-    //     $("#m_received").attr("placeholder", "");
-    // }
-
-    if(sender_phone == ''){
-        $('#sender_phone'+pointer_index).addClass('custom_has_err');
-        $("#sender_phone"+pointer_index).attr("placeholder", "โปรดกรอกเบอร์โทรผู้ส่ง");
-    }else{
-        $('#sender_phone'+pointer_index).removeClass('custom_has_err');
-        $("#sender_phone"+pointer_index).attr("placeholder", "");
-    }
-
-    if(s_fname == ''){
-        $('#s_fname'+pointer_index).addClass('custom_has_err');
-        $("#s_fname"+pointer_index).attr("placeholder", "โปรดกรอกชื่อผู้ส่ง");
-    }else{
-        $('#s_fname'+pointer_index).removeClass('custom_has_err');
-        $("#s_fname"+pointer_index).attr("placeholder", "");
-    }
-
-    if(s_lname == ''){
-        $('#s_lname'+pointer_index).addClass('custom_has_err');
-        $("#s_lname"+pointer_index).attr("placeholder", "โปรดกรอกนามสกุลผู้ส่ง");
-    }else{
-        $('#s_lname'+pointer_index).removeClass('custom_has_err');
-        $("#s_lname"+pointer_index).attr("placeholder", "");
-    }
-
-    if(s_address == ''){
-        $('#s_address'+pointer_index).addClass('custom_has_err');
-        $("#s_address"+pointer_index).attr("placeholder", "โปรดกรอกที่อยู่ผู้ส่ง");
-    }else{
-        $('#s_address'+pointer_index).removeClass('custom_has_err');
-        $("#s_address"+pointer_index).attr("placeholder", "");
-    }
-
-    if(s_district == ''){
-        $('#s_district'+pointer_index).addClass('custom_has_err');
-        $("#s_district"+pointer_index).attr("placeholder", "โปรดกรอกแขวง/ตำบลผู้ส่ง");
-    }else{
-        $('#s_district'+pointer_index).removeClass('custom_has_err');
-        $("#s_district"+pointer_index).attr("placeholder", "");
-    }
-
-    if(s_area == ''){
-        $('#s_area'+pointer_index).addClass('custom_has_err');
-        $("#s_area"+pointer_index).attr("placeholder", "โปรดกรอกเขต/อำเภอผู้ส่ง");
-    }else{
-        $('#s_area'+pointer_index).removeClass('custom_has_err');
-        $("#s_area"+pointer_index).attr("placeholder", "");
-    }
-
-    if(s_province == ''){
-        $('#s_province'+pointer_index).addClass('custom_has_err');
-        $("#s_province"+pointer_index).attr("placeholder", "โปรดกรอกจังหวัดผู้ส่ง");
-    }else{
-        $('#s_province'+pointer_index).removeClass('custom_has_err');
-        $("#s_province"+pointer_index).attr("placeholder", "");
-    }
-
-    if(s_postcode == ''){
-        $('#s_postcode'+pointer_index).addClass('custom_has_err');
-        $("#s_postcode"+pointer_index).attr("placeholder", "โปรดกรอกรหัสไปรษณีย์ผู้ส่ง");
-    }else{
-        $('#s_postcode'+pointer_index).removeClass('custom_has_err');
-        $("#s_postcode"+pointer_index).attr("placeholder", "");
-    }
-
-    if(phone_number == ''){
-        $('#phone_number'+pointer_index).addClass('custom_has_err');
-        $("#phone_number"+pointer_index).attr("placeholder", "โปรดกรอกเบอร์โทรผู้รับ");
-    }else{
-        $('#phone_number'+pointer_index).removeClass('custom_has_err');
-        $("#phone_number"+pointer_index).attr("placeholder", "");
-    }
-
-    if(r_fname == ''){
-        $('#r_fname'+pointer_index).addClass('custom_has_err');
-        $("#r_fname"+pointer_index).attr("placeholder", "โปรดกรอกชื่อผู้รับ");
-    }else{
-        $('#r_fname'+pointer_index).removeClass('custom_has_err');
-        $("#r_fname"+pointer_index).attr("placeholder", "");
-    }
-
-    if(r_lname == ''){
-        $('#r_lname'+pointer_index).addClass('custom_has_err');
-        $("#r_lname"+pointer_index).attr("placeholder", "โปรดกรอกนามสกุลผู้รับ");
-    }else{
-        $('#r_lname'+pointer_index).removeClass('custom_has_err');
-        $("#r_lname"+pointer_index).attr("placeholder", "");
-    }
-
-    if(r_address == ''){
-        $('#r_address'+pointer_index).addClass('custom_has_err');
-        $("#r_address"+pointer_index).attr("placeholder", "โปรดกรอกที่อยู่ผู้รับ");
-    }else{
-        $('#r_address'+pointer_index).removeClass('custom_has_err');
-        $("#r_address"+pointer_index).attr("placeholder", "");
-    }
-
-    if(r_district == ''){
-        $('#r_district'+pointer_index).addClass('custom_has_err');
-        $("#r_district"+pointer_index).attr("placeholder", "โปรดกรอกแขวง/ตำบลผู้รับ");
-    }else{
-        $('#r_district'+pointer_index).removeClass('custom_has_err');
-        $("#r_district"+pointer_index).attr("placeholder", "");
-    }
-
-    if(r_area == ''){
-        $('#r_area'+pointer_index).addClass('custom_has_err');
-        $("#r_area"+pointer_index).attr("placeholder", "โปรดกรอกเขต/อำเภอผู้รับ");
-    }else{
-        $('#s_area'+pointer_index).removeClass('custom_has_err');
-        $("#s_area"+pointer_index).attr("placeholder", "");
-    }
-
-    if(r_province == ''){
-        $('#r_province'+pointer_index).addClass('custom_has_err');
-        $("#r_province"+pointer_index).attr("placeholder", "โปรดกรอกจังหวัดผู้รับ");
-    }else{
-        $('#r_province'+pointer_index).removeClass('custom_has_err');
-        $("#r_province"+pointer_index).attr("placeholder", "");
-    }
-
-    if(r_postcode == ''){
-        $('#r_postcode'+pointer_index).addClass('custom_has_err');
-        $("#r_postcode"+pointer_index).attr("placeholder", "โปรดกรอกรหัสไปรษณีย์ผู้รับ");
-    }else{
-        $('#r_postcode'+pointer_index).removeClass('custom_has_err');
-        $("#r_postcode"+pointer_index).attr("placeholder", "");
-    }
-
-    if(weight == ''){
-        $('#weight'+pointer_index).addClass('custom_has_err');
-        $("#weight"+pointer_index).attr("placeholder", "โปรดกรอกน้ำหนักพัสดุ");
-    }else{
-        $('#weight'+pointer_index).removeClass('custom_has_err');
-        $("#weight"+pointer_index).attr("placeholder", "");
-    }
-
-    if(price == ''){
-        $('#price'+pointer_index).addClass('custom_has_err');
-        $("#price"+pointer_index).attr("placeholder", "โปรดกรอกราคา");
-    }else{
-        $('#price'+pointer_index).removeClass('custom_has_err');
-        $("#price"+pointer_index).attr("placeholder", "");
-    }
-
-    if(shipping_type == ''){
-        $('#shipping_type'+pointer_index).addClass('custom_has_err');
-            //$("#shipping_type").attr("placeholder", "โปรดกรอกรหัสผ่าน");
+        if(c_phone_number == ''){
+            $('#customer_phone_number'+pointer_index).addClass('custom_has_err');
+            $("#customer_phone_number"+pointer_index).attr("placeholder", "โปรดกรอกเบอร์โทรผู้ทำรายการ");
         }else{
-            $('#shipping_type'+pointer_index).removeClass('custom_has_err');
-            //$("#shipping_type").attr("placeholder", "");
+            $('#customer_phone_number'+pointer_index).removeClass('custom_has_err');
+            $("#customer_phone_number"+pointer_index).attr("placeholder", "");
         }
 
-    }else{
+
+        if(sender_phone == ''){
+            $('#sender_phone'+pointer_index).addClass('custom_has_err');
+            $("#sender_phone"+pointer_index).attr("placeholder", "โปรดกรอกเบอร์โทรผู้ส่ง");
+        }else{
+            $('#sender_phone'+pointer_index).removeClass('custom_has_err');
+            $("#sender_phone"+pointer_index).attr("placeholder", "");
+        }
+
+        if(s_fname == ''){
+            $('#s_fname'+pointer_index).addClass('custom_has_err');
+            $("#s_fname"+pointer_index).attr("placeholder", "โปรดกรอกชื่อผู้ส่ง");
+        }else{
+            $('#s_fname'+pointer_index).removeClass('custom_has_err');
+            $("#s_fname"+pointer_index).attr("placeholder", "");
+        }
+
+        if(s_lname == ''){
+            $('#s_lname'+pointer_index).addClass('custom_has_err');
+            $("#s_lname"+pointer_index).attr("placeholder", "โปรดกรอกนามสกุลผู้ส่ง");
+        }else{
+            $('#s_lname'+pointer_index).removeClass('custom_has_err');
+            $("#s_lname"+pointer_index).attr("placeholder", "");
+        }
+
+        if(s_address == ''){
+            $('#s_address'+pointer_index).addClass('custom_has_err');
+            $("#s_address"+pointer_index).attr("placeholder", "โปรดกรอกที่อยู่ผู้ส่ง");
+        }else{
+            $('#s_address'+pointer_index).removeClass('custom_has_err');
+            $("#s_address"+pointer_index).attr("placeholder", "");
+        }
+
+        if(s_district == ''){
+            $('#s_district'+pointer_index).addClass('custom_has_err');
+            $("#s_district"+pointer_index).attr("placeholder", "โปรดกรอกแขวง/ตำบลผู้ส่ง");
+        }else{
+            $('#s_district'+pointer_index).removeClass('custom_has_err');
+            $("#s_district"+pointer_index).attr("placeholder", "");
+        }
+
+        if(s_area == ''){
+            $('#s_area'+pointer_index).addClass('custom_has_err');
+            $("#s_area"+pointer_index).attr("placeholder", "โปรดกรอกเขต/อำเภอผู้ส่ง");
+        }else{
+            $('#s_area'+pointer_index).removeClass('custom_has_err');
+            $("#s_area"+pointer_index).attr("placeholder", "");
+        }
+
+        if(s_province == ''){
+            $('#s_province'+pointer_index).addClass('custom_has_err');
+            $("#s_province"+pointer_index).attr("placeholder", "โปรดกรอกจังหวัดผู้ส่ง");
+        }else{
+            $('#s_province'+pointer_index).removeClass('custom_has_err');
+            $("#s_province"+pointer_index).attr("placeholder", "");
+        }
+
+        if(s_postcode == ''){
+            $('#s_postcode'+pointer_index).addClass('custom_has_err');
+            $("#s_postcode"+pointer_index).attr("placeholder", "โปรดกรอกรหัสไปรษณีย์ผู้ส่ง");
+        }else{
+            $('#s_postcode'+pointer_index).removeClass('custom_has_err');
+            $("#s_postcode"+pointer_index).attr("placeholder", "");
+        }
+
+        if(phone_number == ''){
+            $('#phone_number'+pointer_index).addClass('custom_has_err');
+            $("#phone_number"+pointer_index).attr("placeholder", "โปรดกรอกเบอร์โทรผู้รับ");
+        }else{
+            $('#phone_number'+pointer_index).removeClass('custom_has_err');
+            $("#phone_number"+pointer_index).attr("placeholder", "");
+        }
+
+        if(r_fname == ''){
+            $('#r_fname'+pointer_index).addClass('custom_has_err');
+            $("#r_fname"+pointer_index).attr("placeholder", "โปรดกรอกชื่อผู้รับ");
+        }else{
+            $('#r_fname'+pointer_index).removeClass('custom_has_err');
+            $("#r_fname"+pointer_index).attr("placeholder", "");
+        }
+
+        if(r_lname == ''){
+            $('#r_lname'+pointer_index).addClass('custom_has_err');
+            $("#r_lname"+pointer_index).attr("placeholder", "โปรดกรอกนามสกุลผู้รับ");
+        }else{
+            $('#r_lname'+pointer_index).removeClass('custom_has_err');
+            $("#r_lname"+pointer_index).attr("placeholder", "");
+        }
+
+        if(r_address == ''){
+            $('#r_address'+pointer_index).addClass('custom_has_err');
+            $("#r_address"+pointer_index).attr("placeholder", "โปรดกรอกที่อยู่ผู้รับ");
+        }else{
+            $('#r_address'+pointer_index).removeClass('custom_has_err');
+            $("#r_address"+pointer_index).attr("placeholder", "");
+        }
+
+        if(r_district == ''){
+            $('#r_district'+pointer_index).addClass('custom_has_err');
+            $("#r_district"+pointer_index).attr("placeholder", "โปรดกรอกแขวง/ตำบลผู้รับ");
+        }else{
+            $('#r_district'+pointer_index).removeClass('custom_has_err');
+            $("#r_district"+pointer_index).attr("placeholder", "");
+        }
+
+        if(r_area == ''){
+            $('#r_area'+pointer_index).addClass('custom_has_err');
+            $("#r_area"+pointer_index).attr("placeholder", "โปรดกรอกเขต/อำเภอผู้รับ");
+        }else{
+            $('#s_area'+pointer_index).removeClass('custom_has_err');
+            $("#s_area"+pointer_index).attr("placeholder", "");
+        }
+
+        if(r_province == ''){
+            $('#r_province'+pointer_index).addClass('custom_has_err');
+            $("#r_province"+pointer_index).attr("placeholder", "โปรดกรอกจังหวัดผู้รับ");
+        }else{
+            $('#r_province'+pointer_index).removeClass('custom_has_err');
+            $("#r_province"+pointer_index).attr("placeholder", "");
+        }
+
+        if(r_postcode == ''){
+            $('#r_postcode'+pointer_index).addClass('custom_has_err');
+            $("#r_postcode"+pointer_index).attr("placeholder", "โปรดกรอกรหัสไปรษณีย์ผู้รับ");
+        }else{
+            $('#r_postcode'+pointer_index).removeClass('custom_has_err');
+            $("#r_postcode"+pointer_index).attr("placeholder", "");
+        }
+
+        if(weight == ''){
+            $('#weight'+pointer_index).addClass('custom_has_err');
+            $("#weight"+pointer_index).attr("placeholder", "โปรดกรอกน้ำหนักพัสดุ");
+        }else{
+            $('#weight'+pointer_index).removeClass('custom_has_err');
+            $("#weight"+pointer_index).attr("placeholder", "");
+        }
+
+        if(price == ''){
+            $('#price'+pointer_index).addClass('custom_has_err');
+            $("#price"+pointer_index).attr("placeholder", "โปรดกรอกราคา");
+        }else{
+            $('#price'+pointer_index).removeClass('custom_has_err');
+            $("#price"+pointer_index).attr("placeholder", "");
+        }
+
+        if(shipping_type == ''){
+            $('#shipping_type'+pointer_index).addClass('custom_has_err');
+        }else{
+            $('#shipping_type'+pointer_index).removeClass('custom_has_err');
+        }
+
+        if(cod_money == '' && shipping_type == 'cod'){
+            $('#money_cod').addClass('custom_has_err');
+            $('#money_cod').attr("placeholder", "โปรดกรอกจำนวนเงินที่เก็บ");
+        }else{
+            $('#money_cod').removeClass('custom_has_err');
+            $('#money_cod').attr("placeholder", "");
+        }
+
+    }
+
+
+    else{
         $(':input').removeClass('custom_has_err');
+        $(':input').attr("placeholder", "");
     }
 
     return result;
@@ -788,30 +780,26 @@ function getPrice(pointer_index) {
     $('#price'+pointer_index).val(price.toFixed(2));
 }
 
-function sumPrice() {
-   var total = 0;
-   console.log('Start', total);
-   $('#order_list tr').each(function(){
+function sumPrice(mode = '') {
+ var total = 0;
+ console.log('Start', total);
+ $('#order_list tr').each(function(){
     $(this).find('.price').each(function(){
         var this_price = Number(parseFloat($(this).html()).toFixed(2));
-        console.log('>>>>', this_price);
-
         total = total+this_price;
     })
 })
+ $('#sum_price').html(NumberFormat(total));
 
-   console.log('TOTAL: ',total.toFixed(2));
-   $('#sum_price').html(NumberFormat(total));
-
-   return total.toFixed(2);
+ return total.toFixed(2);
 }
 
 function makeid(length, type) {
-   var result           = '';
-   var characters       = ['0123456789', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
-   var charactersLength = characters[type].length;
-   for ( var i = 0; i < length; i++ ) {
-      result += characters[type].charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
+ var result           = '';
+ var characters       = ['0123456789', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+ var charactersLength = characters[type].length;
+ for ( var i = 0; i < length; i++ ) {
+  result += characters[type].charAt(Math.floor(Math.random() * charactersLength));
+}
+return result;
 }

@@ -57,6 +57,11 @@ class MNG_Product{
 
 		$sql_where = " WHERE tbl_product.active_status = 'T' ";
 
+		if(empty($param['ignore_confirm'])){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= "  tbl_product.confirm_create = 'T' ";
+		}
+
 		if(isset($param['status']) && $param['status'] != ""){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
 			$sql_where .= " tbl_product.status = '".$param['status']."' ";
@@ -148,7 +153,7 @@ class MNG_Product{
 		
 		$sql ="SELECT tracking_code, status, cod_price FROM tbl_product ";
 
-		$sql_where = " WHERE active_status = 'T' ";
+		$sql_where = " WHERE active_status = 'T' && confirm_create = 'T' ";
 
 		if(isset($param['status']) && $param['status'] != ""){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
@@ -328,7 +333,8 @@ class MNG_Product{
 				$get_last_customer_id = $result_customer['last_id'];
 				$tracking_code = $this->GenerateTrackingCode();
 
-				$arr_customer = array( 
+				$arr_customer = array(
+					"product_type" => $value['product_type'], 
 					"shipping_type" => $value['shipping_type'],
 					"payment_type" => $value['payment_type'],
 					"cod_price" => $value['cod_price'],
@@ -337,6 +343,7 @@ class MNG_Product{
 					"tracking_code" => $tracking_code,
 					"image_signature" => null,
 					"active_status" => 'T',
+					"confirm_create" => 'F',
 					"status" => 'waiting',
 					"create_date" => $date
 				);
@@ -483,9 +490,37 @@ class MNG_Product{
 		$result_map_transaction = $this->db_connect->Insert_db($arr_map_transaction,"tbl_map_transaction");
 
 		if($result_map_transaction){
-			$response = array(
-				'status' => 200
-			);
+			$key = array("id");
+			$arr = array();
+			$arr['confirm_create'] = 'T';
+			$sql = 'SELECT product_id FROM tbl_transaction WHERE transaction_id = "'.$trans_id.'"';
+
+			$get_data = $this->db_connect->Select_db($sql);
+
+			if($get_data){
+				$get_id = array();
+				foreach ($get_data as $value) {
+					$get_id[] =  $value['product_id'];
+				}
+				$sql_update = "id in ('".implode("','",$get_id)."')";
+				$result_update = $this->db_connect->Update_db($arr, '', "tbl_product", $sql_update);
+
+				if($result_update){
+					$response = array(
+						'status' => 200
+					);
+				}else{
+					$response = array(
+					'status' => 500,
+					'err_msg' => 'Cannot update confirm order of product'
+				);
+				}
+			}else{
+				$response = array(
+					'status' => 500,
+					'err_msg' => 'Cannot confirm create order'
+				);
+			}
 		}else{
 			$response = array(
 				'status' => 500,

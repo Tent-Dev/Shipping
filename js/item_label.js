@@ -18,6 +18,7 @@ function getData(){
 		else{
 			ajax_data.command = 'get_product';
 			ajax_data.tracking_code = TRACKING_CODE;
+			ajax_data.ignore_confirm = 'T';
 			url = '../api/function/manage_product.php';
 
 		}
@@ -91,6 +92,7 @@ function generateLabel(val){
 	'<b>ชื่อที่อยู่ผู้ส่ง</b>'+
 	'<p class="s_name">'+val.sender_desc.firstname +' '+val.sender_desc.lastname+'</p>'+
 	'<p class="s_address">'+val.sender_desc.address+' </p><p>เขต <span class="s_area">'+val.sender_desc.area+'</span> แขวง <span class="s_district">'+val.sender_desc.district+'</span> <span class="s_province">'+val.sender_desc.province+'</span></p>'+
+	'<p>โทร. <span class="s_phone">'+val.sender_desc.phone_number+'</span></p>'+
 	'</div>'+
 	'<div class="address-right">'+
 	'<img src="../assets/logo/logo.png" alt="logo" class="logo">'+
