@@ -57,8 +57,8 @@ if(isset($_GET['transaction_id'])){
             float: left;
             width: 60%;
             height: 110px;
-            padding: 10px 20px 5px 0;
-            font-size: 12px;
+            padding: 10px 0px 5px 0px;
+            font-size: 11px;
             line-height: 16px;
             margin-bottom: 10px;
         }

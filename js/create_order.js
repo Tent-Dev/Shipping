@@ -413,6 +413,7 @@ function getAllData(){
                     $("#r_area").val('');
                     $("#r_province").val('');
                     $("#r_postcode").val('');
+                    $('#money_cod').val('');
 
                     $("#weight").val('');
                     $("#price").val('');
