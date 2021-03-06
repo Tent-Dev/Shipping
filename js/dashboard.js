@@ -165,9 +165,11 @@ function getTransaction(page = 1, mode = ''){
 			if(data.status == 200){
 				if(data.data.data.length > 0){
 					var total_income = 0;
+					console.log('Data: ', data.data.data);
 					$.each(data.data.data, function(index, val) {
 						if (val.price > 0){
 							total_income = total_income+parseFloat(val.price);
+							console.log('----->',total_income );
 						}
 					});
 					$('.summary_total_transaction').html('<span class="">'+NumberFormat(data.data.data.length.toString(), 0)+'</span> รายการ');

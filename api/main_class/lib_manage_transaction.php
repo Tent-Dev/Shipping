@@ -151,12 +151,12 @@ class MNG_Transaction{
 	public function GetTransactionDashboard($param = null){
 		
 		$sql ="
-		SELECT tbl_transaction.transaction_id, tbl_map_transaction.total_price 
+		SELECT Distinct tbl_transaction.transaction_id, tbl_map_transaction.total_price 
 		FROM tbl_transaction 
 		JOIN tbl_map_transaction 
 		ON tbl_transaction.transaction_id = tbl_map_transaction.transaction_id ";
 
-		$sql_where = " WHERE tbl_transaction.active_status = 'T' ";
+		$sql_where = " WHERE tbl_transaction.active_status = 'T'";
 
 		if(isset($param['startdate']) && $param['startdate'] != "" && isset($param['enddate']) && $param['enddate'] != ""){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
