@@ -242,14 +242,14 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                             <input type="text" name="s_address[]" id="s_address" class="form-control form-control-sm s_address">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="s_district" class="col-form-label col-form-label-sm">เขต</label>
-                                            <input type="text" name="s_district[]" id="s_district" class="form-control form-control-sm s_district">
+                                            <label for="s_area" class="col-form-label col-form-label-sm">เขต</label>
+                                            <input type="text" name="s_area[]" id="s_area" class="form-control form-control-sm s_area">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="s_area" class="col-form-label col-form-label-sm">แขวง</label>
-                                            <input type="text" name="s_area[]" id="s_area" class="form-control form-control-sm s_area">
+                                            <label for="s_district" class="col-form-label col-form-label-sm">แขวง</label>
+                                            <input type="text" name="s_district[]" id="s_district" class="form-control form-control-sm s_district">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="s_province" class="col-form-label col-form-label-sm">จังหวัด</label>
@@ -290,14 +290,14 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                             <input type="text" name="r_address[]" id="r_address" class="form-control form-control-sm r_address">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="r_district" class="col-form-label col-form-label-sm">เขต</label>
-                                            <input type="text" name="r_district[]" id="r_district" class="form-control form-control-sm r_district">
+                                            <label for="r_area" class="col-form-label col-form-label-sm">เขต</label>
+                                            <input type="text" name="r_area[]" id="r_area" class="form-control form-control-sm r_area">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="r_area" class="col-form-label col-form-label-sm">แขวง</label>
-                                            <input type="text" name="r_area[]" id="r_area" class="form-control form-control-sm r_area">
+                                            <label for="r_district" class="col-form-label col-form-label-sm">แขวง</label>
+                                            <input type="text" name="r_district[]" id="r_district" class="form-control form-control-sm r_district">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="r_province" class="col-form-label col-form-label-sm">จังหวัด</label>
