@@ -337,6 +337,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                         <th>น้ำหนัก</th>
                                         <th>ราคา</th>
                                         <th>เก็บเงินปลายทาง</th>
+                                        <th></th>
                                     </thead>
                                     <tbody id="order_list">
                                     </tbody>

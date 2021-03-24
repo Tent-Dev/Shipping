@@ -151,6 +151,11 @@ $(document).ready(function() {
         $("#id_card").val(customer_history_set[customer_history].id_card);
     });
 
+    $(document).on('click', '.btn_delete', function(event) {
+        var product_id = $(this).data('id');
+        deleteProductFromDb(product_id);
+    });
+
     $(document).on('focus', '.form-suggest', function() {
         $(this).parent().find('.box-suggest').addClass('active');
     });
@@ -382,7 +387,7 @@ function getAllData(){
                     // $('.form_add').hide();
                     // $('.form_print').show();
                     html = '';
-                    html += '<tr>';
+                    html += '<tr class="_list_pd_id-'+data.last_id+'">';
                     html +=
                     '<td>'+data.tracking_code+'</td>'+
                     '<td>'+r_fname+' '+r_lname+'</td>'+
@@ -391,7 +396,8 @@ function getAllData(){
                     '<td>'+r_postcode+'</td>'+
                     '<td>'+weight+'</td>'+
                     '<td class="price">'+price+'</td>'+
-                    '<td>'+cod_price+'</td>';
+                    '<td>'+cod_price+'</td>'+
+                    '<td><button class="btn_delete btn btn-sm btn-danger" data-id="'+data.last_id+'"><i class="fas fa-trash"></i></button></td>';
                     html += '</tr>';
 
                     $('#order_list').append(html);
@@ -437,7 +443,7 @@ function getAllData(){
                 $('.btn_save, .btn_clearall').attr('disabled', false);
                 Swal.fire({
                     title: 'พบข้อผิดพลาด',
-                    text: 'ไม่สามารถสร้างี่ยการได้',
+                    text: 'ไม่สามารถสร้างรายการได้',
                     icon: 'error',
                     confirmButtonText: 'ตกลง'
                 });
@@ -446,6 +452,43 @@ function getAllData(){
         });
 
     }
+}
+
+function deleteProductFromDb(product_id){
+     $.ajax({
+            url: '../api/function/manage_product.php',
+            method: 'post',
+            data: {
+                command: 'delete_product_from_db',
+                product_id: product_id,
+            },
+            success: function(data) {
+                var data = JSON.parse(data);
+                console.log("result: ",data);
+
+                if(data.status == 200){
+                    $('._list_pd_id-'+product_id+'').remove();
+                    sumPrice();
+                    $('#m_received, #change').val('');
+                }
+                else{
+                    Swal.fire({
+                        title: 'พบข้อผิดพลาด',
+                        text: 'ไม่สามารถลบรายการได้',
+                        icon: 'error',
+                        confirmButtonText: 'ตกลง'
+                    });
+                }
+                $('.addsection').attr('disabled', false);
+            },error: function() {
+                Swal.fire({
+                    title: 'พบข้อผิดพลาด',
+                    text: 'ไม่สามารถลบรายการได้',
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง'
+                });
+            }
+        });
 }
 
 function validateCreate(pointer_index){

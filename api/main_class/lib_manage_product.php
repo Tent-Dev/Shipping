@@ -689,6 +689,27 @@ class MNG_Product{
 		return $response;
 	}
 
+	public function DeleteProductFromDb($param = null){
+		$arr['id'] = $param['product_id'];
+		$sql = "DELETE tbl_product, tbl_transaction
+		        FROM tbl_product
+		        INNER JOIN tbl_transaction ON tbl_product.id = tbl_transaction.product_id 
+		        WHERE tbl_product.id = '".$_POST['product_id']."' AND tbl_product.confirm_create = 'F' ";
+		$result = $this->db_connect->Delete_db($sql);
+
+		if($result == 1){
+			$response = array(
+				'status' => 200
+			);
+		}else{
+			$response = array(
+				'status' => 500,
+				'err_msg' => 'Can not delete product'
+			);
+		}
+		return $response;
+	}
+
 	public function GenerateTrackingCode(){
 
 		$ran1 = substr(str_shuffle('0123456789'),1,3);
