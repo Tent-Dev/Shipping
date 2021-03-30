@@ -95,9 +95,14 @@ function generateLabel(val){
 	'<p>โทร. <span class="s_phone">'+val.sender_desc.phone_number+'</span></p>'+
 	'</div>'+
 	'<div class="address-right">'+
-	'<img src="../assets/logo/logo.png" alt="logo" class="logo">'+
+	'<img src="../assets/logo/logo.png" alt="logo" class="logo">';
+
+	if(val.payment_type == 'cod'){
+		html+= '<b class="cod_wrap">COD: '+val.cod_price+'฿</b>';
+	}
+	
 	// '<div><svg class="barcode" jsbarcode-value="'+val.tracking_code+'" jsbarcode-margin="0" jsbarcode-fontsize="40" jsbarcode-fontoptions="bold"></svg></div>'+
-	'<div class="qr_gen" id="qr_gen_'+val.id+'" >'+val.tracking_code+'</div>'+
+	html += '<div class="qr_gen" id="qr_gen_'+val.id+'" >'+val.tracking_code+'</div>'+
 	'</div>'+
 	'<div class="address2">'+
 	'<div class="wrap_barcode"><svg class="barcode" jsbarcode-value="'+val.tracking_code+'"jsbarcode-displayValue="false" jsbarcode-margin="0" jsbarcode-fontsize="40" jsbarcode-fontoptions="bold"></svg></div>'+

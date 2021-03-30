@@ -212,7 +212,7 @@ class MNG_Transaction{
 		tbl_product.tracking_code,
 		tbl_product.create_date,
 		tbl_product.weight,
-		tbl_product.price ,
+		tbl_product.price,
 		tbl_member.firstname as employee_fname,
 		tbl_member.lastname as employee_lname,
 		tbl_map_transaction.total_price,
@@ -309,7 +309,9 @@ class MNG_Transaction{
 		tbl_product.create_date,
 		tbl_product.weight,
 		tbl_product.active_status,
-		tbl_product.price 
+		tbl_product.price,
+		tbl_product.payment_type,
+		tbl_product.cod_price
 		FROM tbl_transaction
 		JOIN tbl_customer
 		ON tbl_customer.id = tbl_transaction.customer_id
@@ -353,6 +355,8 @@ class MNG_Transaction{
 					'receiver_desc' =>  json_decode($value['receiver_desc']),
 					'sender_desc' => json_decode($value['sender_desc']),
 					'shipping_type' => $value['shipping_type'],
+					'payment_type' => $value['payment_type'],
+					'cod_price' => $value['cod_price'],
 					'tracking_code' => $value['tracking_code'],
 					'weight' => round($value['weight'], 2),
 					'price' => round($value['price'], 2),

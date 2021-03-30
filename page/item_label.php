@@ -124,6 +124,10 @@ if(isset($_GET['transaction_id'])){
             bottom: -45px;
         }
 
+        .cod_wrap{
+            margin-right: 10px;
+        }
+
         @media print {
             header, footer {
                 display: none !important;

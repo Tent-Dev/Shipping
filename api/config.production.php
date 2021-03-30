@@ -11,7 +11,7 @@ define("AUTH_CHECK_SESSION", false);
 date_default_timezone_set('Asia/Bangkok');
 //SESSION Config==============
 
-define("SESSION_EXPIRE_MINUTE",30);
+define("SESSION_EXPIRE_MINUTE",1440);
 
 //URL Config==============
 

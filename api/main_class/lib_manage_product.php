@@ -33,6 +33,7 @@ class MNG_Product{
 		tbl_product.weight,
 		tbl_product.price,
 		tbl_product.payment_type,
+		tbl_product.cod_price,
 		tbl_transaction.transaction_id,
 		tbl_transaction.receiver_desc,
 		tbl_transaction.sender_desc,
@@ -125,6 +126,7 @@ class MNG_Product{
 					'weight' => round($value['weight'], 2),
 					'price' => round($value['price'], 2),
 					'payment_type' => $value['payment_type'],
+					'cod_price' => $value['cod_price'],
 					'shipper_name' => $value['shipper_name'],
 					'receiver_name' => $value['receiver_name']
 				);
@@ -480,6 +482,10 @@ class MNG_Product{
 		$get_price = $param['get_price'];
 		$change_price = $param['change_price'];
 
+		$sql_check_trans = 'SELECT transaction_id FROM tbl_map_transaction WHERE transaction_id = "'.$trans_id.'"';
+
+		$get_data_trans = $this->db_connect->numRows($sql_check_trans);
+
 		$arr_map_transaction = array(
 			"transaction_id" => $trans_id,
 			"total_price" => $total_price, 
@@ -487,8 +493,19 @@ class MNG_Product{
 			"change_price" => $change_price
 		);
 
-		$result_map_transaction = $this->db_connect->Insert_db($arr_map_transaction,"tbl_map_transaction");
+		if($get_data_trans){
+			$key = array("transaction_id");
+			$result_update_map = $this->db_connect->Update_db($arr_map_transaction, $key, "tbl_map_transaction");
+			if($result_update_map){
+				$result_map_transaction = true;
+			}
+			$result_map_transaction = false;
+		}else{
+			$result_map_transaction = $this->db_connect->Insert_db($arr_map_transaction,"tbl_map_transaction");
 
+		}
+
+		
 		if($result_map_transaction){
 			$key = array("id");
 			$arr = array();
@@ -511,9 +528,9 @@ class MNG_Product{
 					);
 				}else{
 					$response = array(
-					'status' => 500,
-					'err_msg' => 'Cannot update confirm order of product'
-				);
+						'status' => 500,
+						'err_msg' => 'Cannot update confirm order of product'
+					);
 				}
 			}else{
 				$response = array(
@@ -692,9 +709,9 @@ class MNG_Product{
 	public function DeleteProductFromDb($param = null){
 		$arr['id'] = $param['product_id'];
 		$sql = "DELETE tbl_product, tbl_transaction
-		        FROM tbl_product
-		        INNER JOIN tbl_transaction ON tbl_product.id = tbl_transaction.product_id 
-		        WHERE tbl_product.id = '".$_POST['product_id']."' AND tbl_product.confirm_create = 'F' ";
+		FROM tbl_product
+		INNER JOIN tbl_transaction ON tbl_product.id = tbl_transaction.product_id 
+		WHERE tbl_product.id = '".$_POST['product_id']."' AND tbl_product.confirm_create = 'F' ";
 		$result = $this->db_connect->Delete_db($sql);
 
 		if($result == 1){
