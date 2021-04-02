@@ -589,7 +589,25 @@ class MNG_Product{
 			}else{
 				$arr['cod_price'] = 0;
 			}
-			
+		}
+
+		if(isset($param['product_select']) && $param['product_select'] !== ''){
+			$sql_update_multi = "id in ('".implode("','",$param['product_select'])."')";
+			$result_update_multi = $this->db_connect->Update_db($arr, '', "tbl_product", $sql_update_multi);
+
+			if($result_update_multi){
+				$response = array(
+					'status' => 200,
+					'warn_msg' => $warn_msg.$warn_cus_msg
+				);
+			}else{
+				$response = array(
+					'status' => 500,
+					'err_msg' => 'Can not update product'
+				);
+			}
+
+			return $response;
 		}
 
 		if(!empty($param['customer_idcard']) && !empty($param['customer_firstname']) && !empty($param['customer_lastname']) && !empty($param['customer_phone_number'])){

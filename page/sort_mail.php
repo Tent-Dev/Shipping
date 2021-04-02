@@ -44,6 +44,13 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
         .shipper_null{
             color: red;
         }
+        .select_multi{
+            width: 20px;
+            height: 20px;
+        }
+        .btn-hide{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -86,6 +93,11 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                         <option value="" selected>ทั้งหมด</option>
                         <option value="0">ยังไม่ระบุคนนำจ่าย</option>
                     </select>
+                </div>
+                <div class="col-lg-12 mt-2">
+                    <button type="button" class="btn btn-sm btn-success btn-multiselect">เลือกหลายรายการ <i class="fas fa-clipboard-list"></i></button>
+                    <button type="button" class="btn btn-sm btn-warning btn-selected-multiselect btn-hide">เลือก 0 รายการ</button>
+                    <button type="button" class="btn btn-sm btn-danger btn-cancel-multiselect btn-hide">ยกเลิก</button>
                 </div>
             </div>
             <div class="overflow-auto">

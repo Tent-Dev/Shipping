@@ -1,5 +1,7 @@
 var SHIPPER_LIST = [];
 var startdate = "", enddate = "", status = "", keyword = "", shipper = "", area = "";
+var ORDER_SELECTED = [];
+var SELECT_ACTIVE = false;
 
 $(document).ready(function() {
 	getDataFromDB();
@@ -16,12 +18,61 @@ $(document).ready(function() {
 		saveData(product_id);
 	});
 
+	$(document).on('click', '.btn-multiselect', function(event) {
+		if(SELECT_ACTIVE){
+			$('.btn_edit, .btn-multiselect').show();
+			$('.select_multi').hide();
+			ORDER_SELECTED = [];
+			$('.select_multi').prop('checked',false);
+			SELECT_ACTIVE = !SELECT_ACTIVE;
+		}else{
+			$('.btn_edit, .btn-multiselect').hide();
+			$('.select_multi').show();
+			$('.btn-cancel-multiselect, .btn-selected-multiselect').show();
+			SELECT_ACTIVE = !SELECT_ACTIVE;
+		}
+	});
+
+	$(document).on('click', '.btn-cancel-multiselect', function(event) {
+		if(SELECT_ACTIVE){
+			$('.btn_edit').show();
+			$('.select_multi').hide();
+			ORDER_SELECTED = [];
+			$('.select_multi').prop('checked',false);
+			$('.btn-cancel-multiselect, .btn-selected-multiselect').hide();
+			$('.btn-multiselect').show();
+			$('.btn-selected-multiselect').html('เลือก '+ORDER_SELECTED.length+' รายการ');
+			SELECT_ACTIVE = !SELECT_ACTIVE;
+		}
+	});
+
+	$(document).on('click', '.btn-selected-multiselect', function(event) {
+		getDescription();
+	});
+
 	$('input#filter_date').daterangepicker({
 		autoUpdateInput: false,
 		locale: {
 			format: "YYYY-MM-DD",
 			cancelLabel: 'Clear'
 		}
+	});
+
+	$(document).on('click', '.select_for_edit', function(event) {
+		var get_id = $(this).val();
+		if($(this).is(":checked")){
+			ORDER_SELECTED.push(get_id);
+		}else{
+			for(var i in ORDER_SELECTED){
+				if(ORDER_SELECTED[i] == get_id){
+					ORDER_SELECTED.splice(i,1);
+					break;
+				}
+			}
+		}
+		$('.btn-selected-multiselect').html('เลือก '+ORDER_SELECTED.length+' รายการ');
+		console.log(ORDER_SELECTED);
+		/* Act on the event */
 	});
 
 	$('input#filter_date').on('apply.daterangepicker', function(ev, picker) {
@@ -62,6 +113,17 @@ $(document).ready(function() {
         },
     });
 });
+
+function checkSelectActive(){
+	if(SELECT_ACTIVE){
+		$('.btn_edit').hide();
+		$('.select_multi').show();
+		
+	}else{
+		$('.btn_edit').show();
+		$('.select_multi').hide();
+	}
+}
 
 function filterStatus(value) {
 	$('#show_data_from_db').empty();
@@ -142,15 +204,15 @@ function getDataFromDB(page = 1){
 
 						var status_convert = '';
 
-                        if(val.status == 'waiting'){
-                            status_convert = 'นำเข้าระบบแล้ว';
-                        } else if(val.status == 'sending'){
-                            status_convert = 'กำลังจัดส่ง';
-                        } else if(val.status == 'success'){
-                            status_convert = 'ส่งถึงมือผู้รับแล้ว';
-                        } else if(val.status == 'return_distribution_center'){
-                            status_convert = 'ถูกตีกลับ';
-                        }
+						if(val.status == 'waiting'){
+							status_convert = 'นำเข้าระบบแล้ว';
+						} else if(val.status == 'sending'){
+							status_convert = 'กำลังจัดส่ง';
+						} else if(val.status == 'success'){
+							status_convert = 'ส่งถึงมือผู้รับแล้ว';
+						} else if(val.status == 'return_distribution_center'){
+							status_convert = 'ถูกตีกลับ';
+						}
 
 						html +=
 						'<tr class="_rowid-'+val.id+'">'+
@@ -162,7 +224,7 @@ function getDataFromDB(page = 1){
 						'<td class="_td-shippername '+null_class+'">'+shipper_name+'</td>'+
 						'<td align="center">'+
 						// '<button class="btn_edit btn btn-sm btn-warning mr-2" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
-						'<button class="btn btn-sm btn-warning mr-2 btn_edit" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button>'+
+						'<button class="btn btn-sm btn-warning mr-2 btn_edit" data-toggle="modal" data-id="'+val.id+'" data-trackingcode="'+val.tracking_code+'" data-target="#editData"><i class="fas fa-edit"></i></button><input class="select_multi select_for_edit" type="checkbox" data-id="'+val.id+'" value="'+val.id+'">'+
 						'</td>'+
 						'</tr>';
 					});
@@ -186,6 +248,8 @@ function getDataFromDB(page = 1){
 			$('.table_wrap_loading_box').hide();
 			$('.table').show();
 			$('#show_data_from_db').append(html);
+			checkSelected();
+			checkSelectActive();
 		},
 		error: function() {
 			console.log("error");
@@ -194,12 +258,23 @@ function getDataFromDB(page = 1){
 	});
 };
 
-function getDescription(product_id, tracking_code){
+function checkSelected(){
+	$.each(ORDER_SELECTED, function(index, val) {
+		$('.select_for_edit[data-id='+val+']').attr('checked', true);
+	});
+}
+
+function getDescription(product_id = null, tracking_code = null){
 	html_mock = '';
 
 	html_mock += '<div class="modal-content">';
 	html_mock += '	<div class="modal-header">';
-	html_mock += '		<h5 class="modal-title" id="editDataLabel">คนนำจ่ายพัสดุ '+tracking_code+'</h5>';
+	if(product_id == null && tracking_code == null){
+		html_mock += '		<h5 class="modal-title" id="editDataLabel">เลือกคนนำจ่ายพัสดุ</h5>';
+	}else{
+		html_mock += '		<h5 class="modal-title" id="editDataLabel">คนนำจ่ายพัสดุ '+tracking_code+'</h5>';
+	}
+	
 	html_mock += '		<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
 	html_mock += '			<span aria-hidden="true"><i class="fas fa-times"></i></span>';
 	html_mock += '		</button>';
@@ -213,36 +288,43 @@ function getDescription(product_id, tracking_code){
 	html_mock += '</div">';
 
 	$('.modal-dialog').html(html_mock);
-	$('.modal-body').html('<div align="center" class="wrap_loading_box"><div><i class="fas fa-spinner fa-spin loading_box_icon"></i></span></div></div>');
 
-	$.ajax({
-		url: '../api/function/manage_product.php',
-		method: 'post',
-		data: {
-			command: 'get_product_desc',
-			product_id: product_id
-		},
-		success: async function(data) {
-			var data = JSON.parse(data)
-			console.log("result: ",data);
+	if(product_id !== null && tracking_code !== null){
+		$('.modal-body').html('<div align="center" class="wrap_loading_box"><div><i class="fas fa-spinner fa-spin loading_box_icon"></i></span></div></div>');
 
-			if(data.status == 200){
-				await getShipperList('get_for_add');
-				var get_body_html = generateHtml(data);
-				$('.modal-body').html(get_body_html);
-				$("#shipping_type").val(data.data.payment_type).change();
+		$.ajax({
+			url: '../api/function/manage_product.php',
+			method: 'post',
+			data: {
+				command: 'get_product_desc',
+				product_id: product_id
+			},
+			success: async function(data) {
+				var data = JSON.parse(data)
+				console.log("result: ",data);
 
-				if(data.data.shipper_id !== 0 && data.data.shipper_id !== null && data.data.shipper_id !== '0'){
-					console.log(data.data.shipper_id);
-					$("#sender").val(data.data.shipper_id).change();
+				if(data.status == 200){
+					await getShipperList('get_for_add');
+					var get_body_html = generateHtml(data);
+					$('.modal-body').html(get_body_html);
+					$("#shipping_type").val(data.data.payment_type).change();
+
+					if(data.data.shipper_id !== 0 && data.data.shipper_id !== null && data.data.shipper_id !== '0'){
+						console.log(data.data.shipper_id);
+						$("#sender").val(data.data.shipper_id).change();
+					}
 				}
-			}
 
-		},
-		error: function() {
-			console.log("error");
-		}
-	});
+			},
+			error: function() {
+				console.log("error");
+			}
+		});
+	}else{
+		var get_body_html = generateHtmlMultiple();
+		$('.modal-body').html(get_body_html);
+		$('#editData').modal('show');
+	}
 }
 
 function generateHtml(data){
@@ -325,6 +407,26 @@ function generateHtml(data){
 	return html;
 }
 
+function generateHtmlMultiple(data){
+	var html = '';
+	html += '                        <form action="" method="post">';
+	html += '                            <div class="row">';
+	html += '                                <div class="col">';
+	html += '                                    <label for="sender" class="col-form-label col-form-label-sm">คนนำจ่าย</label>';
+	html += '                                    <select name="sender" id="sender" class="form-control form-control-sm">';
+	html += '                                        <option value="" selected>กรุณาเลือกคนนำจ่ายพัสดุ</option>';
+	$.each(SHIPPER_LIST, function(index, val) {
+		if(val.active_status == 'T'){
+			html += '<option value="'+val.id+'">'+val.firstname+' '+val.lastname+'</option>';
+		}
+	});
+	html += '                                    </select>';
+	html += '                                </div>';
+	html += '                            </div>';
+	html += '                        </form>';
+	return html;
+}
+
 function getShipperList(mode = ''){
 	$.ajax({
 		url: '../api/function/manage_account.php',
@@ -354,26 +456,48 @@ function getShipperList(mode = ''){
 function saveData(product_id){
 	var shipper_id = $('#sender').val();
 
+	var obj = {};
+	obj.command = 'update_product';
+	obj.shipper_id = shipper_id;
+	if(SELECT_ACTIVE){
+		obj.product_select = ORDER_SELECTED;
+	}else{
+		obj.product_id = product_id;
+	}
+
 	if(validate()){
 		$('.btn_save').html('<i class="fas fa-spinner fa-spin"></i></span>');
 		$('.btn_save, .btn_cancel').attr('disabled', true);
 		$.ajax({
 			url: '../api/function/manage_product.php',
 			method: 'post',
-			data: {
-				command: 'update_product',
-				product_id: product_id,
-				shipper_id: shipper_id
-			},
+			data: obj,
 			success: function(data) {
 				var data = JSON.parse(data)
 				console.log("result: ",data);
 				$('.btn_save').html('บันทึก');
 				$('.btn_save, .btn_cancel').attr('disabled', false);
 				if(data.status == 200){
-					$('._rowid-'+product_id+'').find('._td-shippername').html($('#sender > option:selected').html());
-					$('._rowid-'+product_id+'').find('._td-shippername').removeClass('shipper_null');
+					if(SELECT_ACTIVE){
+						$.each(ORDER_SELECTED, function(index, val) {
+							$('._rowid-'+val+'').find('._td-shippername').html($('#sender > option:selected').html());
+							$('._rowid-'+val+'').find('._td-shippername').removeClass('shipper_null');
+						});
+					}else{
+						$('._rowid-'+product_id+'').find('._td-shippername').html($('#sender > option:selected').html());
+						$('._rowid-'+product_id+'').find('._td-shippername').removeClass('shipper_null');
+					}
 					$("#editData").modal('hide');
+
+					$('.btn_edit').show();
+					$('.select_multi').hide();
+					ORDER_SELECTED = [];
+					$('.select_multi').prop('checked',false);
+					$('.btn-cancel-multiselect, .btn-selected-multiselect').hide();
+					$('.btn-multiselect').show();
+					$('.btn-selected-multiselect').html('เลือก '+ORDER_SELECTED.length+' รายการ');
+					SELECT_ACTIVE = false;
+
 				}else{
 					Swal.fire({
 						title: 'พบข้อผิดพลาด',
