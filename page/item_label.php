@@ -44,7 +44,7 @@ if(isset($_GET['transaction_id'])){
         .page {
             width: 100mm;
             height: 75mm;
-            margin: 1rem auto;
+            margin: 0rem auto;
         }
         .box {
             width: 100mm;

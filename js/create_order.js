@@ -266,7 +266,7 @@ function saveData(){
                 $('.btn_save, .btn_cancel').attr('disabled', false);
                 Swal.fire({
                     title: 'พบข้อผิดพลาด',
-                    text: 'ไม่สามารถสร้างี่ยการได้',
+                    text: 'ไม่สามารถสร้างรายการได้',
                     icon: 'error',
                     confirmButtonText: 'ตกลง'
                 });
