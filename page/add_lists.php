@@ -193,7 +193,7 @@ if($_SESSION['TYPE'] != 'admin' && $_SESSION['TYPE'] != 'staff'){
                                         <input type="text" name="money_cod[]" id="money_cod" class="form-control form-control-sm" value="">
                                     </div>
                                     <div class="col-4">
-                                        <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กรัม)</label>
+                                        <label for="weight" class="col-form-label col-form-label-sm">น้ำหนัก (กิโลกรัม)</label>
                                         <input type="text" name="weight[]" id="weight" class="form-control form-control-sm weight" value="">
                                     </div>
                                 </div>

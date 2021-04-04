@@ -76,7 +76,7 @@ function GenerateItemList(val){
 	'                    <tr>'+
 	'                        <td width="50%">- น้ำหนัก</td>'+
 	'                        <td width="40%" align="right">'+val.weight+'</td>'+
-	'                        <td width="10%" align="center">กรัม</td>'+
+	'                        <td width="10%" align="center">Kg.</td>'+
 	'                    </tr>'+
 	'                    <tr>'+
 	'                        <td width="50%">- ค่าธรรมเนียม</td>'+
