@@ -47,6 +47,12 @@ include("auth_onpage.php");
             </div>
 
             <div class="row mt-2 mb-4">
+                <div class="col-lg-1">สาขา</div>
+                <div class="col-lg-2">
+                    <select class="filter mt-2 mt-lg-0" name="filter_branch" id="filter_branch">
+                        <option value="all" selected>ทั้งหมด</option>
+                    </select>
+                </div>
                 <div class="col-lg-1">ช่วงเวลา</div>
                 <div class="col-lg-2">
                     <select class="filter mt-2 mt-lg-0" name="filter_date_absoulte" id="filter_date_absoulte">
@@ -60,7 +66,9 @@ include("auth_onpage.php");
                 <div class="col-lg-3">
                     <input class="filter datepicker mt-2 mt-lg-0" type="text" name="filter_date" id="filter_date" placeholder="เลือกช่วงวัน" readonly>
                 </div>
+
             </div>
+
 
             <div class="wrap_overall">
                 <div class="box">

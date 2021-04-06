@@ -55,6 +55,11 @@ class MNG_ExportSummary{
 			}
 		}
 
+		if(isset($param['company']) && $param['company'] !== ''){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_member.company_id = '".$param['company']."' ";
+		}
+
 		$sql_query = $sql . $sql_where;
 
 		$data_result = $this->db_connect->Select_db($sql_query);

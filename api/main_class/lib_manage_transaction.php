@@ -154,7 +154,9 @@ class MNG_Transaction{
 		SELECT Distinct tbl_transaction.transaction_id, tbl_map_transaction.total_price 
 		FROM tbl_transaction 
 		JOIN tbl_map_transaction 
-		ON tbl_transaction.transaction_id = tbl_map_transaction.transaction_id ";
+		ON tbl_transaction.transaction_id = tbl_map_transaction.transaction_id
+		JOIN tbl_member
+		ON tbl_transaction.employee_id = tbl_member.id ";
 
 		$sql_where = " WHERE tbl_transaction.active_status = 'T'";
 
@@ -166,6 +168,11 @@ class MNG_Transaction{
 			else {
 				$sql_where .= " tbl_transaction.create_date BETWEEN '".$param['startdate']."' AND '".$param['enddate']."' ";
 			}
+		}
+
+		if(isset($param['company']) && $param['company'] !== ''){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_member.company_id = '".$param['company']."' ";
 		}
 
 		$sql_count = $sql . $sql_where;
@@ -235,6 +242,11 @@ class MNG_Transaction{
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
 			$sql_where .= " tbl_transaction.transaction_id = '".$param['transaction_id']."' ";
 		}
+
+		// if(isset($param['company'])){
+		// 	$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+		// 	$sql_where .= " tbl_transaction.employee_id = '".$param['company']."' ";
+		// }
 
 
 		$sql_query = $sql . $sql_where;

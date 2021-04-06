@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 28, 2021 at 04:10 PM
+-- Generation Time: Apr 06, 2021 at 10:05 AM
 -- Server version: 5.6.37
 -- PHP Version: 7.1.8
 
@@ -19,6 +19,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `shipping_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_company`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_company` (
+  `id` int(11) NOT NULL,
+  `company_name` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_company`
+--
+
+INSERT INTO `tbl_company` (`id`, `company_name`) VALUES
+(1, 'Nakhon Pathom'),
+(2, 'Name2');
 
 -- --------------------------------------------------------
 
@@ -57,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `tbl_map_transaction` (
   `total_price` varchar(255) NOT NULL,
   `get_price` varchar(255) NOT NULL,
   `change_price` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_map_transaction`
@@ -103,7 +122,11 @@ INSERT INTO `tbl_map_transaction` (`id`, `transaction_id`, `total_price`, `get_p
 (37, '161452571349421HQ', '1675.00', '2000', '325.00'),
 (38, '161452571349421HQ', '1675.00', '2000', '325.00'),
 (39, '161452664320655VW', '653.90', '653.90', '0.00'),
-(40, '161452692404812AA', '450.00', '500', '50.00');
+(40, '161452692404812AA', '450.00', '500', '50.00'),
+(41, '161530539608982CC', '130.00', '200', '70.00'),
+(42, '161660592299718NX', '0.00', '', ''),
+(43, '161712390039628NG', '500.00', '4000', '3500.00'),
+(44, '161712469067693SP', '515.00', '1000', '485.00');
 
 -- --------------------------------------------------------
 
@@ -113,6 +136,7 @@ INSERT INTO `tbl_map_transaction` (`id`, `transaction_id`, `total_price`, `get_p
 
 CREATE TABLE IF NOT EXISTS `tbl_member` (
   `id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL,
   `firstname` varchar(128) DEFAULT NULL,
   `lastname` varchar(128) DEFAULT NULL,
   `member_type` varchar(128) DEFAULT NULL,
@@ -120,22 +144,24 @@ CREATE TABLE IF NOT EXISTS `tbl_member` (
   `password` varchar(128) DEFAULT NULL,
   `session_id` text,
   `active_status` varchar(1) NOT NULL DEFAULT 'T'
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_member`
 --
 
-INSERT INTO `tbl_member` (`id`, `firstname`, `lastname`, `member_type`, `username`, `password`, `session_id`, `active_status`) VALUES
-(4, 'มาลี2', 'ไม่อร่อยนะ', 'admin', 'admin', '$2y$12$BP0jqnze1LL/VfJe3DcT.eB/ODAhkxDZtO9oTaKmvXi.2tVGNtFKu', '$2y$12$h.LBHY7FsjUoOjUfqJYAlOTCdO4nA6xGjaWPptQrbwFw/qk9z/ARC', 'T'),
-(5, 'Test', 'Create2', 'staff', 'testaccount', '$2y$12$i0G.Xb3tKE50HPqzsWkhQ.U00Nz1uR8xSUOpj4b9JVMYxuO/xuFmy', NULL, 'F'),
-(6, 'Testadd', 'Onpage', 'admin', 'admin2', '$2y$12$xQfZzkrtApWh/D280A0BseVN/d2rh8KcylzpTQAvMCsciEVBcVPIW', NULL, 'T'),
-(7, 'Chutipas2', 'Borsub', 'staff', 'itsofun01', '$2y$12$H.ISNtFqC.jCeGTsJmOiW.WepH7w0hGbsw9VKbFLXHwZxhy9eH0e.', '$2y$12$5VBl0Inj..C/ld5GSad0ae0LL52OL1clFtcXTIEHFxEgKEt5ZH5gC', 'T'),
-(8, 'Manee', 'Aroina', 'admin', 'Manee01', '$2y$12$SLL7v8bGgA7VMLs.kyUwIuroR9qGUsLiLTl0EEqssuZN7lPb942oy', NULL, 'T'),
-(9, 'Bot', 'test', 'staff', 'Bot01', '$2y$12$DoRHcqnFtQ.56dLRkKK9feQvFrR/rIWn6lBs9F.N5EnaAtfd4lH/q', NULL, 'F'),
-(10, 'Bot2', 'Test', 'staff', 'Bot02', '$2y$12$TDPRxMF3RBFwu.AwQ0zz3e/fVJBBM93ssU4OWla7/ih2u5l.VEAq2', NULL, 'F'),
-(11, 'Test', 'Postman', 'admin', 'admin_postman', '$2y$12$g.CiobjIU9wgVm6b526Z9.mLh40omKe7IFomwyfw/pxF2sXyaTNqO', '$2y$12$EiHGyuiv.dWRdiJiDKV6C.I/1oqPYr4tzNqjR56IOD4LiLPwDUL8C', 'T'),
-(12, 'Test', 'Shipper', 'shipper', 'shipper01', '$2y$12$RuFmO0OLmbCtdvJJ5gNVjuvGvgrrWG81XQ4qJwTw.wEx2Opm8wm4m', '$2y$12$9Kh3botS8H1QX5ogpNKbb.U6m4t4azGEOwij9MmVakZMGVHyzeBru', 'T');
+INSERT INTO `tbl_member` (`id`, `company_id`, `firstname`, `lastname`, `member_type`, `username`, `password`, `session_id`, `active_status`) VALUES
+(4, 1, 'มาลี2', 'ไม่อร่อยนะ', 'admin', 'admin', '$2y$12$BP0jqnze1LL/VfJe3DcT.eB/ODAhkxDZtO9oTaKmvXi.2tVGNtFKu', '$2y$12$enuftxcZUNHZ3cwRf3qcluBul73YVFYTVu2zEjEdc68IOoyfUpuh.', 'T'),
+(5, 1, 'Test', 'Create2', 'staff', 'testaccount', '$2y$12$i0G.Xb3tKE50HPqzsWkhQ.U00Nz1uR8xSUOpj4b9JVMYxuO/xuFmy', NULL, 'F'),
+(6, 1, 'Testadd', 'Onpage', 'admin', 'admin2', '$2y$12$xQfZzkrtApWh/D280A0BseVN/d2rh8KcylzpTQAvMCsciEVBcVPIW', NULL, 'T'),
+(7, 1, 'Chutipas2', 'Borsub', 'staff', 'itsofun01', '$2y$12$H.ISNtFqC.jCeGTsJmOiW.WepH7w0hGbsw9VKbFLXHwZxhy9eH0e.', '$2y$12$5VBl0Inj..C/ld5GSad0ae0LL52OL1clFtcXTIEHFxEgKEt5ZH5gC', 'T'),
+(8, 2, 'Manee', 'Aroina', 'admin', 'Manee01', '$2y$12$SLL7v8bGgA7VMLs.kyUwIuroR9qGUsLiLTl0EEqssuZN7lPb942oy', NULL, 'T'),
+(9, 2, 'Bot', 'test', 'staff', 'Bot01', '$2y$12$DoRHcqnFtQ.56dLRkKK9feQvFrR/rIWn6lBs9F.N5EnaAtfd4lH/q', NULL, 'F'),
+(10, 1, 'Bot2', 'Test', 'staff', 'Bot02', '$2y$12$TDPRxMF3RBFwu.AwQ0zz3e/fVJBBM93ssU4OWla7/ih2u5l.VEAq2', NULL, 'F'),
+(11, 2, 'Test', 'Postman', 'admin', 'admin_postman', '$2y$12$g.CiobjIU9wgVm6b526Z9.mLh40omKe7IFomwyfw/pxF2sXyaTNqO', '$2y$12$EiHGyuiv.dWRdiJiDKV6C.I/1oqPYr4tzNqjR56IOD4LiLPwDUL8C', 'T'),
+(12, 2, 'Test', 'Shipper', 'shipper', 'shipper01', '$2y$12$RuFmO0OLmbCtdvJJ5gNVjuvGvgrrWG81XQ4qJwTw.wEx2Opm8wm4m', '$2y$12$9Kh3botS8H1QX5ogpNKbb.U6m4t4azGEOwij9MmVakZMGVHyzeBru', 'T'),
+(13, 2, 'ChutipasN', 'N', 'shipper', 'testN', '$2y$12$vM5Uy/xa4tqIQnOZgcO7bOxya9er.3hLGZsSEFeLD/ZbZK5.rbLvO', NULL, 'T'),
+(14, 1, 'Nakorn', 'P', 'admin', 'A1', '$2y$12$1Ua0SGX7rHjvmg6xHnFKlOatBEGjYUkxTJ5Pg03CZfdda2omVs296', NULL, 'T');
 
 -- --------------------------------------------------------
 
@@ -158,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `tbl_product` (
   `image_signature` text,
   `active_status` varchar(1) NOT NULL DEFAULT 'T',
   `confirm_create` varchar(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_product`
@@ -234,16 +260,24 @@ INSERT INTO `tbl_product` (`id`, `shipping_type`, `weight`, `price`, `tracking_c
 (67, 'normal', 50, 500, 'SH892A4170GP2', 'waiting', '2021-02-28 18:00:07', NULL, 'normal', 0, '', '', 'T', ''),
 (68, 'normal', 12.52, 125.2, 'SH067N7931HW3', 'waiting', '2021-02-28 18:03:05', NULL, 'normal', 0, '', '', 'T', ''),
 (69, 'normal', 42.88, 428.8, 'SH371A9854ZQ6', 'waiting', '2021-02-28 20:38:54', NULL, 'normal', 0, 'none', '', 'T', ''),
-(70, 'normal', 52.889, 528.89, 'SH714V5863DZ4', 'waiting', '2021-02-28 20:59:51', NULL, 'normal', 0, 'none', '', 'T', 'T'),
+(70, 'normal', 52.889, 528.89, 'SH714V5863DZ4', 'waiting', '2021-02-28 20:59:51', 6, 'normal', 0, 'none', '', 'T', 'T'),
 (71, 'normal', 52.88, 528.8, 'SH793U3716AF1', 'waiting', '2021-02-28 21:01:22', NULL, 'normal', 0, 'none', '', 'T', 'T'),
 (72, 'normal', 12.5, 125, 'SH156S2408SZ3', 'waiting', '2021-02-28 21:55:21', NULL, 'normal', 0, 'none', '', 'T', 'F'),
 (73, 'normal', 12.5, 125, 'SH596M1724SQ2', 'waiting', '2021-02-28 22:22:17', NULL, 'normal', 0, 'it', '', 'T', 'T'),
 (74, 'normal', 55, 550, 'SH947R0237OA0', 'waiting', '2021-02-28 22:22:50', NULL, 'normal', 0, 'it', '', 'T', 'T'),
-(75, 'normal', 45, 450, 'SH679P2635UC8', 'waiting', '2021-02-28 22:31:18', NULL, 'normal', 0, 'it', '', 'T', 'T'),
+(75, 'normal', 45, 450, 'SH679P2635UC8', 'waiting', '2021-02-28 22:31:18', 7, 'normal', 0, 'it', '', 'T', 'T'),
 (76, 'normal', 55, 550, 'SH649F8062IE0', 'waiting', '2021-02-28 22:31:37', NULL, 'normal', 0, 'it', '', 'T', 'T'),
-(77, 'normal', 12.85, 128.5, 'SH463X9642KA6', 'waiting', '2021-02-28 22:37:39', NULL, 'normal', 0, 'none', '', 'T', 'T'),
+(77, 'normal', 12.85, 128.5, 'SH463X9642KA6', 'waiting', '2021-02-28 22:37:39', 4, 'normal', 0, 'none', '', 'T', 'T'),
 (78, 'normal', 52.54, 525.4, 'SH241Z1234RA4', 'waiting', '2021-02-28 22:37:57', 4, 'normal', 0, 'none', '', 'T', 'T'),
-(79, 'normal', 45, 450, 'SH986Y0763OV6', 'waiting', '2021-02-28 22:42:38', NULL, 'normal', 0, 'fruits', '', 'T', 'T');
+(79, 'normal', 45, 450, 'SH986Y0763OV6', 'waiting', '2021-02-28 22:42:38', 6, 'normal', 0, 'fruits', '', 'T', 'T'),
+(80, 'normal', 13, 130, 'SH142R4251YI6', 'waiting', '2021-03-09 22:56:54', 8, 'cod', 500, 'doc', '', 'T', 'T'),
+(82, 'normal', 1.5, 15, 'SH236J5209DP6', 'waiting', '2021-03-24 23:50:08', NULL, 'normal', 0, 'doc', '', 'T', 'F'),
+(83, 'normal', 1.5, 15, 'SH075K6924QG1', 'waiting', '2021-03-24 23:51:16', NULL, 'normal', 0, 'doc', '', 'T', 'F'),
+(84, 'normal', 1.5, 15, 'SH193O2578IB9', 'waiting', '2021-03-24 23:51:52', NULL, 'normal', 0, 'doc', '', 'T', 'F'),
+(87, 'normal', 1.5, 15, 'SH306P5109TN3', 'waiting', '2021-03-25 00:27:31', NULL, 'normal', 0, 'doc', '', 'T', 'F'),
+(88, 'normal', 50, 500, 'SH421V1698WQ3', 'waiting', '2021-03-31 00:05:21', 8, 'normal', 0, 'doc', '', 'T', 'T'),
+(89, 'normal', 1.5, 15, 'SH213H9750TR6', 'waiting', '2021-03-31 00:18:24', 7, 'normal', 0, 'doc', '', 'T', 'T'),
+(90, 'normal', 50, 500, 'SH798Z1695CY9', 'waiting', '2021-03-31 00:18:48', NULL, 'cod', 200, 'doc', '', 'T', 'T');
 
 -- --------------------------------------------------------
 
@@ -288,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `tbl_sender` (
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `address` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_sender`
@@ -303,7 +337,8 @@ INSERT INTO `tbl_sender` (`id`, `phone_number`, `firstname`, `lastname`, `addres
 (6, '0830884161', 'E-TENT', 'Studio', '{"firstname":"E-TENT","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}'),
 (7, '0830884161', 'E-TENT', 'Studio', '{"firstname":"E-TENT","lastname":"Studio","address":"99 ถนนพัฒนาการ","district":"สวนหลวง","area":"สวนหลวง","province":"Bangkok","postal":"10160","phone_number":"0830884161"}'),
 (8, '0859484646', 'รวมชื่อ', 'สกุลส่ง', '{"firstname":"รวมชื่อ","lastname":"สกุลส่ง","address":"12/100","district":"หนองกบ","area":"หนองแซง","province":"สระบุรี","postal":"18170","phone_number":"0859484646"}'),
-(9, '0859478888', 'รวมชื่อ', 'คนส่ง', '{"firstname":"รวมชื่อ","lastname":"คนส่ง","address":"12","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0859478888"}');
+(9, '0859478888', 'รวมชื่อ', 'คนส่ง', '{"firstname":"รวมชื่อ","lastname":"คนส่ง","address":"12","district":"สวนหลวง","area":"สวนหลวง","province":"กรุงเทพมหานคร","postal":"10250","phone_number":"0859478888"}'),
+(10, '0830884161', 'Chutipas', 'Borsub', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"Thailand","postal":"10160","phone_number":"0830884161"}');
 
 -- --------------------------------------------------------
 
@@ -321,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `tbl_transaction` (
   `sender_desc` text NOT NULL,
   `create_date` datetime NOT NULL,
   `active_status` varchar(1) NOT NULL DEFAULT 'T'
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_transaction`
@@ -406,7 +441,15 @@ INSERT INTO `tbl_transaction` (`id`, `transaction_id`, `employee_id`, `customer_
 (76, '161452571349421HQ', 4, 1, 76, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"องครักษ์","area":"องครักษ์","province":"นครนายก","postal":"26120","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-02-28 22:31:37', 'T'),
 (77, '161452664320655VW', 4, 1, 77, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"องครักษ์","area":"องครักษ์","province":"นครนายก","postal":"26120","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-02-28 22:37:39', 'T'),
 (78, '161452664320655VW', 4, 1, 78, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"องครักษ์","area":"องครักษ์","province":"นครนายก","postal":"26120","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-02-28 22:37:57', 'T'),
-(79, '161452692404812AA', 4, 1, 79, '{"firstname":"ชื่อคนรับ2","lastname":"หวัดดี","address":"99 ถนนพัฒนาการ","district":"บางแค","area":"บางแค","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0875558899"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-02-28 22:42:38', 'T');
+(79, '161452692404812AA', 4, 1, 79, '{"firstname":"ชื่อคนรับ2","lastname":"หวัดดี","address":"99 ถนนพัฒนาการ","district":"บางแค","area":"บางแค","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0875558899"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-02-28 22:42:38', 'T'),
+(80, '161530539608982CC', 4, 1, 80, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"องครักษ์","area":"องครักษ์","province":"นครนายก","postal":"26120","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"Thailand","postal":"10160","phone_number":"0830884161"}', '2021-03-09 22:56:54', 'T'),
+(82, '161660458365777MR', 4, 1, 82, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"องครักษ์","area":"องครักษ์","province":"นครนายก","postal":"26120","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-03-24 23:50:08', 'T'),
+(83, '161660466091490KO', 4, 1, 83, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"องครักษ์","area":"องครักษ์","province":"นครนายก","postal":"26120","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-03-24 23:51:16', 'T'),
+(84, '161660466091490KO', 4, 1, 84, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"องครักษ์","area":"องครักษ์","province":"นครนายก","postal":"26120","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-03-24 23:51:52', 'T'),
+(87, '161660592299718NX', 4, 1, 87, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"องครักษ์","area":"องครักษ์","province":"นครนายก","postal":"26120","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-03-25 00:27:31', 'T'),
+(88, '161712390039628NG', 4, 1, 88, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"องครักษ์","area":"องครักษ์","province":"นครนายก","postal":"26120","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"กรุงเทพมหานคร","postal":"10160","phone_number":"0830884161"}', '2021-03-31 00:05:21', 'T'),
+(89, '161712469067693SP', 11, 1, 89, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"องครักษ์","area":"องครักษ์","province":"นครนายก","postal":"26120","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"Thailand","postal":"10160","phone_number":"0830884161"}', '2021-03-31 00:18:24', 'T'),
+(90, '161712469067693SP', 4, 1, 90, '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"องครักษ์","area":"องครักษ์","province":"นครนายก","postal":"26120","phone_number":"0830884161"}', '{"firstname":"Chutipas","lastname":"Borsub","address":"99 ถนนพัฒนาการ","district":"ยกกระบัตร","area":"หนองแขม","province":"Thailand","postal":"10160","phone_number":"0830884161"}', '2021-03-31 00:18:48', 'T');
 
 -- --------------------------------------------------------
 
@@ -420,7 +463,7 @@ CREATE TABLE IF NOT EXISTS `tbl_transport` (
   `status` varchar(100) NOT NULL DEFAULT 'waiting',
   `note` text,
   `timestamp` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_transport`
@@ -510,11 +553,28 @@ INSERT INTO `tbl_transport` (`id`, `product_id`, `status`, `note`, `timestamp`) 
 (81, '76', 'waiting', '', '2021-02-28 22:31:37'),
 (82, '77', 'waiting', '', '2021-02-28 22:37:39'),
 (83, '78', 'waiting', '', '2021-02-28 22:37:57'),
-(84, '79', 'waiting', '', '2021-02-28 22:42:38');
+(84, '79', 'waiting', '', '2021-02-28 22:42:38'),
+(85, '80', 'waiting', '', '2021-03-09 22:56:54'),
+(86, '81', 'waiting', '', '2021-03-24 23:11:51'),
+(87, '82', 'waiting', '', '2021-03-24 23:50:08'),
+(88, '83', 'waiting', '', '2021-03-24 23:51:16'),
+(89, '84', 'waiting', '', '2021-03-24 23:51:52'),
+(90, '85', 'waiting', '', '2021-03-25 00:12:20'),
+(91, '86', 'waiting', '', '2021-03-25 00:12:37'),
+(92, '87', 'waiting', '', '2021-03-25 00:27:31'),
+(93, '88', 'waiting', '', '2021-03-31 00:05:21'),
+(94, '89', 'waiting', '', '2021-03-31 00:18:24'),
+(95, '90', 'waiting', '', '2021-03-31 00:18:48');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tbl_company`
+--
+ALTER TABLE `tbl_company`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_customer`
@@ -569,6 +629,11 @@ ALTER TABLE `tbl_transport`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_company`
+--
+ALTER TABLE `tbl_company`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
@@ -577,17 +642,17 @@ ALTER TABLE `tbl_customer`
 -- AUTO_INCREMENT for table `tbl_map_transaction`
 --
 ALTER TABLE `tbl_map_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `tbl_member`
 --
 ALTER TABLE `tbl_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT for table `tbl_receiver`
 --
@@ -597,17 +662,17 @@ ALTER TABLE `tbl_receiver`
 -- AUTO_INCREMENT for table `tbl_sender`
 --
 ALTER TABLE `tbl_sender`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tbl_transaction`
 --
 ALTER TABLE `tbl_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT for table `tbl_transport`
 --
 ALTER TABLE `tbl_transport`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=96;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

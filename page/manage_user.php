@@ -24,6 +24,7 @@ if($_SESSION['TYPE'] != 'admin'){
     <script src="../lib/sweetalert2/sweetalert2.all.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         var MEMBER_TYPE = <?php echo MEMBER_TYPE; ?>;
+        var BRANCH_LIST = <?php echo BRANCH_LIST; ?>;
     </script>
     <script src="../js/common.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
     <script src="../js/manage_user.js?v=<?php echo JS_VERSION ?>" type="text/javascript" charset="utf-8"></script>
@@ -91,6 +92,14 @@ if($_SESSION['TYPE'] != 'admin'){
                     </div>
                     <div class="modal-body">
                         <form action="" method="post">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="branch_select" class="col-form-label col-form-label-sm">ประจำสาขา</label>
+                                    <select name="branch_select" id="branch_select" class="form-control form-control-sm">
+                                        <option value="" selected>กรุณาเลือกสาขา</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="firstname" class="col-form-label col-form-label-sm">ชื่อ</label>

@@ -53,6 +53,18 @@ if ($cmd != "") {
 		exit();
 	}
 
+	if ($cmd == "get_company") {
+		$permission = $auth->AuthPermission();
+		if($permission['permission']){
+			$result = $mng_account->GetCompany($_POST);
+		}else{
+			$result = array('status' => 500, 'err_msg' => $permission['msg'], 'err_code' => $permission['err_code']);
+		}
+		echo json_encode($result);
+		$mysql->Close_db();
+		exit();
+	}
+
 	if ($cmd == "get_account_desc") {
 		$permission = $auth->AuthPermission();
 		if($permission['permission']){

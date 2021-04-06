@@ -1,17 +1,17 @@
-var keyword = "", member_type = "";
+var keyword = "", member_type = "", COMPANY_LIST = [];
 
 $(document).ready(function() {
 	getDataFromDB();
-
+    getCompany();
     $.each(MEMBER_TYPE, function(index, val) {
         html ='<option value="'+val+'">'+val+'</option>';
         $('#member_type').append(html);
     });
 
     $(document).on('click', '.btn_edit', function(event) {
-      var account_id = $(this).data('id');
-      getDescription(account_id);
-  });
+        var account_id = $(this).data('id');
+        getDescription(account_id);
+    });
 
     $(document).on('click', '.btn_add', function(event) {
         insertAccount();
@@ -145,6 +145,39 @@ function getDataFromDB(page = 1, mode = ''){
     });
 };
 
+function getCompany(){
+    $.ajax({
+        url: '../api/function/manage_account.php',
+        method: 'post',
+        data: {
+            command: 'get_company'
+        },
+        success: function(data) {
+            var data = JSON.parse(data)
+
+            if(data.status == 200){
+                if(data.data.data.length > 0){
+                    var html = '';
+                    COMPANY_LIST = data.data.data;
+                    $.each(data.data.data, function(index, val) {
+                        html ='<option value="'+val.id+'">'+val.company_name+'</option>';
+                        $('#branch_select').append(html);
+                    });
+                }else{
+                    showErrorAjax('ไม่พบสาขา');
+                }
+            }
+            else if(data.status == 404){
+                showErrorAjax('ไม่พบสาขา');
+            }
+        },
+        error: function() {
+            console.log("error");
+            showErrorAjax();
+        }
+    });
+};
+
 function getDescription(account_id){
 	html_mock = '';
 
@@ -170,30 +203,45 @@ function getDescription(account_id){
       url: '../api/function/manage_account.php',
       method: 'post',
       data: {
-       command: 'get_account_desc',
-       account_id: account_id
-   },
-   success: function(data) {
-       var data = JSON.parse(data);
-       console.log("result: ",data);
+         command: 'get_account_desc',
+         account_id: account_id
+     },
+     success: function(data) {
+         var data = JSON.parse(data);
+         console.log("result: ",data);
 
-       if(data.status == 200){
-        var get_body_html = generateHtml(data.data);
-        $('.modal-edit-body').html(get_body_html);
-        $("#member_type_edit").val(data.data.member_type).change();
-    }
+         if(data.status == 200){
+            var get_body_html = generateHtml(data.data);
+            $('.modal-edit-body').html(get_body_html);
+            $("#member_type_edit").val(data.data.member_type).change();
+            $("#branch_select_edit").val(data.data.company_id).change();
+        }
 
-},
-error: function() {
-   console.log("error");
-}
+    },
+    error: function() {
+     console.log("error");
+ }
 });
 
 }
 
+
 function generateHtml(data){
 	html = '';
 	html +='<form action="" method="post">';
+    html += '<div class="row">';
+    html +=                            '<div class="col-12">';
+    html +=                                '<label for="branch_select_edit" class="col-form-label col-form-label-sm">ประจำสาขา</label>';
+    html +=                                '<select name="branch_select_edit" id="branch_select_edit" class="form-control form-control-sm">';
+    html +=                                         '<option value="" disabled>เลือกสาขา</option>';
+    if(COMPANY_LIST.length > 0){
+        $.each(COMPANY_LIST, function(index, val) {
+            html += '<option value="'+val.id+'">'+val.company_name+'</option>';
+        });
+    }
+    html +=                                '</select>';
+    html +=                            '</div>';
+    html +=                        '</div>';
     html +='    <div class="row">';
     html +='        <div class="col">';
     html +='            <label for="firstname" class="col-form-label col-form-label-sm">ชื่อ</label>';
@@ -232,6 +280,7 @@ function insertAccount(){
     var username = $('#username').val();
     var password = $('#password').val();
     var member_type = $('#member_type').val();
+    var company = $('#branch_select').val();
     var confirm_password = $('#confirm_password').val();
 
     if(validate()){
@@ -247,6 +296,7 @@ function insertAccount(){
                 lastname: lastname,
                 username: username,
                 password: password,
+                company: company,
                 member_type: member_type,
                 confirm_password: confirm_password
             },
@@ -292,6 +342,7 @@ function updateAccount(){
     var lastname = $('#lastname_edit').val();
     var member_id = $('#username_edit').data('id');
     var username = $('#username_edit').val();
+    var company = $('#branch_select_edit').val();
     var member_type = $('#member_type_edit').val();
 
     if(validateEdit()){
@@ -307,6 +358,7 @@ function updateAccount(){
                 firstname: firstname,
                 lastname: lastname,
                 username: username,
+                company: company,
                 member_type: member_type
             },
             success: function(data) {
@@ -378,11 +430,12 @@ function validate(){
     var firstname = $('#firstname').val();
     var lastname = $('#lastname').val();
     var username = $('#username').val();
+    var company = $('#branch_select').val();
     var password = $('#password').val();
     var member_type = $('#member_type').val();
     var confirm_password = $('#confirm_password').val();
 
-    if(username == '' || password == '' || confirm_password == '' || firstname == '' || lastname == '' || member_type == '' ){
+    if(username == '' || password == '' || confirm_password == '' || firstname == '' || lastname == '' || member_type == '' || company == '' ){
         result = false;
 
         if(username == ''){
@@ -432,6 +485,14 @@ function validate(){
             $('#member_type').removeClass('custom_has_err');
             //$("#member_type").attr("placeholder", "");
         }
+
+        if(company == ''){
+            $('#branch_select').addClass('custom_has_err');
+            //$("#member_type").attr("placeholder", "โปรดกรอกรหัสผ่าน");
+        }else{
+            $('#branch_select').removeClass('custom_has_err');
+            //$("#member_type").attr("placeholder", "");
+        }
     }else{
         if(password !== confirm_password){
             Swal.fire({
@@ -441,7 +502,7 @@ function validate(){
                 confirmButtonText: 'ตกลง'
             });
         }
-        $('#username, #password, #confirm_password, #firstname, #lastname, #member_type').removeClass('custom_has_err');
+        $('#username, #password, #confirm_password, #firstname, #lastname, #member_type, #branch_select').removeClass('custom_has_err');
     }
 
     return result;
@@ -451,10 +512,11 @@ function validateEdit(){
     var result = true;
     var firstname = $('#firstname_edit').val();
     var lastname = $('#lastname_edit').val();
+    var company = $('#branch_select_edit').val();
     var username = $('#username_edit').val();
     var member_type = $('#member_type_edit').val();
 
-    if(username == '' ||  firstname == '' || lastname == '' || member_type == '' ){
+    if(username == '' ||  firstname == '' || lastname == '' || member_type == '' || company == '' ){
         result = false;
 
         if(username == ''){
@@ -488,8 +550,15 @@ function validateEdit(){
             $('#member_type_edit').removeClass('custom_has_err');
             //$("#member_type").attr("placeholder", "");
         }
+        if(company == ''){
+            $('#branch_select_edit').addClass('custom_has_err');
+            //$("#member_type").attr("placeholder", "โปรดกรอกรหัสผ่าน");
+        }else{
+            $('#branch_select_edit').removeClass('custom_has_err');
+            //$("#member_type").attr("placeholder", "");
+        }
     }else{
-        $('#username_edit, #firstname_edit, #lastname_edit, #member_type_edit').removeClass('custom_has_err');
+        $('#username_edit, #firstname_edit, #lastname_edit, #member_type_edit, #branch_select_edit').removeClass('custom_has_err');
     }
 
     return result;

@@ -43,7 +43,7 @@ class MNG_Product{
 		JOIN tbl_transaction
 		ON tbl_product.id = tbl_transaction.product_id
 		LEFT JOIN tbl_member
-		ON tbl_product.shipper_id = tbl_member.id
+		ON tbl_product.shipper_id = tbl_member.id 
 		LEFT JOIN tbl_receiver
 		ON tbl_transaction.customer_id = tbl_receiver.id
 		";
@@ -73,9 +73,9 @@ class MNG_Product{
 			$sql_where .= " tbl_product.tracking_code = '".$param['tracking_code']."' ";
 		}
 
-		if(isset($param['product_id'])){
+		if(isset($param['company'])){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
-			$sql_where .= " tbl_product.id = '".$param['product_id']."' ";
+			$sql_where .= " tbl_member.company_id = '".$param['company']."' ";
 		}
 
 		if(isset($param['startdate']) && $param['startdate'] != "" && isset($param['enddate']) && $param['enddate'] != ""){
@@ -153,13 +153,24 @@ class MNG_Product{
 
 	public function GetProductDashboard($param = null){
 		
-		$sql ="SELECT tracking_code, status, cod_price FROM tbl_product ";
+		$sql ="
+		SELECT tbl_product.tracking_code, tbl_product.status, tbl_product.cod_price
+		FROM tbl_product
+		JOIN tbl_transaction
+		ON tbl_transaction.product_id = tbl_product.id
+		JOIN tbl_member
+		ON tbl_transaction.employee_id = tbl_member.id";
 
-		$sql_where = " WHERE active_status = 'T' && confirm_create = 'T' ";
+		$sql_where = " WHERE tbl_product.active_status = 'T' && tbl_product.confirm_create = 'T' ";
 
 		if(isset($param['status']) && $param['status'] != ""){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
 			$sql_where .= " tbl_product.status = '".$param['status']."' ";
+		}
+
+		if(isset($param['company']) && $param['company'] !== ''){
+			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
+			$sql_where .= " tbl_member.company_id = '".$param['company']."' ";
 		}
 
 		if(isset($param['startdate']) && $param['startdate'] != "" && isset($param['enddate']) && $param['enddate'] != ""){
@@ -232,7 +243,7 @@ class MNG_Product{
 		JOIN tbl_transaction
 		ON tbl_product.id = tbl_transaction.product_id 
 		JOIN tbl_customer
-		ON tbl_transaction.customer_id = tbl_customer.id
+		ON tbl_transaction.customer_id = tbl_customer.id 
 		LEFT JOIN tbl_member
 		ON tbl_product.shipper_id = tbl_member.id
 		";

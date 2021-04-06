@@ -19,6 +19,7 @@ class MNG_Account{
 		$lastName = $param['lastname'];
 		$username = $param['username'];
 		$password = $param['password'];
+		$company = $param['company'];
 		$member_type = $param['member_type'];
 		$confirm_password = $param['confirm_password'];
 		$username_duplicate = $validate->Check_same('tbl_member','username',$username);
@@ -37,6 +38,7 @@ class MNG_Account{
 					"password"=> password_hash($password, PASSWORD_BCRYPT, array('cost'=>12)),
 					"firstname"=> $firstName,
 					"lastname"=> $lastName,
+					"company_id"=> $company,
 					"member_type" => $member_type
 				);
 				$result = $this->db_connect->Insert_db($arr,"tbl_member");
@@ -71,7 +73,7 @@ class MNG_Account{
 		}
 		$start_page = $this->tools->PaginationSetpage($per_page,$page);
 
-		$sql = "SELECT id, firstname, lastname, member_type, username FROM tbl_member";
+		$sql = "SELECT id, firstname, lastname, member_type, username, company_id FROM tbl_member";
 		$sql_limit = " ORDER BY id DESC LIMIT ".$start_page." , ".$per_page."";
 
 		$sql_where = "";
@@ -126,15 +128,40 @@ class MNG_Account{
 		return $response;
 	}
 
+	public function GetCompany($param = null){
+		$sql = "SELECT id, company_name FROM tbl_company";
+		$data = $this->db_connect->Select_db($sql);
+
+		if($data){
+
+			$data_final['data'] = $data;
+
+			$response = array(
+				'status' => 200,
+				'data' => $data_final
+			);
+		}else{
+			$response = array(
+				'status' => 404,
+				'err_msg' => 'Company not found'
+			);
+		}
+		return $response;
+	}
+
 	public function GetAccountDescription($param = null){
 
-		$sql = "SELECT id, firstname, lastname, member_type, username FROM tbl_member";
+		$sql = "
+		SELECT tbl_member.id, tbl_member.firstname, tbl_member.lastname, tbl_member.member_type, tbl_member.company_id, tbl_member.username, tbl_company.company_name 
+		FROM tbl_member 
+		JOIN tbl_company
+		ON tbl_member.company_id = tbl_company.id";
 
 		$sql_where = "";
 
 		if(isset($param['account_id'])){
 			$sql_where .= ($sql_where != "") ? " AND " : " WHERE ";
-			$sql_where .= " id = '".$param['account_id']."' ";
+			$sql_where .= " tbl_member.id = '".$param['account_id']."' ";
 		}
 
 		$sql_query = $sql . $sql_where;
@@ -207,6 +234,10 @@ class MNG_Account{
 
 		if(isset($param['member_type']) && $param['member_type'] !== ''){
 			$arr['member_type'] = $param['member_type'];
+		}
+
+		if(isset($param['company']) && $param['company'] !== ''){
+			$arr['company_id'] = $param['company'];
 		}
 
 		if((isset($param['old_password']) && $param['old_password'] !== '') && (isset($param['new_password']) && $param['new_password'] !== '')){

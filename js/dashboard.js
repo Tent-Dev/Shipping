@@ -1,7 +1,8 @@
-var startdate = '', enddate = '';
+var startdate = '', enddate = '', company = '';
 $(document).ready(function() {
 	enddate = moment().format('YYYY-MM-DD');
 	startdate = moment().format('YYYY-MM-DD');
+	getCompany();
 	getAllData();
 	//$('.detail').html('<i class="fas fa-spinner fa-spin loading_box_icon"></i></span>');
 	$('input#filter_date').daterangepicker({
@@ -50,6 +51,17 @@ $(document).ready(function() {
 		}
 	});
 
+	$(document).on('change', 'select#filter_branch', function() {
+		var value = $(this).children('option:selected').val();
+		if(value == "all"){
+			company = "";
+			getAllData();
+		}else {
+			company = value;
+			getAllData();
+		}
+	});
+
 	$('input#filter_date').on('apply.daterangepicker', function(ev, picker) {
 		startdate = picker.startDate.format('YYYY-MM-DD');
 		enddate = picker.endDate.format('YYYY-MM-DD');
@@ -91,6 +103,7 @@ function getProduct(page = 1, mode = ''){
 			page: page,
 			startdate: startdate,
 			enddate: enddate,
+			company: company,
 			ignore_pagination: true
 		},
 		success: function(data) {
@@ -144,6 +157,38 @@ function getProduct(page = 1, mode = ''){
 	});
 };
 
+function getCompany(){
+    $.ajax({
+        url: '../api/function/manage_account.php',
+        method: 'post',
+        data: {
+            command: 'get_company'
+        },
+        success: function(data) {
+            var data = JSON.parse(data)
+
+            if(data.status == 200){
+                if(data.data.data.length > 0){
+                    var html = '';
+                    $.each(data.data.data, function(index, val) {
+                        html ='<option value="'+val.id+'">'+val.company_name+'</option>';
+                        $('#filter_branch').append(html);
+                    });
+                }else{
+                    showErrorAjax('ไม่พบสาขา');
+                }
+            }
+            else if(data.status == 404){
+                showErrorAjax('ไม่พบสาขา');
+            }
+        },
+        error: function() {
+            console.log("error");
+            showErrorAjax();
+        }
+    });
+};
+
 function getTransaction(page = 1, mode = ''){
 
 	if(mode !== 'delete'){
@@ -157,6 +202,7 @@ function getTransaction(page = 1, mode = ''){
 			command: 'get_transaction_dashboard',
 			startdate: startdate,
 			enddate: enddate,
+			company: company
 		},
 		success: function(data) {
 			var data = JSON.parse(data)
@@ -205,6 +251,7 @@ function ExportSummary(){
 			command: 'export_summary',
 			startdate: startdate,
 			enddate: enddate,
+			company: company
 		},
 		success: function(data) {
 			$('.btn_export').attr('disabled', false);
