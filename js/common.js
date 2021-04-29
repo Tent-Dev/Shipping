@@ -13,7 +13,7 @@ function pagination(page, total_pages){
 
 	html += 
 	'<nav aria-label="Page navigation">'+
-		'<ul class="pagination pagination-sm justify-content-center">';
+		'<ul class="pagination pagination-sm justify-content-center" style="flex-wrap: wrap;">';
 		if(page !=1){
 			html +=		'<li class="page-item">'+
 				'<a class="page-link pre_value" href="#" aria-label="Previous">'+

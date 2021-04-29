@@ -124,7 +124,7 @@ if(isset($_SESSION['TYPE']) && isset($_SESSION['ID']) && $_SESSION['TYPE'] == 's
             </div>
 
             <div class="row">
-                <div class="col-12 my-3">
+                <div class="col-12 my-3" style="display: flex;">
                     <nav aria-label="Page navigation">
                         <ul class="pagination pagination-sm justify-content-center">
                             <div class="main_pagination"></div>
