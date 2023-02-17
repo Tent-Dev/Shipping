@@ -81,7 +81,7 @@ class Main_db{
 
 	public function Update_db($arr,$key,$tableName,$sql_string = null){
 		$sql = "UPDATE ".$tableName." SET ";
-		$last_key = end(array_keys($arr));
+		$last_key = @end(array_keys($arr));
 
 		if(isset($key) && $key !== ''){
 			$last_arr = end($key);
